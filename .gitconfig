@@ -1,0 +1,25 @@
+[user]
+	name = yochem
+	email = yochem@users.noreply.github.com
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[alias]
+	# View the current working tree status using the short format
+	s = status -s
+
+	# add, commit and push all files at once!
+	cap = !git add . && git commit -m $@ && git push
+
+	# List aliases
+	alias = config --get-regexp alias
+
+	# List contributors with number of commits
+	contributors = shortlog --summary --numbered
+
+[color "branch"]
+	current = yellow
+	local = green

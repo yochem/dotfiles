@@ -1,0 +1,23 @@
+// Liquid syntax color
+// Uses !important to force tags inside {{}} and {% %} to change into this color.
+.syntax--liquid {
+  color: #56b6c2 !important;
+}
+
+.termination {
+  &.status-bar .icon-x {
+    display: none;
+  }
+}
+
+
+
+// Fritzing icon for .fzz extensions
+.icon[data-name$=".fzz"]:before,
+.icon[data-name$=".fzpz"]:before {
+  background-image: url("atom://fritzingicon.png");
+  background-size: 120%;
+  background-repeat: no-repeat;
+  top: 3px;
+  font-size: 0;
+}
