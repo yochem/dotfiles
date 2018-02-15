@@ -40,6 +40,24 @@ brew install shpotify
 brew install thefuck
 brew install hardlink-osx
 
+# now it's time for the macOS applications
+brew tap caskroom/cask
+brew cask install arduino
+brew cask install atom
+brew cask install dropbox
+brew cask install fritzing
+brew cask install github
+brew cask install google-chrome
+brew cask install hyper
+brew cask install makerbot-print
+brew cask install skype
+brew cask install spotify
+brew cask install telegram
+brew cask install vlc
+brew cask install vuze
+brew cask install whatsapp
+# TODO: google drive
+
 # RUBYGEM
 gem update --system  # you might need to be an administrator or root
 
