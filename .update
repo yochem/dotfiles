@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# BREW (CASK)
+echo "updating and upgrading Brew..."
+brew update
+brew upgrade
+
+# RUBY
+echo "updating and upgrading Ruby..."
+sudo gem update —system
+sudo gem update
+
+# NPM
+echo "updating and upgrading NPM..."
+npm install npm -g
+npm update -g
+
+# PIP
+echo "updating and upgrading PIP..."
+pip freeze > requirements.txt
+pip install -r requirements.txt --upgrade
+rm requirements.txt
+
+# APP STORE
+echo "App Store software updates..."
+sudo softwareupdate -i -a

@@ -23,63 +23,6 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-echo "export PS1=' \W $ '
-export PS1='\e[0;36m \W \e[m \e[0;35m $ \e[m '
-function gi() { curl -L -s https://www.gitignore.io/api/\$@ ;}" > ~/.bash_profile
-
-# HOMEBREW
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew update
-brew upgrade
-brew install git
-brew install imagesnap
-brew install pandoc
-brew install pandoc-citeproc
-brew install python
-brew install shpotify
-brew install thefuck
-brew install hardlink-osx
-
-# now it's time for the macOS applications
-brew tap caskroom/cask
-brew cask install arduino
-brew cask install atom
-brew cask install dropbox
-brew cask install fritzing
-brew cask install github
-brew cask install google-chrome
-brew cask install hyper
-brew cask install makerbot-print
-brew cask install skype
-brew cask install spotify
-brew cask install telegram
-brew cask install vlc
-brew cask install vuze
-brew cask install whatsapp
-# TODO: google drive
-
-# RUBYGEM
-gem update --system  # you might need to be an administrator or root
-
-# JEKYLL
-gem install jekyll bundler
-
-# PIP
-pip install -U pip
-pip install click
-pip install checkpy
-pip install colorama
-pip install cookiecutter
-pip install dropbox
-pip install httplib2
-pip install pandoc
-pip install pandoc-shortcaption
-pip install pandocfilters
-pip install pipsi
-pip install pydrive
-pip install pygments
-pip install zerorpc
-
 
 ##############################################################################
 ##############################################################################
@@ -108,6 +51,9 @@ pip install zerorpc
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
+
+# Disable audio feedback when volume is changed
+defaults write com.apple.sound.beep.feedback -bool false
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
