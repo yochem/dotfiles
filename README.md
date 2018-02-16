@@ -10,8 +10,20 @@ commands if you know what the effects will be.
 
 Feel free to ask questions, drop a suggestion or open an issue!
 
-## Thanks
+### Usage
+download or clone this repository to wherever you want. Then run
+```bash
+$ cd path/to/dotfiles
+```
+```bash
+$ chmod +x .install
+```
+```bash
+$ .install
+```
+
+### Thanks
 A big shout out to [Mathias Bynens](https://github.com/mathiasbynens/dotfiles) and [Lars Kappert](https://github.com/webpro/dotfiles) for their amazing work!
 
-## License
+### License
 Licensed under the [MIT license](https://github.com/yochem/dotfiles/blob/master/LICENSE).
