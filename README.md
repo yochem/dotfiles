@@ -10,5 +10,8 @@ commands if you know what the effects will be.
 
 Feel free to ask questions, drop a suggestion or open an issue!
 
+## Thanks
+A big shout out to [Mathias Bynens](https://github.com/mathiasbynens/dotfiles) and [Lars Kappert](https://github.com/webpro/dotfiles) for their amazing work!
+
 ## License
 Licensed under the [MIT license](https://github.com/yochem/dotfiles/blob/master/LICENSE).
