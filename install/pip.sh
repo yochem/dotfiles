@@ -1,3 +1,5 @@
+echo "Installing PIP..."
+
 # download pip from website
 curl https://bootstrap.pypa.io/get-pip.py > get-pip.py
 
@@ -12,7 +14,6 @@ pip install -U pip
 pip_apps=(
   checkpy
   click
-  colorama
   cookiecutter
   dropbox
   httplib2

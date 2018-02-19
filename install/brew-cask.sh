@@ -1,7 +1,4 @@
-if ! is-macos -o ! is-executable brew; then
-  echo "Skipped: Homebrew-Cask"
-  return
-fi
+echo "Installing Brew Cask..."
 
 brew tap caskroom/cask
 brew tap caskroom/versions
