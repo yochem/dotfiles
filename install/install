@@ -11,17 +11,18 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Package managers & packages
-. "$ROOT_DIR/install/brew.sh"
-. "$ROOT_DIR/install/brew-cask.sh"
-. "$ROOT_DIR/install/pip.sh"
+. "$ROOT_DIR/install/brew"
+. "$ROOT_DIR/install/brew-cask"
+. "$ROOT_DIR/install/pip"
+. "$ROOT_DIR/install/apm"
 
-# Atom packages
 
 # Bunch of symlinks from files in this directory to your home directory
-ln -sfv "$ROOT_DIR/.bash_profile" ~
-ln -sfv "$ROOT_DIR/.gitconfig" ~
+ln -sfv "$ROOT_DIR/bash/.aliases" ~
+ln -sfv "$ROOT_DIR/bash/.functions" ~
+ln -sfv "$ROOT_DIR/bash/.bash_profile" ~
+ln -sfv "$ROOT_DIR/git/.gitconfig" ~
 ln -sfv "$ROOT_DIR/.hyper.js" ~
-ln -sfv "$ROOT_DIR/.update" ~
 
 # RUBYGEM install/update
 sudo gem update --system  # you might need to be an administrator or root
