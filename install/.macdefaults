@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-# READ CAREFULLY!!!!! USE WITH CARE.
-# Most of this file is based on Mathias' awesome
-# .macos file. This can be found here:
-# https://github.com/mathiasbynens/dotfiles
-# This file includes a lot of personal preferences.
-# Yochem. https://github.com/yochem. 2018.
-
-
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
