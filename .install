@@ -25,16 +25,16 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$DOTFILES_DIR/install/pip.sh"
 
 # Bunch of hardlinks to hardlink files in this directory to your home directory
-hln "$DOTFILES_DIR/.bash_profile" ~/.bash_profile
-hln "$DOTFILES_DIR/.gitconfig" ~/.gitconfig
-hln "$DOTFILES_DIR/.hyper.js" ~/.hyper.js
-hln "$DOTFILES_DIR/.update" ~/.update
+ln -sfv "$DOTFILES_DIR/.bash_profile" ~
+ln -sfv "$DOTFILES_DIR/.gitconfig" ~
+ln -sfv "$DOTFILES_DIR/.hyper.js" ~
+ln -sfv "$DOTFILES_DIR/.update" ~
 
 # RUBYGEM install/update
-gem update --system  # you might need to be an administrator or root
+sudo gem update --system  # you might need to be an administrator or root
 
 # JEKYLL install
-gem install jekyll bundler
+sudo gem install jekyll bundler
 
 # Run macOS defaults
-. "$DOTFILES_DIR/.newmac"
+. "$DOTFILES_DIR/.macdefaults"
