@@ -21,6 +21,9 @@ pip freeze > requirements.txt
 pip install -r requirements.txt --upgrade
 rm requirements.txt
 
+# ATOM
+apm update
+
 # APP STORE
 echo "App Store software updates..."
 sudo softwareupdate -i -a

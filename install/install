@@ -15,20 +15,18 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Get current dir (so run this script from anywhere)
-export DOTFILES_DIR DOTFILES_CACHE DOTFILES_EXTRA_DIR
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 # Package managers & packages
-. "$DOTFILES_DIR/install/brew.sh"
-. "$DOTFILES_DIR/install/brew-cask.sh"
-. "$DOTFILES_DIR/install/pip.sh"
+. "$ROOT_DIR/install/brew.sh"
+. "$ROOT_DIR/install/brew-cask.sh"
+. "$ROOT_DIR/install/pip.sh"
 
-# Bunch of hardlinks to hardlink files in this directory to your home directory
-ln -sfv "$DOTFILES_DIR/.bash_profile" ~
-ln -sfv "$DOTFILES_DIR/.gitconfig" ~
-ln -sfv "$DOTFILES_DIR/.hyper.js" ~
-ln -sfv "$DOTFILES_DIR/.update" ~
+# Atom packages
+
+# Bunch of symlinks from files in this directory to your home directory
+ln -sfv "$ROOT_DIR/.bash_profile" ~
+ln -sfv "$ROOT_DIR/.gitconfig" ~
+ln -sfv "$ROOT_DIR/.hyper.js" ~
+ln -sfv "$ROOT_DIR/.update" ~
 
 # RUBYGEM install/update
 sudo gem update --system  # you might need to be an administrator or root
@@ -37,4 +35,4 @@ sudo gem update --system  # you might need to be an administrator or root
 sudo gem install jekyll bundler
 
 # Run macOS defaults
-. "$DOTFILES_DIR/.macdefaults"
+. "$ROOT_DIR/.macdefaults"
