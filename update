@@ -22,6 +22,7 @@ pip install -r requirements.txt --upgrade
 rm requirements.txt
 
 # ATOM
+echo "updating Atom packages..."
 apm update
 
 # APP STORE
