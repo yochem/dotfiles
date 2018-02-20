@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# This is the CLI version of my dotfiles.
+# It allows me to e.g. run '$ dot update' to update the system.
+#
+# Yochem. https://github.com/yochem/dotfiles. 2018.
+
+#######################################################################
+
+# Use root directory so you can run this from anywhere on your computer
+export ROOT_DIR
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Version
+VERSION="0.1"
+
+# Color for version
+COLOR_CYAN="\033[36m"
+
+# Usage
+usage="
+Basic usage:\n
+$ dot [install] [update] [--version] [--help]\n
+\n
+---\n
+\n
+where:\n
+    install     installs things like .bash_profile and\n
+                package managers, also mac defaults.\n
+    update      updates package managers and app store.\n
+    --help      shows this help message and exits.\n
+    --version   shows version and exits.
+"
+
+# Check arguments on install, update, --version (-v) or --help (-h)
+if [[ $1 == 'install' ]]; then
+  . install/install
+elif [[ $1 == 'update' ]]; then
+  . update
+elif [[ $1 == '--version' || $1 == '-v' ]]; then
+  echo -e "The version of the CLI of my dotfiles you are using, is: ${COLOR_CYAN}$VERSION"
+  exit
+elif [[ $# == 0 || $1 == '--help' || $1 == '-h' ]]; then
+  echo -e $usage
+  exit
+else
+  echo -e $usage
+  exit
+fi

@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-# READ CAREFULLY!!!!! USE WITH CARE.
-# Most of this file is based on Mathias' awesome
-# .macos file. This can be found here:
-# https://github.com/mathiasbynens/dotfiles
-# This file includes a lot of personal preferences.
-# Yochem. https://github.com/yochem. 2018.
-
-
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
@@ -110,7 +100,7 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 # Finder: show hidden files by default
 #defaults write com.apple.finder AppleShowAllFiles -bool true
 
-# Finder: show status bar
+# Finder: don't show status bar
 defaults write com.apple.finder ShowStatusBar -bool false
 
 # Finder: show path bar
@@ -122,7 +112,7 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool false
 # Keep folders on top when sorting by name
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 
-# Use list view in all Finder windows by default
+# Use collumn view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
@@ -171,9 +161,6 @@ defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-
-# Add a context menu item for showing the Web Inspector in web views
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 # Enable continuous spellchecking
 defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true

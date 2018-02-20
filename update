@@ -7,19 +7,23 @@ brew upgrade
 
 # RUBY
 echo "updating and upgrading Ruby..."
-sudo gem update —system
+brew upgrade ruby
 sudo gem update
 
 # NPM
 echo "updating and upgrading NPM..."
-npm install npm -g
-npm update -g
+sudo npm install npm -g
+sudo npm update -g
 
 # PIP
 echo "updating and upgrading PIP..."
 pip freeze > requirements.txt
 pip install -r requirements.txt --upgrade
 rm requirements.txt
+
+# ATOM
+echo "updating Atom packages..."
+apm update
 
 # APP STORE
 echo "App Store software updates..."

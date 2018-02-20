@@ -1,8 +1,8 @@
+#!/usr/bin/env bash
+
 echo "Installing Brew Cask..."
 
-brew tap caskroom/cask
-brew tap caskroom/versions
-brew tap caskroom/fonts
+sudo brew tap caskroom/cask
 
 cask_apps=(
   arduino

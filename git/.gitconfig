@@ -11,11 +11,14 @@
 	# View the current working tree status using the short format
 	s = status -s
 
-	# add and commit all files at once!
+	# Add and commit all files at once!
 	ac = !git add . && git commit -m
 
-	# push to origin master
+	# Push to origin master
 	pom = push origin master
+
+	# View url to Github
+	url = config --get remote.origin.url
 
 	# List aliases
 	alias = config --get-regexp alias
