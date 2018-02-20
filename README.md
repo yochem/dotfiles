@@ -15,11 +15,13 @@ download or clone this repository to wherever you want. Then run
 ```bash
 $ cd path/to/dotfiles
 ```
+To run dot:
 ```bash
-$ chmod +x .install
+$ bash dot <args>
 ```
+To see help:
 ```bash
-$ .install
+$ bash dot --help
 ```
 
 ### Thanks
