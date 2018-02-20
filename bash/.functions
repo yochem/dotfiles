@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# 'cd ~/Dropbox/example' -> 'cdb example'
+# cd + DropBox = cdb
+function cdb() { cd ~/Dropbox/$@ ;}
+
+# View the local git repository on Github
+function viewgh() {
+  # Uses alias 'git url', as seen in git/.gitconfig
+  URL="$(git url)"
+  # 'open' opens an url in the browser on macOS. Not tested on linux
+  open $URL
+}
+
+# gi macos gives the gitignore for macos.
+# Use gi macos >> .gitignore to make file
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+# Generates a MIT license for the person in the argument
+function mit() {
+printf "\n
+Copyright (c) 2018 $@
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+\"Software\"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+}
