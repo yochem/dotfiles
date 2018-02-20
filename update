@@ -7,13 +7,13 @@ brew upgrade
 
 # RUBY
 echo "updating and upgrading Ruby..."
-sudo gem update —system
+brew upgrade ruby
 sudo gem update
 
 # NPM
 echo "updating and upgrading NPM..."
-npm install npm -g
-npm update -g
+sudo npm install npm -g
+sudo npm update -g
 
 # PIP
 echo "updating and upgrading PIP..."
