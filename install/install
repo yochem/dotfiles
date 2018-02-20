@@ -4,7 +4,7 @@
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
-# # Ask password
+# Ask password
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
@@ -16,11 +16,11 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 . "$ROOT_DIR/install/pip"
 . "$ROOT_DIR/install/apm"
 
-
 # Bunch of symlinks from files in this directory to your home directory
 ln -sfv "$ROOT_DIR/bash/.aliases" ~
-ln -sfv "$ROOT_DIR/bash/.functions" ~
 ln -sfv "$ROOT_DIR/bash/.bash_profile" ~
+ln -sfv "$ROOT_DIR/bash/.bash_prompt" ~
+ln -sfv "$ROOT_DIR/bash/.functions" ~
 ln -sfv "$ROOT_DIR/git/.gitconfig" ~
 ln -sfv "$ROOT_DIR/.hyper.js" ~
 
