@@ -18,13 +18,16 @@ pip_apps=(
   click
   cookiecutter
   dropbox
+  flask
   httplib2
+  numpy
   pandoc
   pandoc-shortcaption
   pandocfilters
   pipsi
   pydrive
   pygments
+  setuptools
   zerorpc
 )
 

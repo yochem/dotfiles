@@ -34,9 +34,9 @@ where:\n
 
 # Check arguments on install, update, --version (-v) or --help (-h)
 if [[ $1 == 'install' ]]; then
-  . install/install
+  . $ROOT_DIR/install/install
 elif [[ $1 == 'update' ]]; then
-  . update
+  . $ROOT_DIR/update
 elif [[ $1 == '--version' || $1 == '-v' ]]; then
   echo -e "The version of the CLI of my dotfiles you are using, is: ${COLOR_CYAN}$VERSION"
   exit
