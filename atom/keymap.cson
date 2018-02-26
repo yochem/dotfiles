@@ -1,13 +1,1 @@
-'.platform-darwin':
-  'cmd-f': 'find-and-replace:toggle'
-
-'.platform-darwin, .platform-darwin .command-palette atom-text-editor':
-  'cmd-p': 'command-palette:toggle'
-
-'atom-workspace':
-  'cmd-b': 'platomformio:build',
-  'cmd-u': 'platomformio:upload'
-
-
-'.tree-view':
-  'r': 'tree-view:rename'
+/Users/Yochem/.atom/keymap.cson
