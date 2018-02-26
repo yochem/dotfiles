@@ -2,7 +2,7 @@
 
 echo "Installing Brew Cask..."
 
-sudo brew tap caskroom/cask
+brew tap caskroom/cask
 
 cask_apps=(
   arduino
