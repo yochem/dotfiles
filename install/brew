@@ -17,7 +17,10 @@ brew_apps=(
   pandoc
   pandoc-citeproc
   python
+  python3
+  ruby
   shpotify
+  sqlite
   thefuck
 )
 

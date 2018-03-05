@@ -31,4 +31,4 @@ sudo gem update --system  # you might need to be an administrator or root
 sudo gem install jekyll bundler
 
 # Run macOS defaults
-. "$ROOT_DIR/.macdefaults"
+. "$ROOT_DIR/install/.macdefaults"

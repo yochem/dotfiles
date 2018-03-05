@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Installing Atom Packages..."
+
 atom_apps=(
   stylus
   atom-beautify
