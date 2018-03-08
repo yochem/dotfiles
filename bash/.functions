@@ -5,12 +5,9 @@
 function cdb() { cd ~/Dropbox/$@ ;}
 
 # View the local git repository on Github
-function viewgh() {
-  # Uses alias 'git url', as seen in git/.gitconfig
-  URL="$(git url)"
-  # 'open' opens an url in the browser on macOS. Not tested on linux
-  open $URL
-}
+# Uses alias 'git url', as seen in git/.gitconfig
+# 'open' opens an url in the browser on macOS. Not tested on linux
+function viewgh() { URL="$(git url)" | open $URL }
 
 # gi macos gives the gitignore for macos.
 # Use gi macos >> .gitignore to make file
@@ -39,6 +36,14 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
 }
 
 # echo your computers ip-address
-function ip() {
-  ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'
+function ip() { ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' }
+
+
+# usage: clone_all_from users/username or clone_all_from orgs/orgname
+function clone_all_from {
+  PAGE=1
+  curl "https://api.github.com/$@/repos?page=$PAGE&per_page=100" |
+  grep -e 'git_url*' |
+  cut -d \" -f 4 |
+  xargs -L1 -P5 git clone
 }
