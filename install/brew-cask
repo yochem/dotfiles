@@ -12,6 +12,7 @@ cask_apps=(
   github
   google-chrome
   hyper
+  lastpass
   makerbot-print
   skype
   spotify
