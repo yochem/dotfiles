@@ -45,3 +45,7 @@ function clone_all_from() {
   cut -d \" -f 4 |
   xargs -L1 -P5 git clone;
 }
+
+function manpdf() {
+  man -t "$1" | open -f -a /Applications/Preview.app/
+}

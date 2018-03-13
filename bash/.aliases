@@ -12,3 +12,5 @@ alias qparty="export FLASK_APP=QParty.py; flask run --reload"
 
 # fancy ls
 alias lst="ls -GFhl1"
+
+alias reload="source ~/.bash_profile"
