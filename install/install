@@ -17,12 +17,12 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 . "$ROOT_DIR/install/apm"
 
 # Bunch of symlinks from files in this directory to your home directory
-ln -sfv "$ROOT_DIR/bash/.aliases" ~
-ln -sfv "$ROOT_DIR/bash/.bash_profile" ~
-ln -sfv "$ROOT_DIR/bash/.bash_prompt" ~
-ln -sfv "$ROOT_DIR/bash/.functions" ~
-ln -sfv "$ROOT_DIR/git/.gitconfig" ~
-ln -sfv "$ROOT_DIR/.hyper.js" ~
+ln -sfv $ROOT_DIR/bash/.aliases ~/.aliases
+ln -sfv $ROOT_DIR/bash/.bash_profile ~/.bash_profile
+ln -sfv $ROOT_DIR/bash/.bash_prompt ~/.bash_prompt
+ln -sfv $ROOT_DIR/bash/.functions ~/.functions
+ln -sfv $ROOT_DIR/git/.gitconfig ~/.gitconfig
+ln -sfv $ROOT_DIR/.hyper.js ~/.hyper.js
 
 # RUBYGEM install/update
 sudo gem update --system  # you might need to be an administrator or root
