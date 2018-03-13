@@ -13,6 +13,21 @@ function viewgh() { open $(git url) ;}
 # Use gi macos >> .gitignore to make file
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
+# echo your computers ip-address
+function ip() { ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' ;}
+
+# usage: clone_all_from users/username or clone_all_from orgs/orgname
+function clone_all_from() {
+  PAGE=1;
+  curl "https://api.github.com/$@/repos?page=$PAGE&per_page=100" |
+  grep -e 'git_url*' |
+  cut -d \" -f 4 |
+  xargs -L1 -P5 git clone;
+}
+
+# open a manual as pdf
+function manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
+
 # Generates a MIT license for the person in the argument
 function mit() {
 printf "\n
@@ -33,19 +48,3 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.";}
-
-# echo your computers ip-address
-function ip() { ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' ;}
-
-# usage: clone_all_from users/username or clone_all_from orgs/orgname
-function clone_all_from() {
-  PAGE=1;
-  curl "https://api.github.com/$@/repos?page=$PAGE&per_page=100" |
-  grep -e 'git_url*' |
-  cut -d \" -f 4 |
-  xargs -L1 -P5 git clone;
-}
-
-function manpdf() {
-  man -t "$1" | open -f -a /Applications/Preview.app/
-}
