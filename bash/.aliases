@@ -2,7 +2,7 @@
 
 # let me know if i'm getting an error.
 # Usage: $ (...some code...) kut
-alias kut='|| say kut, een fout;'
+alias kut='say kut, een fout;'
 
 # let me know when it's done (polite).
 # Usage: $ ...some code... && lemmeknow
