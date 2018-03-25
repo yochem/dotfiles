@@ -26,6 +26,16 @@
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered
 
+	# also show remote branches
+	branches = branch -a
+
 [color "branch"]
-	current = yellow
-	local = green
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "status"]
+
+	added = green
+	changed = yellow
+	untracked = red
