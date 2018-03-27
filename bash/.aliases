@@ -14,3 +14,6 @@ alias qparty="export FLASK_APP=qparty.py; flask run --reload"
 alias lst="ls -GFhl1"
 
 alias reload="source ~/.bash_profile"
+
+# md to pdf using pandoc
+alias mdpdf="pandoc -o"
