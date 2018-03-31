@@ -1,25 +1,14 @@
 #!/usr/bin/env bash
 
-# Ask password
-sudo -v
-
-# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
 # BREW (CASK)
 echo "updating and upgrading Brew..."
 brew update
 brew upgrade
 
-# RUBY
-echo "updating and upgrading Ruby..."
-brew upgrade ruby
-sudo gem update
-
 # NPM
 echo "updating and upgrading NPM..."
-sudo npm install npm -g
-sudo npm update -g
+npm install npm -g
+npm update -g
 
 # PIP
 echo "updating and upgrading PIP..."
