@@ -12,6 +12,8 @@ cask_apps=(
   github
   google-chrome
   hyper
+  iterm2
+  kite
   lastpass
   makerbot-print
   skype
