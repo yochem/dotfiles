@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 
 # atom as default editor
 export EDITOR=/usr/local/bin/atom;
