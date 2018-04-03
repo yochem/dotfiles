@@ -8,7 +8,7 @@
 #######################################################################
 
 # Version
-VERSION="0.1"
+VERSION="2.0"
 
 # Color for version
 magenta=$(tput setaf 5);
