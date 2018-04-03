@@ -1,1 +1,136 @@
-/Users/Yochem/.atom/config.cson
+"*":
+  "atom-beautify":
+    arduino:
+      beautify_on_save: true
+    bash:
+      beautify_on_save: true
+    css:
+      align_assignments: true
+      beautify_on_save: true
+      convert_quotes: "double"
+    general:
+      _analyticsUserId: "1c87e35c-18a6-4cf0-b04c-d8bd06d6b2f4"
+      showLoadingView: false
+    html:
+      beautify_on_save: true
+    js:
+      beautify_on_save: true
+    json:
+      beautify_on_save: true
+    latex: {}
+    less:
+      beautify_on_save: true
+    markdown: {}
+    python: {}
+    sass:
+      beautify_on_save: true
+  "atom-clock":
+    showTooltip: true
+  "atom-latex":
+    preview_after_build: "View in PDF viewer tab"
+  "atom-package-deps":
+    ignored: [
+      "linter-ui-default"
+      "build"
+    ]
+  "autocomplete-plus":
+    confirmCompletion: "tab always, enter when suggestion explicitly selected"
+  "autohide-tree-view":
+    pushEditor: true
+  build: {}
+  core:
+    closeDeletedFileTabs: true
+    customFileTypes:
+      "source.arduino": [
+        "ino"
+      ]
+    disabledPackages: [
+      "scroll-through-time"
+      "linter-htmlhint"
+      "spell-check"
+      "linter"
+    ]
+    ignoredNames: [
+      "venv"
+      "build"
+      ".git"
+      "dist"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "Icon"
+      "Gemfile.lock"
+      ".localized"
+      "_site"
+      ".dropbox.cache"
+      ".dropbox"
+      "*.pyc"
+      "*.egg-info"
+      ".pioenvs"
+      ".piolibdeps"
+      ".clang_complete"
+      ".gcc-flags.json"
+      ".sass-cache"
+      "Gemfile"
+    ]
+    projectHome: "/Users/Yochem/Dropbox"
+    telemetryConsent: "no"
+    titleBar: "custom"
+  editor:
+    scrollPastEnd: true
+    showIndentGuide: true
+  "exception-reporting":
+    userId: "65697317-0264-bd7e-904b-0baf33eb482e"
+  "file-icons":
+    strategies: {}
+  kite:
+    editorMetricsEnabled: "yes"
+    showDocsNotificationOnStartup: false
+    showKiteTourOnStartup: false
+    useDockForSidebar: true
+  "latex-plus":
+    texBin: "/Library/TeX/Distributions/Programs/texbin"
+  "linter-htmlhint":
+    enabledScopes: [
+      "text.html.angular"
+      "text.html.basic"
+      "text.html.gohtml"
+      "text.html.jsp"
+      "text.html.mustache"
+      "jekyll (HTML)"
+      "text.html.jekyll"
+    ]
+  "linter-ui-default":
+    useBusySignal: false
+  "markdown-preview":
+    useGitHubStyle: true
+  "markdown-preview-plus":
+    enableLatexRenderingByDefault: true
+    useGitHubStyle: true
+  minimap:
+    disablePythonDocLinks: true
+  "one-dark-ui": {}
+  pigments:
+    markerType: "native-dot"
+  "platformio-ide":
+    advanced:
+      checkAuthOnStartup: false
+    autoUpdateIDE: true
+    highlightActiveProject: false
+    showPIOHome: false
+  platomformio: {}
+  "rst-preview-pandoc":
+    pandocOpts: "-frst -thtml --webtex"
+  termination:
+    style:
+      animationSpeed: 0
+  "tool-bar":
+    position: "Left"
+    visible: false
+  "tree-view":
+    hideIgnoredNames: true
+  welcome:
+    showOnStartup: false
+".jade.source":
+  editor:
+    autoIndent: true
