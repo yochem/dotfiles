@@ -1,1 +1,21 @@
-/Users/Yochem/.aliases
+#!/usr/bin/env bash
+
+### NOTE TO SELF: ONLY EDIT FROM ~/ ###
+
+# let me know if i'm getting an error.
+# Usage: $ (...some code...) kut
+alias kut='say kut, een fout;'
+
+# let me know when it's done (polite).
+# Usage: $ ...some code... && lemmeknow
+alias lemmeknow='terminal-notifier -title "Terminal" -message "Done with task!"'
+
+alias qparty="export FLASK_APP=qparty.py; flask run --reload"
+
+# fancy ls
+alias lst="ls -GFhl1"
+
+alias reload="source ~/.bash_profile"
+
+# md to pdf using pandoc
+alias mdpdf="pandoc -o"
