@@ -1,1 +1,45 @@
-/Users/Yochem/.gitconfig
+[user]
+	name = yochem
+	email = yochem@users.noreply.github.com
+
+[alias]
+	# View the current working tree status using the short format
+	s = status -s
+
+	# Add and commit all files at once!
+	ac = !git add . && git commit -m
+
+	# Push to origin master
+	pom = push origin master
+
+	# View url to Github
+	url = config --get remote.origin.url
+
+	# List aliases
+	alias = config --get-regexp alias
+
+	# List contributors with number of commits
+	contributors = shortlog --summary --numbered
+
+	# also show remote branches
+	branches = branch -a
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "status"]
+
+	added = green
+	changed = yellow
+	untracked = red
+
+[hub]
+	protocol = https
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
