@@ -3,7 +3,7 @@
 ### NOTE TO SELF: ONLY EDIT FROM ~/ ###
 
 # atom as default editor
-export EDITOR=/usr/local/bin/atom;
+export EDITOR='vim';
 
 # add ~/bin to path
 export PATH="~/bin:$PATH";
