@@ -7,15 +7,60 @@
 
 #######################################################################
 
-# Use root directory so you can run this from anywhere on your computer
-export ROOT_DIR
-ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 # Version
 VERSION="0.1"
 
 # Color for version
-COLOR_CYAN="\033[36m"
+magenta=$(tput setaf 5);
+reset=$(tput sgr0);
+
+
+
+install() {
+  # Close any open System Preferences panes, to prevent them from overriding
+  # settings we’re about to change
+  osascript -e 'tell application "System Preferences" to quit'
+
+  # Keep-alive: update existing `sudo` time stamp until installation is finished
+  sudo -v
+  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+  xcode-select --install
+
+  # Package managers & packages
+  echo "${magenta}Installing Brew & stuff...${reset}"
+  . install/brew
+  echo "${magenta}Installing Brew-Cask & stuff...${reset}"
+  . install/brew-cask
+  echo "${magenta}Installing PIP & stuff...${reset}"
+  . install/pip
+  echo "${magenta}Installing Atom Packages...${reset}"
+  apm install --packages-file install/atom_packages.txt
+
+  # Bunch of symlinks from files in this directory to your home directory
+  # these are all hardlinks. I kept getting the message "Too many levels
+  # of symbolic links. This is probably because the .bash_profile file
+  # links to the other . files, which are symlinks to this repo."
+  ln -fv bash/.aliases ~
+  ln -fv bash/.bash_profile ~
+  ln -fv bash/.bash_prompt ~
+  ln -fv bash/.exports ~
+  ln -fv bash/.functions ~
+  ln -fv git/.gitconfig ~
+  ln -fv .hyper.js ~
+
+  # JEKYLL install
+  echo "${magenta}Installing Jekyll...${reset}"
+  gem install jekyll bundler
+
+  # Changing defaults
+  echo "${magenta}Changin macos defaults...${reset}"
+  . "$ROOT_DIR/install/.macdefaults"
+
+  # Clone all repos from given user (default = me :) )
+  . install/clonerepos ~/documents
+}
+
 
 # Usage
 usage="
@@ -25,25 +70,24 @@ $ dot [install] [update] [--version] [--help]\n
 ---\n
 \n
 where:\n
-    install     installs things like .bash_profile and\n
-                package managers, also mac defaults.\n
-    update      updates package managers and app store.\n
-    --help      shows this help message and exits.\n
-    --version   shows version and exits.
+install     installs things like .bash_profile and\n
+package managers, also mac defaults.\n
+update      updates package managers and app store.\n
+--help      shows this help message and exits.\n
+--version   shows version and exits.
 "
 
 # Check arguments on install, update, --version (-v) or --help (-h)
 if [[ $1 == 'install' ]]; then
-  . $ROOT_DIR/install/install
+  install
 elif [[ $1 == 'update' ]]; then
-  . $ROOT_DIR/update
+  . update
+elif [[ $1 == 'atom' || $1 == '--apm' ]]; then
+  apm list --installed --bare > $ROOT_DIR/install/atom_packages.txt
 elif [[ $1 == '--version' || $1 == '-v' ]]; then
-  echo -e "The version of the CLI of my dotfiles you are using, is: ${COLOR_CYAN}$VERSION"
-  exit
+  echo -e "The version of the CLI of my dotfiles you are using, is: ${magenta}$VERSION"
 elif [[ $# == 0 || $1 == '--help' || $1 == '-h' ]]; then
   echo -e $usage
-  exit
 else
   echo -e $usage
-  exit
 fi
