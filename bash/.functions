@@ -30,6 +30,9 @@ function clone_all_from() {
 # open a manual as pdf
 function manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
 
+# quick way to run a python file
+function p() { python $1.py; }
+
 # Generates a MIT license for the person in the argument
 function mit() {
   printf "\n
