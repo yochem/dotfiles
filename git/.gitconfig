@@ -22,7 +22,7 @@
 	contributors = shortlog --summary --numbered
 
 	# also show remote branches
-	branches = branch -a
+	branches = branch -a 
 
 [color "branch"]
 	current = yellow reverse

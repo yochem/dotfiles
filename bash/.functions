@@ -2,9 +2,9 @@
 
 ### NOTE TO SELF: ONLY EDIT FROM ~/ ###
 
-# 'cd ~/Dropbox/example' -> 'cdb example'
-# cd + DropBox = cdb
-function cdb() { cd ~/Dropbox/$@ ;}
+# 'cd ~/Repos/example' -> 'cdr example'
+# cd + Repos = cdr
+function cdr() { cd ~/Repos/$@ ;}
 
 # View the local git repository on Github
 # Uses alias 'git url', as seen in git/.gitconfig

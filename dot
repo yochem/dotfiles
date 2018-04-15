@@ -58,7 +58,8 @@ install() {
   . "$ROOT_DIR/install/.macdefaults"
 
   # Clone all repos from given user (default = me :) )
-  . install/clonerepos ~/documents
+  mkdir ~/Repos
+  . install/clonerepos ~/Repos
 }
 
 
