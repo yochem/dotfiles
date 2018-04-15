@@ -85,8 +85,8 @@
     strategies: {}
   kite:
     editorMetricsEnabled: "yes"
-    showDocsNotificationOnStartup: false
     showKiteTourOnStartup: false
+    showWelcomeNotificationOnStartup: false
     useDockForSidebar: true
   "latex-plus":
     texBin: "/Library/TeX/Distributions/Programs/texbin"
@@ -101,7 +101,6 @@
       "text.html.jekyll"
     ]
   "linter-ui-default":
-    panelHeight: 69
     useBusySignal: false
   "markdown-preview":
     useGitHubStyle: true
