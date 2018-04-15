@@ -27,6 +27,10 @@ function clone_all_from() {
   xargs -L1 -P5 git clone;
 }
 
+# make a directory and cd into it
+function mkcd() { mkdir "$1"; cd "$1" ;}
+
+
 # open a manual as pdf
 function manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
 
