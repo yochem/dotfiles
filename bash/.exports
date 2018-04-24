@@ -3,7 +3,7 @@
 ### NOTE TO SELF: ONLY EDIT FROM ~/ ###
 
 # atom as default editor
-export EDITOR='vim';
+export EDITOR='nano';
 
 # add ~/bin to path
 export PATH="~/bin:$PATH";
