@@ -55,7 +55,7 @@ install() {
 
   # Changing defaults
   echo "${magenta}Changin macos defaults...${reset}"
-  . "$ROOT_DIR/install/.macdefaults"
+  . "install/.macdefaults"
 
   # Clone all repos from given user (default = me :) )
   mkdir ~/Repos
@@ -84,7 +84,7 @@ if [[ $1 == 'install' ]]; then
 elif [[ $1 == 'update' ]]; then
   . update
 elif [[ $1 == 'atom' || $1 == '--apm' ]]; then
-  apm list --installed --bare > $ROOT_DIR/install/atom_packages.txt
+  apm list --installed --bare > install/atom_packages.txt
 elif [[ $1 == '--version' || $1 == '-v' ]]; then
   echo -e "The version of the CLI of my dotfiles you are using, is: ${magenta}$VERSION"
 elif [[ $# == 0 || $1 == '--help' || $1 == '-h' ]]; then
