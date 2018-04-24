@@ -1,0 +1,37 @@
+# syntax highlighting
+include /usr/local/share/nano/*.nanorc
+
+# linenumbers
+set linenumbers
+
+# auto indention
+set autoindent
+
+# bold in stead of reverse
+set boldtext
+
+# use more space
+unset morespace
+
+# use mouse
+set mouse
+
+# no new lines at end of file
+unset nonewlines
+
+# no help at the bottom of the page
+# set nohelp
+
+# smooth scrolling
+set smooth
+
+set tabsize "4"
+
+# used tabs will be converted to spaces
+set tabstospaces
+
+# no tempory file, just save file
+unset tempfile
+
+# don't wrap text to the next line
+set nowrap
