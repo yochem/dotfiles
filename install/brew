@@ -12,9 +12,10 @@ brew upgrade
 # Install packages
 brew_apps=(
   fish
-  hub
   git
+  hub
   imagesnap
+  nano
   pandoc
   pandoc-citeproc
   python

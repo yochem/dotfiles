@@ -19,3 +19,6 @@ alias reload="source ~/.bash_profile"
 
 # md to pdf using pandoc
 alias mdpdf="pandoc -o"
+
+# use nano v2.9.5
+alias nano="/usr/local/Cellar/nano/2.9.5/bin/nano -t"
