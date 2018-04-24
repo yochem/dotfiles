@@ -35,3 +35,9 @@ unset tempfile
 
 # don't wrap text to the next line
 set nowrap
+
+# higlights matching bracket
+set brackets ""')>]}"
+set matchbrackets "(]}"
+
+set multibuffer
