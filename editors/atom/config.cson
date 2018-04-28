@@ -1,29 +1,22 @@
 "*":
   "atom-beautify":
-    arduino:
-      beautify_on_save: true
-    bash:
-      beautify_on_save: true
+    arduino: {}
+    bash: {}
     css:
       align_assignments: true
-      beautify_on_save: true
       convert_quotes: "double"
     general:
       _analyticsUserId: "1c87e35c-18a6-4cf0-b04c-d8bd06d6b2f4"
+      beautifyEntireFileOnSave: false
       showLoadingView: false
-    html:
-      beautify_on_save: true
-    js:
-      beautify_on_save: true
-    json:
-      beautify_on_save: true
+    html: {}
+    js: {}
+    json: {}
     latex: {}
-    less:
-      beautify_on_save: true
+    less: {}
     markdown: {}
     python: {}
-    sass:
-      beautify_on_save: true
+    sass: {}
   "atom-clock":
     showTooltip: true
   "atom-latex":
