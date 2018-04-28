@@ -38,7 +38,7 @@ mkcd() { mkdir "$1"; cd "$1" ;}
 manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
 
 # quick way to run a python file
-p() { python $1.py; }
+p() { python $1.py $2 $3 $4; }
 
 # Generates a MIT license for the person in the argument
 mit() {
