@@ -6,8 +6,8 @@ comment "//"
 # Declarational stuff.
 color green "\<(async|class|const|extends|function|let|this|typeof|var|void)\>"
 # Flow control and special keywords.
-color brightyellow "\<(do|while|if|else|switch|case|default|for|each|in|of|with)\>"
-color brightyellow "\<(await|export|import|throw|try|catch|finally|new|delete)\>"
+color yellow "\<(do|while|if|else|switch|case|default|for|each|in|of|with)\>"
+color yellow "\<(await|export|import|throw|try|catch|finally|new|delete)\>"
 # "Exit" points.
 color magenta "\<(break|continue|return|yield)\>"
 
@@ -15,10 +15,10 @@ color magenta "\<(break|continue|return|yield)\>"
 color cyan "\<[0-9]+\>" "\<0x[0-9A-Fa-f]+\>"
 
 # Strings.
-color brightmagenta ""(\\.|[^"])*"" "'(\\.|[^'])*'" "`(\\.|[^`])*`"
+color magenta ""(\\.|[^"])*"" "'(\\.|[^'])*'" "`(\\.|[^`])*`"
 # Comments.
-color brightblue "(^|[[:space:]])//.*"
-color brightblue start="/\*" end="\*/"
+color blue "(^|[[:space:]])//.*"
+color blue start="/\*" end="\*/"
 
 # Trailing whitespace.
 color ,green "[[:space:]]+$"

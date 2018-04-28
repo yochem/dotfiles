@@ -6,13 +6,13 @@ magic "diff output"
 comment ""
 
 # Added lines.
-color brightgreen "^\+.*"
+color green "^\+.*"
 # Show trailing whitespace only on added lines.
 color ,green "[[:space:]]+$"
 # Context lines.
-color brightblue "^ .*"
+color blue "^ .*"
 # Deleted lines.
-color brightred "^-.*"
+color red "^-.*"
 
 # Header lines.
 color magenta "^(Index:|diff)[[:blank:]].*"
@@ -20,7 +20,7 @@ color magenta "^(Index:|diff)[[:blank:]].*"
 color red "^---.*"
 color green "^\+\+\+.*"
 # Line numbers.
-color brightyellow "^@@.*"
+color yellow "^@@.*"
 
 # Statistics.
 color cyan start="^---$" end="^$"

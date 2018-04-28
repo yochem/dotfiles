@@ -27,4 +27,4 @@ color yellow "\<(new|ref|mutable|lazy|assert|raise)\>"
 # Comments:
 color white start="\(\*" end="\*\)"
 # Strings: (no multiline handling yet)
-color brightblack ""[^\"]*""
+color black ""[^\"]*""

@@ -14,7 +14,7 @@ color yellow "\<(arp|bridge|inet|ingress|ip6?|netdev)\>"
 
 # Terminal statements
 color red "\<(drop|reject)\>"
-color brightblue "\<(accept|continue|(d|s)nat|goto|jump|masquerade|return)\>"
+color blue "\<(accept|continue|(d|s)nat|goto|jump|masquerade|return)\>"
 
 # Comments
 color cyan "(^|[[:space:]])#.*$"
@@ -27,4 +27,4 @@ color yellow ""(\\.|[^"])*"" "'(\\.|[^'])*'"
 color green "[{}():;|`$<>!=&\\]" "(\]|\[)"
 
 # Basic variable names
-color brightred "(\$|@)[[:alpha:]_-][[:alnum:]_.-]*"
+color red "(\$|@)[[:alpha:]_-][[:alnum:]_.-]*"
