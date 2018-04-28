@@ -8,32 +8,29 @@
  * If you are unfamiliar with Less, you can read more about it here:
  * http://lesscss.org
  */
-
-
 /*
  * Examples
  * (To see them, uncomment and save)
  */
-
 // style the background color of the tree view
+
 .tree-view {
   // background-color: whitesmoke;
 }
-
 // style the background and foreground colors on the atom-text-editor-element itself
+
 atom-text-editor {
   // color: white;
   // background-color: hsl(180, 24%, 12%);
 }
-
 // To style other content in the text editor's shadow DOM, use the ::shadow expression
+
 atom-text-editor::shadow .cursor {
   // border-color: red;
 }
-
-
 // Liquid syntax color
 // Uses !important to force tags inside {{}} and {% %} to change into this color.
+
 .syntax--liquid {
   color: #56b6c2 !important;
 }
@@ -43,10 +40,8 @@ atom-text-editor::shadow .cursor {
     display: none;
   }
 }
-
-
-
 // Fritzing icon for .fzz extensions
+
 .icon[data-name$=".fzz"]:before,
 .icon[data-name$=".fzpz"]:before {
   background-image: url("atom://fritzingicon.png");
