@@ -16,8 +16,8 @@ color green "\<(cidr|inet|macaddr)\>"
 color green "\<(daterange|int4range|int8range|numrange|tsrange|tstzrange)\>"
 
 # Structure.
-color brightyellow "\<(CASE|CLASS|DEFAULT|DO|ELSE|ELSEIF|FOR|FOREACH|FUNCTION|IF|IS NULL)\>"
-color brightyellow "\<(NEW|PRIVATE|PUBLIC|RETURN|RETURNS|SETOF|SWITCH|THEN|WHEN|WHILE)>"
+color yellow "\<(CASE|CLASS|DEFAULT|DO|ELSE|ELSEIF|FOR|FOREACH|FUNCTION|IF|IS NULL)\>"
+color yellow "\<(NEW|PRIVATE|PUBLIC|RETURN|RETURNS|SETOF|SWITCH|THEN|WHEN|WHILE)>"
 
 # Control flow.
 color magenta "\<(EXCEPTION|NOTICE|RAISE|RETURN)\>"
@@ -34,17 +34,17 @@ color blue "\<(SAVEPOINT|SCHEMA|SEARCH|SECURITY|SELECT|SEQUENCE|SERVER|SESSION|S
 color blue "\<(TABLE|TEXT|TO|TRANSACTION|TYPE|UPDATE|USER|VACUUM|VALUES|VIEW|WHERE|WITH|WRAPPER)\>"
 
 # Strings.
-color brightyellow "<[^=       ]*>" ""(\.|[^"])*""
+color yellow "<[^=       ]*>" ""(\.|[^"])*""
 
 # Trailing whitespace.
 color ,green "[[:space:]]+$"
 
 # Regular expressions.
-color brightmagenta "/([^/]|(\\/))*/[iomx]*" "%r\{([^}]|(\\}))*\}[iomx]*"
+color magenta "/([^/]|(\\/))*/[iomx]*" "%r\{([^}]|(\\}))*\}[iomx]*"
 
 # Shell command expansion is in `backticks` or like %x{this}.  These are
 # "double-quotish" (to use a perlism).
-color brightblue "`[^`]*`" "%x\{[^}]*\}"
+color blue "`[^`]*`" "%x\{[^}]*\}"
 
 # Strings, double-quoted.
 color green ""([^"]|(\\"))*"" "%[QW]?\{[^}]*\}" "%[QW]?\([^)]*\)" "%[QW]?<[^>]*>"
@@ -52,7 +52,7 @@ color green "%[QW]?\[[^]]*\]" "%[QW]?\$[^$]*\$" "%[QW]?\^[^^]*\^" "%[QW]?![^!]*!
 
 # Expression substitution.  These go inside double-quoted strings,
 # "like #{this}".
-color brightgreen "#\{[^}]*\}"
+color green "#\{[^}]*\}"
 
 # Strings, single-quoted.
 color green "'([^']|(\\'))*'" "%[qw]\{[^}]*\}" "%[qw]\([^)]*\)" "%[qw]<[^>]*>"
@@ -62,14 +62,14 @@ color green "%[qw]\[[^]]*\]" "%[qw]\$[^$]*\$" "%[qw]\^[^^]*\^" "%[qw]![^!]*!"
 color red "#[^{].*$" "#$"
 color red "--[^{].*$" "#$"
 color red "##[^{].*$" "##$"
-color brightblue "//.*"
-color brightblue start="/\*" end="\*/"
+color blue "//.*"
+color blue start="/\*" end="\*/"
 
 # PostgreSQL markings.
 color red "(--)"
 
 # PostgreSQL default schemas.
-color brightred "(pg_catalog|public)"
+color red "(pg_catalog|public)"
 
 # PostgreSQL PLs.
-color brightblue "(pljava|plperlu?|plpgsql|plpy|plpythonu?|plr|plruby|plsh|pltcl|plscheme)"
+color blue "(pljava|plperlu?|plpgsql|plpy|plpythonu?|plr|plruby|plsh|pltcl|plscheme)"

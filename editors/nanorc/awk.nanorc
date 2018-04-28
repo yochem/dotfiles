@@ -5,21 +5,21 @@ magic "awk script"
 comment "#"
 
 # Records.
-icolor brightred "\$[0-9A-Z_!@#$*?-]+"
+icolor red "\$[0-9A-Z_!@#$*?-]+"
 # Awk-set variables.
 color red "\<(ARGC|ARGIND|ARGV|BINMODE|CONVFMT|ENVIRON|ERRNO|FIELDWIDTHS)\>"
 color red "\<(FILENAME|FNR|FS|IGNORECASE|LINT|NF|NR|OFMT|OFS|ORS)\>"
 color red "\<(PROCINFO|RS|RT|RSTART|RLENGTH|SUBSEP|TEXTDOMAIN)\>"
 # Function declarations and special patterns.
-color brightgreen "\<(function|extension|BEGIN|END)\>"
+color green "\<(function|extension|BEGIN|END)\>"
 # Operators.
 color green "(\{|\}|\(|\)|\;|\]|\[|\\|<|>|!|=|&|\+|-|\*|%|/|\?:|\^|\|)"
 # Flow control.
-color brightyellow "\<(for|if|while|do|else|in|delete|exit)\>"
-color brightyellow "\<(break|continue|return)\>"
+color yellow "\<(for|if|while|do|else|in|delete|exit)\>"
+color yellow "\<(break|continue|return)\>"
 # I/O statements.
-color brightgreen "\<(close|getline|next|nextfile|print|printf)\>"
-color brightgreen "\<(system|fflush)\>"
+color green "\<(close|getline|next|nextfile|print|printf)\>"
+color green "\<(system|fflush)\>"
 # Standard functions.
 color magenta "\<(atan2|cos|exp|int|log|rand|sin|sqrt|srand)\>"
 color magenta "\<(asort|asorti|gensub|gsub|index|length|match)\>"
@@ -29,9 +29,9 @@ color magenta "\<(and|compl|lshift|or|rshift|xor)\>"
 color magenta "\<(bindtextdomain|dcgettext|dcngettext)\>"
 
 # Strings.
-color brightyellow "<[^= 	]*>" ""(\\.|[^"])*""
+color yellow "<[^= 	]*>" ""(\\.|[^"])*""
 # Comments.
-color brightblue "(^|[[:space:]])#.*$"
+color blue "(^|[[:space:]])#.*$"
 
 # Trailing whitespace.
 color ,green "[[:space:]]+$"

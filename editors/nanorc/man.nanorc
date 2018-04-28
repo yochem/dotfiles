@@ -5,9 +5,9 @@ magic "troff or preprocessor input"
 comment ".\""
 
 color green "\.(SH|SS|TH) .*$"
-color brightgreen "\.(SH|SS|TH) " "\.([HIT]P)"
-color brightred "\.(B[IR]?|I[BR]?|R[BI]|S[BM]) .*$"
-color brightblue "\.(B[IR]?|I[BR]?|R[BI]|S[BM]) " "\.([LP]?P)$"
+color green "\.(SH|SS|TH) " "\.([HIT]P)"
+color red "\.(B[IR]?|I[BR]?|R[BI]|S[BM]) .*$"
+color blue "\.(B[IR]?|I[BR]?|R[BI]|S[BM]) " "\.([LP]?P)$"
 color magenta "\\f[BIPR]"
 color yellow "\.(br|DT|RS|RE|PD)"
 

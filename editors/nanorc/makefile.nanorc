@@ -7,7 +7,7 @@ comment "#"
 color red "[:=]"
 color magenta "\<(if|ifeq|else|endif)\>"
 color blue "\$+[{(][a-zA-Z0-9_-]+[})]"
-color brightred "^[^ 	]+:"
+color red "^[^ 	]+:"
 
 # Comments
-color brightblue "(^|[[:space:]]+)#.*"
+color blue "(^|[[:space:]]+)#.*"
