@@ -21,7 +21,8 @@ cask_apps=(
   telegram
   vuze
   whatsapp
+  qlcolorcod
+  qlstephen
 )
-# TODO: google drive
 
 brew cask install "${cask_apps[@]}"
