@@ -13,7 +13,7 @@ color cyan "\w+\(\)"
 color green "(\(|\))"
 
 # Uncolor brackets after function name
-color white "\(\)"
+color brightwhite "\(\)"
 
 # Keywords
 color magenta "\<(break|case|do|done|elif|else|esac|exit|fi|for|function|if|in|local|read|return|select|shift|then|time|until|while)\>"
@@ -52,10 +52,10 @@ color green ""([^"\]|\\.)+""
 icolor red "\$\{?[0-9A-Z_!@#$*:?-]+\}?"
 
 # Operators
-color white ";|=|:"
+color brightwhite ";|=|:"
 
 # Booleans and stuff
 color yellow "\<(false|true)\>"
 
 # Comments
-color blue "(^|[[:space:]])#.*$"
+color white "(^|[[:space:]])#.*$"

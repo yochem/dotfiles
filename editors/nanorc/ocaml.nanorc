@@ -25,6 +25,6 @@ color green "\<(include|inherit|initializer)\>"
 # Expression modifiers:
 color yellow "\<(new|ref|mutable|lazy|assert|raise)\>"
 # Comments:
-color white start="\(\*" end="\*\)"
+color brightwhite start="\(\*" end="\*\)"
 # Strings: (no multiline handling yet)
 color black ""[^\"]*""

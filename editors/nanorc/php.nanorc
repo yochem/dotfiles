@@ -8,7 +8,7 @@ comment "//"
 color green "(<\?(php)?|\?>)"
 
 # Function names.
-color white "\<[A-Za-z_][A-Za-z_0-9]*\("
+color brightwhite "\<[A-Za-z_][A-Za-z_0-9]*\("
 # Variable names.
 color cyan "\$[A-Za-z_][A-Za-z_0-9]*"
 
