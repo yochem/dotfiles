@@ -10,15 +10,15 @@ alias kut='say kut, een fout;'
 # Usage: $ ...some code... && lemmeknow
 alias lemmeknow='terminal-notifier -title "Terminal" -message "Done with task!"'
 
-alias qparty="export FLASK_APP=qparty.py; flask run --reload"
-
 # fancy ls
 alias lst="ls -GFhl1"
 
+# reload bash profile and stuff
 alias reload="source ~/.bash_profile"
-
-# md to pdf using pandoc
-alias mdpdf="pandoc -o"
 
 # use nano v2.9.5
 alias nano="/usr/local/Cellar/nano/2.9.5/bin/nano -t"
+
+alias ..="cd .."
+
+alias cask="brew cask"
