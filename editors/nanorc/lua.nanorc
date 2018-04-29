@@ -7,7 +7,7 @@ syntax lua "\.lua$"
 magic "Lua script"
 comment "--"
 
-color white "\[\[.*\]\]"
+color brightwhite "\[\[.*\]\]"
 
 # Operators
 color yellow ":|\*|/|%|\+|-|\^|>|>=|<|<=|~=|=|\.\.|\<(not|and|or)\>"

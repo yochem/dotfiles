@@ -4,7 +4,7 @@ syntax sql "\.sql[2345s~]?$"
 comment "-- "
 
 # Functions.
-color white "\<[a-z_]*\("
+color brightwhite "\<[a-z_]*\("
 
 # Types.
 color green "\<(int2|smallint|int4|int|integer|int8|bigint|decimal|numeric|real|double precision|(small|big)?serial)\>"

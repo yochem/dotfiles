@@ -22,13 +22,14 @@ color magenta "\<(and|as|assert|async|await|break|class|continue)\>"
 color magenta "\<(def|del|elif|else|except|exec|finally|for|from)\>"
 color magenta "\<(global|if|import|in|is|lambda|nonlocal|not|or)\>"
 color magenta "\<(pass|print|raise|return|try|while|with|yield)\>"
+color cyan "\<(abs|append|apply|buffer|callable|chr|clear|close|closed|cmp|coerce|compile|complex|conjugate|copy|count|delattr|dir|divmod|eval|execfile|extend|fileno|filter|float|flush|get|getattr|globals|has_key|hasattr|hash|hex|id|index|input|insert|int|intern|isatty|isinstance|issubclass|items|keys|len|list|locals|long|map|max|min|mode|name|oct|open|ord|pop|pow|range|raw_input|read|readline|readlines|reduce|reload|remove|repr|reverse|round|seek|setattr|slice|softspace|sort|str|tell|truncate|tuple|type|unichr|unicode|update|values|vars|write|writelines|xrange|zip)\>"
 
 # Single-quoted strings
 color green "'([^'\]|\\.)+'"
 color green ""([^"\]|\\.)+""
 
 # Comments
-color blue "(^|[[:blank:]])#.*$"
+color white "(^|[[:blank:]])#.*$"
 
 # Triple-quoted strings.
 color green start="'''([^'),]|$)" end="(^|[^(\])'''"
@@ -47,7 +48,7 @@ color yellow "(FIXME|TODO|XXX)"
 #color ,green "[[:space:]]+$"
 
 # Force brackets to always be white
-color white "\(|\)|\[|\]"
+color brightwhite "\(|\)|\[|\]"
 
 # {} brackets (ex: "{}".format(test)
 color yellow "\{\w*\}"

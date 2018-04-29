@@ -60,8 +60,8 @@ color magenta ":[^[:space:]]+([[:space:]]|$)"
 color red "[[:space:]]+\+?[A-Za-z0-9+_@-]+"
 color blue "[[:space:]]+-[A-Za-z0-9+_@-]+"
 ## Accepted arches:
-color white "[~-]?\<(alpha|amd64|arm(64)?|hppa|ia64|m68k|mips|nios2|ppc(64)?|riscv|s390|sh|sparc|x86)(-(aix|(f|free|net|open)bsd|cygwin|hpux|interix|linux|macos|mint|solaris|winnt))?\>"
-color white "[[:space:]][*~-]?\*"
+color brightwhite "[~-]?\<(alpha|amd64|arm(64)?|hppa|ia64|m68k|mips|nios2|ppc(64)?|riscv|s390|sh|sparc|x86)(-(aix|(f|free|net|open)bsd|cygwin|hpux|interix|linux|macos|mint|solaris|winnt))?\>"
+color brightwhite "[[:space:]][*~-]?\*"
 ## Categories:
 color cyan "^[[:space:]]*[^/]*/"
 ## Masking regulators:

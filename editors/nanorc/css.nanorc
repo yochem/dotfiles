@@ -5,7 +5,7 @@ comment "/*|*/"
 
 color red     "."
 color yellow  start="\{" end="\}"
-color white   start=":" end="([;^\{]|$)"
+color brightwhite   start=":" end="([;^\{]|$)"
 color blue    ":active|:focus|:hover|:link|:visited|:link|:after|:before|$"
 color blue    start="\/\*" end="\\*/"
 color green         ";|:|\{|\}"
