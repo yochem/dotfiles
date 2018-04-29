@@ -20,7 +20,7 @@ set mouse
 unset nonewlines
 
 # no help at the bottom of the page
-# set nohelp
+#set nohelp
 
 # smooth scrolling
 set smooth
@@ -40,4 +40,8 @@ set nowrap
 set brackets ""')>]}"
 set matchbrackets "(]}"
 
+# avaible using multiple buffers
 set multibuffer
+
+# remember the search/replace
+set historylog
