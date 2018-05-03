@@ -11,6 +11,8 @@ brew upgrade
 
 # Install packages
 brew_apps=(
+  bash
+  coreutils
   fish
   git
   hub
