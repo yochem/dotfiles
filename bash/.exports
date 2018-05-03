@@ -5,8 +5,17 @@
 # atom as default editor
 export EDITOR='nano';
 
-# add ~/bin to path
-export PATH="~/bin:$PATH";
+# add GNU core utils from brew to path
+export PATH="/Library/TeX/texbin"
+export PATH="/bin:$PATH"
+export PATH="/sbin:$PATH"
+export PATH="/usr/bin:$PATH"
+export PATH="/usr/sbin:$PATH"
+export PATH="$HOME/.nvm/versions/node/v8.11.1/bin:$PATH"
+#export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 # set path to node_modules
 export NODE_PATH='/usr/local/lib/node_modules'
@@ -15,3 +24,6 @@ export NODE_PATH='/usr/local/lib/node_modules'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# increase bash history size
+export HISTSIZE='32768';
