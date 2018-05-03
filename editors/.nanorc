@@ -1,5 +1,5 @@
 # syntax highlighting
-include /usr/local/share/nano/*.nanorc
+include ~/.nano/*.nanorc
 
 # linenumbers
 set linenumbers
