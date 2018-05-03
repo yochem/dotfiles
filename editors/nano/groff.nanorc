@@ -1,0 +1,26 @@
+## Here is an example for groff.
+
+syntax groff "\.m[ems]$" "\.rof" "\.tmac$" "^tmac."
+comment ".\""
+
+# The argument of .ds or .nr
+color cyan "^\.(ds|nr) [^[:space:]]*"
+# Single-character escapes
+color magenta "\\."
+# The argument of \f or \s in the same color
+color magenta "\\f." "\\f\(.." "\\s(\+|\-)?[0-9]"
+# Newlines
+color cyan "(\\|\\\\)n(.|\(..)"
+color cyan start="(\\|\\\\)n\[" end="]"
+# Requests
+color green "^\.[[:space:]]*[^[:space:]]*"
+# Comments
+color yellow "^\.\\".*$"
+# Strings
+color green "(\\|\\\\)\*(.|\(..)"
+color green start="(\\|\\\\)\*\[" end="]"
+# Characters
+color red "\\\(.."
+color red start="\\\[" end="]"
+# Macro arguments
+color cyan "\\\\\$[1-9]"
