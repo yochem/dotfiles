@@ -19,6 +19,11 @@ alias reload="source ~/.bash_profile"
 # use nano v2.9.5
 alias nano="/usr/local/Cellar/nano/2.9.5/bin/nano -t"
 
+# easier way to cd back one level
 alias ..="cd .."
 
+# shorter version for brew cask
 alias cask="brew cask"
+
+# hub for git
+alias git=hub
