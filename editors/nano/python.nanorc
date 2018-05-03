@@ -1,0 +1,54 @@
+## Here is an example for Python.
+
+syntax python "\.py$"
+header "^#!.*python[-0-9._]*"
+magic "Python script"
+linter pyflakes
+comment "#"
+
+# Function definitions
+color cyan "def [0-9A-Z_]+"
+
+# .format() and len()
+color cyan "\<(format|len)\>"
+
+# function names and @func (ex: test() and @test.test()
+color cyan "\w+\("
+color cyan "@\w+.?"
+
+
+# Keywords
+color magenta "\<(and|as|assert|async|await|break|class|continue)\>"
+color magenta "\<(def|del|elif|else|except|exec|finally|for|from)\>"
+color magenta "\<(global|if|import|in|is|lambda|nonlocal|not|or)\>"
+color magenta "\<(pass|print|raise|return|try|while|with|yield)\>"
+color cyan "\<(abs|append|apply|buffer|callable|chr|clear|close|closed|cmp|coerce|compile|complex|conjugate|copy|count|delattr|dir|divmod|eval|execfile|extend|fileno|filter|float|flush|get|getattr|globals|has_key|hasattr|hash|hex|id|index|input|insert|int|intern|isatty|isinstance|issubclass|items|keys|len|list|locals|long|map|max|min|mode|name|oct|open|ord|pop|pow|range|raw_input|read|readline|readlines|reduce|reload|remove|repr|reverse|round|seek|setattr|slice|softspace|sort|str|tell|truncate|tuple|type|unichr|unicode|update|values|vars|write|writelines|xrange|zip)\>"
+
+# Single-quoted strings
+color green "'([^'\]|\\.)+'"
+color green ""([^"\]|\\.)+""
+
+# Comments
+color white "(^|[[:blank:]])#.*$"
+
+# Triple-quoted strings.
+color green start="'''([^'),]|$)" end="(^|[^(\])'''"
+color green start="\"\"\"([^"),]|$)" end="(^|[^(\])\"\"\""
+
+# Special values.
+color yellow "\<(False|None|True)\>"
+
+# Integers or floats (not in strings ofc)
+color yellow "[0-9]+\.?[0-9]*([[:space:]]+|;)"
+
+# Reminders.
+color yellow "(FIXME|TODO|XXX)"
+
+# Trailing whitespace.
+#color ,green "[[:space:]]+$"
+
+# Force brackets to always be white
+color brightwhite "\(|\)|\[|\]"
+
+# {} brackets (ex: "{}".format(test)
+color yellow "\{\w*\}"

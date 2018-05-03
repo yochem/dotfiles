@@ -1,0 +1,22 @@
+syntax "colorTest" "ColorTest$"
+
+
+color normal "\<normal\>"
+color black "\<black\>"
+color white "\<white\>"
+color red "\<red\>"
+color blue "\<blue\>"
+color green "\<green\>"
+color yellow "\<yellow\>"
+color magenta "\<magenta\>"
+color cyan "\<cyan\>"
+
+color brightnormal "\<brightnormal\>"
+color brightblack "\<brightblack\>"
+color brightwhite "\<brightwhite\>"
+color brightred "\<brightred\>"
+color brightblue "\<brightblue\>"
+color brightgreen "\<brightgreen\>"
+color brightyellow "\<brightyellow\>"
+color brightmagenta "\<brightmagenta\>"
+color brightcyan "\<brightcyan\>"
