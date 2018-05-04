@@ -25,4 +25,4 @@ elif [ -f /etc/bash_completion ]; then
 fi;
 
 # sourcing z
-. z.sh
+. ~/z.sh
