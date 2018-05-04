@@ -13,7 +13,7 @@ color cyan "\w+\(\)"
 color green "(\(|\))"
 
 # Uncolor brackets after function name
-color brightwhite "\(\)"
+color normal "\(\)"
 
 # Keywords
 color magenta "\<(break|case|do|done|elif|else|esac|exit|fi|for|function|if|in|local|read|return|select|shift|then|time|until|while)\>"
@@ -22,13 +22,13 @@ color magenta "\<(break|case|do|done|elif|else|esac|exit|fi|for|function|if|in|l
 #color green "(\{|\}|\(|\)|\;|\]|\[|`|\\|\$|<|>|!|&|\|)"
 
 # Options
-color cyan "-\w+"
+color cyan "--?\w+"
 
 # Some things
 color green "-(eq|ne|gt|lt|ge|le|s|n|z)\>"
 
 # Some builtin functions
-color cyan "\<(cat|cd|chmod|chown|cp|echo|env|export|grep|install|let|ln|make|mkdir|mv|rm|sed|set|tar|touch|umask|unset)\>"
+color cyan "\<(alias|cat|cd|chmod|chown|cp|echo|env|export|grep|install|let|ln|make|mkdir|mv|rm|sed|set|tar|touch|umask|unset)\>"
 
 # ex: case function
 icolor green "^\s+[0-9A-Z_]+\s+\(\)"
@@ -36,6 +36,9 @@ color green ""(\\.|[^"])*"" "'(\\.|[^'])*'"
 
 # trailing whitespace
 #color ,green "[[:space:]]+$"
+
+# Operators
+color normal ";|=|:"
 
 # sub functions
 color green "\$\(.*\)"
@@ -50,9 +53,6 @@ color green ""([^"\]|\\.)+""
 
 # Variable references
 icolor red "\$\{?[0-9A-Z_!@#$*:?-]+\}?"
-
-# Operators
-color brightwhite ";|=|:"
 
 # Booleans and stuff
 color yellow "\<(false|true)\>"

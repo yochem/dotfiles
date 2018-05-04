@@ -25,5 +25,5 @@ icolor yellow "^[[:space:]]*i?color[[:space:]]*()?(bright)?(white|black|red|blue
 icolor cyan "^[[:space:]]*i?color\>" "\<(start|end)="
 
 # Comments
-color brightwhite "(^|[[:space:]]+)#.*$"
+color white "(^|[[:space:]]+)#.*$"
 color brightwhite "^[[:space:]]*##.*$"
