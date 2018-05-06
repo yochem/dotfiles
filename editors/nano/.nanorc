@@ -10,14 +10,14 @@ set autoindent
 # bold in stead of reverse
 set boldtext
 
-# use more space
+# don't use more space
 unset morespace
 
 # use mouse
 set mouse
 
 # no new lines at end of file
-unset nonewlines
+set nonewlines
 
 # no help at the bottom of the page
 #set nohelp
@@ -36,12 +36,23 @@ unset tempfile
 # don't wrap text to the next line
 set nowrap
 
-# higlights matching bracket
+# higlights matching brackets
 set brackets ""')>]}"
-set matchbrackets "(]}"
+set matchbrackets "(<[{)>]}"
 
 # avaible using multiple buffers
 set multibuffer
 
 # remember the search/replace
 set historylog
+
+# everything that's allowed to colorize in nano
+# include selected text, errors, description and key shortcut in helpmenu
+# linenumbers, status of document (modified) and the title of the document
+set selectedcolor normal,blue
+set errorcolor normal,red
+set functioncolor normal
+set keycolor normal
+set numbercolor normal
+set statuscolor brightwhite
+set titlecolor brightwhite
