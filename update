@@ -1,23 +1,26 @@
 #!/usr/bin/env bash
 
+reset=$(tput sgr0);
+orangebold=$(tput bold; tput setaf 166);
+
 # BREW (CASK)
-echo "updating and upgrading Brew..."
+echo -e "${orangebold}updating and upgrading Brew...${reset}"
 brew update
 brew upgrade
 
 # NPM
-echo "updating and upgrading NPM..."
+echo -e "${orangebold}updating and upgrading NPM...${reset}"
 npm install npm -g
 npm update -g
 
 # PIP
-echo "updating and upgrading PIP..."
+echo -e "${orangebold}updating and upgrading PIP...${reset}"
 pip freeze > requirements.txt
-pip install -r requirements.txt --upgrade
+pip install -r requirements.txt --upgrade -q
 rm requirements.txt
 
 # ATOM
-echo "updating Atom packages..."
+echo -e "${orangebold}updating Atom packages...${reset}"
 apm update
 
 # APP STORE
