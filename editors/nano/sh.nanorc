@@ -4,7 +4,7 @@ syntax "SH" "\.sh$" "\.bashrc" "bashrc" "\.bash_aliases" "bash_aliases" "\.bash_
 header "^#!.*/(env +)?(ba)?sh( |$)"
 
 # Integers or floats (not in strings ofc)
-color yellow "[0-9]+\.?[0-9]*([[:space:]]+|;)"
+color yellow "=[[:space:]]?[0-9]+\.?[0-9]*([[:space:]]+|;)"
 
 # Function names
 color cyan "\w+\(\)"
@@ -21,11 +21,8 @@ color magenta "\<(break|case|do|done|elif|else|esac|exit|fi|for|function|if|in|l
 # Brackets and pipes and stuff
 #color green "(\{|\}|\(|\)|\;|\]|\[|`|\\|\$|<|>|!|&|\|)"
 
-# Options
-color cyan "--?\w+"
-
 # Some things
-color green "-(eq|ne|gt|lt|ge|le|s|n|z)\>"
+color green "-(eq|ne|gt|lt|ge|le|n|z)\>"
 
 # Some builtin functions
 color cyan "\<(alias|cat|cd|chmod|chown|cp|echo|env|export|grep|install|let|ln|make|mkdir|mv|rm|sed|set|tar|touch|umask|unset)\>"
@@ -50,6 +47,9 @@ color green start="\"\"\"([^"),]|$)" end="(^|[^(\])\"\"\""
 # Single-quoted strings
 color green "'([^'\]|\\.)+'"
 color green ""([^"\]|\\.)+""
+
+# escaping characters
+color cyan "\\.{1}"
 
 # Variable references
 icolor red "\$\{?[0-9A-Z_!@#$*:?-]+\}?"
