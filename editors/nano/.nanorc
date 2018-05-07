@@ -28,7 +28,7 @@ set smooth
 set tabsize "4"
 
 # used tabs will be converted to spaces
-set tabstospaces
+#set tabstospaces
 
 # no tempory file, just save file
 unset tempfile
