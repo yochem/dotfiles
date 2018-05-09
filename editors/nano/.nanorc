@@ -17,7 +17,7 @@ unset morespace
 set mouse
 
 # no new lines at end of file
-set nonewlines
+#set nonewlines
 
 # no help at the bottom of the page
 #set nohelp
