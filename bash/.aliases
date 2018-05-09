@@ -2,14 +2,6 @@
 
 ### NOTE TO SELF: ONLY EDIT FROM ~/ ###
 
-# let me know if i'm getting an error.
-# Usage: $ (...some code...) kut
-alias kut='say kut, een fout;'
-
-# let me know when it's done (polite).
-# Usage: $ ...some code... && lemmeknow
-alias lemmeknow='terminal-notifier -title "Terminal" -message "Done with task!"'
-
 # fancy ls
 alias lst="ls -GFhl1"
 
