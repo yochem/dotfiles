@@ -24,7 +24,8 @@ PS1="\[$reset\]";
 PS1+="\[$cyan\] \W "; # short working directory in cyan
 PS1+="\[$reset\]";
 PS1+="\$(prompt_git)";
-PS1+="\[$magenta\] Σ "; # $ prompt in magenta
+#PS1+="\[$magenta\] Σ "; # $ prompt in magenta
+PS1+="\[$magenta\] ▲ "; # $ prompt in magenta
 PS1+="\[$reset\] ";
 export PS1;
 # prompt now looks like ' ~ Σ ' in home directory.
