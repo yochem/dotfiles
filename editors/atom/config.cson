@@ -66,12 +66,14 @@
       ".sass-cache"
       "Gemfile"
     ]
-    projectHome: "/Users/Yochem/Dropbox"
+    projectHome: "/Users/Yochem/Repos"
+    restorePreviousWindowsOnStart: "no"
     telemetryConsent: "no"
     titleBar: "custom"
   editor:
     scrollPastEnd: true
     showIndentGuide: true
+    tabLength: 4
   "exception-reporting":
     userId: "65697317-0264-bd7e-904b-0baf33eb482e"
   "file-icons":
