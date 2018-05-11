@@ -28,6 +28,7 @@ pip_apps=(
   pydrive
   pygments
   setuptools
+  termdown
   zerorpc
 )
 
