@@ -3,12 +3,12 @@
 syntax javascript "\.js$"
 comment "//"
 
-color blue   "\<[-+]?([0-9]+[EePp][+-]?[0-9]+)[fFlL]?"
-color brightblue "[A-Za-z_][A-Za-z0-9_]*[[:space:]]*[(]"
-color yellow "\<(true|false)\>"
-color cyan "[-+/*=<>!~%?:&|]"
-color magenta   "/[^*]([^/]|(\\/))*[^\\]/[gim]*"
-color magenta   "\\[0-7][0-7]?[0-7]?|\\x[0-9a-fA-F]+|\\[bfnrt'"\?\\]"
+#color blue   "\<[-+]?([0-9]+[EePp][+-]?[0-9]+)[fFlL]?"
+#color brightblue "[A-Za-z_][A-Za-z0-9_]*[[:space:]]*[(]"
+#color yellow "\<(true|false)\>"
+#color cyan "[-+/*=<>!~%?:&|]"
+#color magenta   "/[^*]([^/]|(\\/))*[^\\]/[gim]*"
+#color magenta   "\\[0-7][0-7]?[0-7]?|\\x[0-9a-fA-F]+|\\[bfnrt'"\?\\]"
 
 # jquery support
 color cyan "\$"
@@ -47,10 +47,12 @@ color green start="\"\"\"([^"),]|$)" end="(^|[^(\])\"\"\""
 color green "['][^']*[^\\][']" "[']{3}.*[^\\][']{3}"
 color green "["][^"]*[^\\]["]" "["]{3}.*[^\\]["]{3}"
 
+# character escapes
+color cyan "\\[a-z0-9*."']"
+
 # comments
 color white "(^|[[:space:]])//.*"
 color white start="/\*" end="\*/"
 
 # reminders.
 color white,yellow "(BUG|DEBUG|FIXME|IDEA|NOTE|REVIEW|TEMP|TODO|WARNING|XXX):"
-
