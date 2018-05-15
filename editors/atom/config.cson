@@ -42,6 +42,7 @@
       "linter-htmlhint"
       "spell-check"
       "linter"
+      "markdown-preview"
     ]
     ignoredNames: [
       "venv"
@@ -100,7 +101,8 @@
   "markdown-preview":
     useGitHubStyle: true
   "markdown-preview-plus":
-    enableLatexRenderingByDefault: true
+    mathConfig:
+      enableLatexRenderingByDefault: true
     useGitHubStyle: true
   minimap:
     disablePythonDocLinks: true
@@ -124,6 +126,7 @@
     visible: false
   "tree-view":
     hideIgnoredNames: true
+    hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false
 ".jade.source":
