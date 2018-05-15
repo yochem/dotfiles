@@ -19,3 +19,8 @@ alias cask="brew cask"
 
 # hub for git
 alias git=hub
+
+# I like to study using pomodoro technique
+# this is a countdown timer with notification
+# to time 25 minutes
+alias pomodoro="termdown 25m && notify --title=Timer klaar!"
