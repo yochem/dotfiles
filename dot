@@ -60,6 +60,20 @@ install() {
   # Clone all repos from given user (default = me :) )
   mkdir ~/Repos
   . install/clonerepos ~/Repos
+
+	# create the dock
+	dockutil --no-restart --remove all
+	dockutil --no-restart --add "/Applications/Safari.app"
+	dockutil --no-restart --add "/Applications/Mail.app"
+	dockutil --no-restart --add "/Applications/Spotify.app"
+	dockutil --no-restart --add "/Applications/Hyper.app"
+	dockutil --no-restart --add "/Applications/Atom.app"
+	dockutil --no-restart --add "/Applications/WhatsApp.app"
+	dockutil --no-restart --add "/Applications/Telegram.app"
+	dockutil --no-restart --add "~/Downloads"  --view fan --display stack	
+
+	killall Dock
+
 }
 
 
