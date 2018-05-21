@@ -9,13 +9,12 @@ cdr() { cd ${HOME}/Repos/$@ ;}
 # View the local git repository on Github
 # Uses alias 'git url', as seen in git/.gitconfig
 # 'open' opens an url in the browser on macOS. Not tested on linux
-viewgh() { 
+viewgh() {
     remote=$(git ls-remote --get-url origin)
     if [[ ${remote:0:4} == "http" ]]; then
-        open ${remote} 
+        open "${remote}"
     else
-        url=$(git ls-remote --get-url origin | cut -f 2 -d : | cut -f 1 -d ".");
-        open https://github.com/${url};
+        open "https${remote:3}"
     fi
 }
 
