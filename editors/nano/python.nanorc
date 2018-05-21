@@ -11,6 +11,7 @@ color cyan "def [0-9A-Z_]+"
 
 # function names and decorators
 color red "\w+\."
+color red "\.\w+"
 color cyan "\w+\("
 color cyan "@\w+.?"
 
