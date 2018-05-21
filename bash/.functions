@@ -38,7 +38,6 @@ clone_all_from() {
 # make a directory and cd into it
 mkcd() { mkdir "$1"; cd "$1" ;}
 
-
 # open a manual as pdf
 manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
 
