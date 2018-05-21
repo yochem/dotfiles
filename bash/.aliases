@@ -5,6 +5,9 @@
 # fancy ls
 alias lst="ls -GFhl1"
 
+# always color grep
+alias grep="grep --color"
+
 # reload bash profile and stuff
 alias reload="source ~/.bash_profile"
 
