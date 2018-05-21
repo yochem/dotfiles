@@ -1,4 +1,7 @@
 "*":
+  Zen:
+    softWrap: true
+    typewriter: true
   "atom-beautify":
     arduino: {}
     bash: {}
@@ -106,6 +109,8 @@
     useGitHubStyle: true
   minimap:
     disablePythonDocLinks: true
+  "native-ui":
+    ui: {}
   "one-dark-ui": {}
   pigments:
     markerType: "native-dot"
