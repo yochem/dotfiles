@@ -10,8 +10,12 @@ comment "#"
 color cyan "def [0-9A-Z_]+"
 
 # function names and decorators
+color red "\w+\."
 color cyan "\w+\("
 color cyan "@\w+.?"
+
+# force brackets and dots to always be white
+color normal "\(|\)|\[|\]|\."
 
 # keywords etc.
 color magenta "\<(and|as|assert|async|await|break|class|continue)\>"
@@ -24,13 +28,10 @@ color cyan "\<(Exception|StandardError|ArithmeticError|LookupError|EnvironmentEr
 color yellow "\<(False|None|True)\>"
 
 # integers or floats (not in strings ofc)
-color yellow "[^_][0-9]+\.?[0-9]*"
-
+color yellow "(^| |=)[0-9]+\.?[0-9]*"
+color normal "="
 # trailing whitespace.
 #color ,green "[[:space:]]+$"
-
-# force brackets to always be white
-color normal "\(|\)|\[|\]"
 
 # single-quoted strings
 #color green "'([^'\]|\\.)+'"
