@@ -26,5 +26,3 @@ fi;
 
 # sourcing z
 . ~/z.sh
-
-export PATH="$HOME/.cargo/bin:$PATH"
