@@ -1,0 +1,79 @@
+#!/usr/bin/env python
+
+"""
+Notify - irritate yourself.
+
+Notify is a small python script that notifies
+the user. It uses applescript to interact with
+the notification display on macOS.
+
+
+Usage
+notify [options] <message>
+
+
+Options
+--title		define a title for the notification.
+			Default: "Terminal"
+--sound		add a sound to the notification. The available
+			sounds can be found in /System/Library/Sounds.
+			Default: "Glass"
+message		The message to display. Default: "Terminal task done!"
+
+
+Example
+			notify --title=curl --sound=Frog curl is done!
+
+
+Author
+			Yochem van Rosmalen
+
+Date
+			May 8 2018
+"""
+
+import sys
+import os
+import re
+
+
+# check if there are any arguments
+if len(sys.argv) > 1:
+	# cut the first item from sys.argv ('notify')
+	usr_inp = ' '.join(sys.argv[1:])
+
+	# find a flag using regex. If it's given, use
+	# that value. Otherwise use a default
+	title = re.search("(?<=--title=)\w+", usr_inp)
+	if title:
+		title = title.group(0)
+	else:
+		title = "Terminal"
+
+	sound = re.search("(?<=--sound=)\w+", usr_inp)
+	if sound:
+		sound = sound.group(0)
+	else:
+		sound = "Glass"
+
+	# replace (aka delete) the flags from the message the
+	# user input string. This way all not-flags will be part
+	# of the message itself
+	msg  = re.sub("--(title|sound)=\w+", '', usr_inp)
+
+else:
+	# use default values if no arguments are given
+	title = "Terminal"
+	msg = "Terminal task done!"
+	sound = "Glass"
+
+
+# create the applescript command
+cmd = """'display notification "{}" """.format(msg)
+cmd += """with title "{}" """.format(title)
+cmd += """sound name "/System/Library/Sounds/{}.aiff" """.format(sound)
+# end quote
+cmd += """'"""
+
+		# run the apple script with created command
+os.system("osascript -e "+ cmd)
