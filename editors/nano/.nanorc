@@ -69,6 +69,3 @@ bind M-2 "---------------------" main
 
 # more natural way to undo
 bind ^Z undo main
-
-# execute file
-bind ^I "python " main
