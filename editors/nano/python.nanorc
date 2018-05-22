@@ -56,3 +56,6 @@ color white "(^|[[:blank:]])#.*$"
 
 # reminders.
 color black,yellow "(BUG|DEBUG|FIXME|IDEA|NOTE|REVIEW|TEMP|TODO|WARNING|XXX)"
+
+# Spaces in front of tabs.
+color ,red " +	+"
