@@ -16,9 +16,6 @@ unset morespace
 # use mouse
 set mouse
 
-# no new lines at end of file
-#set nonewlines
-
 # no help at the bottom of the page
 #set nohelp
 
@@ -56,3 +53,22 @@ set keycolor normal
 set numbercolor normal
 set statuscolor brightwhite
 set titlecolor brightwhite
+
+# more natural way to copy
+bind M-C copytext all
+
+# easy way to list all files in working directory
+bind ^L "" all
+
+# ... and the more logical way to exit that
+bind ^X "" browser
+
+# how to scroll past end in nano...
+bind M-1 "=====================" main
+bind M-2 "---------------------" main
+
+# more natural way to undo
+bind ^Z undo main
+
+# execute file
+bind ^I "python " main
