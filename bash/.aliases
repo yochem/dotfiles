@@ -11,11 +11,16 @@ alias grep="grep --color"
 # reload bash profile and stuff
 alias reload="source ~/.bash_profile"
 
+# shorten less
+alias l="less"
+
 # use nano v2.9.5
 alias nano="/usr/local/Cellar/nano/2.9.5/bin/nano -t"
 
 # easier way to cd back one level
 alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 # shorter version for brew cask
 alias cask="brew cask"
