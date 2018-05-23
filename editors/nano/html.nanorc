@@ -5,24 +5,32 @@ magic "HTML document"
 comment "<!--|-->"
 
 # Tags:
-color cyan "<[[:alpha:]/!?][^>]*>"
+color red "<[[:alpha:]/!?][^>]*>"
 # Bold, italic, and underlined:
 color magenta "</?[biu]>"
 
 # Named character references:
-color red "&[^;[:space:]]*;"
+color magenta "&[^;[:space:]]*;"
+
+# Attributes:
+color yellow "(abbr|accept(-charset)?|accesskey|action|alink|align|alt|archive|axis|background|bgcolor|border)="
+color yellow "(cell(padding|spacing)|char(off|set)?|checked|cite|class(id)?|compact|code(base|tag)?|cols(pan)?)="
+color yellow "(content(editable)?|contextmenu|coords|data|datetime|declare|defer|dir|disabled|enctype)="
+color yellow "(for|frame(border)?|headers|height|hidden|href(lang)?|hspace|http-equiv|ismap)="
+color yellow "(label|lang|link|longdesc|margin(height|width)|maxlength|media|method|multiple)="
+color yellow "(name|nohref|noresize|noshade|object|onclick|onfocus|onload|onmouseover|profile|readonly|rel|rev)="
+color yellow "(rows(pan)?|rules|scheme|scope|scrolling|selected|shape|size|span|src|standby|start|style|summary)="
+color yellow "(tabindex|target|text|title|type|usemap|valign|value(type)?|vlink|vspace|width|xmlns|xml:space)="
+color cyan "(id)"
+
+# normalize < > / and =
+color normal "<|>|/|="
+
 # Strings:
 color green ""(\\.|[^"])*""
 
-# Attributes:
-color red "(abbr|accept(-charset)?|accesskey|action|alink|align|alt|archive|axis|background|bgcolor|border)="
-color red "(cell(padding|spacing)|char(off|set)?|checked|cite|class(id)?|compact|code(base|tag)?|cols(pan)?)="
-color red "(content(editable)?|contextmenu|coords|data|datetime|declare|defer|dir|disabled|enctype)="
-color red "(for|frame(border)?|headers|height|hidden|href(lang)?|hspace|http-equiv|id|ismap)="
-color red "(label|lang|link|longdesc|margin(height|width)|maxlength|media|method|multiple)="
-color red "(name|nohref|noresize|noshade|object|onclick|onfocus|onload|onmouseover|profile|readonly|rel|rev)="
-color red "(rows(pan)?|rules|scheme|scope|scrolling|selected|shape|size|span|src|standby|start|style|summary)="
-color red "(tabindex|target|text|title|type|usemap|valign|value(type)?|vlink|vspace|width|xmlns|xml:space)="
+# urls
+color cyan "https?://[0-9a-z\./-_:?=;,*%#&]+"
 
 # Comments
-color blue start="<!--" end="-->"
+color white start="<!--" end="-->"

@@ -78,6 +78,7 @@
     scrollPastEnd: true
     showIndentGuide: true
     tabLength: 4
+    tabType: "hard"
   "exception-reporting":
     userId: "65697317-0264-bd7e-904b-0baf33eb482e"
   "file-icons":
