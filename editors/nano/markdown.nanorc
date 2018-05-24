@@ -49,7 +49,7 @@ color yellow start="\\\[" end="\\\]"
 color green "`{1,3}.*`{1,3}"
 
 # code blocks
-color green start="^```[^$]" end="^```$"
+color green start="^```[a-z]*$" end="^```$"
 color green "^```$"
 
 # comments
