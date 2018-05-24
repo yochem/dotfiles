@@ -3,7 +3,7 @@
 ### NOTE TO SELF: ONLY EDIT FROM ~/ ###
 
 # fancy ls
-alias lst="ls -GFhl1"
+alias lst="ls -FGhl1"
 
 # always color grep
 alias grep="grep --color"
