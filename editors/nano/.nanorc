@@ -51,8 +51,8 @@ set errorcolor normal,red
 set functioncolor normal
 set keycolor normal
 set numbercolor normal
-set statuscolor brightwhite
-set titlecolor brightwhite
+set statuscolor brightnormal
+set titlecolor brightnormal
 
 # more natural way to copy
 bind M-C copytext all
