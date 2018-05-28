@@ -24,6 +24,9 @@ viewgh() {
 	fi
 }
 
+# print a markdown file, rendered by pandoc
+printmd() {	pandoc -s $1 -o temp.pdf && lpr temp.pdf && rm temp.pdf; }
+
 # gi macos gives the gitignore for macos.
 # Use gi macos >> .gitignore to make file
 gi() { curl -L -s https://www.gitignore.io/api/$@ ;}

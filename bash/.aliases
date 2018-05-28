@@ -5,6 +5,9 @@
 # fancy ls
 alias lst="ls -FGhl1"
 
+# i always forget what the printer command is...
+alias printer="lpr"
+
 # always color grep
 alias grep="grep --color"
 
