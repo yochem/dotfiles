@@ -1,6 +1,6 @@
 ## Here is an example for Bourne shell scripts.
 
-syntax "SH" "\.sh$" "\.bashrc" "bashrc" "\.bash_aliases" "bash_aliases" "\.bash_functions" "bash_functions" "\.bash_profile" "bash_profile" "revise\..+$"
+syntax "SH" "\.sh$" "\.bashrc" "bashrc" "\.aliases" "\.exports" "\.bash_prompt" "\.functions" "\.bash_profile" "bash_profile" "revise\..+$"
 header "^#!.*/(env +)?(ba)?sh( |$)"
 
 # Integers or floats (not in strings ofc)
@@ -59,3 +59,9 @@ color yellow "\<(false|true)\>"
 
 # Comments
 color white "(^|[[:space:]])#.*$"
+
+# reminders.
+color black,yellow "(BUG:|DEBUG:|FIXME:|IDEA:|NOTE:|REVIEW:|TEMP:|TODO:|WARNING:|XXX:)"
+
+# Spaces in front of tabs.
+color ,red " +	+"
