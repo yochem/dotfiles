@@ -16,6 +16,9 @@ unset morespace
 # use mouse
 set mouse
 
+# save the cursors position
+set positionlog
+
 # no help at the bottom of the page
 #set nohelp
 
@@ -30,8 +33,8 @@ set tabsize "4"
 # no tempory file, just save file
 unset tempfile
 
-# don't wrap text to the next line
-set nowrap
+set softwrap
+set atblanks
 
 # higlights matching brackets
 set brackets ""')>]}"
