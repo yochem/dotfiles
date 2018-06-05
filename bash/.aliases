@@ -14,11 +14,14 @@ alias grep="grep --color"
 # reload bash profile and stuff
 alias reload="source ~/.bash_profile"
 
-# shorten less
-alias l="less"
-
 # use nano v2.9.5
 alias nano="/usr/local/Cellar/nano/2.9.7/bin/nano -t"
+
+# shorten the most used things
+alias l="less"
+alias n="nano"
+alias g="git"
+alias a="atom"
 
 # easier way to cd back one level
 alias ..="cd .."
@@ -30,6 +33,9 @@ alias cask="brew cask"
 
 # hub for git
 alias git=hub
+
+# some pandoc settings I always use
+alias pd="pandoc -V lang=nl --number-sections --filter pandoc-fignos"
 
 # I like to study using pomodoro technique
 # this is a countdown timer with notification
