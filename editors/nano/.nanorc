@@ -31,7 +31,7 @@ set tabsize "4"
 #set tabstospaces
 
 # no tempory file, just save file
-unset tempfile
+set tempfile
 
 set softwrap
 set atblanks
@@ -72,3 +72,6 @@ bind M-2 "---------------------" main
 
 # more natural way to undo
 bind ^Z undo main
+
+# run python files
+bind ^I "|pythonn" main
