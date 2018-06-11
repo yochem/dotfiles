@@ -14,9 +14,6 @@ alias grep="grep --color"
 # reload bash profile and stuff
 alias reload="source ~/.bash_profile"
 
-# use nano v2.9.5
-alias nano="/usr/local/Cellar/nano/2.9.7/bin/nano -t"
-
 # shorten the most used things
 alias l="less"
 alias n="nano"
