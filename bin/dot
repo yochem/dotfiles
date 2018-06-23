@@ -17,49 +17,53 @@ reset=$(tput sgr0);
 
 
 install() {
-  # Close any open System Preferences panes, to prevent them from overriding
-  # settings we’re about to change
-  osascript -e 'tell application "System Preferences" to quit'
+	# Close any open System Preferences panes, to prevent them from overriding
+	# settings we’re about to change
+	osascript -e 'tell application "System Preferences" to quit'
 
-  # Keep-alive: update existing `sudo` time stamp until installation is finished
-  sudo -v
-  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+	# Keep-alive: update existing `sudo` time stamp until installation is finished
+	sudo -v
+	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-  xcode-select --install
+	xcode-select --install
 
-  # Package managers & packages
-  echo "${magenta}Installing Brew & stuff...${reset}"
-  . install/brew
-  echo "${magenta}Installing Brew-Cask & stuff...${reset}"
-  . install/brew-cask
-  echo "${magenta}Installing PIP & stuff...${reset}"
-  . install/pip
-  echo "${magenta}Installing Atom Packages...${reset}"
-  apm install --packages-file install/atom_packages.txt
+	# Package managers & packages
+	echo "${magenta}Installing Brew & stuff...${reset}"
+	. install/brew
+	echo "${magenta}Installing Brew-Cask & stuff...${reset}"
+	. install/brew-cask
+	echo "${magenta}Installing PIP & stuff...${reset}"
+	. install/pip
+	echo "${magenta}Installing Atom Packages...${reset}"
+	apm install --packages-file install/atom_packages.txt
 
-  # Bunch of symlinks from files in this directory to your home directory
-  # these are all hardlinks. I kept getting the message "Too many levels
-  # of symbolic links. This is probably because the .bash_profile file
-  # links to the other . files, which are symlinks to this repo."
-  ln -fv bash/.aliases ~
-  ln -fv bash/.bash_profile ~
-  ln -fv bash/.bash_prompt ~
-  ln -fv bash/.exports ~
-  ln -fv bash/.functions ~
-  ln -fv git/.gitconfig ~
-  ln -fv .hyper.js ~
+	# Bunch of symlinks from files in this directory to your home directory
+	# these are all hardlinks. I kept getting the message "Too many levels
+	# of symbolic links. This is probably because the .bash_profile file
+	# links to the other . files, which are symlinks to this repo."
+	ln -fv bash/.aliases ~
+	ln -fv bash/.bash_profile ~
+	ln -fv bash/.bash_prompt ~
+	ln -fv bash/.exports ~
+	ln -fv bash/.functions ~
+	ln -fv git/.gitconfig ~
+	ln -fv .hyper.js ~
 
-  # JEKYLL install
-  echo "${magenta}Installing Jekyll...${reset}"
-  gem install jekyll bundler
+	# JEKYLL install
+	echo "${magenta}Installing Jekyll...${reset}"
+	gem install jekyll bundler
 
-  # Changing defaults
-  echo "${magenta}Changin macos defaults...${reset}"
-  . "install/.macdefaults"
+	# Changing defaults
+	echo "${magenta}Changin macos defaults...${reset}"
+	. "install/.macdefaults"
 
-  # Clone all repos from given user (default = me :) )
-  mkdir ~/Repos
-  . install/clonerepos ~/Repos
+	# Clone all repos from given user (default = me :) )
+	mkdir ~/Repos
+	. install/clonerepos ~/Repos
+
+    # set the preferences for iTerm2
+    defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Repos/dotfiles/terminals/iterm2"
+    defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 	# create the dock
 	dockutil --no-restart --remove all
@@ -70,39 +74,37 @@ install() {
 	dockutil --no-restart --add "/Applications/Atom.app"
 	dockutil --no-restart --add "/Applications/WhatsApp.app"
 	dockutil --no-restart --add "/Applications/Telegram.app"
-	dockutil --no-restart --add "~/Downloads"  --view fan --display stack	
-
+	dockutil --no-restart --add "~/Downloads"	--view fan --display stack
 	killall Dock
-
 }
 
 
 # Usage
-usage="
+usage="""
 Basic usage:\n
 $ dot [install] [update] [--version] [--help]\n
 \n
 ---\n
 \n
 where:\n
-install     installs things like .bash_profile and\n
-package managers, also mac defaults.\n
-update      updates package managers and app store.\n
---help      shows this help message and exits.\n
---version   shows version and exits.
-"
+install		 installs things like .bash_profile and\n
+            package managers, also mac defaults.\n
+update			updates package managers and app store.\n
+--help			shows this help message and exits.\n
+--version	 shows version and exits.
+"""
 
 # Check arguments on install, update, --version (-v) or --help (-h)
 if [[ $1 == 'install' ]]; then
-  install
+	install
 elif [[ $1 == 'update' ]]; then
-  . update
+	. update
 elif [[ $1 == 'atom' || $1 == '--apm' ]]; then
-  apm list --installed --bare > install/atom_packages.txt
+	apm list --installed --bare > install/atom_packages.txt
 elif [[ $1 == '--version' || $1 == '-v' ]]; then
-  echo -e "The version of the CLI of my dotfiles you are using, is: ${magenta}$VERSION"
+	echo -e "The version of the CLI of my dotfiles you are using, is: ${magenta}$VERSION"
 elif [[ $# == 0 || $1 == '--help' || $1 == '-h' ]]; then
-  echo -e $usage
+	echo -e $usage
 else
-  echo -e $usage
+	echo -e $usage
 fi
