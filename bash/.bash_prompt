@@ -23,10 +23,9 @@ prompt_git() {
 
 # build prompt
 PS1="\[$reset\]"
-PS1+="\[$blue\] \W " # short working directory in default blue
+PS1+="\[$blue\]\W " # short working directory in default blue
 PS1+="\[$reset\]"
 PS1+="\$(prompt_git)"
-#PS1+="\[$magenta\] Σ "; # $ prompt in magenta
 PS1+="\[$grey\] ▲ " # $ prompt in grey
 PS1+="\[$reset\] "
 export PS1
