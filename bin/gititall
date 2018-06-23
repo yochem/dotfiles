@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-reposfile="$HOME/.gitrepos.txt"
+reposfile="$HOME/.gititall"
 reset=$(tput sgr0);
 orange=$(tput setaf 166);
 bold=$(tput bold);
