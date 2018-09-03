@@ -85,6 +85,7 @@
     strategies: {}
   kite:
     editorMetricsEnabled: "yes"
+    showEditorVacanciesNotificationOnStartup: false
     showKiteTourOnStartup: false
     showWelcomeNotificationOnStartup: false
     useDockForSidebar: true
