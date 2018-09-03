@@ -4,7 +4,7 @@
 
 # 'cd ~/Repos/example' -> 'cdr example'
 # cd + Repos = cdr
-cdr() { cd ${HOME}/Repos/$@ ;}
+cdd() { cd ${HOME}/dev/$@ ;}
 
 # View the local git repository on Github
 # Uses alias 'git url', as seen in git/.gitconfig
