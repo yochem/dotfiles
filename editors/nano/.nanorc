@@ -20,7 +20,7 @@ set mouse
 set positionlog
 
 # no help at the bottom of the page
-#set nohelp
+set nohelp
 
 # smooth scrolling
 set smooth
@@ -33,6 +33,7 @@ set tabsize "4"
 # no tempory file, just save file
 set tempfile
 
+# soft wrap the lines at blanks
 set softwrap
 set atblanks
 
