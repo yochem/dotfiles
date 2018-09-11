@@ -2,7 +2,7 @@
 
 ### NOTE TO SELF: ONLY EDIT FROM ~/ ###
 
-# atom as default editor
+# nano as default editor
 export EDITOR='nano';
 
 # add GNU core utils from brew to path
@@ -28,3 +28,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # increase bash history size
 export HISTSIZE='32768';
+
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
