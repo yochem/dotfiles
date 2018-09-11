@@ -15,9 +15,6 @@ color red "\.\w+"
 color cyan "\w+\("
 color cyan "@\w+.?"
 
-# force brackets and dots to always be white
-color normal "\(|\)|\[|\]|\."
-
 # keywords etc.
 color magenta "\<(and|as|assert|async|await|break|class|continue)\>"
 color magenta "\<(def|del|elif|else|except|exec|finally|for|from)\>"
@@ -29,10 +26,13 @@ color cyan "\<(Exception|StandardError|ArithmeticError|LookupError|EnvironmentEr
 color yellow "\<(False|None|True)\>"
 
 # integers or floats (not in strings ofc)
-color yellow "(^| |=)[0-9]+\.?[0-9]*"
+color yellow "(^| |=|\(|\)|:|\[|\])[0-9]+\.?[0-9]*"
 color normal "="
 # trailing whitespace.
 #color ,green "[[:space:]]+$"
+
+# force brackets and dots to always be white
+color normal "\(|\)|\[|\]|\."
 
 # single-quoted strings
 #color green "'([^'\]|\\.)+'"
