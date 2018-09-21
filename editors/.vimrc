@@ -1,4 +1,4 @@
-syntax enable
+syntax on
 
 set nocompatible
 
@@ -18,7 +18,7 @@ set ignorecase
 
 set mouse=a
 
-"set title
+set title
 
 set showcmd
 
@@ -27,3 +27,15 @@ set smarttab
 set autoindent
 
 set smartindent
+
+" absolute width of netrw window
+let g:netrw_winsize = -28
+
+" tree-view
+let g:netrw_liststyle = 3
+
+" sort is affecting only: directories on the top, files below
+let g:netrw_sort_sequence = '[\/]$,*'
+
+" open file in a new tab
+let g:netrw_browse_split = 3
