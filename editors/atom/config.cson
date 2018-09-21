@@ -48,6 +48,7 @@
       "markdown-preview"
     ]
     ignoredNames: [
+      "*.swp"
       "venv"
       "build"
       ".git"
@@ -125,6 +126,7 @@
   platomformio: {}
   "rst-preview-pandoc":
     pandocOpts: "-frst -thtml --webtex"
+  "status-bar": {}
   termination:
     style:
       animationSpeed: 0
@@ -134,6 +136,8 @@
   "tree-view":
     hideIgnoredNames: true
     hideVcsIgnoredFiles: true
+  "vim-mode-plus":
+    startInInsertMode: true
   welcome:
     showOnStartup: false
 ".jade.source":
