@@ -8,6 +8,9 @@ alias lst="ls -FGhl1"
 # i always forget what the printer command is...
 alias printer="lpr"
 
+# short way to ssh to raspberry pi
+alias rp="ssh pi@192.168.2.62"
+
 # always color grep
 alias grep="grep --color"
 
