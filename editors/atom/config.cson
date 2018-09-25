@@ -41,11 +41,9 @@
         "ino"
       ]
     disabledPackages: [
-      "scroll-through-time"
-      "linter-htmlhint"
       "spell-check"
-      "linter"
       "markdown-preview"
+      "github"
     ]
     ignoredNames: [
       "*.swp"
@@ -130,6 +128,11 @@
   termination:
     style:
       animationSpeed: 0
+      fontFamily: "menlo"
+      theme: "one-dark"
+    toggles:
+      cloneTerminalPlus: false
+      cursorBlink: false
   "tool-bar":
     position: "Left"
     visible: false
