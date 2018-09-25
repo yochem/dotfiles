@@ -23,6 +23,7 @@ prompt_git() {
 
 # build prompt
 PS1="\[$reset\]"
+if [ -n "$SSH_CLIENT" ]; then PS1+="\[\u@\h: "
 PS1+="\[$blue\]\W " # short working directory in default blue
 PS1+="\[$reset\]"
 PS1+="\$(prompt_git)"
