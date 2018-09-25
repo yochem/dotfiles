@@ -23,8 +23,8 @@ color normal "(!|\[|\]|\(|\))"
 color red "^#{1,6}[[:space:]].*$"
 
 # bold and italics
-color yellow "([[:space:]]|^)\*\*?[a-zA-Z0-9]+.*[a-zA-Z0-9]+\*\*?"
-color yellow "([[:space:]]|^)__?[a-zA-Z0-9]+.*[a-zA-Z0-9]+__?"
+color yellow "([[:space:]]|^)\*\*?[a-zA-Z0-9']+.*[a-zA-Z0-9']+\*\*?"
+color yellow "([[:space:]]|^)__?[a-zA-Z0-9']+.*[a-zA-Z0-9']+__?"
 
 # strike-trough
 color yellow "([[:space:]]|^)~~.*~~"
