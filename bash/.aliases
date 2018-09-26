@@ -31,9 +31,10 @@ alias ....="cd ../../.."
 # shorter version for brew cask
 alias cask="brew cask"
 
-# hub for git
-alias git=hub
-
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+	# hub for git
+	alias git=hub
+fi
 # some pandoc settings I always use
 alias pd="pandoc -V lang=nl --number-sections --filter pandoc-fignos"
 
