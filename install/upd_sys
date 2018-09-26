@@ -1,0 +1,172 @@
+#!/usr/bin/env bash
+
+#####################################
+### MACOS: BREW, MACDEFAULTS ETC ####
+#####################################
+install_brew() {
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	brew update
+	brew upgrade
+	brew_apps=(
+		bash
+		bat
+		binwalk
+		coreutils
+		dockutil
+		emacs
+		git
+		hub
+		imagesnap
+		nano
+		pandoc
+		pandoc-citeproc
+		python
+		python3
+		ruby
+		shpotify
+		sqlite
+		thefuck
+		tldr
+	)
+	brew install "${brew_apps[@]}"
+
+	# install brew cask apps
+	brew tap caskroom/cask
+	cask_apps=(
+	  arduino
+	  atom
+	  dropbox
+	  fritzing
+	  github
+	  google-chrome
+	  hyper
+	  iterm2
+	  kite
+	  lastpass
+	  makerbot-print
+	  skype
+	  spotify
+	  telegram
+	  vuze
+	  whatsapp
+	  qlcolorcod
+	  qlstephen
+	)
+	brew cask install "${cask_apps[@]}"
+
+	# Add the new shell to the list of allowed shells
+	sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+	# Change to the new shell
+	chsh -s /usr/local/bin/bash
+}
+
+#####################################
+#### ATOM: PACKAGES AND CONFIGS #####
+#####################################
+install_pip() {
+	# download pip from website
+	curl https://bootstrap.pypa.io/get-pip.py > ${HOME}/get-pip.py
+
+	# install pip
+	python ${HOME}/get-pip.py
+
+	# delete install file
+	rm ${HOME}/get-pip.py
+
+	sudo pip install -U pip
+
+	pip_apps=(
+	  checkpy
+	  click
+	  cookiecutter
+	  dropbox
+	  flask
+	  httplib2
+	  numpy
+	  pandoc
+	  pandoc-shortcaption
+	  pandocfilters
+	  pipsi
+	  pydrive
+	  pygments
+	  setuptools
+	  termdown
+	  zerorpc
+	)
+	sudo pip install "${pip_apps[@]}"
+}
+
+#####################################
+#### ATOM: PACKAGES AND CONFIGS #####
+#####################################
+install_atom() {
+	apm install --package-file atom_packages.txt
+	ln -sfv ../editors/atom/config.cson ${HOME}/.atom/config.cson
+	ln -sfv ../editors/atom/init.coffee ${HOME}/.atom/init.coffee
+	ln -sfv ../editors/atom/keymap.cson ${HOME}/.atom/keymap.cson
+	ln -sfv ../editors/atom/styles.less ${HOME}/.atom/styles.less
+}
+
+#####################################
+######## NANO & VIM: CONFIGS ########
+#####################################
+install_nano() {
+	ln -fv ../editors/.vimrc ${HOME}/.vimrc
+	ln -fv ../editors/nano/.nanorc ${HOME}/.nanorc
+	for f in $(cd ../editors/nano && ls -d -1 $PWD/**); do
+		sym_tar=$(echo "$f" | sed "s/.*\///")
+		ln -fv $f ${HOME}/.nano/$sym_tar
+	done
+}
+
+
+
+####################################
+############ INSTALL ###############
+####################################
+install_everything() {
+	# HOMEBREW & CASK
+	if ! [[ "$OSTYPE" =~ ^darwin ]]; then
+		echo "Skipped: Homebrew (not running MacOS)"
+	else
+		read -p "Install Homebrew (Cask) and newest bash version? " -n 1 -r
+		echo
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			install_brew
+		else
+			echo "Skipped: Homebrew and Cask."
+		fi
+	fi
+
+	# PIP
+	if type python >/dev/null 2>&1; then
+		read -p "Install PIP and PIP packages? " -n 1 -r
+		echo
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			install_pip
+		else
+			echo "Skipped: PIP and PIP packages."
+		fi
+	fi
+
+	# ATOM
+	if type atom >/dev/null 2>&1 && type apm >/dev/null 2>&1; then
+		read -p "Install Atom packages and use these config files? " -n 1 -r
+		echo
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			install_atom
+		else
+			echo "Skipped: Atom packages and configs."
+		fi
+	fi
+
+	# NANO & VIM
+	if type nano >/dev/null 2>&1 && type vim >/dev/null 2>&1; then
+		read -p "Use these Nano & Vim configs? " -n 1 -r
+		echo
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			install_nano
+		else
+			echo "Skipped: Nano & Vim configs."
+		fi
+}
