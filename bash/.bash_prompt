@@ -12,7 +12,7 @@ blue=$(tput setaf 4)
 white=$(tput setaf 7)
 orange=$(tput setaf 166)
 
-# If current working directory is a git folder, prompt branch in orange
+# If current working directory is a git folder, prompt [git] in orange
 prompt_git() {
 	if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
 		echo -e "$orange[git]"
@@ -26,8 +26,7 @@ PS1="\[$reset\]"
 if [ -n "$SSH_CLIENT" ]; then PS1+="\[\u@\h: "; fi
 PS1+="\[$blue\]\W " # short working directory in default blue
 PS1+="\[$reset\]"
-PS1+="$(prompt_git)"
-PS1+="\[$reset\]"
+PS1+="\$(prompt_git)"
 PS1+="\[$grey\] ▲ " # $ prompt in grey
 PS1+="\[$reset\] "
 export PS1

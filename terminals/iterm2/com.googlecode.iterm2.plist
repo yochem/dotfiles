@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AboutToPasteTabsWithCancel</key>
+	<true/>
+	<key>AboutToPasteTabsWithCancel_selection</key>
+	<integer>0</integer>
 	<key>AlternateMouseScroll</key>
 	<true/>
 	<key>AppleAntiAliasingThreshold</key>
@@ -651,7 +655,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>117 392 928 394 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>325 265 690 487 0 0 1440 877 </string>
+	<string>369 235 850 487 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>544 124 690 487 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
