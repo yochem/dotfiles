@@ -37,8 +37,8 @@
   core:
     closeDeletedFileTabs: true
     customFileTypes:
-      "source.arduino": [
-        "ino"
+      "source.prolog": [
+        "pl"
       ]
     disabledPackages: [
       "spell-check"
@@ -76,8 +76,8 @@
   editor:
     scrollPastEnd: true
     showIndentGuide: true
+    softTabs: false
     tabLength: 4
-    tabType: "hard"
   "exception-reporting":
     userId: "65697317-0264-bd7e-904b-0baf33eb482e"
   "file-icons":
@@ -101,6 +101,7 @@
       "text.html.jekyll"
     ]
   "linter-ui-default":
+    showPanel: true
     useBusySignal: false
   "markdown-preview":
     useGitHubStyle: true
@@ -131,7 +132,6 @@
       fontFamily: "menlo"
       theme: "one-dark"
     toggles:
-      cloneTerminalPlus: false
       cursorBlink: false
   "tool-bar":
     position: "Left"
