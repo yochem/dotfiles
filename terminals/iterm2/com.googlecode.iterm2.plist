@@ -653,9 +653,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 138 606 469 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>117 392 928 394 0 0 1440 877 </string>
+	<string>117 339 1018 447 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>369 235 850 487 0 0 1440 877 </string>
+	<string>461 258 690 487 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>544 124 690 487 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -2084,6 +2084,8 @@
 	<string>/Users/Yochem/dev/dotfiles/terminals/iterm2</string>
 	<key>PromptOnQuit</key>
 	<false/>
+	<key>RestoreWindowContents</key>
+	<false/>
 	<key>SUAutomaticallyUpdate</key>
 	<true/>
 	<key>SUEnableAutomaticChecks</key>
@@ -2095,7 +2097,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-10-03T18:01:21Z</date>
+	<date>2018-10-07T21:49:52Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
