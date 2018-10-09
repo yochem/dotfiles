@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-### NOTE TO SELF: ONLY EDIT FROM ~/ ###
-
 # Some colors to use for prompt
 reset=$(tput sgr0)
 bold=$(tput bold)

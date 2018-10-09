@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-### NOTE TO SELF: ONLY EDIT FROM ~/ ###
-
 # nano as default editor
 export EDITOR='nano';
 
