@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dev/dotfiles/terminals/iterm2"
-defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
-
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
@@ -138,6 +135,9 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
+# Don’t show recent applications in Dock
+defaults write com.apple.dock show-recents -bool false
+
 ###############################################################################
 # Safari & WebKit                                                             #
 ###############################################################################
@@ -205,6 +205,10 @@ defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
 # Enable Secure Keyboard Entry in Terminal.app
 # See: https://security.stackexchange.com/a/47786/8918
 defaults write com.apple.terminal SecureKeyboardEntry -bool true
+
+# use preferences from this repo
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dev/dotfiles/terminals/iterm2"
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 ###############################################################################
 # Mac App Store                                                               #
