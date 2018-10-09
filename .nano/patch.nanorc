@@ -1,0 +1,26 @@
+## Here is an example for patch files.
+
+syntax patch "\.(patch|diff|debdiff)$"
+magic "diff output"
+# There is no official support for comments in patch files.
+comment ""
+
+# Added lines.
+color green "^\+.*"
+# Show trailing whitespace only on added lines.
+color ,green "[[:space:]]+$"
+# Context lines.
+color blue "^ .*"
+# Deleted lines.
+color red "^-.*"
+
+# Header lines.
+color magenta "^(Index:|diff)[[:blank:]].*"
+# File names and dates.
+color red "^---.*"
+color green "^\+\+\+.*"
+# Line numbers.
+color yellow "^@@.*"
+
+# Statistics.
+color cyan start="^---$" end="^$"

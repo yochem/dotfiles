@@ -1,0 +1,67 @@
+## Here is an example for Bourne shell scripts.
+
+syntax "SH" "\.sh$" "\.bashrc" "bashrc" "\.aliases" "\.exports" "\.bash_prompt" "\.functions" "\.bash_profile" "bash_profile" "revise\..+$"
+header "^#!.*/(env +)?(ba)?sh( |$)"
+
+# Integers or floats (not in strings ofc)
+color yellow "=[[:space:]]?[0-9]+\.?[0-9]*([[:space:]]+|;)"
+
+# Function names
+color cyan "\w+\(\)"
+
+# Some brackets
+color green "(\(|\))"
+
+# Uncolor brackets after function name
+color normal "\(\)"
+
+# Keywords
+color magenta "\<(break|case|do|done|elif|else|esac|exit|fi|for|function|if|in|local|read|return|select|shift|then|time|until|while)\>"
+
+# Brackets and pipes and stuff
+#color green "(\{|\}|\(|\)|\;|\]|\[|`|\\|\$|<|>|!|&|\|)"
+
+# Some things
+color green "-(eq|ne|gt|lt|ge|le|n|z)\>"
+
+# Some builtin functions
+color cyan "\<(alias|cat|cd|chmod|chown|cp|echo|env|export|grep|install|let|ln|make|mkdir|mv|rm|sed|set|tar|touch|umask|unset)\>"
+
+# ex: case function
+icolor green "^\s+[0-9A-Z_]+\s+\(\)"
+color green ""(\\.|[^"])*"" "'(\\.|[^'])*'"
+
+# trailing whitespace
+#color ,green "[[:space:]]+$"
+
+# Operators
+color normal ";|=|:"
+
+# sub functions
+color green "\$\(.*\)"
+
+# Triple-quoted strings.
+color green start="'''([^'),]|$)" end="(^|[^(\])'''"
+color green start="\"\"\"([^"),]|$)" end="(^|[^(\])\"\"\""
+
+# Single-quoted strings
+color green "'([^'\]|\\.)+'"
+color green ""([^"\]|\\.)+""
+
+# escaping characters
+color cyan "\\.{1}"
+
+# Variable references
+icolor red "\$\{?[0-9A-Z_!@#$*:?-]+\}?"
+
+# Booleans and stuff
+color yellow "\<(false|true)\>"
+
+# Comments
+color white "(^|[[:space:]])#.*$"
+
+# reminders.
+color black,yellow "(BUG:|DEBUG:|FIXME:|IDEA:|NOTE:|REVIEW:|TEMP:|TODO:|WARNING:|XXX:)"
+
+# Spaces in front of tabs.
+color ,red " +	+"
