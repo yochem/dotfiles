@@ -9,7 +9,8 @@ green="\033[01;38;5;002m"
 magenta="\033[01;38;5;005m"
 blue="\[\033[01;38;5;006m\]"
 
-# If current working directory is a git folder, prompt [git] in orange
+# If current working directory is a git folder, prompt the branch
+# name in square brackets and colored green
 prompt_git() {
 	if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
 		branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
@@ -25,7 +26,7 @@ prompt_git() {
 
 # build prompt
 PS1="\[$reset\]"
-if [ -n "$SSH_CLIENT" ]; then PS1+="\[\u@\h: "; fi
+if [ -n "$SSH_CLIENT" ]; then PS1+="${magenta}\u@\h${reset}: "; fi
 PS1+="${blue}\W " # short working directory in default blue
 PS1+="\[$reset\]"
 PS1+="\$(prompt_git)"
