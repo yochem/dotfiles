@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+do-not-disturb toggle
+do-not-disturb toggle
+do-not-disturb toggle
+
+osascript -e 'set volume output muted true'

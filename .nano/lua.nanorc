@@ -1,0 +1,57 @@
+## Syntax highlighting for Lua.
+#
+## Original author:  Matthew Wild <mwild1 (at) gmail.com>
+## License: GPL 3 or later
+
+syntax lua "\.lua$"
+magic "Lua script"
+comment "--"
+
+color brightwhite "\[\[.*\]\]"
+
+# Operators
+color yellow ":|\*|/|%|\+|-|\^|>|>=|<|<=|~=|=|\.\.|\<(not|and|or)\>"
+
+# Statements
+color blue "\<(do|end|while|repeat|until|if|elseif|then|else|for|in|function|local|return|break)\>"
+
+# Keywords
+color yellow "\<(_G|_VERSION|assert|collectgarbage|dofile|error|getfenv|getmetatable|ipairs|load|loadfile|module|next|pairs|pcall|print|rawequal|rawget|rawlen|rawset|require|select|setfenv|setmetatable|tonumber|tostring|type|unpack|xpcall)\s*\("
+
+# Standard library
+color yellow "\<coroutine\.(create|isyieldable|resume|running|status|wrap|yield)\>"
+color yellow "\<debug\.(debug|(get|set)(fenv|hook|local|metatable|(up|user)value)|getinfo|getregistry|traceback|upvalue(id|join))\>"
+color yellow "\<io\.(close|flush|input|lines|output|p?open|read|tmpfile|type|write|std(in|out|err))\>"
+color yellow "\<math\.(abs|acos|asin|atan2?|ceil|cosh?|deg|exp|floor|fmod|frexp|huge|ldexp|log10|log)\>"
+color yellow "\<math\.((max|min)(integer)?|modf?|pi|pow|rad|random(seed)?|sinh?|sqrt|tan|tointeger|type|ult)\>"
+color yellow "\<os\.(clock|date|difftime|execute|exit|getenv|remove|rename|setlocale|time|tmpname)\>"
+color yellow "\<package\.(config|cpath|loaded|loadlib|path|preload|searchers|searchpath|seeall)\>"
+color yellow "\<string\.(byte|char|dump|find|format|gmatch|gsub|len|lower|match|pack|packsize|rep|reverse|sub|unpack|upper)\>"
+color yellow "\<table\.(concat|insert|maxn|move|pack|remove|sort|unpack)\>"
+color yellow "\<utf8\.(char|charpattern|codepoint|codes|len|offset)\>"
+
+# File handle methods
+color yellow ":(close|flush|lines|read|seek|setvbuf|write)\>"
+
+# External files
+color green "\<(dofile|require)\>"
+
+# Special words
+color magenta "\<(false|nil|true)\>"
+
+# Decimal and hexadecimal numbers
+color red "\<[0-9]+(\.[0-9]*)?([Ee][+-]?[0-9]+)?\>"
+icolor red "\<0x[0-9a-f]+(\.[0-9a-f]*)?(p[+-]?[0-9]+)?\>"
+
+# Brackets
+color magenta "\(|\)|\[|\]|\{|\}"
+
+# Shebang
+color cyan "^#!.*"
+
+# Simple comments and multiline comments
+color green "--.*"
+color green start="--\[\[" end="\]\]"
+
+# Strings
+color red ""(\\.|[^"\])*"|'(\\.|[^'\])*'"

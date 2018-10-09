@@ -1,0 +1,19 @@
+## This is an example of a gitconfig syntax highlighting file
+
+syntax  "\.gitconfig" "gitconfig" ".*\.toml$"
+comment "#"
+
+# reset everything to normal
+color normal ".*"
+
+# keys 
+color yellow "[0-9a-z_-]+[[:space:]]+="
+
+# section names
+color cyan "\[.+\]"
+
+# normalize = and [ ] used to identify sections and keys
+color normal "=|\[|\]"
+
+# comments
+color white "^[[:space:]]*#.*$"

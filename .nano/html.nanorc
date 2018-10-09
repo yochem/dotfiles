@@ -1,0 +1,36 @@
+## Here is an example for HTML.
+
+syntax html "\.html?$"
+magic "HTML document"
+comment "<!--|-->"
+
+# Tags:
+color red "<[[:alpha:]/!?][^>]*>"
+# Bold, italic, and underlined:
+color magenta "</?[biu]>"
+
+# Named character references:
+color magenta "&[^;[:space:]]*;"
+
+# Attributes:
+color yellow "(abbr|accept(-charset)?|accesskey|action|alink|align|alt|archive|axis|background|bgcolor|border)="
+color yellow "(cell(padding|spacing)|char(off|set)?|checked|cite|class(id)?|compact|code(base|tag)?|cols(pan)?)="
+color yellow "(content(editable)?|contextmenu|coords|data|datetime|declare|defer|dir|disabled|enctype)="
+color yellow "(for|frame(border)?|headers|height|hidden|href(lang)?|hspace|http-equiv|ismap)="
+color yellow "(label|lang|link|longdesc|margin(height|width)|maxlength|media|method|multiple)="
+color yellow "(name|nohref|noresize|noshade|object|onclick|onfocus|onload|onmouseover|profile|readonly|rel|rev)="
+color yellow "(rows(pan)?|rules|scheme|scope|scrolling|selected|shape|size|span|src|standby|start|style|summary)="
+color yellow "(tabindex|target|text|title|type|usemap|valign|value(type)?|vlink|vspace|width|xmlns|xml:space)="
+color cyan "(id)"
+
+# normalize < > / and =
+color normal "<|>|/|="
+
+# Strings:
+color green ""(\\.|[^"])*""
+
+# urls
+color cyan "https?://[0-9a-z\./-_:?=;,*%#&]+"
+
+# Comments
+color white start="<!--" end="-->"
