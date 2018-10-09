@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-### NOTE TO SELF: ONLY EDIT FROM ~/ ###
-
 # fancy ls
 if ls --color > /dev/null 2>&1; then # GNU `ls`
 	colorflag="--color"

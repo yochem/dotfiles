@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-### NOTE TO SELF: ONLY EDIT FROM ~/ ###
-
 # Load the shell dotfiles, and then some:
 for file in ~/.{aliases,bash_prompt,exports,functions}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
