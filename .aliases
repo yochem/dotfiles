@@ -37,3 +37,5 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	alias git=hub
 	alias ql="qlmanage -p 2>/dev/null"
 fi
+
+alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
