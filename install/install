@@ -148,7 +148,9 @@ install_everything() {
 		read -p "Install Atom packages? " -n 1 -r
 		echo
 		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			curl -O https://raw.githubusercontent.com/yochem/dotfiles/master/install/atom_packages.txt
 			apm install --package-file atom_packages.txt
+			rm atom_packages.txt
 		else
 			echo "Skipped: Atom packages."
 		fi
