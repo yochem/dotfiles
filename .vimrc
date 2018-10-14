@@ -45,10 +45,8 @@ endif
 " enable line numbers
 set number
 " tab should have the length of four spaces
-set tabstop=4 
-set noexpandtab
-set shiftwidth=4
-" highlight all search results
+set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+"highlight all search results
 set hlsearch
 " ignore cases of search
 set ignorecase
