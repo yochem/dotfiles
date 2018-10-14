@@ -2,9 +2,9 @@
 
 # fancy ls
 if ls --color > /dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
+    colorflag="--color"
 else # macOS `ls`
-	colorflag="-G"
+    colorflag="-G"
 fi
 alias lst="ls -Fhl1 ${colorflag}"
 
@@ -33,9 +33,9 @@ alias ....="cd ../../.."
 alias cask="brew cask"
 
 if [[ "$OSTYPE" =~ ^darwin ]]; then
-	# hub for git
-	alias git=hub
-	alias ql="qlmanage -p 2>/dev/null"
+    # hub for git
+    alias git=hub
+    alias ql="qlmanage -p 2>/dev/null"
 fi
 
 alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"

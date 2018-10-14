@@ -1,28 +1,40 @@
 #!/usr/bin/env bash
+reset=$(tput sgr0)
+orangebold=$(tput bold; tput setaf 166)
 
-reset=$(tput sgr0);
-orangebold=$(tput bold; tput setaf 166);
+dot pull
 
 # BREW (CASK)
-echo -e "${orangebold}updating and upgrading Brew...${reset}"
-brew update
-brew upgrade
+if [[ "$OSTYPE" == "Darwin"* ]]; then
+    if brew > /dev/null 2>&1; then
+	echo -e "${orangebold}updating and upgrading Brew...${reset}"
+	brew update
+	brew upgrade
+    fi
+fi
 
 # NPM
-echo -e "${orangebold}updating and upgrading NPM...${reset}"
-npm install npm -g
-npm update -g
+if npm > /dev/null 2>&1; then
+    echo -e "${orangebold}updating and upgrading NPM...${reset}"
+    npm install npm -g
+    npm update -g
+fi
 
 # PIP
-echo -e "${orangebold}updating and upgrading PIP...${reset}"
-pip freeze > requirements.txt
-pip install -r requirements.txt --upgrade -q
-rm requirements.txt
+if pip > /dev/null 2>&1; then
+    echo -e "${orangebold}updating and upgrading PIP...${reset}"
+    pip freeze > tmp/requirements.txt
+    pip install -r tmp/requirements.txt --upgrade -q
+fi
 
 # ATOM
-echo -e "${orangebold}updating Atom packages...${reset}"
-apm update
+if apm > /dev/null 2>&1; then
+    echo -e "${orangebold}updating Atom packages...${reset}"
+    apm update
+fi
 
 # APP STORE
-echo -e "${orangebold}App Store software updates...${reset}"
-sudo softwareupdate -i -a
+if [[ "$OSTYPE" == "Darwin"* ]]; then
+    echo -e "${orangebold}App Store software updates...${reset}"
+    sudo softwareupdate -i -a
+fi

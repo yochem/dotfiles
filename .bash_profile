@@ -2,7 +2,7 @@
 
 # Load the shell dotfiles, and then some:
 for file in ~/.{aliases,bash_prompt,exports,functions}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done
 unset file
 
@@ -20,9 +20,9 @@ shopt -s autocd
 
 # Add tab completion for many Bash commands
 if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-	source "$(brew --prefix)/share/bash-completion/bash_completion";
+    source "$(brew --prefix)/share/bash-completion/bash_completion";
 elif [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion;
+    source /etc/bash_completion;
 fi
 
 # sourcing z
