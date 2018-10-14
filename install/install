@@ -4,107 +4,109 @@
 ### MACOS: BREW, MACDEFAULTS ETC ####
 #####################################
 install_brew() {
-	xcode-select --install
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	brew update
-	brew upgrade
-	brew_apps=(
-		bash
-		bat
-		binwalk
-		coreutils
-		dockutil
-		emacs
-		git
-		hub
-		imagesnap
-		nano
-		pandoc
-		pandoc-citeproc
-		python
-		python3
-		ruby
-		shpotify
-		sqlite
-		thefuck
-		tldr
-		vim
-	)
-	brew install "${brew_apps[@]}"
+    xcode-select --install
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew update
+    brew upgrade
+    brew_apps=(
+	    bash
+	    bat
+	    binwalk
+	    coreutils
+	    dockutil
+	    emacs
+	    git
+	    hub
+	    imagesnap
+	    nano
+	    pandoc
+	    pandoc-citeproc
+	    python
+	    python3
+	    ruby
+	    shpotify
+	    sqlite
+	    thefuck
+	    tldr
+	    vim
+    )
+    brew install "${brew_apps[@]}"
 
-	# install brew cask apps
-	brew tap caskroom/cask
-	cask_apps=(
-	  arduino
-	  atom
-	  dropbox
-	  fritzing
-	  github
-	  google-chrome
-	  hyper
-	  iterm2
-	  kite
-	  lastpass
-	  makerbot-print
-	  skype
-	  spotify
-	  telegram
-	  vuze
-	  whatsapp
-	  qlcolorcod
-	  qlstephen
-	)
-	brew cask install "${cask_apps[@]}"
+    # install brew cask apps
+    brew tap caskroom/cask
+    cask_apps=(
+	    adobe-acrobat-reader
+	    arduino
+	    atom
+	    dropbox
+	    fritzing
+	    github
+	    google-chrome
+	    google-drive-file-stream
+	    hyper
+	    iterm2
+	    kite
+	    lastpass
+	    makerbot-print
+	    skype
+	    spotify
+	    telegram
+	    vuze
+	    whatsapp
+	    qlcolorcod
+	    qlstephen
+    )
+    brew cask install "${cask_apps[@]}"
 
-	# Add the new shell to the list of allowed shells
-	sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
-	# Change to the new shell
-	chsh -s /usr/local/bin/bash
+    # Add the new shell to the list of allowed shells
+    sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+    # Change to the new shell
+    chsh -s /usr/local/bin/bash
 
-	# create the dock
-	dockutil --no-restart --remove all
-	dockutil --no-restart --add "/Applications/Safari.app"
-	dockutil --no-restart --add "/Applications/Mail.app"
-	dockutil --no-restart --add "/Applications/Spotify.app"
-	dockutil --no-restart --add "/Applications/iTerm.app"
-	dockutil --no-restart --add "/Applications/Atom.app"
-	dockutil --no-restart --add "/Applications/WhatsApp.app"
-	dockutil --no-restart --add "/Applications/Telegram.app"
-	dockutil --no-restart --add "~/Downloads" --view fan --display stack
-	killall Dock
+    # create the dock
+    dockutil --no-restart --remove all
+    dockutil --no-restart --add "/Applications/Safari.app"
+    dockutil --no-restart --add "/Applications/Mail.app"
+    dockutil --no-restart --add "/Applications/Spotify.app"
+    dockutil --no-restart --add "/Applications/iTerm.app"
+    dockutil --no-restart --add "/Applications/Atom.app"
+    dockutil --no-restart --add "/Applications/WhatsApp.app"
+    dockutil --no-restart --add "/Applications/Telegram.app"
+    dockutil --no-restart --add "~/Downloads" --view fan --display stack
+    killall Dock
 }
 
 #####################################
 #### ATOM: PACKAGES AND CONFIGS #####
 #####################################
 install_pip() {
-	# download pip from website
-	curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py
+    # download pip from website
+    curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py
 
-	# install pip
-	python /tmp/get-pip.py
+    # install pip
+    python /tmp/get-pip.py
 
-	sudo pip install -U pip
+    sudo pip install -U pip
 
-	pip_apps=(
-	  checkpy
-	  click
-	  cookiecutter
-	  dropbox
-	  flask
-	  httplib2
-	  numpy
-	  pandoc
-	  pandoc-shortcaption
-	  pandocfilters
-	  pipsi
-	  pydrive
-	  pygments
-	  setuptools
-	  termdown
-	  zerorpc
-	)
-	sudo pip install "${pip_apps[@]}"
+    pip_apps=(
+	    checkpy
+	    click
+	    cookiecutter
+	    dropbox
+	    flask
+	    httplib2
+	    numpy
+	    pandoc
+	    pandoc-shortcaption
+	    pandocfilters
+	    pipsi
+	    pydrive
+	    pygments
+	    setuptools
+	    termdown
+	    zerorpc
+    )
+    sudo pip install "${pip_apps[@]}"
 }
 
 ####################################
@@ -112,63 +114,63 @@ install_pip() {
 ####################################
 install_everything() {
 	# Keep-alive: update existing `sudo` time stamp until installation is finished
-	sudo -v
-	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+    sudo -v
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-	# HOMEBREW & CASK
-	if ! [[ "$OSTYPE" =~ ^darwin ]]; then
-		echo "Skipped: Homebrew (not running MacOS)"
-	else
-		# Close any open System Preferences panes, to prevent them from overriding
-		# settings we’re about to change
-		osascript -e 'tell application "System Preferences" to quit'
+    # HOMEBREW & CASK
+    if ! [[ "$OSTYPE" =~ ^darwin ]]; then
+	echo "Skipped: Homebrew (not running MacOS)"
+    else
+	# Close any open System Preferences panes, to prevent them from overriding
+	# settings we’re about to change
+	osascript -e 'tell application "System Preferences" to quit'
 
-		read -p "Install Homebrew (Cask) and newest bash version? " -n 1 -r
-		echo
-		if [[ $REPLY =~ ^[Yy]$ ]]; then
-			install_brew
-		else
-			echo "Skipped: Homebrew and Cask."
-		fi
-	fi
-
-	# PIP
-	if type python >/dev/null 2>&1; then
-		read -p "Install PIP and PIP packages? " -n 1 -r
-		echo
-		if [[ $REPLY =~ ^[Yy]$ ]]; then
-			install_pip
-		else
-			echo "Skipped: PIP and PIP packages."
-		fi
-	fi
-
-	# ATOM
-	if type atom >/dev/null 2>&1 && type apm >/dev/null 2>&1; then
-		read -p "Install Atom packages? " -n 1 -r
-		echo
-		if [[ $REPLY =~ ^[Yy]$ ]]; then
-			curl -O https://raw.githubusercontent.com/yochem/dotfiles/master/install/atom_packages.txt
-			apm install --package-file atom_packages.txt
-			rm atom_packages.txt
-		else
-			echo "Skipped: Atom packages."
-		fi
-	fi
-
-	# dev/ and repositories
-	read -p "Clone yochem's repositories to ~/dev/? " -n 1 -r
+	read -p "Install Homebrew (Cask) and newest bash version? " -n 1 -r
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		mkdir ${HOME}/dev
-		clonerepos ${HOME}/dev
+	    install_brew
 	else
-		echo "Skipped: dev/ and repositories."
+	    echo "Skipped: Homebrew and Cask."
 	fi
+    fi
 
-	mkdir ${HOME}.dot/
-	git clone --bare https://github.com/yochem/dotfiles.git ${HOME}/.dot
-	alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
-	dot checkout
-	dot config status.showUntrackedFiles no
+    # PIP
+    if type python >/dev/null 2>&1; then
+	read -p "Install PIP and PIP packages? " -n 1 -r
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+	    install_pip
+	else
+	    echo "Skipped: PIP and PIP packages."
+	fi
+    fi
+
+    # ATOM
+    if type atom >/dev/null 2>&1 && type apm >/dev/null 2>&1; then
+	read -p "Install Atom packages? " -n 1 -r
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+	    curl -O https://raw.githubusercontent.com/yochem/dotfiles/master/install/atom_packages.txt
+	    apm install --package-file atom_packages.txt
+	    rm atom_packages.txt
+	else
+	    echo "Skipped: Atom packages."
+	fi
+    fi
+
+    # dev/ and repositories
+    read -p "Clone yochem's repositories to ~/dev/? " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+	mkdir ${HOME}/dev
+	clonerepos ${HOME}/dev
+    else
+	echo "Skipped: dev/ and repositories."
+    fi
+
+    mkdir ${HOME}.dot/
+    git clone --bare https://github.com/yochem/dotfiles.git ${HOME}/.dot
+    alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
+    dot checkout
+    dot config status.showUntrackedFiles no
 }
