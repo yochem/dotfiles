@@ -1,8 +1,8 @@
 " if vim-plug is not downloaded, download it
 if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " all vim-plug plugins
@@ -39,13 +39,14 @@ set gdefault
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 if exists("&undodir")
-	set undodir=~/.vim/undo
+    set undodir=~/.vim/undo
 endif
 
 " enable line numbers
 set number
 " tab should have the length of four spaces
-set softtabstop=4 noexpandtab
+set tabstop=4 
+set noexpandtab
 set shiftwidth=4
 " highlight all search results
 set hlsearch
@@ -69,8 +70,8 @@ set shortmess=atI
 set title
 " relative line numbers
 if exists("&relativenumber")
-	set relativenumber
-	au BufReadPost * set relativenumber
+    set relativenumber
+    au BufReadPost * set relativenumber
 endif
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
