@@ -23,6 +23,11 @@ prompt_git() {
 	fi;
 }
 
+if [[ "${USER}" == "root" ]]; then
+		promptSign="#"
+else
+		promptSign="❯"
+fi	
 
 # build prompt
 PS1="\[$reset\]"
@@ -30,6 +35,6 @@ if [ -n "$SSH_CLIENT" ]; then PS1+="${magenta}\u@\h${reset}: "; fi
 PS1+="${blue}\W " # short working directory in default blue
 PS1+="\[$reset\]"
 PS1+="\$(prompt_git)"
-PS1+="${red} ❯ " # $ prompt in grey
+PS1+="${red} ${promptSign} " # $ prompt in grey
 PS1+="\[$reset\] "
 export PS1
