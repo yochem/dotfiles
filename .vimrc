@@ -1,9 +1,11 @@
+" if vim-plug is not downloaded, download it
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
 		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" all vim-plug plugins
 call plug#begin('~/.vim/plugged')
 Plug 'rakr/vim-one'
 Plug 'sheerun/vim-polyglot'
@@ -43,7 +45,8 @@ endif
 " enable line numbers
 set number
 " tab should have the length of four spaces
-set tabstop=4
+set softtabstop=4 noexpandtab
+set shiftwidth=4
 " highlight all search results
 set hlsearch
 " ignore cases of search
