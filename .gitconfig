@@ -15,6 +15,10 @@
     # Always commit with a message
     c = commit -m
 
+	# commit all files that have been modified or removed, new files not 
+	# affected
+	com = commit -u
+	
     # Push to origin master
     pom = push origin master
 
