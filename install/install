@@ -51,7 +51,8 @@ install_brew() {
 	    skype
 	    spotify
 	    telegram
-	    vuze
+	    vlc
+		vuze
 	    whatsapp
 	    qlcolorcod
 	    qlstephen
