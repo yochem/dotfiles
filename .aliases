@@ -36,6 +36,9 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     # hub for git
     alias git=hub
     alias ql="qlmanage -p 2>/dev/null"
+	if [ -e ${HOME}/bin/darkmode.applescript ]; then
+		alias dark="osascript ${HOME}/bin/darkmode.applescript"
+	fi
 fi
 
 alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
