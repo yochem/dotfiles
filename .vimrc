@@ -34,7 +34,7 @@ set backspace=indent,eol,start
 set ttyfast
 " g flag with search as default
 set gdefault
-
+set autoindent
 " centralize backups and swaps
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
