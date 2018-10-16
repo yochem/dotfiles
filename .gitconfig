@@ -17,7 +17,7 @@
 
 	# commit all files that have been modified or removed, new files not 
 	# affected
-	com = commit -u
+	com = commit -a
 	
     # Push to origin master
     pom = push origin master
