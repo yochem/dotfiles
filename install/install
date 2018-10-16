@@ -73,7 +73,7 @@ install_brew() {
     dockutil --no-restart --add "/Applications/Atom.app"
     dockutil --no-restart --add "/Applications/WhatsApp.app"
     dockutil --no-restart --add "/Applications/Telegram.app"
-    dockutil --no-restart --add "~/Downloads" --view fan --display stack
+    dockutil --no-restart --add "${HOME}/Downloads" --view fan --display stack
     killall Dock
 }
 
@@ -114,62 +114,62 @@ install_pip() {
 ############ INSTALL ###############
 ####################################
 install_everything() {
-	# Keep-alive: update existing `sudo` time stamp until installation is finished
+	# update existing `sudo` time stamp until installation is finished
     sudo -v
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
     # HOMEBREW & CASK
     if ! [[ "$OSTYPE" =~ ^darwin ]]; then
-	echo "Skipped: Homebrew (not running MacOS)"
-    else
-	# Close any open System Preferences panes, to prevent them from overriding
-	# settings we’re about to change
-	osascript -e 'tell application "System Preferences" to quit'
-
-	read -p "Install Homebrew (Cask) and newest bash version? " -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-	    install_brew
+		echo "Skipped: Homebrew (not running MacOS)"
 	else
-	    echo "Skipped: Homebrew and Cask."
-	fi
+		# Close any open System Preferences panes, to prevent them from 
+		# overriding settings we’re about to change
+		osascript -e 'tell application "System Preferences" to quit'
+
+		read -p "Install Homebrew (Cask) and newest bash version? " -n 1 -r
+		echo
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			install_brew
+		else
+			echo "Skipped: Homebrew and Cask."
+		fi
     fi
 
     # PIP
     if type python >/dev/null 2>&1; then
-	read -p "Install PIP and PIP packages? " -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-	    install_pip
-	else
-	    echo "Skipped: PIP and PIP packages."
-	fi
+		read -p "Install PIP and PIP packages? " -n 1 -r
+		echo
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			install_pip
+		else
+			echo "Skipped: PIP and PIP packages."
+		fi
     fi
 
     # ATOM
     if type atom >/dev/null 2>&1 && type apm >/dev/null 2>&1; then
-	read -p "Install Atom packages? " -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-	    curl -O https://raw.githubusercontent.com/yochem/dotfiles/master/install/atom_packages.txt
-	    apm install --package-file atom_packages.txt
-	    rm atom_packages.txt
-	else
-	    echo "Skipped: Atom packages."
-	fi
+		read -p "Install Atom packages? " -n 1 -r
+		echo
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			curl -O https://raw.githubusercontent.com/yochem/dotfiles/master/install/atom_packages.txt
+			apm install --package-file atom_packages.txt
+			rm atom_packages.txt
+		else
+			echo "Skipped: Atom packages."
+		fi
     fi
 
     # dev/ and repositories
     read -p "Clone yochem's repositories to ~/dev/? " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-	mkdir ${HOME}/dev
-	clonerepos ${HOME}/dev
+		mkdir ${HOME}/dev
+		clonerepos ${HOME}/dev
     else
-	echo "Skipped: dev/ and repositories."
+		echo "Skipped: dev/ and repositories."
     fi
 
-    mkdir ${HOME}.dot/
+    mkdir ${HOME}/.dot/
     git clone --bare https://github.com/yochem/dotfiles.git ${HOME}/.dot
     alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
     dot checkout
