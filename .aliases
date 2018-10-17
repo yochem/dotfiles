@@ -15,7 +15,7 @@ alias printer="lpr"
 alias grep="grep --color"
 
 # reload bash profile and stuff
-alias reload="source ~/.bash_profile"
+alias reload="source ${HOME}/.bash_profile"
 
 # shorten the most used things
 alias l="less"
@@ -29,16 +29,22 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-# shorter version for brew cask
-alias cask="brew cask"
 
 if [[ "$OSTYPE" =~ ^darwin ]]; then
-    # hub for git
-    alias git=hub
-    alias ql="qlmanage -p 2>/dev/null"
+	# hub for git
+	alias git=hub
+
+	# enables finders quicklook from the terminal
+	alias ql="qlmanage -p 2>/dev/null"
+	
+	# dark toggles dark mode on Mojave using the applescript in bin/
 	if [ -e ${HOME}/bin/darkmode.applescript ]; then
 		alias dark="osascript ${HOME}/bin/darkmode.applescript"
 	fi
+
+	# shorter version for brew cask
+	alias cask="brew cask"
 fi
 
+# dot is my dotfiles repository
 alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"

@@ -4,7 +4,7 @@
 export EDITOR='nano';
 
 # add GNU core utils from brew to path
-export PATH="/Library/TeX/texbin"
+export PATH="/Library/TeX/texbin:$PATH"
 export PATH="/bin:$PATH"
 export PATH="/sbin:$PATH"
 export PATH="/usr/bin:$PATH"
