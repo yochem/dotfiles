@@ -1,6 +1,6 @@
 ## This is an example of a gitconfig syntax highlighting file
 
-syntax  "\.gitconfig" "gitconfig" ".*\.toml$"
+syntax  "\.gitconfig" "gitconfig" ".*\.toml$" "COMMIT_EDITMSG|TAG_EDITMSG"
 comment "#"
 
 # reset everything to normal
