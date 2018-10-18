@@ -14,6 +14,10 @@ alias printer="lpr"
 # always color grep
 alias grep="grep --color"
 
+# always confirm overwriting a file
+alias cp="cp -i"
+alias mv="mv -i"
+
 # reload bash profile and stuff
 alias reload="source ${HOME}/.bash_profile"
 
@@ -23,6 +27,7 @@ alias n="nano"
 alias g="git"
 alias a="atom"
 alias v="vim"
+alias o="open"
 
 # easier way to cd back one level
 alias ..="cd .."
