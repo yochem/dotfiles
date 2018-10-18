@@ -1,0 +1,8 @@
+trc(Func) :-
+	leash(-all),
+	trace,
+	call(Func),
+	notrace,
+	nodebug.
+
+cl :- shell('clear').
