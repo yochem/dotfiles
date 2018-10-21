@@ -46,7 +46,11 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	alias o="open"
 fi
 
+# shorten the very, very long install command known as apt-get
+type -P apt-get > /dev/null 2>&1 && alias get="sudo apt-get install"
+
 # dot is my dotfiles repository
 alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
 
+# always use SWI-Prolog with rc file
 type -P swipl > /dev/null 2>&1 && alias swipl="swipl -f ${HOME}/.plrc"
