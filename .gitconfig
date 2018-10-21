@@ -3,8 +3,8 @@
 	email = yochem@users.noreply.github.com
 
 # enforce ssh
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
+# [url "ssh://git@github.com/"]
+#	insteadOf = https://github.com/
 
 [alias]
 	# View the current working tree status using the short format
