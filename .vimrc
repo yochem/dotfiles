@@ -10,6 +10,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'rakr/vim-one'
 Plug 'sheerun/vim-polyglot'
 Plug 'mityu/vim-applescript'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
 
 """""""""""""""""""""""
@@ -110,3 +112,13 @@ set mouse=a
 
 " no error bells
 set noerrorbells
+
+" Automatic commands
+if has("autocmd")
+	" Enable file type detection
+	filetype on
+	" Treat .md files as Markdown
+	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+endif
+
+inoremap ` <ESC>
