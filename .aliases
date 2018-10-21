@@ -27,7 +27,6 @@ alias n="nano"
 alias g="git"
 alias a="atom"
 alias v="vim"
-alias o="open"
 
 # easier way to cd back one level
 alias ..="cd .."
@@ -40,13 +39,14 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	alias git=hub
 
 	# enables finders quicklook from the terminal
-	alias ql="qlmanage -p 2>/dev/null"
+	alias ql="qlmanage -p > /dev/null 2>&1"
 	
-	# shorter version for brew cask
+	# shorten things up 
 	alias cask="brew cask"
+	alias o="open"
 fi
 
 # dot is my dotfiles repository
 alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
 
-alias swipl="swipl -f ${HOME}/.plrc"
+type -P swipl > /dev/null 2>&1 && alias swipl="swipl -f ${HOME}/.plrc"
