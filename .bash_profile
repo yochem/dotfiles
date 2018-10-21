@@ -18,6 +18,9 @@ shopt -s cdspell
 # cd without typing cd
 shopt -s autocd
 
+# vi key bindings in bash
+set -o vi
+
 # Add tab completion for many Bash commands
 if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
     source "$(brew --prefix)/share/bash-completion/bash_completion";
