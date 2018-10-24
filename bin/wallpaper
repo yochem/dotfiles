@@ -1,0 +1,50 @@
+#!/usr/bin/env python2.7
+
+"""
+@author: Yochem van Rosmalen
+@date: 2018/09/12
+
+Wallpaper - Change background to an image from a given folder.
+
+Usage:
+    wallpaper.py [ARGS]
+    
+Examples
+    wallpaper.py
+        generates two random wallpapers from the folder
+
+    wallpaper.py bg1.jpg bg2.jpg
+        uses the two arguments as wallpapers (the images must be in folder)
+
+"""
+
+import glob
+import os
+import random
+import sys
+
+folder = "/Users/Yochem/drive/assets/backgrounds/stalenhag/"
+
+def choose_image():
+	imgs = glob.glob(folder + "*")
+	new_img = random.choice(imgs)
+        return new_img
+
+def set_background(bg1, bg2):
+	set_bg1 = ("osascript -e 'tell application \"System Events\" "
+			"to set picture of desktop 1 to \"{}\"'".format(bg1))
+	
+	set_bg2 = ("osascript -e 'tell application \"System Events\" "
+			"to set picture of desktop 2 to \"{}\"'".format(bg2))
+        os.system(set_bg1)
+        os.system(set_bg2)
+	
+if len(sys.argv) == 1:
+    bg1 = choose_image()
+    bg2 = choose_image()
+else:
+    bg1 = folder + sys.argv[1]
+    bg2 = folder + sys.argv[2]
+
+set_background(bg1, bg2)
+
