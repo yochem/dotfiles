@@ -11,11 +11,15 @@ Usage:
     
 Examples
     wallpaper.py
-        generates two random wallpapers from the folder
+        choose two random images from the folder as wallpaper for desktop 1 and
+        desktop 2.
 
     wallpaper.py bg1.jpg bg2.jpg
-        uses the two arguments as wallpapers (the images must be in folder)
+        use bg1.jpg as wallpaper for desktop 1 and bg2.jpg as wallpaper for
+        desktop 2.
 
+    wallpaper.py bg1.jpg
+        use given image as wallpaper on every desktop
 """
 
 import glob
@@ -26,25 +30,21 @@ import sys
 folder = "/Users/Yochem/drive/assets/backgrounds/stalenhag/"
 
 def choose_image():
-	imgs = glob.glob(folder + "*")
-	new_img = random.choice(imgs)
-        return new_img
+    imgs = glob.glob(folder + "*")
+    new_img = random.choice(imgs)
+    return new_img
 
-def set_background(bg1, bg2):
-	set_bg1 = ("osascript -e 'tell application \"System Events\" "
-			"to set picture of desktop 1 to \"{}\"'".format(bg1))
-	
-	set_bg2 = ("osascript -e 'tell application \"System Events\" "
-			"to set picture of desktop 2 to \"{}\"'".format(bg2))
-        os.system(set_bg1)
-        os.system(set_bg2)
+def set_background(desktop, bgimg):
+    set_bg = ("osascript -e 'tell application \"System Events\" "
+        "to set picture of {} to \"{}\"'".format(desktop, bgimg))
+
+    os.system(set_bg)
 	
 if len(sys.argv) == 1:
-    bg1 = choose_image()
-    bg2 = choose_image()
-else:
-    bg1 = folder + sys.argv[1]
-    bg2 = folder + sys.argv[2]
-
-set_background(bg1, bg2)
-
+    set_background('desktop 1', choose_image())
+    set_background('desktop 2', choose_image())
+elif len(sys.argv) == 2:
+    set_background('every desktop', folder + sys.argv[1])
+elif len(sys.argv) == 3:
+    set_background('desktop 1', sys.argv[1])
+    set_background('desktop 2', sys.argv[2])
