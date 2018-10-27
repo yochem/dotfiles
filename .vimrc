@@ -9,9 +9,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'rakr/vim-one'
 Plug 'sheerun/vim-polyglot'
-Plug 'mityu/vim-applescript'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'gabrielelana/vim-markdown'
 call plug#end()
 
 """""""""""""""""""""""
@@ -34,14 +32,17 @@ set nocompatible
 set laststatus=2
 
 " dont show intro message
-set shortmess=atI
+set shortmess=WIF
 
-" titlename in window titlebar
-set title
+" dont care about spelling
+set nospell
+let g:markdown_enable_spell_checking = 0
 
-" highlight matching brackets
-set showmatch
+" don't show 'Thanks for flying Vim'
+set notitle
 
+" when splitting vertical, do this to the right
+set splitright
 
 """""""""""""""""""""""
 """""" INDENTION """"""
@@ -62,7 +63,7 @@ set nostartofline
 " enable line numbers
 set number
 " cursor position
-set ruler
+"set ruler
 " relative line numbers
 if exists("&relativenumber")
     set relativenumber
@@ -121,4 +122,28 @@ if has("autocmd")
 	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 endif
 
-inoremap ` <ESC>
+" remap jj and ff as escape key for easier mode switching
+inoremap jj <ESC>
+inoremap ff <ESC>
+
+" tbh I copied this so idk what's going on
+set statusline=
+set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
+set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ RPLACE\ ':''}
+set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
+set statusline+=\ %n\           " buffer number
+set statusline+=%#Visual#       " colour
+set statusline+=%#CursorIM#     " colour
+set statusline+=%#Cursor#       " colour
+set statusline+=%#CursorLine#   " colour
+set statusline+=\ %F\           " short file name
+set statusline+=%m              " modified [+] flag
+set statusline+=%=              " right align
+set statusline+=%#CursorLine#   " colour
+set statusline+=\ %Y\           " file type
+set statusline+=%#CursorIM#     " colour
+set statusline+=\ %3l:%-2c\     " line + column
+set statusline+=%#Cursor#       " colour
+set statusline+=\ %3p%%\        " percentage
+
