@@ -12,6 +12,8 @@ shopt -s nocaseglob
 # Append to the Bash history file, rather than overwriting it
 shopt -s histappend
 
+# don't put duplicates in history
+HISTCONTROL=ignoreboth
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell
 
@@ -29,4 +31,4 @@ elif [ -f /etc/bash_completion ]; then
 fi
 
 # sourcing z
-. ~/z.sh
+[ -f ${HOME}/z.sh ] && . ${HOME}/z.sh
