@@ -17,7 +17,7 @@ alias grep="grep --color"
 # always confirm overwriting a file
 alias cp="cp -i"
 alias mv="mv -i"
-
+alias rm="rm -v"
 # reload bash profile and stuff
 alias reload="source ${HOME}/.bash_profile"
 
@@ -32,7 +32,6 @@ alias v="vim"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
 
 if [[ "$OSTYPE" =~ ^darwin ]]; then
 	# hub for git
