@@ -73,6 +73,7 @@
     restorePreviousWindowsOnStart: "no"
     telemetryConsent: "no"
     titleBar: "custom"
+    useTreeSitterParsers: false
   editor:
     scrollPastEnd: true
     showIndentGuide: true
