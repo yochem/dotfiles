@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # fancy ls
-if [[ "$OSTYPE" =~ ^Darwin ]]; then
+if [[ "$OSTYPE" =~ ^darwin ]]; then
     flags="-Fhl1G"
 else
     flags="--group-directories-first -1F --color"
