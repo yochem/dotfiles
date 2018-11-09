@@ -13,16 +13,17 @@ blue="\[\033[01;38;5;006m\]"
 # name in square brackets and colored green
 prompt_git() {
     if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
-		branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
-			git rev-parse --short HEAD 2> /dev/null || \
-		echo '(unknown)')";
-
-		echo -e "[${green}${branchName}${reset}]";
+	branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+	    git rev-parse --short HEAD 2> /dev/null || \
+	    echo '(unknown)')";
+	echo -e "[${green}${branchName}${reset}]";
     else
-		return;
+	return;
     fi;
 }
 
+# change the prompt to a hash like oldskool unix systems
+# when root
 if [[ "${USER}" == "root" ]]; then
     promptSign="#"
 else
@@ -31,10 +32,11 @@ fi
 
 # build prompt
 PS1="\[$reset\]"
-[ -n "$SSH_CLIENT" ] && PS1+="${magenta}\u@\h${reset}: "
+# if connected using SSH, show hostname
+[ -n "$SSH_CLIENT" ] && PS1+="${magenta}@\h${reset}: "
 PS1+="${blue}\W " # short working directory in default blue
 PS1+="\[$reset\]"
-PS1+="\$(prompt_git)"
-PS1+="${red} ${promptSign} " # $ prompt in grey
+PS1+="\$(prompt_git)" # show git branch
+PS1+="${red} ${promptSign} " # end with promptsign
 PS1+="\[$reset\] "
 export PS1
