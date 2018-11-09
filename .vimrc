@@ -51,7 +51,7 @@ set splitright
 set autoindent
 
 " tab should have the length of four spaces
-set tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
+set tabstop=8 softtabstop=4 shiftwidth=4 noexpandtab
 
 " don't reset cursor to start of line
 set nostartofline
