@@ -1,4 +1,4 @@
-# `${HOME}` :heart:
+# `$HOME` is where the :heart: is
 Just some configuration files (aka dotfiles). Can be used for MacOS and Linux.
 
 **Warning** Be careful when using the commands used in e.g. `install/.macdefaults`. Only use these
