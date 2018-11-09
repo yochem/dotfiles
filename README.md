@@ -1,9 +1,5 @@
-# dotfiles
-
-```bash
-${HOME}/.*
-```
-You know I had to do it like all the cool kids :sunglasses:.
+# `${HOME}` :heart:
+Just some configuration files (aka dotfiles). Can be used for MacOS and Linux.
 
 **Warning** Be careful when using the commands used in e.g. `install/.macdefaults`. Only use these
 commands if you know what the effects will be.
