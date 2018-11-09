@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
 # fancy ls
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
-else # macOS `ls`
-	colorflag="-G"
+if [[ "$OSTYPE" =~ ^Darwin ]]; then
+    alias lst="ls -Fhl1G"
+else
+    alias lst="ls --group-directories-first -1F --color"
 fi
-alias lst="ls -Fhl1 ${colorflag}"
 
 # i always forget what the printer command is...
 alias printer="lpr"
