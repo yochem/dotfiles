@@ -26,6 +26,7 @@ import glob
 import os
 import random
 import sys
+from subprocess import Popen, PIPE
 
 folder = "/Users/Yochem/drive/assets/backgrounds/stalenhag/"
 
@@ -40,9 +41,20 @@ def set_background(desktop, bgimg):
 
     os.system(set_bg)
 	
+def desktop_count():
+    get_desktop = ("""tell application \"System Events\"
+                   set n to count of desktops
+                   end tell
+                   return n
+                   """)
+    proc = Popen(['osascript', '-'], stdin=PIPE, stdout=PIPE, universal_newlines=True)
+    count,error = proc.communicate(get_desktop)
+    return count[:1]
+
 if len(sys.argv) == 1:
     set_background('desktop 1', choose_image())
-    set_background('desktop 2', choose_image())
+    if (desktop_count() == 2):
+        set_background('desktop 2', choose_image())
 elif len(sys.argv) == 2:
     set_background('every desktop', folder + sys.argv[1])
 elif len(sys.argv) == 3:
