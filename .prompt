@@ -34,7 +34,7 @@ fi
 PS1="\[$reset\]"
 # if connected using SSH, show hostname
 [ -n "$SSH_CLIENT" ] && PS1+="${magenta}@\h${reset}: "
-PS1+="${blue}\W " # short working directory in default blue
+PS1+="${blue}\w " # short working directory in default blue
 PS1+="\[$reset\]"
 PS1+="\$(prompt_git)" # show git branch
 PS1+="${red} ${promptSign} " # end with promptsign

@@ -47,9 +47,9 @@ def desktop_count():
                    end tell
                    return n
                    """)
-    proc = Popen(['osascript', '-'], stdin=PIPE, stdout=PIPE, universal_newlines=True)
+    proc = Popen(['osascript', '-'], stdin=PIPE, stdout=PIPE)
     count,error = proc.communicate(get_desktop)
-    return count[:1]
+    return int(count[:1])
 
 
 def main():
