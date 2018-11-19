@@ -1,9 +1,6 @@
 # `$HOME` is where the :heart: is
 Just some configuration files (aka dotfiles). Can be used for MacOS and Linux.
 
-**Warning** Be careful when using the commands used in e.g. `install/.macdefaults`. Only use these
-commands if you know what the effects will be.
-
 ### Structure
 ```bash
 .atom/                # Usefull atom configs
@@ -26,10 +23,7 @@ terminals/            # Config files for iTerm2, Hyper and Terminal.app
 ### Usage
 If you just want to install the dotfiles:
 ```bash
-$ git clone --bare https://github.com/yochem/dotfiles.git ${HOME}/.dot
-$ alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
-$ dot checkout
-$ dot config status.showUntrackedFiles no
+$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/install/dotinstall | /bin/bash
 ```
 If you want to fully install my devtools on a new system:
 ```bash
