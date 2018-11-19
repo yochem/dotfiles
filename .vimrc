@@ -111,20 +111,31 @@ endif
 " enable mouse in all modes
 set mouse=a
 
+" autosave when 'running' the file
+set autowrite
+
 " no error bells
 set noerrorbells
 
-" Automatic commands
+" go to last position when opening file
 if has("autocmd")
-	" Enable file type detection
-	filetype on
-	" Treat .md files as Markdown
-	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+	\| exe "normal! g'\"" | endif
 endif
 
-" remap jj and ff as escape key for easier mode switching
-inoremap jj <ESC>
+" Automatic commands
+if has("autocmd")
+    " Enable file type detection
+    filetype on
+    " Treat .md files as Markdown
+    autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+endif
+
+" remap ff as escape key for easier mode switching
 inoremap ff <ESC>
+
+" compile LaTeX quick
+command Pdf w | !pdflatex %
 
 " tbh I copied this so idk what's going on
 set statusline=
