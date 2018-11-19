@@ -90,6 +90,8 @@
     showKiteTourOnStartup: false
     showWelcomeNotificationOnStartup: false
     useDockForSidebar: true
+  latex:
+    enableExtendedBuildMode: false
   "latex-plus":
     texBin: "/Library/TeX/Distributions/Programs/texbin"
   "linter-htmlhint":
