@@ -53,6 +53,7 @@ def desktop_count():
 
 
 def main():
+    desktop_count()
     if sys.platform != 'darwin':
         return 1
     if len(sys.argv) == 1:
