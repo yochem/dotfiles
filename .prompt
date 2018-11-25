@@ -37,6 +37,6 @@ PS1="\[$reset\]"
 PS1+="${blue}\w " # short working directory in default blue
 PS1+="\[$reset\]"
 PS1+="\$(prompt_git)" # show git branch
-PS1+="${red} ${promptSign} " # end with promptsign
+PS1+="${red}${promptSign} " # end with promptsign
 PS1+="\[$reset\] "
 export PS1
