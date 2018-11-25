@@ -1,3 +1,6 @@
+"""""""""""""""""""""""
+"""""" PLUGINS """"""""
+"""""""""""""""""""""""
 " if vim-plug is not downloaded, download it
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -68,8 +71,7 @@ set nostartofline
 """""""""""""""""""""""
 " enable line numbers
 set number
-" cursor position
-"set ruler
+
 " relative line numbers
 if exists("&relativenumber")
     set relativenumber
@@ -84,10 +86,13 @@ set scrolloff=3
 """""""""""""""""""""""
 " g flag with search as default
 set gdefault
+
 "highlight all search results
 set hlsearch
+
 " ignore cases of search
 set ignorecase
+
 " highlight dynamically
 set incsearch
 
@@ -142,6 +147,7 @@ inoremap ff <ESC>
 
 " compile LaTeX quick
 command Pdf !pdflatex %
+command PdfBib !pdflatex % && bibtex %:r && pdflatex % && pdflatex %
 
 " tbh I copied this so idk what's going on
 set statusline=
