@@ -44,6 +44,12 @@ set notitle
 " when splitting vertical, do this to the right
 set splitright
 
+" i really hate folding
+set nofoldenable
+
+" atom-like line to show where the 80 char bound is
+set colorcolumn=80
+
 """""""""""""""""""""""
 """""" INDENTION """"""
 """""""""""""""""""""""
@@ -135,7 +141,7 @@ endif
 inoremap ff <ESC>
 
 " compile LaTeX quick
-command Pdf w | !pdflatex %
+command Pdf !pdflatex %
 
 " tbh I copied this so idk what's going on
 set statusline=
