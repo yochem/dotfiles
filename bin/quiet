@@ -1,6 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env osascript
 
-osascript -e 'set volume output muted true'
-do-not-disturb toggle
-do-not-disturb toggle
-do-not-disturb toggle
+# mute volume
+set volume output muted true
+
+# using C-\ as keyboard shortcut for do-not-disturb
+tell application "System Events" to key code 42 using control down 
+
