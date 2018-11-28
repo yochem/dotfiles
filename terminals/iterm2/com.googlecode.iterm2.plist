@@ -865,11 +865,11 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 138 606 469 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>117 347 796 486 0 0 1440 877 </string>
+	<string>117 381 796 486 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>304 218 738 504 0 0 1440 877 </string>
+	<string>291 263 738 504 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>544 124 690 487 0 0 1440 877 </string>
+	<string>303 262 738 504 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>465 155 690 487 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -2246,7 +2246,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>E5E90DBE-F611-40BF-872B-8BBAF3A14692</string>
 	<key>NoSyncLastTipTime</key>
-	<real>560797585.51771796</real>
+	<real>565091578.91583598</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2266,9 +2266,12 @@
 		<string>0003</string>
 		<string>0004</string>
 		<string>0005</string>
+		<string>0005</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
+	<key>PMPrintingExpandedStateForPrint2</key>
+	<true/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -2304,6 +2307,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/Yochem/terminals/iterm2</string>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>RestoreWindowContents</key>
@@ -2319,9 +2324,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-10-27T14:14:25Z</date>
+	<date>2018-11-26T18:21:26Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
+	<key>Secure Input</key>
+	<true/>
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowNewOutputIndicator</key>
@@ -2349,7 +2356,7 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>3.2.4</string>
+	<string>3.2.5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
