@@ -48,10 +48,10 @@ mkcd() { mkdir "$1"; cd "$1" ;}
 manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
 
 # quick way to run a python file
-p() { python2.7 $1.py ${@:2}; }
+p2() { python2.7 $1.py ${@:2}; }
 
 # ... and the python3 version
-p3() { python3 $1.py ${@:2}; }
+p() { python3 $1.py ${@:2}; }
 
 # move to trash
 thrash() { mv -f $1 ${HOME}/.Trash/$1; }
