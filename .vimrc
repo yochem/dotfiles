@@ -140,6 +140,7 @@ if has("autocmd")
     filetype on
     " Treat .md files as Markdown
     autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+    autocmd BufRead,BufNewFile *.tex set filetype=tex
 endif
 
 " remap ff as escape key for easier mode switching
