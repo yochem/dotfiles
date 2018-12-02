@@ -9,7 +9,7 @@ alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
 # checkout gets the working tree files
 dot checkout
 
-if [[ $? \eq 0 ]]; then
+if [[ $? -eq 0 ]]; then
     echo "dotfiles installed. You might need to restart your terminal."
 else
     # if git checkout returned an error, create a backup and overwrite
