@@ -9,70 +9,77 @@ install_brew() {
     brew update
     brew upgrade
     brew_apps=(
-	    bash
-	    bash-completion
-	    bat
-	    binwalk
-	    coreutils
-	    dockutil
-	    emacs
-	    git
-	    hub
-	    imagesnap
-	    nano
-	    pandoc
-	    pandoc-citeproc
-	    python
-	    python3
-	    ruby
-	    shpotify
-	    sqlite
-	    thefuck
-	    tldr
-	    vim
-	    youtube-dl
+	bash
+	bash-completion2
+	bat
+	binwalk
+	coreutils
+	dockutil
+	emacs
+	git
+	grep
+	hub
+	imagesnap
+	nano
+	pandoc
+	pandoc-citeproc
+	python
+	python3
+	ruby
+	screen
+	shpotify
+	sqlite
+	thefuck
+	tldr
+	vim
+	youtube-dl
     )
     brew install "${brew_apps[@]}"
 
     # install brew cask apps
     brew tap caskroom/cask
     cask_apps=(
-	    adobe-acrobat-reader
-	    arduino
-	    atom
-	    dropbox
-	    fritzing
-	    github
-	    google-chrome
-	    google-drive-file-stream
-	    hyper
-	    iterm2
-	    kite
-	    lastpass
-	    makerbot-print
-	    skype
-	    spotify
-	    telegram
-	    vlc
-	    vuze
-	    whatsapp
-	    qlcolorcod
-	    qlstephen
+	adobe-acrobat-reader
+	arduino
+	atom
+	dropbox
+	fritzing
+	github
+	google-chrome
+	google-drive-file-stream
+	hyper
+	iterm2
+	kite
+	lastpass
+	makerbot-print
+	skype
+	spotify
+	telegram
+	vlc
+	vuze
+	whatsapp
+	qlcolorcod
+	qlstephen
     )
     brew cask install "${cask_apps[@]}"
 
-    # Add the new shell to the list of allowed shells
-    sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
-    # Change to the new shell
-    chsh -s /usr/local/bin/bash
+    brew cleanup
+
+    # Save Homebrew’s installed location.
+    BREW_PREFIX=$(brew --prefix)
+
+    # Switch to using brew-installed bash as default shell
+    if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
+	echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
+	chsh -s "${BREW_PREFIX}/bin/bash"
+    fi
 
     # create the dock
     dockutil --no-restart --remove all
-    dockutil --no-restart --add "/Applications/Safari.app"
+    dockutil --no-restart --add "/Applications/Brave Browser.app"
     dockutil --no-restart --add "/Applications/Mail.app"
     dockutil --no-restart --add "/Applications/Spotify.app"
     dockutil --no-restart --add "/Applications/iTerm.app"
-    dockutil --no-restart --add "/Applications/Atom.app"
     dockutil --no-restart --add "/Applications/WhatsApp.app"
     dockutil --no-restart --add "/Applications/Telegram.app"
     dockutil --no-restart --add "${HOME}/Downloads" --view fan --display stack
@@ -80,34 +87,40 @@ install_brew() {
 }
 
 #####################################
-#### ATOM: PACKAGES AND CONFIGS #####
+############### PIP #################
 #####################################
 install_pip() {
     # download pip from website
-    curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py
+    curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
 
     # install pip
-    python /tmp/get-pip.py
+    python3 /tmp/get-pip.py
 
     sudo pip install -U pip
 
     pip_apps=(
-	    checkpy
-	    click
-	    cookiecutter
-	    dropbox
-	    flask
-	    httplib2
-	    numpy
-	    pandoc
-	    pandoc-shortcaption
-	    pandocfilters
-	    pipsi
-	    pydrive
-	    pygments
-	    setuptools
-	    termdown
-	    zerorpc
+	autopep8
+	checkpy
+	Click
+	cookiecutter
+	dropbox
+	flask
+	httplib2
+	heupy
+	numpy
+	pandoc
+	pandoc-shortcaption
+	pandocfilters
+	pipsi
+	pybtex
+	pydrive
+	pygments
+	python-dateutil
+	requests
+	setuptools
+	style50
+	termdown
+	zerorpc
     )
     sudo pip install "${pip_apps[@]}"
 }
@@ -128,56 +141,61 @@ install_everything() {
 
     # HOMEBREW & CASK
     if ! [[ "$OSTYPE" =~ ^darwin ]]; then
-	echo "${warning} Skipped: Homebrew (not running MacOS)"
+	echo "${warning}Skipped: Homebrew (not running MacOS)"
     else
 	# Close any open System Preferences panes, to prevent them from 
 	# overriding settings we’re about to change
 	osascript -e 'tell application "System Preferences" to quit'
 
-	read -p "${question} Install Homebrew (Cask) and newest bash? " -n 1 -r
+	read -p "${question}Install Homebrew (Cask) and newest bash? " -n 1 -r
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 	    install_brew
 	else
-	    echo "${warning} Skipped: Homebrew and Cask."
+	    echo "${warning}Skipped: Homebrew and Cask."
 	fi
+
+	./macdefaults	
+	# change wallpaper if drive is set up
+	local stalenhag_dir = "${HOME}/drive/assets/backgrounds/stalenhag/"
+	[ -x ${HOME}/bin/wallpaper && -d stalenhag_dir ] && wallpaper
     fi
 
     # PIP
     if type python >/dev/null 2>&1; then
-	read -p "${question} Install PIP and PIP packages? " -n 1 -r
+	read -p "${question}Install PIP and PIP packages? " -n 1 -r
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 	    install_pip
 	else
-	    echo "${warning} Skipped: PIP and PIP packages."
+	    echo "${warning}Skipped: PIP and PIP packages."
 	fi
     fi
 
     # ATOM
     if type atom >/dev/null 2>&1 && type apm >/dev/null 2>&1; then
-	read -p "${question} Install Atom packages? " -n 1 -r
+	read -p "${question}Install Atom packages? " -n 1 -r
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 	    curl -O https://raw.githubusercontent.com/yochem/dotfiles/master/install/atom_packages.txt
 	    apm install --package-file atom_packages.txt
 	    rm atom_packages.txt
 	else
-	    echo "${warning} Skipped: Atom packages."
+	    echo "${warning}Skipped: Atom packages."
 	fi
     fi
 
     # dev/ and repositories
-    read -p "${question} Clone yochem's repositories to ~/dev/? " -n 1 -r
+    read -p "${question}Clone yochem's repositories to ~/dev/? " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
 	mkdir ${HOME}/dev
 	clonerepos ${HOME}/dev
     else
-	echo "${warning} Skipped: dev/ and repositories."
+	echo "${warning}Skipped: dev/ and repositories."
     fi
 	
-    # get z.sh 
+    # get rupa/z 
     curl "https://raw.githubusercontent.com/rupa/z/master/z.1" > "/usr/local/share/man/man1/z.1"
     curl "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "${HOME}/z.sh"
 
@@ -193,4 +211,5 @@ install_everything() {
     mkdir -p ~/.git-template/hooks
     git config --global init.templatedir '~/.git-template'
     curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > ~/.git-template/hooks/commit-msg && chmod +x ~/.git-template/hooks/commit-msg
+
 }
