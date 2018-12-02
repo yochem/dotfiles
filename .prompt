@@ -16,7 +16,7 @@ prompt_git() {
 	branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
 	    git rev-parse --short HEAD 2> /dev/null || \
 	    echo '(unknown)')";
-	echo -e "[${green}${branchName}${reset}]";
+	echo -e "[${green}${branchName}${reset}] ";
     else
 	return;
     fi;
