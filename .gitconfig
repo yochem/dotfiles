@@ -1,67 +1,61 @@
 [user]
     name = yochem
-	email = yochem@users.noreply.github.com
+    email = yochem@users.noreply.github.com
 
-# enforce ssh
-# [url "ssh://git@github.com/"]
-#	insteadOf = https://github.com/
+[init]
+    templatedir = ~/.git-template
 
 [alias]
-	# View the current working tree status using the short format
-	s = status -s
+    # View the current working tree status using the short format
+    s = status -s
 
- 	# Add and commit all files at once!
- 	ac = !git add . && git commit -m
+    # Everything short
+    a = add
 
- 	# Everything short
-	a = add
+    # Always commit with a message
+    c = commit -m
 
-	# Always commit with a message
-	c = commit -m
+    # commit all files that have been modified or removed, new files not 
+    # affected
+    com = commit -a
 
-	# commit all files that have been modified or removed, new files not 
-	# affected
-	com = commit -a
+    # Push to origin master
+    pom = push origin master
 
-	# Push to origin master
-	pom = push origin master
+    # View url to Github
+    url = config --get remote.origin.url
 
-	# View url to Github
-	url = config --get remote.origin.url
+    # List aliases
+    alias = config --get-regexp alias
 
-	# List aliases
-	alias = config --get-regexp alias
+    # List contributors with number of commits
+    contributors = shortlog --summary --numbered
 
-	# List contributors with number of commits
-	contributors = shortlog --summary --numbered
+    # also show remote branches
+    branches = branch -a
 
-	# also show remote branches
-	branches = branch -a
+    # I always forgot these
+    unadd = reset
+    uncommit = reset HEAD^
 
-	# I always forgot these
-	unadd = reset
-	uncommit = reset HEAD^
-
-	# log a pretty graph to show commits
-	graph = log --graph --pretty=format:'%Cred%h%Creset (%an) -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    # log a pretty graph to show commits
+    graph = log --graph --pretty=format:'%Cred%h%Creset (%an) -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 
 [color "status"]
-	added = green
-	changed = yellow
-	untracked = red
+    added = green
+    changed = yellow
+    untracked = red
 
 [hub]
-	protocol = ssh
+    protocol = ssh
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[init]
-	templatedir = ~/.git-template
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
