@@ -14,11 +14,11 @@ if [[ "$OSTYPE" == "Darwin"* ]]; then
 fi
 
 if [[ "$OSTYPE" == "linux"* ]]; then
-	if apt-get > /dev/null 2>&1; then
-		echo -e "${orangebold}updating and upgrading apt-get...${reset}"
-		sudo apt-get update
-		sudo apt-get upgrade -y
-	fi
+    if apt-get > /dev/null 2>&1; then
+	echo -e "${orangebold}updating and upgrading apt-get...${reset}"
+	sudo apt-get update
+	sudo apt-get upgrade -y
+    fi
 fi
 
 # NPM
