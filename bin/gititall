@@ -17,6 +17,8 @@ case $1 in
 	echo -e "${bold}${orange}${HOME}/.dot${reset}:"
 	cd ${HOME}
 	git --git-dir=${HOME}/.dot/ --work-tree=${HOME} $1
+
+	# and the other repos
 	while read -r REPO; do
 	    (echo -e "${bold}${orange}${REPO}${reset}:"
 	    pushd ${REPO} >/dev/null 2>&1
