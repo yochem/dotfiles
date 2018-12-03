@@ -793,7 +793,7 @@
 	<key>DeleteProfile_selection</key>
 	<integer>0</integer>
 	<key>DimInactiveSplitPanes</key>
-	<false/>
+	<true/>
 	<key>DimOnlyText</key>
 	<false/>
 	<key>EnableDivisionView</key>
@@ -860,6 +860,8 @@
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>376 375 869 222 0 0 1440 878 </string>
+	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
+	<string>412 527 616 174 0 0 1440 877 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>410 381 620 392 0 0 1440 878 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
@@ -867,7 +869,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>117 381 796 486 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>291 263 738 504 0 0 1440 877 </string>
+	<string>0 0 1440 878 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>303 262 738 504 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -2324,7 +2326,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-11-26T18:21:26Z</date>
+	<date>2018-11-29T10:22:05Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Secure Input</key>
@@ -2335,6 +2337,10 @@
 	<true/>
 	<key>ShowPaneTitles</key>
 	<false/>
+	<key>SmartPlacement</key>
+	<true/>
+	<key>SplitPaneDimmingAmount</key>
+	<real>0.14161658653846154</real>
 	<key>StretchTabsToFillBar</key>
 	<true/>
 	<key>SwitchPaneModifier</key>
@@ -2356,7 +2362,7 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>3.2.5</string>
+	<string>3.2.6</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
