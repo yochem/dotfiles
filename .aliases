@@ -35,15 +35,18 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 
 if [[ "$OSTYPE" =~ ^darwin ]]; then
-	# hub for git
-	alias git=hub
+    # hub for git
+    alias git=hub
 
-	# enables finders quicklook from the terminal
-	alias ql="qlmanage -p > /dev/null 2>&1"
-	
-	# shorten things up 
-	alias cask="brew cask"
-	alias o="open"
+    # enables finders quicklook from the terminal
+    alias ql="qlmanage -p > /dev/null 2>&1"
+    
+    # shorten things up 
+    alias cask="brew cask"
+    alias o="open"
+
+    # open apps
+    alias prefs="open -a System\ Preferences"
 fi
 
 # shorten the very, very long install command known as apt-get
