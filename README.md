@@ -1,23 +1,23 @@
-# `$HOME` is where the :heart: is
-Just some configuration files (aka dotfiles). Can be used for MacOS and Linux.
+# `$HOME` is where the heart is
+My configs for syncing across devices, sharing and other stuff.
 
 ### Structure
 ```bash
-.atom/                # Usefull atom configs
-.nano/                # All nano syntax highlighting files live inside this directory
-bin/                  # Some scripts I (sometimes) use
-install/              # .macdefaults, Brew, Cask, Pip and Atom packages
-terminals/            # Config files for iTerm2, Hyper and Terminal.app
-.aliases              # All bash aliases I use
-.bash_profile         # My bash profile. Uses .aliases, .bash_prompt, .exports and .functions
-.bash_prompt          # For creating my prompt
-.bashrc               # When on Linux...
-.exports              # All exports, mainly my $PATH
-.functions            # Some functions I use to shorten things up
-.gitconfig            # Git configuration
-.nanorc               # Rc file for the Nano text editor
-.profile              # idk
-.vimrc                # Rc file for the Vim text editor
+.atom/		    # atom configs
+.nano/		    # nano syntax highlighting
+bin/		    # some scripts I sometimes use
+install/	    # for installing this repo
+terminals/	    # config for iTerm2, Hyper and Terminal.app
+.aliases	    # bash aliases
+.bash_profile	    # bundles .aliases, .exports, .functions, .prompt
+.exports	    # $PATH and others
+.functions	    # bash functions
+.gitconfig	    # git configuration
+.nanorc		    # nano rc file
+.plrc		    # prolog rc file
+.prompt		    # bash prompt
+.screenrc	    # screen rc file stolen from @geohot
+.vimrc		    # vim rc file
 ```
 
 ### Usage
