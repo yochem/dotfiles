@@ -18,6 +18,7 @@ alias grep="grep --color"
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -v"
+
 # reload bash profile and stuff
 alias reload="source ${HOME}/.bash_profile"
 
