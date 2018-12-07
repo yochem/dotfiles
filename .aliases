@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
 # fancy ls
-if [[ "$OSTYPE" =~ ^darwin ]]; then
-    flags="-Fhl1G"
-else
-    flags="--group-directories-first -1F --color"
-fi
-alias lst="ls ${flags}"
+ls_type="ls"
+command -V gls >/dev/null 2>1  && ls_type="gls"
+alias lst="${ls_type} --group-directories-first -1F --color"
 
 # i always forget what the printer command is...
 alias printer="lpr"
