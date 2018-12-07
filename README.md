@@ -5,9 +5,9 @@ My configs for syncing across devices, sharing and other stuff.
 ```bash
 .atom/		    # atom configs
 .nano/		    # nano syntax highlighting
+.terminals/	    # config for iTerm2, Hyper and Terminal.app
 bin/		    # some scripts I sometimes use
 install/	    # for installing this repo
-terminals/	    # config for iTerm2, Hyper and Terminal.app
 .aliases	    # bash aliases
 .bash_profile	    # bundles .aliases, .exports, .functions, .prompt
 .exports	    # $PATH and others
