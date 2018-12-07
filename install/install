@@ -135,6 +135,8 @@ install_everything() {
     warning="\e[93m[!]\e[0m"
     question="\e[94m[?]\e[0m"
 
+    [ -d ${HOME}/install ] && cd ${HOME}/install
+
     # update existing `sudo` time stamp until installation is finished
     sudo -v
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
@@ -155,10 +157,7 @@ install_everything() {
 	    echo "${warning}Skipped: Homebrew and Cask."
 	fi
 
-	./macdefaults	
-	# change wallpaper if drive is set up
-	local stalenhag_dir = "${HOME}/drive/assets/backgrounds/stalenhag/"
-	[ -x ${HOME}/bin/wallpaper && -d stalenhag_dir ] && wallpaper
+	./macdefaults
     fi
 
     # PIP
@@ -198,18 +197,12 @@ install_everything() {
     # get rupa/z 
     curl "https://raw.githubusercontent.com/rupa/z/master/z.1" > "/usr/local/share/man/man1/z.1"
     curl "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "${HOME}/z.sh"
-
-    # clone bare git repo 'dotfiles' into ~/.dot
-    mkdir ${HOME}/.dot/
-    git clone --bare https://github.com/yochem/dotfiles.git ${HOME}/.dot
-    alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
-    dot checkout
-    dot config status.showUntrackedFiles no
-    . ${HOME}/.bash_profile
     
     # clone git-good-template into ~/.git-template
     mkdir -p ~/.git-template/hooks
     git config --global init.templatedir '~/.git-template'
     curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > ~/.git-template/hooks/commit-msg && chmod +x ~/.git-template/hooks/commit-msg
 
+    # reload bash_profile
+    . ${HOME}/.bash_profile
 }

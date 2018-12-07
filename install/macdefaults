@@ -207,7 +207,7 @@ defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
 defaults write com.apple.terminal SecureKeyboardEntry -bool true
 
 # use preferences from this repo
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dev/dotfiles/terminals/iterm2"
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.terminals/com.googlecode.iterm2.plist"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 ###############################################################################
