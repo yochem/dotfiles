@@ -12,7 +12,7 @@ if [[ $# -eq 1 ]]; then
     mkdir -p $1 && cd $1
     echo "cloning in $1"
 else
-   echo "cloning in $PWD" 
+    echo "cloning in $PWD" 
 fi
 
 # curl a users repos using the github api
