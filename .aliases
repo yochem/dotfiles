@@ -2,7 +2,7 @@
 
 # fancy ls
 ls_type="ls"
-command -V gls >/dev/null 2>1  && ls_type="gls"
+command -V gls >/dev/null 2>&1 && ls_type="gls"
 alias lst="${ls_type} --group-directories-first -1F --color"
 
 # i always forget what the printer command is...
