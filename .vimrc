@@ -103,6 +103,8 @@ set incsearch
 " use OS clipboard
 set clipboard=unnamed
 
+" replace more characters at once in visual mode
+vmap r "_dP
 " cursor in insert mode
 set esckeys
 
