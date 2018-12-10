@@ -1,13 +1,26 @@
 #!/usr/bin/env bash
+# 
+# INSTALL EVERYTHING
+# Yochem van Rosmalen
 
-#####################################
-### MACOS: BREW, MACDEFAULTS ETC ####
-#####################################
+
+# for coloring output
+proc="\e[39m[~]\e[0m"
+bad="\e[91m[-]\e[0m"
+good="\e[92m[+]\e[0m"
+warning="\e[93m[!]\e[0m"
+question="\e[94m[?]\e[0m"
+
+
+
 install_brew() {
+    # need xcode tools to install brew
     xcode-select --install
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew update
-    brew upgrade
+
+    # install brew
+    ruby -e "$(curl -fsL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+    # list of all brew formulae
     brew_apps=(
 	bash
 	bash-completion2
@@ -33,15 +46,21 @@ install_brew() {
 	tldr
 	vim
 	youtube-dl
+	zsh
     )
-    brew install "${brew_apps[@]}"
+    # install list
+    brew -q install "${brew_apps[@]}"
+}
 
-    # install brew cask apps
-    brew tap caskroom/cask
+install_brew_cask() {
+    # install brew cask
+    brew -q tap caskroom/cask
+    # all cask apps
     cask_apps=(
 	adobe-acrobat-reader
 	arduino
 	atom
+	brave-browser
 	dropbox
 	fritzing
 	github
@@ -51,7 +70,6 @@ install_brew() {
 	iterm2
 	kite
 	lastpass
-	makerbot-print
 	skype
 	spotify
 	telegram
@@ -61,42 +79,19 @@ install_brew() {
 	qlcolorcod
 	qlstephen
     )
-    brew cask install "${cask_apps[@]}"
-
-    brew cleanup
-
-    # Save Homebrew’s installed location.
-    BREW_PREFIX=$(brew --prefix)
-
-    # Switch to using brew-installed bash as default shell
-    if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
-	echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
-	chsh -s "${BREW_PREFIX}/bin/bash"
-    fi
-
-    # create the dock
-    dockutil --no-restart --remove all
-    dockutil --no-restart --add "/Applications/Brave Browser.app"
-    dockutil --no-restart --add "/Applications/Mail.app"
-    dockutil --no-restart --add "/Applications/Spotify.app"
-    dockutil --no-restart --add "/Applications/iTerm.app"
-    dockutil --no-restart --add "/Applications/WhatsApp.app"
-    dockutil --no-restart --add "/Applications/Telegram.app"
-    dockutil --no-restart --add "${HOME}/Downloads" --view fan --display stack
-    killall Dock
+    brew -q cask install "${cask_apps[@]}"
+    # cleanup outdated brew things
+    brew -q cleanup
 }
 
-#####################################
-############### PIP #################
-#####################################
 install_pip() {
     # download pip from website
-    curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+    curl -s https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
 
     # install pip
-    python3 /tmp/get-pip.py
+    python /tmp/get-pip.py
 
-    sudo pip install -U pip
+    sudo pip -q install -U pip
 
     pip_apps=(
 	autopep8
@@ -122,87 +117,213 @@ install_pip() {
 	termdown
 	zerorpc
     )
-    sudo pip install "${pip_apps[@]}"
+    sudo pip -q install "${pip_apps[@]}"
 }
 
-####################################
-############ INSTALL ###############
-####################################
-install_everything() {
-    proc="\e[39[~]\e[0m"
-    bad="\e[91m[-]\e[0m"
-    good="\e[92m[+]\e[0m"
-    warning="\e[93m[!]\e[0m"
-    question="\e[94m[?]\e[0m"
-
-    [ -d ${HOME}/install ] && cd ${HOME}/install
+install() {
+    # check if install folder exists, go to there
+    if [ -d ${HOME}/install ]; then
+	cd ${HOME}/install
+    else
+	echo -e "${warning} No folder named ${HOME}/install"
+	exit 1
+    fi
 
     # update existing `sudo` time stamp until installation is finished
     sudo -v
-    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+    while true; do 
+	sudo -n true
+	sleep 60
+	kill -0 "$$" || exit
+    done 2>/dev/null &
 
-    # HOMEBREW & CASK
+    ###################
+    ###### MACOS ######
+    ###################
     if ! [[ "$OSTYPE" =~ ^darwin ]]; then
-	echo "${warning}Skipped: Homebrew (not running MacOS)"
+	echo -e "${bad} Skipped: Homebrew (not running MacOS)\n"
     else
 	# Close any open System Preferences panes, to prevent them from 
 	# overriding settings we’re about to change
 	osascript -e 'tell application "System Preferences" to quit'
 
-	read -p "${question}Install Homebrew (Cask) and newest bash? " -n 1 -r
+	###################
+	### BREW (CASK) ###
+	###################
+	# install homebrew. Only ask for Cask if homebrew is installed
+	echo -en "${question} Install Homebrew and formulae? "
+	read -n 1 -r
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
+	    # install HOMEBREW
+	    echo -e "${proc} Installing: Homebrew and formulae..."
 	    install_brew
+	    echo -e "${good} Installed: Homebrew and formulae\n"
+
+	    # install homebrew cask
+	    echo -en "${question} Install Homebrew Cask and apps? "
+	    read -n 1 -r
+	    echo
+	    if [[ $REPLY =~ ^[Yy]$ ]]; then
+		echo -e "${proc} Installing: Homebrew Cask and apps..."
+		install_brew_cask
+		echo -e "${good} Installed: Homebrew Cask and apps\n"
+	    else
+		echo -e "${bad} Skipped: Homebrew Cask and apps\n"
+	    fi
 	else
-	    echo "${warning}Skipped: Homebrew and Cask."
+	    echo -e "${bad} Skipped: Homebrew and formulae\n"
 	fi
 
-	./macdefaults
-    fi
+	###################
+	###### BASH #######
+	###################
+	echo -en "${question} Update to new bash version? "
+	read -n 1 -r
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+	    echo -e "${proc} Changing to newest bash version..."
+	    # Save Homebrew’s installed location.
+	    BREW_PREFIX=$(brew --prefix)
+	    # Switch to using brew-installed bash as default shell
+	    if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
+		echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
+		chsh -s "${BREW_PREFIX}/bin/bash"
+	    fi
+	    echo -e "${good} Changed to newest bash version\n"
+	else
+	    echo -e "${bad} Skipped: Bash update\n"
+	fi
 
-    # PIP
+	###################
+	####### DOCK ######
+	###################
+	echo -en "${question} Change dock apps? "
+	read -n 1 -r
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+	    echo -e "${proc} Changing dock..."
+	    dockutil --no-restart --remove all
+	    dockutil --no-restart --add "/Applications/Brave Browser.app"
+	    dockutil --no-restart --add "/Applications/Mail.app"
+	    dockutil --no-restart --add "/Applications/Spotify.app"
+	    dockutil --no-restart --add "/Applications/iTerm.app"
+	    dockutil --no-restart --add "/Applications/WhatsApp.app"
+	    dockutil --no-restart --add "/Applications/Telegram.app"
+	    dockutil --no-restart --add "${HOME}/Downloads" --view fan --display stack
+	    killall Dock
+	    echo -e "${good} Changed dock"
+	else
+	    echo -e "${bad} Skipped: Changing dock"
+	fi
+
+	###################
+	### MACDEFAULTS ###
+	###################
+	echo -en "${question} Use mac defaults? be careful! "
+	read -n 1 -r
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+	    echo -e "${proc} Applying mac defaults..."
+	    echo -e "${good} Applied: mac defaults\n"
+	else
+	    echo -e "${bad} Skipped: mac defaults\n"
+	fi
+    fi  
+    
+
+    ###################
+    ####### PIP #######
+    ###################
     if type python >/dev/null 2>&1; then
-	read -p "${question}Install PIP and PIP packages? " -n 1 -r
+	echo -en "${question} Install PIP and packages? "
+	read -n 1 -r
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-	    install_pip
+	    echo -e "${proc} Installing: PIP and packages..."
+	    echo -e "${good} Installed: PIP and packages\n"
 	else
-	    echo "${warning}Skipped: PIP and PIP packages."
+	    echo -e "${bad} Skipped: PIP and packages.\n"
 	fi
     fi
 
-    # ATOM
+    ###################
+    ###### ATOM #######
+    ###################
     if type atom >/dev/null 2>&1 && type apm >/dev/null 2>&1; then
-	read -p "${question}Install Atom packages? " -n 1 -r
+	echo -en "${question} Install Atom packages? "
+	read -n 1 -r
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-	    curl -O https://raw.githubusercontent.com/yochem/dotfiles/master/install/atom_packages.txt
-	    apm install --package-file atom_packages.txt
-	    rm atom_packages.txt
+	    if [[ $(ls) =~ atom_packages.txt ]]; then
+		echo -e "${proc} Installing: Atom packages..."
+		apm install --package-file atom_packages.txt
+		apm upgrade -c=false
+		echo -e "${good} Installed: Atom packages\n"
+	    else
+		echo -e "${bad} Skipped: Atom packages.\n"
+	    fi
 	else
-	    echo "${warning}Skipped: Atom packages."
+	    echo -e "${bad} Skipped: Atom packages.\n"
 	fi
+    else
+	echo -e "${bad} Skipped: Atom packages.\n"
     fi
 
-    # dev/ and repositories
-    read -p "${question}Clone yochem's repositories to ~/dev/? " -n 1 -r
+
+    ###################
+    ##### REPOS  ######
+    ###################
+    echo -en "${question} Clone yochem's repositories to ${HOME}/dev/? "
+    read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-	mkdir ${HOME}/dev
-	clonerepos ${HOME}/dev
+	if [ -x ~/bin/clonerepos ]; then
+	    echo -e "${proc} Cloning all repo's from https://github.com/yochem"
+	    mkdir ${HOME}/dev
+	    clonerepos ${HOME}/dev
+	    echo -e "${good} Cloned repo's to ${HOME}/dev\n"
+	else
+	    echo -e "${bad} Skipped: dev/ and repositories.\n"
+	fi
     else
-	echo "${warning}Skipped: dev/ and repositories."
+	echo -e "${bad} Skipped: dev/ and repositories.\n"
     fi
-	
-    # get rupa/z 
-    curl "https://raw.githubusercontent.com/rupa/z/master/z.1" > "/usr/local/share/man/man1/z.1"
-    curl "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "${HOME}/z.sh"
-    
-    # clone git-good-template into ~/.git-template
-    mkdir -p ~/.git-template/hooks
-    git config --global init.templatedir '~/.git-template'
-    curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > ~/.git-template/hooks/commit-msg && chmod +x ~/.git-template/hooks/commit-msg
 
-    # reload bash_profile
+    ###################
+    ###### Z.SH #######
+    ###################
+    echo -en "${question} Install z.sh? "
+    read -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+	echo -e "${proc} Installing z.sh..."
+	curl -s "https://raw.githubusercontent.com/rupa/z/master/z.1" > "/usr/local/share/man/man1/z.1"
+	curl -s "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "${HOME}/z.sh"
+	echo -e "${good} Installed: z.sh\n"
+    else
+	echo -e "${bad} Skipped: z.sh\n"
+    fi
+
+    ##################
+    ## GIT TEMPLATE ##
+    ##################
+    echo -en "${question} Install git-template? "
+    read -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+	echo -e "${proc} Installing git-template..."
+	# clone git-good-template into ~/.git-template
+	mkdir -p ~/.git-template/hooks
+	git config --global init.templatedir '~/.git-template'
+	curl -s https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > ~/.git-template/hooks/commit-msg && 
+	chmod +x ~/.git-template/hooks/commit-msg
+	echo -e "${good} Installed: git-template\n"
+    else
+	echo -e "${bad} Skipped: git-template\n"
+    fi
+
+    # reload for all changes to appear
     . ${HOME}/.bash_profile
 }
+install
