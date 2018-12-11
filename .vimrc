@@ -53,6 +53,9 @@ set nofoldenable
 " atom-like line to show where the 80 char bound is
 set colorcolumn=80
 
+" clear command output everytime when running
+set shell=~/.vim/clear_shell.sh
+
 """""""""""""""""""""""
 """""" INDENTION """"""
 """""""""""""""""""""""
