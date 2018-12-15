@@ -1,4 +1,4 @@
-# `$HOME` is where the heart is
+# `/Users/yochem`
 My configs for syncing across devices, sharing and other stuff.
 
 ### Structure
@@ -25,7 +25,7 @@ If you just want to install the dotfiles:
 ```bash
 $ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/install/dotinstall | /bin/bash
 ```
-If you want to fully install my devtools on a new system:
+If you want to fully install devtools on a new system:
 ```bash
 $ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/install/install | /bin/bash
 ```
