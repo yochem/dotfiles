@@ -24,24 +24,20 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 # Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-# Reveal IP address, hostname, OS version, etc. when clicking the clock
-# in the login window
-sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-
-# Restart automatically if the computer freezes
-# sudo systemsetup -setrestartfreeze on
-
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# only show scrollbars when scrolling
+defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
+
+# Disable automatic termination of inactive apps
+defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
 # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
 #rm -rf ~/Library/Application Support/Dock/desktoppicture.db
 #sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
 #sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
-
-# click and drag a screen from any location with ctrl + cmd.
-defaults write -g NSWindowShouldDragOnGesture YES
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
@@ -55,29 +51,32 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 # Use natural scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
-# Increase sound quality for Bluetooth headphones/headsets
-defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
-
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
 defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
 defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+
 # Follow the keyboard focus while zoomed in
 defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+
+# Set a blazingly fast keyboard repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Set language and text formats
 # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
 # `Inches`, `en_GB` with `en_US`, and `true` with `false`.
-defaults write NSGlobalDomain AppleLanguages -array "nl-NL"
+defaults write NSGlobalDomain AppleLanguages -array "en" "nl"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
 defaults write NSGlobalDomain AppleLocale -string "nl_NL@currency=EUR"
 
-# Set the timezone; see `sudo systemsetup -listtimezones` for other values
-sudo systemsetup -settimezone "Europe/Amsterdam" > /dev/null
-
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
+
+# Require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to the desktop
 defaults write com.apple.screencapture location -string "${HOME}/Desktop"
@@ -85,14 +84,11 @@ defaults write com.apple.screencapture location -string "${HOME}/Desktop"
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
 
-# Disable shadow in screenshots
-defaults write com.apple.screencapture disable-shadow -bool true
-
 ###############################################################################
 # Finder                                                                      #
 ###############################################################################
 
-# Only show icons for external harddrives
+# Only show icons for external harddrives on desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
@@ -100,6 +96,10 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 
 # Finder: show hidden files by default
 #defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Set Desktop as the default location for new Finder windows
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
 # Finder: don't show status bar
 defaults write com.apple.finder ShowStatusBar -bool false
@@ -114,10 +114,11 @@ defaults write com.apple.finder _FXSortFoldersFirst -bool true
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
-# Remove Dropbox’s green checkmark icons in Finder
-# file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns
-# [ -e "${file}" ] && mv -f "${file}" "${file}.bak"
+# Show the ~/Library folder
+chflags nohidden ~/Library
 
+# Show the /Volumes folder
+sudo chflags nohidden /Volumes
 
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #
@@ -171,6 +172,7 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 
 # Enable continuous spellchecking
 defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true
+
 # Disable auto-correct
 defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false
 
@@ -201,14 +203,13 @@ defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
 # Terminal & iTerm 2                                                          #
 ###############################################################################
 
-
 # Enable Secure Keyboard Entry in Terminal.app
 # See: https://security.stackexchange.com/a/47786/8918
 defaults write com.apple.terminal SecureKeyboardEntry -bool true
 
 # use preferences from this repo
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.terminals/com.googlecode.iterm2.plist"
-defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.terminals/iterm2/com.googlecode.iterm2.plist"
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true 
 
 ###############################################################################
 # Mac App Store                                                               #
@@ -233,10 +234,6 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
 ###############################################################################
-
-# Disable the all too sensitive backswipe on trackpads
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
 
 # Use the system-native print preview dialog
 defaults write com.google.Chrome DisablePrintPreview -bool true
