@@ -5,6 +5,12 @@
 [init]
     templatedir = ~/.git-template
 
+[core]
+    pager = ~/bin/diff-highlight | less
+
+[pager]
+    diff = true
+
 [alias]
     # View the current working tree status using the short format
     s = status -s
