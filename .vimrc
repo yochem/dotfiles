@@ -44,8 +44,9 @@ let g:markdown_enable_spell_checking = 0
 " don't show 'Thanks for flying Vim'
 set notitle
 
-" when splitting vertical, do this to the right
+" split normal
 set splitright
+set splitbelow
 
 " i really hate folding
 set nofoldenable
