@@ -36,8 +36,8 @@ def choose_image():
     return new_img
 
 def set_background(desktop, bgimg):
-    set_bg = ("osascript -e 'tell application \"System Events\" "
-        "to set picture of {} to \"{}\"'".format(desktop, bgimg))
+    set_bg = (f"osascript -e 'tell application \"System Events\" "
+        f"to set picture of {desktop} to \"{bgimg}\"'")
 
     os.system(set_bg)
 	
