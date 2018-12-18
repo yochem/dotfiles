@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'rakr/vim-one'
 Plug 'sheerun/vim-polyglot'
 Plug 'gabrielelana/vim-markdown'
+Plug 'rkulla/pydiction'
 call plug#end()
 
 """""""""""""""""""""""
@@ -104,6 +105,10 @@ set incsearch
 """""""""""""""""""""""
 """" RANDOM STUFF """""
 """""""""""""""""""""""
+" enable filetype for plugins
+filetype plugin on
+let g:pydiction_location = '~/.vim/plugged/pydiction/complete-dict'
+
 " use OS clipboard
 set clipboard=unnamed
 
