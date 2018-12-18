@@ -7,6 +7,7 @@
 
 [core]
     pager = ~/bin/diff-highlight | less
+    editor = vim
 
 [pager]
     diff = true
