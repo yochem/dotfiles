@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# nano as default editor
-export EDITOR='nano';
+# vim as default editor
+export EDITOR='vim';
 
 # add GNU core utils from brew to path
 export PATH="/Library/TeX/texbin:$PATH"
