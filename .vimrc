@@ -77,14 +77,13 @@ set nostartofline
 " enable line numbers
 set number
 
-" relative line numbers
-if exists("&relativenumber")
-    set relativenumber
-    au BufReadPost * set relativenumber
-endif
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
 
+" add empty line without leaving normal mode
+set timeoutlen=150
+nmap oo m`o<Esc>``
+nmap OO m`O<Esc>``
 
 """""""""""""""""""""""
 """""" SEARCHING """"""
