@@ -81,7 +81,7 @@ set number
 set scrolloff=3
 
 " add empty line without leaving normal mode
-set timeoutlen=150
+set timeoutlen=250
 nmap oo m`o<Esc>``
 nmap OO m`O<Esc>``
 
