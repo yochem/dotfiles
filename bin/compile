@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+[ $# -eq 0 ] && exit 1
+
+# get filename
+file=$1
+# without extension
+base="${file%.*}"
+# grep the first line
+shebang=$(sed -n 1p "$file")
+# and the dir the file is in
+dir=$(dirname $file)
+
+cd "$dir" || exit 2
+
+# run file like specified in shebang
+shebangtest() {
+    # check if it really is a shebang on the first line
+    case "$shebang" in
+	\#\!*) "$dir/$file" ;;
+	*) sent "$file" 2>/dev/null & ;;
+    esac
+}
+
+case "$file" in
+    *\.tex) pdflatex "$file" ;;
+    *\.md) pandoc -s "$file" -o "$base.pdf" ;;
+    *\.py) python3 "$file" ;;
+    *\.sh) sh "$file" ;;
+    *) shebangtest ;;
+esac
