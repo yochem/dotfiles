@@ -142,19 +142,27 @@ set autowrite
 " no error bells
 set noerrorbells
 
-" go to last position when opening file
-if has("autocmd")
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-	\| exe "normal! g'\"" | endif
-endif
-
 " Automatic commands
 if has("autocmd")
+    " go to last position when opening file
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+	\| exe "normal! g'\"" | endif
+
     " Enable file type detection
     filetype on
+
     " Treat .md files as Markdown
     autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+
+    " and .tex files as LaTeX
     autocmd BufRead,BufNewFile *.tex set filetype=tex
+
+    " always start in insertmode with new files
+    autocmd BufNewFile * startinsert
+
+    " start on top and in insertmode with commits
+    autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+    autocmd FileType gitcommit startinsert
 endif
 
 " remap ff as escape key for easier mode switching
