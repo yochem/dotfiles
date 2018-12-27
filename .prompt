@@ -5,7 +5,7 @@ if tput setaf 1 &>/dev/null; then
     reset="\[$(tput sgr0)\]"
     green="\[$(tput setaf 2)\]"
     magenta="\[$(tput setaf 5)\]"
-    blue="\[$(tput setaf 6)\]"
+    blue="\[$(tput setaf 75)\]"
 else
     reset="\[\e[0m\]"
     green="\[\033[01;38;5;002m\]"
