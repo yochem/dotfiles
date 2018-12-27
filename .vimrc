@@ -108,11 +108,15 @@ set incsearch
 filetype plugin on
 let g:pydiction_location = '~/.vim/plugged/pydiction/complete-dict'
 
+" set leader key
+let mapleader = ','
+
 " use OS clipboard
 set clipboard=unnamed
 
 " replace more characters at once in visual mode
 vmap r "_dP
+
 " cursor in insert mode
 set esckeys
 
@@ -157,8 +161,7 @@ endif
 inoremap ff <ESC>
 
 " compile LaTeX quick
-command Pdf !pdflatex %
-command PdfBib !pdflatex % && bibtex %:r && pdflatex % && pdflatex %
+nmap <leader>r :!compile %<CR>
 
 " tbh I copied this so idk what's going on
 set statusline=
