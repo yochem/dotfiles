@@ -1,33 +1,15 @@
 # `/Users/yochem`
 My configs for syncing across devices, sharing and other stuff.
 
-### Structure
-```bash
-.atom/		    # atom configs
-.nano/		    # nano syntax highlighting
-.terminals/	    # config for iTerm2, Hyper and Terminal.app
-bin/		    # some scripts I sometimes use
-install/	    # for installing this repo
-.aliases	    # bash aliases
-.bash_profile	    # bundles .aliases, .exports, .functions, .prompt
-.exports	    # $PATH and others
-.functions	    # bash functions
-.gitconfig	    # git configuration
-.nanorc		    # nano rc file
-.plrc		    # prolog rc file
-.prompt		    # bash prompt
-.screenrc	    # screen rc file stolen from @geohot
-.vimrc		    # vim rc file
-```
+### Screenshots
+![img](https://user-images.githubusercontent.com/23235841/50482144-6cdb8f80-09e5-11e9-9ca0-90e2b3b8209f.jpg)
 
-### Usage
+### Installation
 If you just want to install the dotfiles:
 ```bash
 $ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/install/dotinstall | /bin/bash
-```
-If you want to fully install devtools on a new system:
-```bash
-$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/install/install | /bin/bash
+$ cd .install/
+$ bash install
 ```
 
 ### Thanks
