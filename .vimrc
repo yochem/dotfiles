@@ -1,5 +1,20 @@
+" .vimrc - Yochem van Rosmalen
+" 1. Plugins
+" 2. Colorscheme
+" 3. Looks
+" 4. Indention
+" 5. Lines
+" 6. Searching
+" 7. Typing
+" 8. Modernize
+" 9. Random Stuff
+" 10. Opening files
+" 11. Shell/running
+" 12. Statusline
+
+
 """""""""""""""""""""""
-"""""" PLUGINS """"""""
+"      PLUGINS        "
 """""""""""""""""""""""
 " if vim-plug is not downloaded, download it
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -16,8 +31,9 @@ Plug 'gabrielelana/vim-markdown'
 Plug 'rkulla/pydiction'
 call plug#end()
 
+
 """""""""""""""""""""""
-"""""""" LOOK """""""""
+"     COLORSCHEME     "
 """""""""""""""""""""""
 " make background the same as iterm2 background
 set termguicolors
@@ -29,18 +45,12 @@ syntax enable
 set background=dark
 colorscheme one
 
-" make vim more useful
-set nocompatible
 
-" always show statusbar
-set laststatus=2
-
+"""""""""""""""""""""""
+"        LOOKS        "
+"""""""""""""""""""""""
 " dont show intro message
 set shortmess=WIF
-
-" dont care about spelling
-set nospell
-let g:markdown_enable_spell_checking = 0
 
 " don't show 'Thanks for flying Vim'
 set notitle
@@ -49,17 +59,9 @@ set notitle
 set splitright
 set splitbelow
 
-" i really hate folding
-set nofoldenable
-
-" atom-like line to show where the 80 char bound is
-set colorcolumn=80
-
-" clear command output everytime when running
-set shell=~/.vim/clear_shell.sh
 
 """""""""""""""""""""""
-"""""" INDENTION """"""
+"      INDENTION      "
 """""""""""""""""""""""
 " auto indent
 set autoindent
@@ -70,23 +72,30 @@ set tabstop=8 softtabstop=4 shiftwidth=4 noexpandtab
 " don't reset cursor to start of line
 set nostartofline
 
+" i really hate folding
+set nofoldenable
+
+" atom-like line to show where the 80 char bound is
+set colorcolumn=80
+
 
 """""""""""""""""""""""
-"""""""" LINES """"""""
+"        LINES        "
 """""""""""""""""""""""
 " enable line numbers
 set number
 
-" Start scrolling three lines before the horizontal window border
-set scrolloff=3
+" Start scrolling five lines before the horizontal window border
+set scrolloff=5
 
 " add empty line without leaving normal mode
 set timeoutlen=250
 nmap oo m`o<Esc>``
 nmap OO m`O<Esc>``
 
+
 """""""""""""""""""""""
-"""""" SEARCHING """"""
+"      SEARCHING      "
 """""""""""""""""""""""
 " g flag with search as default
 set gdefault
@@ -102,11 +111,11 @@ set incsearch
 
 
 """""""""""""""""""""""
-"""" RANDOM STUFF """""
+"       TYPING        "
 """""""""""""""""""""""
-" enable filetype for plugins
-filetype plugin on
-let g:pydiction_location = '~/.vim/plugged/pydiction/complete-dict'
+" remap ff as escape key for easier mode switching
+inoremap ff <ESC>
+inoremap FF <ESC>
 
 " set leader key
 let mapleader = ','
@@ -117,14 +126,39 @@ set clipboard=unnamed
 " replace more characters at once in visual mode
 vmap r "_dP
 
-" cursor in insert mode
-set esckeys
-
 " backspace in insert mode
 set backspace=indent,eol,start
 
+
+"""""""""""""""""""""""
+"      MODERNIZE      "
+"""""""""""""""""""""""
+" cursor in insert mode
+set esckeys
+
+" enable mouse in all modes
+set mouse=a
+
+" no error bells
+set noerrorbells
+
+" make vim more useful
+set nocompatible
+
 " fast terminal connections
 set ttyfast
+
+
+"""""""""""""""""""""""
+"    RANDOM STUFF     "
+"""""""""""""""""""""""
+" enable filetype for plugins
+filetype plugin on
+let g:pydiction_location = '~/.vim/plugged/pydiction/complete-dict'
+
+" dont care about spelling
+set nospell
+let g:markdown_enable_spell_checking = 0
 
 " centralize backups and swaps
 set backupdir=~/.vim/backups
@@ -133,16 +167,10 @@ if exists("&undodir")
     set undodir=~/.vim/undo
 endif
 
-" enable mouse in all modes
-set mouse=a
 
-" autosave when 'running' the file
-set autowrite
-
-" no error bells
-set noerrorbells
-
-" Automatic commands
+"""""""""""""""""""""""
+"    OPENING FILES    "
+"""""""""""""""""""""""
 if has("autocmd")
     " go to last position when opening file
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
@@ -162,24 +190,38 @@ if has("autocmd")
     autocmd FileType gitcommit startinsert
 endif
 
-" remap ff as escape key for easier mode switching
-inoremap ff <ESC>
+
+"""""""""""""""""""""""
+"    SHELL/RUNNING    "
+"""""""""""""""""""""""
+" autosave when 'running' the file
+set autowrite
+
+" clear command output everytime when running
+set shell=~/.vim/clear_shell.sh
 
 " compile LaTeX quick
 nmap <leader>r :!compile %<CR>
+
+
+"""""""""""""""""""""""
+"      STATUSLINE     "
+"""""""""""""""""""""""
+" always show statusline
+set laststatus=2
 
 " tbh I copied this so idk what's going on
 set statusline=
 set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
 set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
-set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ RPLACE\ ':''}
+set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ REPLACE\ ':''}
 set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
 set statusline+=\ %n\           " buffer number
 set statusline+=%#Visual#       " colour
 set statusline+=%#CursorIM#     " colour
 set statusline+=%#Cursor#       " colour
 set statusline+=%#CursorLine#   " colour
-set statusline+=\ %F\           " short file name
+set statusline+=\ %F\           " long file name
 set statusline+=%m              " modified [+] flag
 set statusline+=%=              " right align
 set statusline+=%#CursorLine#   " colour
@@ -188,4 +230,3 @@ set statusline+=%#CursorIM#     " colour
 set statusline+=\ %3l:%-2c\     " line + column
 set statusline+=%#Cursor#       " colour
 set statusline+=\ %3p%%\        " percentage
-
