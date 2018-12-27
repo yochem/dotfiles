@@ -2,41 +2,30 @@
 
 # Some colors to use for prompt
 reset=$(tput sgr0)
-bold=$(tput bold)
-white=$(tput setaf 7)
-red="\[\033[01;38;5;009m\]"
 green="\033[01;38;5;002m"
 magenta="\033[01;38;5;005m"
-blue="\[\033[01;38;5;006m\]"
+blue="\033[01;38;5;006m"
 
-# If current working directory is a git folder, prompt the branch
-# name in square brackets and colored green
+# check if git rpo and which branch
 prompt_git() {
     if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
 	branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
 	    git rev-parse --short HEAD 2> /dev/null || \
 	    echo '(unknown)')";
-	echo -e "[${green}${branchName}${reset}] ";
+	echo -e "($green$branchName$reset) ";
     else
 	return;
     fi;
 }
 
-# change the prompt to a hash like oldskool unix systems
-# when root
-if [[ "${USER}" == "root" ]]; then
-    promptSign="#"
-else
-    promptSign="❯"
-fi	
-
 # build prompt
-PS1="\[$reset\]"
+PS1="$reset"
+PS1+="[ "
 # if connected using SSH, show hostname
-[ -n "$SSH_CLIENT" ] && PS1+="${magenta}@\h${reset}: "
-PS1+="${blue}\w " # short working directory in default blue
-PS1+="\[$reset\]"
+[ -n "$SSH_CLIENT" ] && PS1+="$magenta@\h$reset: "
+PS1+="$blue\w " # short working directory in default blue
+PS1+="$reset"
 PS1+="\$(prompt_git)" # show git branch
-PS1+="${red}${promptSign} " # end with promptsign
-PS1+="\[$reset\] "
+PS1+="$reset"
+PS1+="] "
 export PS1
