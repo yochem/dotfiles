@@ -1,21 +1,32 @@
 #!/usr/bin/env bash
 
 # Some colors to use for prompt
-reset=$(tput sgr0)
-green="\033[01;38;5;002m"
-magenta="\033[01;38;5;005m"
-blue="\033[01;38;5;006m"
+if tput setaf 1 &>/dev/null; then
+    reset="\[$(tput sgr0)\]"
+    green="\[$(tput setaf 2)\]"
+    magenta="\[$(tput setaf 5)\]"
+    blue="\[$(tput setaf 6)\]"
+else
+    reset="\[\e[0m\]"
+    green="\[\033[01;38;5;002m\]"
+    magenta="\[\033[01;38;5;005m\]"
+    blue="\[\033[01;38;5;006m\]"
+fi
 
 # check if git rpo and which branch
 prompt_git() {
-    if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
+    git rev-parse --is-inside-work-tree &>/dev/null
+    if [ $? == '0' ]; then
+	# Get the short symbolic ref.
+	# If HEAD isnt a symbolic ref, get the short SHA for the latest commit
+	# Otherwise, just give up.
 	branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
 	    git rev-parse --short HEAD 2> /dev/null || \
-	    echo '(unknown)')";
-	echo -e "($green$branchName$reset) ";
+	    echo -e '(unknown)')"
+	echo -e "($1$branchName$2) "
     else
-	return;
-    fi;
+	return
+    fi
 }
 
 # build prompt
@@ -25,7 +36,7 @@ PS1+="[ "
 [ -n "$SSH_CLIENT" ] && PS1+="$magenta@\h$reset: "
 PS1+="$blue\w " # short working directory in default blue
 PS1+="$reset"
-PS1+="\$(prompt_git)" # show git branch
+PS1+="\$(prompt_git \"$green\" \"$reset\")" # show git branch
 PS1+="$reset"
 PS1+="] "
 export PS1
