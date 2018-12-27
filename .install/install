@@ -11,8 +11,6 @@ good="\e[92m[+]\e[0m"
 warning="\e[93m[!]\e[0m"
 question="\e[94m[?]\e[0m"
 
-
-
 install_brew() {
     # need xcode tools to install brew
     xcode-select --install
@@ -119,10 +117,10 @@ install_pip() {
 
 install() {
     # check if install folder exists, go to there
-    if [ -d ${HOME}/install ]; then
-	cd ${HOME}/install
+    if [ -d ${HOME}/.install ]; then
+	cd ${HOME}/.install
     else
-	echo -e "${warning} No folder named ${HOME}/install"
+	echo -e "${warning} No folder named ${HOME}/.install"
 	exit 1
     fi
 
@@ -222,8 +220,8 @@ install() {
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 	    echo -e "${proc} Applying mac defaults..."
-	    chmod +x "${HOME}/install/macdefaults"
-	    .${HOME}/install/macdefaults
+	    chmod +x "${HOME}/.install/macdefaults"
+	    .${HOME}/.install/macdefaults
 	    echo -e "${good} Applied: mac defaults\n"
 	else
 	    echo -e "${bad} Skipped: mac defaults\n"
