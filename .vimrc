@@ -157,9 +157,6 @@ if has("autocmd")
     " and .tex files as LaTeX
     autocmd BufRead,BufNewFile *.tex set filetype=tex
 
-    " always start in insertmode with new files
-    autocmd BufNewFile * startinsert
-
     " start on top and in insertmode with commits
     autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
     autocmd FileType gitcommit startinsert
