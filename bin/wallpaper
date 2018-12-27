@@ -54,13 +54,14 @@ def desktop_count():
 def main():
     if sys.platform != "darwin":
         return 1
-    if len(sys.argv) == 1:
+    argc = len(sys.argv)
+    if argc == 1:
         set_background("desktop 1", choose_image())
         if (desktop_count() == 2):
             set_background("desktop 2", choose_image())
-    elif len(sys.argv) == 2:
+    elif argc == 2:
         set_background("every desktop", folder + sys.argv[1])
-    elif len(sys.argv) == 3:
+    elif argc == 3:
         set_background("desktop 1", folder + sys.argv[1])
         set_background("desktop 2", folder + sys.argv[2])
 
