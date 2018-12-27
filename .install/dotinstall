@@ -9,12 +9,15 @@ alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
 # checkout gets the working tree files
 dot checkout
 
-if [[ $? -eq 0 ]]; then
-    echo "dotfiles installed. You might need to restart your terminal."
-else
-    # if git checkout returned an error, create a backup and overwrite
-    mkdir -p .dotfiles-backup
-    dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
+if ! [[ $? -ne 0 ]]; then
+    # if git checkout returned an error, create a backup and replace
+    mkdir -p ${HOME}/.dotfiles-backup
+    dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} ${HOME}/.dotfiles-backup/{}
+    echo "some files already exist on your computer. They have been moved to ${HOME}/.dotfiles-backup/."
 fi
 
+# don't show untracked files
 dot config status.showUntrackedFiles no
+
+# let the user know whats up
+echo "dotfiles installed. You might need to restart your terminal."
