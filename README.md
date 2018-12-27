@@ -8,6 +8,9 @@ My configs for syncing across devices, sharing and other stuff.
 If you just want to install the dotfiles:
 ```bash
 $ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/install/dotinstall | /bin/bash
+```
+and installing things brew, pip, changing mac defaults etc:
+```bash
 $ cd .install/
 $ bash install
 ```
