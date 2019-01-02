@@ -129,6 +129,9 @@ vmap r "_dP
 " backspace in insert mode
 set backspace=indent,eol,start
 
+" remove trailing whitespaces
+nnoremap W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
 
 """""""""""""""""""""""
 "      MODERNIZE      "
@@ -188,6 +191,9 @@ if has("autocmd")
     " start on top and in insertmode with commits
     autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
     autocmd FileType gitcommit startinsert
+    
+    " stop auto commenting newline
+    autocmd FileType * setlocal formatoptions-=cro
 endif
 
 
@@ -200,7 +206,7 @@ set autowrite
 " clear command output everytime when running
 set shell=~/.vim/clear_shell.sh
 
-" compile LaTeX quick
+" compile / run current file
 nmap <leader>r :!compile %<CR>
 
 
