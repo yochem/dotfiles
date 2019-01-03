@@ -7,8 +7,9 @@ My configs for syncing across devices, sharing and other stuff.
 ### Installation
 If you just want to install the dotfiles:
 ```bash
-$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/install/dotinstall | /bin/bash
+$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/.install/dotinstall | /bin/bash
 ```
+This install the b
 and installing things brew, pip, changing mac defaults etc:
 ```bash
 $ cd .install/
@@ -18,7 +19,7 @@ $ bash install
 ### Thanks
 A big shout out to [Mathias Bynens](https://github.com/mathiasbynens/dotfiles)
 and [Lars Kappert](https://github.com/webpro/dotfiles) for their amazing work!
-Also, thank you Nicola Paolucci for [this amazing article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
+Also, thank you Nicola Paolucci for [this awesome article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/) about the best way to version control your dotfiles.
 
 ### License
 Licensed under the [MIT license](https://github.com/yochem/dotfiles/blob/master/LICENSE).
