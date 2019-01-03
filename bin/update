@@ -2,20 +2,20 @@
 reset=$(tput sgr0)
 orangebold=$(tput bold; tput setaf 166)
 
-dot pull
+command -V dot > /dev/null 2>&1 && dot pull
 
 # BREW (CASK)
-if [[ "$OSTYPE" == "Darwin"* ]]; then
-    if brew > /dev/null 2>&1; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [[ $(command -v brew) ]]; then
 	echo -e "${orangebold}updating and upgrading Brew...${reset}"
-	brew -q update
-	brew -q upgrade
-	brew -q cleanup
+	brew update
+	brew upgrade
+	brew cleanup
     fi
 fi
 
 if [[ "$OSTYPE" == "linux"* ]]; then
-    if apt-get > /dev/null 2>&1; then
+    if [[ $(command -v apt-get) ]]; then
 	echo -e "${orangebold}updating and upgrading apt-get...${reset}"
 	sudo apt-get update
 	sudo apt-get upgrade -y
@@ -23,27 +23,27 @@ if [[ "$OSTYPE" == "linux"* ]]; then
 fi
 
 # NPM
-if npm > /dev/null 2>&1; then
+if [[ $(command -v npmi) ]]; then
     echo -e "${orangebold}updating and upgrading NPM...${reset}"
     npm install npm -g
     npm update -g
 fi
 
 # PIP
-if pip > /dev/null 2>&1; then
+if [[ $(command -v pip) ]]; then
     echo -e "${orangebold}updating and upgrading PIP...${reset}"
-    pip freeze > tmp/requirements.txt
-    pip install -r tmp/requirements.txt --upgrade -q
+    pip freeze > /tmp/requirements.txt
+    pip install -r /tmp/requirements.txt --upgrade -q
 fi
 
 # ATOM
-if apm > /dev/null 2>&1; then
+if [[ $(command -v apm) ]]; then
     echo -e "${orangebold}updating Atom packages...${reset}"
     apm update
 fi
 
 # APP STORE
-if [[ "$OSTYPE" == "Darwin"* ]]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
     echo -e "${orangebold}App Store software updates...${reset}"
     sudo softwareupdate -i -a
 fi

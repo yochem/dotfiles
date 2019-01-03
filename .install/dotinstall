@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
 
 # first clone the bare repo in .dot directory
-git clone --bare https://github.com/yochem/dotfiles.git ${HOME}/.dot
+git clone --bare https://github.com/yochem/dotfiles.git "$HOME/.dot"
 
 # create alias to work with for now this seperates the work tree and git dir
-alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
+alias dot="git --git-dir=\"$HOME/.dot/\" --work-tree=\"$HOME\""
 
 # checkout gets the working tree files
 dot checkout
 
-if ! [[ $? -ne 0 ]]; then
+if [[ $? -ne 0 ]]; then
     # if git checkout returned an error, create a backup and replace
-    mkdir -p ${HOME}/.dotfiles-backup
-    dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} ${HOME}/.dotfiles-backup/{}
-    echo "some files already exist on your computer. They have been moved to ${HOME}/.dotfiles-backup/."
+    backupdir="$HOME/dotfiles-backup"
+    mkdir -p "$backupdir"
+    dot checkout 2>&1 | grep -E "\s+\." | awk {'print $1'} | xargs -I{} mv {} "$backupdir/{}"
+    echo "some files already exist on your computer. They have been moved to $backupdir."
 fi
 
 # don't show untracked files
