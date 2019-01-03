@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # first clone the bare repo in .dot directory
-git clone --bare https://github.com/yochem/dotfiles.git "$HOME/.dot"
+![ -d "$HOME/.dot" ] && git clone --bare https://github.com/yochem/dotfiles.git "$HOME/.dot"
 
 # create alias to work with for now this seperates the work tree and git dir
 alias dot="git --git-dir=\"$HOME/.dot/\" --work-tree=\"$HOME\""
@@ -13,7 +13,7 @@ if [[ $? -ne 0 ]]; then
     # if git checkout returned an error, create a backup and replace
     backupdir="$HOME/dotfiles-backup"
     mkdir -p "$backupdir"
-    dot checkout 2>&1 | grep -E "\s+\." | awk {'print $1'} | xargs -I{} mv {} "$backupdir/{}"
+    dot checkout 2>&1 | grep -E "\s+\." | awk {'print $1'} | xargs -I{} mv {} $backupdir/{}
     echo "some files already exist on your computer. They have been moved to $backupdir."
 fi
 
