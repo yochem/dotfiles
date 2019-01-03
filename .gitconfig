@@ -20,7 +20,7 @@
     a = add
 
     # Always commit with a message
-    c = commit -m
+    c = commit
 
     # commit all files that have been modified or removed, new files not 
     # affected
