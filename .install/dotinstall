@@ -9,12 +9,14 @@ alias dot="git --git-dir=\"$HOME/.dot/\" --work-tree=\"$HOME\""
 # checkout gets the working tree files
 dot checkout
 
+# if git checkout returned an error, create a backup and replace
 if [[ $? -ne 0 ]]; then
-    # if git checkout returned an error, create a backup and replace
-    backupdir="$HOME/dotfiles-backup"
-    mkdir -p "$backupdir"
-    dot checkout 2>&1 | grep -E "\s+\." | awk {'print $1'} | xargs -I{} mv {} $backupdir/{}
-    echo "some files already exist on your computer. They have been moved to $backupdir."
+    files=$(dot checkout 2>&1 | grep -E "^\s+" | awk {'print $1'})
+    for file in $files; do
+	mkdir -p "$HOME/dotfiles-backup/$file"
+	mv $file $_
+    done
+    echo "some files already exist on your computer. They have been moved to $HOME/dotfiles-backup."
 fi
 
 # don't show untracked files
