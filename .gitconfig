@@ -3,7 +3,7 @@
     email = yochem@users.noreply.github.com
 
 [init]
-    templatedir = ~/.git-template
+    templatedir = ~/.config/git/templates/hooks
 
 [core]
     pager = ~/bin/diff-highlight | less
