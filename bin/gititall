@@ -1,33 +1,66 @@
 #!/usr/bin/env bash
 
+# database file
 FILE="$HOME/.gititall"
-reset=$(tput sgr0);
-orange=$(tput setaf 166);
-bold=$(tput bold);
 
+# pretty print the repo paths
+color_print() {
+    # set colors
+    if tput setaf 1 &> /dev/null; then
+	reset=$(tput sgr0)
+	orange=$(tput setaf 166)
+	bold=$(tput bold)
+    else
+	reset="\e[0m"
+	orange="\e[1;33m"
+	bold=""
+    fi
+
+    # print first argument in orange, rest in normal color
+    echo -e "${bold}${orange}$1${reset}${@:2}"
+}
+
+# generic function to print help menu. Exists with status of 2
+help_menu() {
+    cat <<EOF
+usage: gititall [options] [pattern]
+
+options:
+    -a, --add	    add current directory to database
+    -s, --show	    show all directories listed in database
+    -h, --help	    this help menu
+
+pattern:
+    all known git commands you want to perform for every repository
+EOF
+    exit 2
+}
+
+# check if there is an argument given. If not, show help_menu
+[ -z $1 ] && help_menu
+
+# check arguments
 case $1 in 
-    add|-a)
-	pwd >> ${FILE}
-	;;
-    show|-s)
-	echo -e "${orange}$(cat ${FILE})${reset}"
-	;;
-    pull|s)
-	# for my dotfile config
-	echo -e "${bold}${orange}${HOME}/.dot${reset}:"
-	cd ${HOME}
-	git --git-dir=${HOME}/.dot/ --work-tree=${HOME} $1
+    --add|-a) pwd >> ${FILE} ;;
+    --show|-s) color_print "$(cat ${FILE})" ;;
+    --help|-h) help_menu ;;
+    *)
+	# git repo with non-default git folder name is not recognised,
+	# so doing this the hard way for my dotfiles repo
+	if [ -d "${HOME}/.dot" ]; then
+	    color_print "${HOME}/.dot" ":"
+	    cd ${HOME}
+	    git --git-dir=${HOME}/.dot/ --work-tree=${HOME} $1
+	fi
 
 	# and the other repos
-	while read -r REPO; do
-	    (echo -e "${bold}${orange}${REPO}${reset}:"
-	    pushd ${REPO} >/dev/null 2>&1
+	while read -r repo; do
+	    (color_print "${repo}" ":"
+	    pushd ${repo} >/dev/null 2>&1
 	    git $1
 	    popd >/dev/null 2>&1)
 	done < ${FILE}
 	;;
-    *)
-	echo "use -a|add, -s|show or pull|s"
-	exit 1
-	;;
 esac
+
+exit 0
