@@ -9,8 +9,8 @@ base="${file%.*}"
 # grep the first line
 shebang=$(sed -n 1p "$file")
 # and the dir the file is in
-dir=$(dirname $file)
-
+dir=$(dirname "$file")
+# cd else exit
 cd "$dir" || exit 2
 
 # run file like specified in shebang
