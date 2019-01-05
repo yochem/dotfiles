@@ -38,6 +38,9 @@
     # List contributors with number of commits
     contributors = shortlog --summary --numbered
 
+    # find author of specific commit
+    author = show -s --format='%an <%ae>'
+
     # also show remote branches
     branches = branch -a
 
