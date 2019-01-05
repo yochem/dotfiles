@@ -9,6 +9,12 @@ unset file
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 
+# Perform file completion in a case insensitive fashion
+bind "set completion-ignore-case on"
+
+# show ambiguous files after just 1 tab press
+bind "set show-all-if-ambiguous on"
+
 # Append to the Bash history file, rather than overwriting it
 shopt -s histappend
 
@@ -20,8 +26,8 @@ shopt -s cdspell
 # cd without typing cd
 shopt -s autocd
 
-# vi key bindings in bash
-set -o vi
+# Enable history expansion with space
+bind Space:magic-space
 
 # Add tab completion for many Bash commands
 if command -V brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
