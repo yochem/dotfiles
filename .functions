@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 
-# 'cd ~/Repos/example' -> 'cdr example'
-# cd + Repos = cdr
-cdd() { cd ${HOME}/dev/$@ ;}
+# open python server
+server() { open "http://localhost:${1}" && python -m SimpleHTTPServer "$1"; }
 
 # View the local git repository on Github
 # Uses alias 'git url', as seen in git/.gitconfig
 # 'open' opens an url in the browser on macOS. Not tested on linux
 viewgh() {
     remote=$(git ls-remote --get-url origin)
-
     # format: https://github.com/USER/REPO.git
     if [[ ${remote:0:4} == "http" ]]; then
 	open "${remote}"
@@ -23,14 +21,14 @@ viewgh() {
 }
 
 # print a markdown file, rendered by pandoc
-printmd() { pandoc -s $1 -o temp.pdf && lpr temp.pdf && rm temp.pdf; }
+printmd() { pandoc -s "$1" -o "temp.pdf" && lpr "temp.pdf" && rm "temp.pdf"; }
 
 # gi macos gives the gitignore for macos.
 # Use gi macos >> .gitignore to make file
-gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+gi() { curl -L -s "https://www.gitignore.io/api/$@"; }
 
 # echo your computers ip-address
-ip() { ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' ;}
+ip() { ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'; }
 
 # usage: clone_all_from users/username or clone_all_from orgs/orgname
 clone_all_from() {
@@ -42,16 +40,16 @@ clone_all_from() {
 }
 
 # make a directory and cd into it
-mkcd() { mkdir "$1"; cd "$1" ;}
+mkcd() { mkdir "$1"; cd "$1"; }
 
 # open a manual as pdf
 manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
 
 # quick way to run a python file
-p2() { python2.7 $1.py ${@:2}; }
+p2() { python2.7 "$1.py" "${@:2}"; }
 
 # ... and the python3 version
-p() { python3 $1.py ${@:2}; }
+p() { python3 "$1.py" "${@:2}"; }
 
 # move to trash
 thrash() { mv -f $1 ${HOME}/.Trash/$1; }
