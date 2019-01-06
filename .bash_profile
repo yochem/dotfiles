@@ -15,6 +15,12 @@ shopt -s nocaseglob
 # Append to the Bash history file, rather than overwriting it
 shopt -s histappend
 
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell
+
+# cd without typing cd
+shopt -s autocd
+
 # don't put duplicates in history
 HISTCONTROL=ignoreboth
 
