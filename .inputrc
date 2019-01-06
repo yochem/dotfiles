@@ -14,11 +14,5 @@ bind "set completion-ignore-case on"
 # show ambiguous files after just 1 tab press
 bind "set show-all-if-ambiguous on"
 
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell
-
-# cd without typing cd
-shopt -s autocd
-
 # Enable history expansion with space
 bind Space:magic-space
