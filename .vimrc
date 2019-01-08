@@ -28,7 +28,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'rakr/vim-one'
 Plug 'sheerun/vim-polyglot'
 Plug 'gabrielelana/vim-markdown'
-Plug 'rkulla/pydiction'
+Plug 'nvie/vim-flake8'
+Plug 'valloric/MatchTagAlways'
 call plug#end()
 
 
