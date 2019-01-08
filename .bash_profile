@@ -24,6 +24,20 @@ shopt -s autocd
 # don't put duplicates in history
 HISTCONTROL=ignoreboth
 
+if [[ $- == *i* ]]; then
+    # Show extra file information when completing, like `ls -F` does
+    set visible-stats on
+
+    # Perform file completion in a case insensitive fashion
+    bind "set completion-ignore-case on"
+
+    # show ambiguous files after just 1 tab press
+    bind "set show-all-if-ambiguous on"
+
+    # Enable history expansion with space
+    bind Space:magic-space
+fi
+
 # Add tab completion for many Bash commands
 if command -V brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
     source "$(brew --prefix)/share/bash-completion/bash_completion";
