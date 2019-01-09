@@ -1,4 +1,4 @@
-# `/Users/yochem`
+# `/Users/yochem | /home/yochem`
 My configs for syncing across devices, sharing and other stuff.
 
 ### Screenshots
@@ -9,7 +9,6 @@ If you just want to install the dotfiles:
 ```bash
 $ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/.install/dotinstall | /bin/bash
 ```
-This install the b
 and installing things brew, pip, changing mac defaults etc:
 ```bash
 $ cd .install/
