@@ -68,7 +68,7 @@ set splitbelow
 set autoindent
 
 " tab should have the length of four spaces
-set tabstop=8 softtabstop=4 shiftwidth=4 noexpandtab
+set tabstop=8 softtabstop=4 shiftwidth=4 expandtab
 
 " don't reset cursor to start of line
 set nostartofline
@@ -208,7 +208,7 @@ set autowrite
 set shell=~/.vim/clear_shell.sh
 
 " compile / run current file
-nmap <leader>r :!compile %<CR>
+nmap Â :!compile %<CR>
 
 
 """""""""""""""""""""""
