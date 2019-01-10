@@ -26,6 +26,6 @@ case "$file" in
     *\.tex) pdflatex "$file" ;;
     *\.md) pandoc -s "$file" -o "$base.pdf" ;;
     *\.py) python3 "$file" ;;
-    *\.sh) sh "$file" ;;
+    *\.sh) bash "$file" ;;
     *) shebangtest ;;
 esac
