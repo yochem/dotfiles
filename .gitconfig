@@ -1,6 +1,6 @@
 [user]
     name = Yochem van Rosmalen
-    email = yochem@users.noreply.github.com
+    email = yochem@icloud.com
 
 [init]
     templatedir = ~/.config/git/templates/hooks
