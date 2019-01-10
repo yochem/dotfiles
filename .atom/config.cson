@@ -43,7 +43,6 @@
     disabledPackages: [
       "spell-check"
       "markdown-preview"
-      "github"
     ]
     ignoredNames: [
       "*.swp"
