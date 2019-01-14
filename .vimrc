@@ -30,6 +30,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'gabrielelana/vim-markdown'
 Plug 'nvie/vim-flake8'
 Plug 'valloric/MatchTagAlways'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 
@@ -151,6 +152,9 @@ set nocompatible
 
 " fast terminal connections
 set ttyfast
+
+" font encoding
+set encoding=utf-8
 
 
 """""""""""""""""""""""
