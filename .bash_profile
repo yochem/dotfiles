@@ -24,6 +24,7 @@ shopt -s autocd
 # don't put duplicates in history
 HISTCONTROL=ignoreboth
 
+# only do this in an interactive shell
 if [[ $- == *i* ]]; then
     # Show extra file information when completing, like `ls -F` does
     set visible-stats on
