@@ -33,7 +33,7 @@
     url = config --get remote.origin.url
 
     # List aliases
-    alias = config --get-regexp alias
+    aliases = config --get-regexp alias
 
     # List contributors with number of commits
     contributors = shortlog --summary --numbered
@@ -50,6 +50,12 @@
 
     # log a pretty graph to show commits
     graph = log --graph --pretty=format:'%Cred%h%Creset (%an) -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+
+    # check last commit
+    last = log -1 HEAD
+
+    # git status for every local branch
+    branch-status = !~/bin/branch_status
 
 [color "branch"]
     current = yellow reverse
