@@ -139,7 +139,9 @@ nnoremap W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 "      MODERNIZE      "
 """""""""""""""""""""""
 " cursor in insert mode
-set esckeys
+if !has('nvim')
+    set esckeys
+endif
 
 " enable mouse in all modes
 set mouse=a
@@ -155,6 +157,10 @@ set ttyfast
 
 " font encoding
 set encoding=utf-8
+
+" makes starting up faster
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 
 """""""""""""""""""""""

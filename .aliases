@@ -27,7 +27,7 @@ alias l="less"
 alias n="nano"
 alias g="git"
 alias a="atom"
-alias v="vim"
+command -V nvim >/dev/null 2>&1 && alias v="nvim"
 
 # easier way to cd back one level
 alias ..="cd .."
