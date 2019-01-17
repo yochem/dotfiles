@@ -39,9 +39,5 @@ if [[ $- == *i* ]]; then
     bind Space:magic-space
 fi
 
-# Add tab completion for many Bash commands
-if command -V brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-    source "$(brew --prefix)/share/bash-completion/bash_completion";
-elif [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion;
-fi
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion 2>/dev/null
+[ -d /usr/local/etc/bash_completion.d ] && . /usr/local/etc/bash_completion.d/* 2>/dev/null
