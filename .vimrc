@@ -228,23 +228,27 @@ nmap Â :!compile %<CR>
 " always show statusline
 set laststatus=2
 
+" don't show mode
+set noshowmode
+
 " tbh I copied this so idk what's going on
 set statusline=
-set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
-set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
-set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ REPLACE\ ':''}
-set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
-set statusline+=\ %n\           " buffer number
-set statusline+=%#Visual#       " colour
-set statusline+=%#CursorIM#     " colour
-set statusline+=%#Cursor#       " colour
-set statusline+=%#CursorLine#   " colour
-set statusline+=\ %F\           " long file name
-set statusline+=%m              " modified [+] flag
-set statusline+=%=              " right align
-set statusline+=%#CursorLine#   " colour
-set statusline+=\ %Y\           " file type
-set statusline+=%#CursorIM#     " colour
-set statusline+=\ %3l:%-2c\     " line + column
-set statusline+=%#Cursor#       " colour
-set statusline+=\ %3p%%\        " percentage
+set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ N\ ':''}
+set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ I\ ':''}
+set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ R\ ':''}
+set statusline+=%#Cursor#%{(mode()=='v')?'\ \ V\ ':''}
+set statusline+=%#CursorIM#                                 " colour
+set statusline+=\ %f\                                       " relative file name
+set statusline+=%#Cursor#                                   " colour
+set statusline+=%m                                          " modified [+] flag
+set statusline+=%#CursorIM#                                 " colour
+set statusline+=\ %{fugitive#statusline()[4:-2]}            " branch name
+set statusline+=%#Visual#                                   " colour
+set statusline+=%#CursorIM#                                 " colour
+set statusline+=%#Cursor#                                   " colour
+set statusline+=%#CursorLine#                               " colour
+set statusline+=%=                                          " right align
+set statusline+=%#Visual#                                   " colour
+set statusline+=\ %Y\                                       " file type
+set statusline+=%#Cursor#                                   " colour
+set statusline+=\ %3l:%-2c\                                 " line + column
