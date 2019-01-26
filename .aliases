@@ -27,7 +27,7 @@ alias l="less"
 alias n="nano"
 alias g="git"
 alias a="atom"
-command -V nvim >/dev/null 2>&1 && alias v="nvim"
+alias v="vim"
 
 # easier way to cd back one level
 alias ..="cd .."
@@ -47,6 +47,9 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 
     # open apps
     alias prefs="open -a System\ Preferences"
+
+    # silence ~/bin/airpods
+    alias airpods="airpods >/dev/null 2>&1"
 fi
 
 # shorten the very, very long install command known as apt-get
