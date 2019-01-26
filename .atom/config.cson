@@ -117,6 +117,8 @@
   "native-ui":
     ui: {}
   "one-dark-ui": {}
+  "php-debug":
+    showWelcome: false
   pigments:
     markerType: "native-dot"
   "platformio-ide":
