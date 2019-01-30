@@ -32,6 +32,7 @@ Plug 'nvie/vim-flake8'
 Plug 'valloric/MatchTagAlways'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/MailApp'
 call plug#end()
 
 
@@ -203,7 +204,7 @@ if has("autocmd")
     " start on top and in insertmode with commits
     autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
     autocmd FileType gitcommit startinsert
-    
+
     " stop auto commenting newline
     autocmd FileType * setlocal formatoptions-=cro
 endif
@@ -221,7 +222,7 @@ set shell=~/.vim/clear_shell.sh
 " compile / run current file
 nmap Â :!compile %<CR>
 
-
+let MailApp_from='Yochem van Rosmalen <yochem@icloud.com>'
 """""""""""""""""""""""
 "      STATUSLINE     "
 """""""""""""""""""""""
