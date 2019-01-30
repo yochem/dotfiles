@@ -26,8 +26,8 @@
     # affected
     com = commit -a
 
-    # Push to origin master
-    pom = push origin master
+    # shorten things up
+    co = checkout
 
     # View url to Github
     url = config --get remote.origin.url
