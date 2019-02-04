@@ -39,41 +39,35 @@ import re
 
 # check if there are any arguments
 if len(sys.argv) > 1:
-	# cut the first item from sys.argv ('notify')
-	usr_inp = ' '.join(sys.argv[1:])
+    # cut the first item from sys.argv ('notify')
+    usr_inp = ' '.join(sys.argv[1:])
 
-	# find a flag using regex. If it's given, use
-	# that value. Otherwise use a default
-	title = re.search("(?<=--title=)\w+", usr_inp)
-	if title:
-		title = title.group(0)
-	else:
-		title = "Terminal"
+    # find a flag using regex. If it's given, use
+    # that value. Otherwise use a default
+    if re.search("(?<=--title=)\w+", usr_inp):
+        title = title.group(0)
+    else:
+        title = "Terminal"
 
-	sound = re.search("(?<=--sound=)\w+", usr_inp)
-	if sound:
-		sound = sound.group(0)
-	else:
-		sound = "Glass"
+    if re.search("(?<=--sound=)\w+", usr_inp):
+        sound = sound.group(0)
+    else:
+        sound = "Glass"
 
-	# replace (aka delete) the flags from the message the
-	# user input string. This way all not-flags will be part
-	# of the message itself
-	msg  = re.sub("--(title|sound)=\w+", '', usr_inp)
-
+    # replace (aka delete) the flags from the message the
+    # user input string. This way all not-flags will be part
+    # of the message itself
+    msg  = re.sub("--(title|sound)=\w+", '', usr_inp)
 else:
-	# use default values if no arguments are given
-	title = "Terminal"
-	msg = "Terminal task done!"
-	sound = "Glass"
+    # use default values if no arguments are given
+    title = "Terminal"
+    msg = "Terminal task done!"
+    sound = "Glass"
 
+cmd = f"""
+display notification {msg} with title {title} and sound name 
+"/System/Library/Sounds/{sound}.aiff
+"""
 
-# create the applescript command
-cmd = """'display notification "{}" """.format(msg)
-cmd += """with title "{}" """.format(title)
-cmd += """sound name "/System/Library/Sounds/{}.aiff" """.format(sound)
-# end quote
-cmd += """'"""
-
-		# run the apple script with created command
-os.system("osascript -e "+ cmd)
+# run the apple script with created command
+os.system("osascript -e " + cmd)
