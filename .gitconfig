@@ -58,9 +58,9 @@
     branch-status = !~/bin/branch_status
 
 [color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
+    current = green
+    local = normal
+    remote = yellow
 
 [color "status"]
     added = green

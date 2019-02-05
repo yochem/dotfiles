@@ -84,11 +84,7 @@
   "file-icons":
     strategies: {}
   kite:
-    editorMetricsEnabled: "yes"
-    showEditorVacanciesNotificationOnStartup: false
-    showKiteTourOnStartup: false
     showWelcomeNotificationOnStartup: false
-    useDockForSidebar: true
   latex:
     enableExtendedBuildMode: false
   "latex-plus":
