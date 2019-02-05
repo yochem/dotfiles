@@ -27,11 +27,12 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'rakr/vim-one'
 Plug 'sheerun/vim-polyglot'
-Plug 'gabrielelana/vim-markdown'
 Plug 'nvie/vim-flake8'
 Plug 'valloric/MatchTagAlways'
+Plug 'scrooloose/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/MailApp'
 call plug#end()
 
@@ -163,6 +164,9 @@ set encoding=utf-8
 " makes starting up faster
 let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
+
+" toggle NerdTree
+map <C-f> :NERDTreeToggle<CR>
 
 
 """""""""""""""""""""""
