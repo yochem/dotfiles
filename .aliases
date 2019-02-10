@@ -24,8 +24,6 @@ alias reload="source ${HOME}/.bash_profile"
 
 # shorten the most used things
 alias l="less"
-alias n="nano"
-alias g="git"
 alias a="atom"
 alias v="vim"
 
