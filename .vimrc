@@ -119,10 +119,6 @@ set incsearch
 """""""""""""""""""""""
 "       TYPING        "
 """""""""""""""""""""""
-" remap ff as escape key for easier mode switching
-inoremap ff <ESC>
-inoremap FF <ESC>
-
 " set leader key
 let mapleader = ','
 
@@ -181,7 +177,6 @@ set updatetime=100
 """""""""""""""""""""""
 " enable filetype for plugins
 filetype plugin on
-let g:pydiction_location = '~/.vim/plugged/pydiction/complete-dict'
 
 " dont care about spelling
 set nospell
@@ -249,10 +244,10 @@ set noshowmode
 
 " tbh I copied this so idk what's going on
 set statusline=
-set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ N\ ':''}
-set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ I\ ':''}
-set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ R\ ':''}
-set statusline+=%#Cursor#%{(mode()=='v')?'\ \ V\ ':''}
+set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
+set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ REPLACE\ ':''}
+set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
 set statusline+=%#CursorIM#                                 " colour
 set statusline+=\ %f\                                       " relative file name
 set statusline+=%#Cursor#                                   " colour
