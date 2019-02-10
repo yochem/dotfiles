@@ -812,8 +812,16 @@
 	<true/>
 	<key>HideTabCloseButton</key>
 	<true/>
+	<key>Hotkey</key>
+	<false/>
+	<key>HotkeyChar</key>
+	<integer>32</integer>
+	<key>HotkeyCode</key>
+	<integer>49</integer>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>HotkeyModifiers</key>
+	<integer>524288</integer>
 	<key>JobName</key>
 	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
@@ -869,9 +877,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 138 606 469 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>277 327 937 514 0 0 1440 877 </string>
+	<string>483 489 958 470 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1440 878 0 0 1440 877 </string>
+	<string>3 68 954 989 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>303 262 738 504 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -2341,7 +2349,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-01-25T19:03:04Z</date>
+	<date>2019-02-08T11:18:33Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Secure Input</key>
