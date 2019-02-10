@@ -24,6 +24,16 @@ viewgh() {
     fi
 }
 
+# use the same alias for all git repos
+# before I used 'dot' as alias for my dotfiles repo but that's way to confusing
+g() { 
+    if git status &>/dev/null; then
+        git $@
+    else
+        git --git-dir=${HOME}/.dot/ --work-tree=${HOME} $@
+    fi
+}
+
 # print a markdown file, rendered by pandoc
 printmd() { pandoc -s "$1" -o "temp.pdf" && lpr "temp.pdf" && rm "temp.pdf"; }
 
