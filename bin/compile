@@ -18,7 +18,7 @@ shebangtest() {
     # check if it really is a shebang on the first line
     case "$shebang" in
 	\#\!*) "$dir/$file" ;;
-	*) sent "$file" 2>/dev/null & ;;
+	*) echo "File not recognised" ;;
     esac
 }
 
