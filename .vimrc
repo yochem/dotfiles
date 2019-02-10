@@ -34,6 +34,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/MailApp'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 
@@ -80,8 +81,8 @@ set nostartofline
 " i really hate folding
 set nofoldenable
 
-" atom-like line to show where the 80 char bound is
-set colorcolumn=80
+" atom-like line to show where the 79 char bound is
+set colorcolumn=79
 
 
 """""""""""""""""""""""
@@ -137,6 +138,9 @@ set backspace=indent,eol,start
 " remove trailing whitespaces
 nnoremap W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
+" use tab for indention
+nnoremap <tab> V>>
+
 
 """""""""""""""""""""""
 "      MODERNIZE      "
@@ -167,6 +171,9 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 
 " toggle NerdTree
 map <C-f> :NERDTreeToggle<CR>
+
+" update faster
+set updatetime=100
 
 
 """""""""""""""""""""""
@@ -221,12 +228,16 @@ endif
 set autowrite
 
 " clear command output everytime when running
+set shellcmdflag=-lc
 set shell=~/.vim/clear_shell.sh
 
 " compile / run current file
-nmap Â :!compile %<CR>
+nnoremap Â® :!compile %<CR>
 
+" set my main mail
 let MailApp_from='Yochem van Rosmalen <yochem@icloud.com>'
+
+
 """""""""""""""""""""""
 "      STATUSLINE     "
 """""""""""""""""""""""
@@ -247,12 +258,9 @@ set statusline+=\ %f\                                       " relative file name
 set statusline+=%#Cursor#                                   " colour
 set statusline+=%m                                          " modified [+] flag
 set statusline+=%#CursorIM#                                 " colour
-set statusline+=\ %{fugitive#statusline()[4:-2]}            " branch name
-set statusline+=%#Visual#                                   " colour
-set statusline+=%#CursorIM#                                 " colour
-set statusline+=%#Cursor#                                   " colour
-set statusline+=%#CursorLine#                               " colour
 set statusline+=%=                                          " right align
+set statusline+=%#DiffAdd#                                  " colour
+set statusline+=\ %{fugitive#statusline()[4:-2]}            " branch name
 set statusline+=%#Visual#                                   " colour
 set statusline+=\ %Y\                                       " file type
 set statusline+=%#Cursor#                                   " colour
