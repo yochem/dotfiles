@@ -43,4 +43,3 @@ fi
 [ -d /usr/local/etc/bash_completion.d ] && . /usr/local/etc/bash_completion.d/* 2>/dev/null
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
