@@ -127,6 +127,15 @@ sudo chflags nohidden /Volumes
 # Minimize windows into their application’s icon
 defaults write com.apple.dock minimize-to-application -bool true
 
+# turn magification on
+defaults write com.apple.dock magnification -bool true
+
+# set hide effect
+defaults write com.apple.dock mineffect -string "genie"
+
+# set dock size
+defaults write com.apple.dock titlesize -int 52
+
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
 
