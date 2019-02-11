@@ -1,42 +1,43 @@
 #!/usr/bin/env bash
 
+# check if the user gives the show-commands flag
+if [ "$#" -gt 0 ] && [ "$1" == "--show-commands" ]; then
+    show_commands=1
+else
+    show_commands=0
+fi
 
-# initialize strings of applied and skipped defaults
-applied=""
-skipped=""
-
-# ask to apply defaults. First arg is an explanation and second is the command
+# handles the I/O. Also executes the commands
 ask() { 
     # check if description and command is provided
-    [ -z "$1" ] && return
-    [ -z "$2" ] && return
-
-    # this way we can shift and loop over rest of args
-    desc="$1"
+    [ -z "$1" ] && return 2
+    [ -z "$2" ] && return 3
 
     # for coloring output
-    proc="\e[39m[~]\e[0m"
     bad="\e[91m[-]\e[0m"
     good="\e[92m[+]\e[0m"
-    warning="\e[93m[!]\e[0m"
     question="\e[94m[?]\e[0m"
 
     # ask user if the default should be applied
-    echo -en "${question} $desc? "
+    echo -en "${question} $1? "
     read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
+        # clear last line to replace the symbol
+        tput cuu 1 && tput el
+        echo -e "${good} $1?"
+
         # skip first arg
         shift
         for arg; do
             # apply default, exit if not working
-            echo "$arg" || exit 5
+            eval "$arg" || exit 5
+            # if show-commands flag is given, show the command in gray
+            [ "$show_commands" -eq 1 ] && echo -e "    \e[0;37m$arg\e[0m"
         done
-        # add to applied string so we can show an summary at the end
-        applied+="${good} $desc\n"
     else
-        # see above
-        skipped+="${bad} $desc\n"
+        tput cuu 1 && tput el
+        echo -e "${bad} $1?"
     fi
 }
 
@@ -49,7 +50,7 @@ EOF
 read -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "Let's go!"
+    echo "You choose yes! Let's start"
 fi
 
 ask "Disable the sound effects on boot" \
@@ -288,7 +289,5 @@ ask "Use the system-native print preview dialog" \
     "defaults write com.google.Chrome.canary DisablePrintPreview -bool true"
 
 echo
-[ -n "$applied" ] && echo -e "Applied defaults:\n$applied"
-[ -n "$skipped" ] && echo -e "Skipped defaults:\n$skipped"
 echo "Done. Note that some of these changes require a logout/restart to take effect."
 exit 0
