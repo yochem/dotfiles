@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # open python server
-server() { open "http://localhost:${1}" && python -m SimpleHTTPServer "$1"; }
-phpserver() { open "http://localhost:${1}" && php -S "localhost:${1}"; }
+server() { open "http://localhost:$1" && python -m SimpleHTTPServer "$1"; }
+phpserver() { open "http://localhost:$1" && php -S "localhost:$1"; }
 
 # tell me if z can find the path
 inz() { z | grep "$1" | awk {'print $2'}; }
@@ -28,9 +28,9 @@ viewgh() {
 # before I used 'dot' as alias for my dotfiles repo but that's way to confusing
 g() { 
     if git status &>/dev/null; then
-        git $@
+        git "$@"
     else
-        git --git-dir=${HOME}/.dot/ --work-tree=${HOME} $@
+        git --git-dir="$HOME/.dot/" --work-tree="$HOME" "$@"
     fi
 }
 
@@ -66,25 +66,4 @@ p2() { python2.7 "$1.py" "${@:2}"; }
 p() { python3 "$1.py" "${@:2}"; }
 
 # move to trash
-thrash() { mv -f $1 ${HOME}/.Trash/$1; }
-
-# Generates a MIT license for the person in the argument
-mit() {
-  printf "\n
-Copyright (c) 2018 $@
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-\"Software\"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.";}
+thrash() { mv -f "$1" "$HOME/.Trash/$1"; }

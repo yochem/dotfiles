@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # vim as default editor
-export EDITOR='vim';
+export EDITOR="vim";
 
 # add GNU core utils from brew to path
 export PATH="/Library/TeX/texbin:$PATH"

@@ -2,8 +2,9 @@
 
 # fancy ls
 ls_type="ls"
-command -V gls >/dev/null 2>&1 && ls_type="gls"
-alias lst="${ls_type} --group-directories-first -1F --color"
+command -V gls &>/dev/null && ls_type="gls"
+alias lst="$ls_type --group-directories-first -1F --color"
+unset ls_type
 
 # remove LaTeX helpfiles
 alias rmtex="rm *.aux *.bbl *.blg *.log *.out"
@@ -20,7 +21,7 @@ alias mv="mv -i"
 alias rm="rm -v"
 
 # reload bash profile and stuff
-alias reload="source ${HOME}/.bash_profile"
+alias reload="source $HOME/.bash_profile"
 
 # shorten the most used things
 alias l="less"
@@ -37,7 +38,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     alias git=hub
 
     # enables finders quicklook from the terminal
-    alias ql="qlmanage -p > /dev/null 2>&1"
+    alias ql="qlmanage -p &>/dev/null"
     
     # shorten things up 
     alias cask="brew cask"
@@ -47,14 +48,11 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     alias prefs="open -a System\ Preferences"
 
     # silence ~/bin/airpods
-    alias airpods="airpods >/dev/null 2>&1"
+    alias airpods="airpods &>/dev/null"
 fi
 
 # shorten the very, very long install command known as apt-get
-type -P apt-get > /dev/null 2>&1 && alias get="sudo apt-get install"
+type -P apt-get &>/dev/null && alias get="sudo apt-get install"
 
 # dot is my dotfiles repository
-alias dot="git --git-dir=${HOME}/.dot/ --work-tree=${HOME}"
-
-# always use SWI-Prolog with rc file
-type -P swipl > /dev/null 2>&1 && alias swipl="swipl -f ${HOME}/.plrc"
+alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME"

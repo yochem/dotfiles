@@ -25,7 +25,7 @@ shopt -s autocd
 HISTCONTROL=ignoreboth
 
 # only do this in an interactive shell
-if [[ $- == *i* ]]; then
+if [[ "$-" == *i* ]]; then
     # Show extra file information when completing, like `ls -F` does
     set visible-stats on
 
@@ -42,4 +42,4 @@ fi
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion 2>/dev/null
 [ -d /usr/local/etc/bash_completion.d ] && . /usr/local/etc/bash_completion.d/* 2>/dev/null
 
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+test -e "$HOME/.iterm2_shell_integration.bash" && source "$HOME/.iterm2_shell_integration.bash"
