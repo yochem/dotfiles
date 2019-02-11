@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-open_apps=$(dockutil --list | awk -F 'fil' '{print $1}' | sed 's/ /\\ /')
-killall $open_apps
