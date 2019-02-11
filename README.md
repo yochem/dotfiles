@@ -1,4 +1,4 @@
-# `/Users/yochem | /home/yochem`
+# `/Users/yochem && /home/yochem`
 My configs for syncing across devices, sharing and other stuff.
 
 ### Screenshots
