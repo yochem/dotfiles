@@ -117,12 +117,7 @@ install_pip() {
 
 install() {
     # check if install folder exists, go to there
-    if [ -d ${HOME}/.install ]; then
-	cd ${HOME}/.install
-    else
-	echo -e "${warning} No folder named ${HOME}/.install"
-	exit 1
-    fi
+    [ -d "$HOME/.install" ] && cd "$HOME/.install" || exit 2
 
     # update existing `sudo` time stamp until installation is finished
     sudo -v
@@ -220,8 +215,8 @@ install() {
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 	    echo -e "${proc} Applying mac defaults..."
-	    chmod +x "${HOME}/.install/macdefaults"
-	    .${HOME}/.install/macdefaults
+	    chmod +x "$HOME/.install/macdefaults"
+	    . "$HOME/.install/macdefaults"
 	    echo -e "${good} Applied: mac defaults\n"
 	else
 	    echo -e "${bad} Skipped: mac defaults\n"
@@ -232,7 +227,7 @@ install() {
     ###################
     ####### PIP #######
     ###################
-    if type python >/dev/null 2>&1; then
+    if type python &>/dev/null; then
 	echo -en "${question} Install PIP and packages? "
 	read -n 1 -r
 	echo
@@ -247,7 +242,7 @@ install() {
     ###################
     ###### ATOM #######
     ###################
-    if type atom >/dev/null 2>&1 && type apm >/dev/null 2>&1; then
+    if type atom &>/dev/null && type apm &>/dev/null; then
 	echo -en "${question} Install Atom packages? "
 	read -n 1 -r
 	echo
@@ -277,9 +272,9 @@ install() {
     if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ -x ~/bin/clonerepos ]; then
 	    echo -e "${proc} Cloning all repo's from https://github.com/yochem"
-	    mkdir ${HOME}/dev
-	    clonerepos ${HOME}/dev
-	    echo -e "${good} Cloned repo's to ${HOME}/dev\n"
+	    mkdir "$HOME/dev"
+	    clonerepos "$HOME/dev"
+	    echo -e "${good} Cloned repo's to $HOME/dev\n"
 	else
 	    echo -e "${bad} Skipped: dev/ and repositories.\n"
 	fi
@@ -296,7 +291,7 @@ install() {
     if [[ $REPLY =~ ^[Yy]$ ]]; then
 	echo -e "${proc} Installing z.sh..."
 	sudo curl -s "https://raw.githubusercontent.com/rupa/z/master/z.1" > "/usr/local/share/man/man1/z.1"
-	curl -s "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "${HOME}/z.sh"
+	curl -s "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "$HOME/z.sh"
 	echo -e "${good} Installed: z.sh\n"
     else
 	echo -e "${bad} Skipped: z.sh\n"
@@ -309,22 +304,21 @@ install() {
     read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
+        hook_path="$HOME/.config/git/templates/hooks"
 	echo -e "${proc} Installing git-template..."
-	# clone git-good-template into ~/.git-template
-	mkdir -p ~/.git-template/hooks
-	git config --global init.templatedir '~/.git-template'
-	curl -s https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > ~/.git-template/hooks/commit-msg && 
-	chmod +x ~/.git-template/hooks/commit-msg
+	mkdir -p $hook_path
+	curl -s https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > "$hook_path/commit-msg" && 
+	chmod +x "$hook_path/commit-msg"
 	echo -e "${good} Installed: git-template\n"
     else
 	echo -e "${bad} Skipped: git-template\n"
     fi
 
     # reload for all changes to appear
-    . ${HOME}/.bash_profile
+    . "$HOME/.bash_profile"
 
     ##################
-    ## GIT TEMPLATE ##
+    ##### REBOOT #####
     ##################
     echo -en "${question} Reboot machine? "
     read -n 1 -r

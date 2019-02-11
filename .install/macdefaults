@@ -3,6 +3,19 @@
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
+applied=""
+skipped=""
+ask() { 
+    echo -en "${question} $1? "
+    read -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        eval "$2"
+        applied+="${good} $1\n"
+    else
+        echo -e "${bad} Skipped: mac defaults\n"
+    fi
+}
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
@@ -83,6 +96,9 @@ defaults write com.apple.screencapture location -string "${HOME}/Desktop"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
+
+# facetime always on top
+defaults write com.apple.facetime alwaysOnTop -int 1
 
 ###############################################################################
 # Finder                                                                      #
