@@ -146,23 +146,25 @@ install() {
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 	    # install HOMEBREW
-	    echo -e "${proc} Installing: Homebrew and formulae..."
+            tput cuu 1 && tput el
+	    echo -e "${good} Install Homebrew and formulae?"
 	    install_brew
-	    echo -e "${good} Installed: Homebrew and formulae\n"
 
 	    # install homebrew cask
 	    echo -en "${question} Install Homebrew Cask and apps? "
 	    read -n 1 -r
 	    echo
 	    if [[ $REPLY =~ ^[Yy]$ ]]; then
-		echo -e "${proc} Installing: Homebrew Cask and apps..."
+                tput cuu 1 && tput el
+		echo -e "${good} Install Homebrew Cask and apps?"
 		install_brew_cask
-		echo -e "${good} Installed: Homebrew Cask and apps\n"
 	    else
-		echo -e "${bad} Skipped: Homebrew Cask and apps\n"
+                tput cuu 1 && tput el
+		echo -e "${bad} Install Homebrew Cask and apps?"
 	    fi
 	else
-	    echo -e "${bad} Skipped: Homebrew and formulae\n"
+            tput cuu 1 && tput el
+	    echo -e "${bad} Install Homebrew and formulae?"
 	fi
 
 	###################
@@ -172,7 +174,8 @@ install() {
 	read -n 1 -r
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-	    echo -e "${proc} Changing to newest bash version..."
+            tput cuu 1 && tput el
+	    echo -e "${good} Update to new bash version?"
 	    # Save Homebrew’s installed location.
 	    BREW_PREFIX=$(brew --prefix)
 	    # Switch to using brew-installed bash as default shell
@@ -180,9 +183,9 @@ install() {
 		echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
 		chsh -s "${BREW_PREFIX}/bin/bash"
 	    fi
-	    echo -e "${good} Changed to newest bash version\n"
 	else
-	    echo -e "${bad} Skipped: Bash update\n"
+            tput cuu 1 && tput el
+	    echo -e "${bad} Update to new bash version?"
 	fi
 
 	###################
@@ -192,7 +195,8 @@ install() {
 	read -n 1 -r
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-	    echo -e "${proc} Changing dock..."
+            tput cuu 1 && tput el
+	    echo -e "${good} Change dock apps?"
 	    dockutil --no-restart --remove all
 	    dockutil --no-restart --add "/Applications/Brave Browser.app"
 	    dockutil --no-restart --add "/Applications/Mail.app"
@@ -200,26 +204,27 @@ install() {
 	    dockutil --no-restart --add "/Applications/iTerm.app"
 	    dockutil --no-restart --add "/Applications/WhatsApp.app"
 	    dockutil --no-restart --add "/Applications/Telegram.app"
-	    dockutil --no-restart --add "${HOME}/Downloads" --view fan --display stack
+	    dockutil --no-restart --add "$HOME/Downloads" --view fan --display stack
 	    killall Dock
-	    echo -e "${good} Changed dock"
 	else
-	    echo -e "${bad} Skipped: Changing dock\n"
+            tput cuu 1 && tput el
+	    echo -e "${bad} Change dock apps?"
 	fi
 
 	###################
 	### MACDEFAULTS ###
 	###################
-	echo -en "${question} Use mac defaults? be careful! "
+	echo -en "${question} Apply mac defaults? Be careful! "
 	read -n 1 -r
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-	    echo -e "${proc} Applying mac defaults..."
+            tput cuu 1 && tput el
+	    echo -e "${good} Apply mac defaults? Be careful!"
 	    chmod +x "$HOME/.install/macdefaults"
 	    . "$HOME/.install/macdefaults"
-	    echo -e "${good} Applied: mac defaults\n"
 	else
-	    echo -e "${bad} Skipped: mac defaults\n"
+            tput cuu 1 && tput el
+	    echo -e "${bad} Apply mac defaults? Be careful!"
 	fi
     fi  
     
@@ -232,10 +237,12 @@ install() {
 	read -n 1 -r
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-	    echo -e "${proc} Installing: PIP and packages..."
-	    echo -e "${good} Installed: PIP and packages\n"
+            tput cuu 1 && tput el
+	    echo -e "${good} Install PIP and packgaes?"
+            install_pip
 	else
-	    echo -e "${bad} Skipped: PIP and packages.\n"
+            tput cuu 1 && tput el
+	    echo -e "${bad} Install PIP and packages?"
 	fi
     fi
 
@@ -248,38 +255,43 @@ install() {
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 	    if [[ $(ls) =~ atom_packages.txt ]]; then
-		echo -e "${proc} Installing: Atom packages..."
+                tput cuu 1 && tput el
+		echo -e "${good} Install Atom packages?"
 		apm install --package-file atom_packages.txt
 		apm upgrade -c=false
-		echo -e "${good} Installed: Atom packages\n"
 	    else
-		echo -e "${bad} Skipped: Atom packages.\n"
+                tput cuu 1 && tput el
+		echo -e "${bad} Install Atom packages?"
 	    fi
 	else
-	    echo -e "${bad} Skipped: Atom packages.\n"
+            tput cuu 1 && tput el
+	    echo -e "${bad} Install Atom packages?"
 	fi
     else
-	echo -e "${bad} Skipped: Atom packages.\n"
+        tput cuu 1 && tput el
+	echo -e "${bad} Install Atom packages?"
     fi
 
 
     ###################
     ##### REPOS  ######
     ###################
-    echo -en "${question} Clone yochem's repositories to ${HOME}/dev/? "
+    echo -en "${question} Clone yochem's repositories to $HOME/dev/? "
     read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ -x ~/bin/clonerepos ]; then
-	    echo -e "${proc} Cloning all repo's from https://github.com/yochem"
+            tput cuu 1 && tput el
+	    echo -e "${good} Clone yochem's repositories to $HOME/dev/?"
 	    mkdir "$HOME/dev"
 	    clonerepos "$HOME/dev"
-	    echo -e "${good} Cloned repo's to $HOME/dev\n"
 	else
-	    echo -e "${bad} Skipped: dev/ and repositories.\n"
+            tput cuu 1 && tput el
+	    echo -e "${bad} Clone yochem's repositories to $HOME/dev/?"
 	fi
     else
-	echo -e "${bad} Skipped: dev/ and repositories.\n"
+        tput cuu 1 && tput el
+	echo -e "${bad} Clone yochem's repositories to $HOME/dev/?"
     fi
 
     ###################
@@ -289,12 +301,13 @@ install() {
     read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-	echo -e "${proc} Installing z.sh..."
+        tput cuu 1 && tput el
+	echo -e "${good} Install z.sh?"
 	sudo curl -s "https://raw.githubusercontent.com/rupa/z/master/z.1" > "/usr/local/share/man/man1/z.1"
 	curl -s "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "$HOME/z.sh"
-	echo -e "${good} Installed: z.sh\n"
     else
-	echo -e "${bad} Skipped: z.sh\n"
+        tput cuu 1 && tput el
+	echo -e "${bad} Install z.sh?"
     fi
 
     ##################
@@ -304,31 +317,18 @@ install() {
     read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
+        tput cuu 1 && tput el
+	echo -e "${good} Install git-template?"
         hook_path="$HOME/.config/git/templates/hooks"
-	echo -e "${proc} Installing git-template..."
 	mkdir -p $hook_path
 	curl -s https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > "$hook_path/commit-msg" && 
 	chmod +x "$hook_path/commit-msg"
-	echo -e "${good} Installed: git-template\n"
     else
-	echo -e "${bad} Skipped: git-template\n"
+        tput cuu 1 && tput el
+	echo -e "${bad} Install git-template?"
     fi
 
     # reload for all changes to appear
     . "$HOME/.bash_profile"
-
-    ##################
-    ##### REBOOT #####
-    ##################
-    echo -en "${question} Reboot machine? "
-    read -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-	echo -e "${proc} Rebooting..."
-	sudo reboot
-	echo -e "${good} Rebooted\n"
-    else
-	echo -e "${bad} Skipped: Reboot\n"
-    fi
 }
 install
