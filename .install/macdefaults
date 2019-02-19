@@ -112,6 +112,10 @@ ask "Use centimeters and metric" \
     "defaults write NSGlobalDomain AppleMeasurementUnits -string \"Centimeters\"" \
     "defaults write NSGlobalDomain AppleMetricUnits -bool true"
 
+ask "Use three finger tap to Look up & data detectors" \
+    "defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 2" \
+    "defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 2"
+
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
