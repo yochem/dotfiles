@@ -41,15 +41,23 @@ call plug#end()
 """""""""""""""""""""""
 "     COLORSCHEME     "
 """""""""""""""""""""""
-" make background the same as iterm2 background
-set termguicolors
-
 " use syntax highlighting
 syntax enable
 
-" use atom's one-dark theme
+" always dark
 set background=dark
-colorscheme one
+if $TERM_PROGRAM == 'iTerm.app'
+    " make background the same as iterm2 background
+    set termguicolors
+
+    if $ITERM_PROFILE == 'One-Dark'
+        " use atom's one-dark theme
+        colorscheme one
+    endif
+
+elseif $TERM_PROGRAM == 'Apple_Terminal'
+    highlight Comment ctermfg=grey
+endif
 
 
 """""""""""""""""""""""
