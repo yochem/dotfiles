@@ -43,12 +43,3 @@
 
 '.tree-view':
   'r': 'tree-view:rename'
-
-'atom-text-editor.vim-mode-plus':
-  'f f': 'vim-mode-plus:reset-normal-mode'
-
-'atom-text-editor.vim-mode-plus:not(.normal-mode)':
-  'f f': 'vim-mode-plus:activate-normal-mode'
-
-'atom-text-editor.vim-mode-plus-input-char-waiting':
-  'f f': 'core:cancel'
