@@ -46,17 +46,17 @@ syntax enable
 
 " always dark
 set background=dark
-if $TERM_PROGRAM == 'iTerm.app'
+if $TERM_PROGRAM == 'iTerm.app' && $ITERM_PROFILE == 'One-Dark'
     " make background the same as iterm2 background
     set termguicolors
 
-    if $ITERM_PROFILE == 'One-Dark'
-        " use atom's one-dark theme
-        colorscheme one
-    endif
+    " use atom's one-dark theme
+    colorscheme one
 
-elseif $TERM_PROGRAM == 'Apple_Terminal'
+else
     highlight Comment ctermfg=grey
+    highlight ColorColumn ctermbg=grey
+    highlight ColorColumn ctermfg=black
 endif
 
 
