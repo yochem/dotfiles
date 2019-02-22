@@ -56,3 +56,6 @@ type -P apt-get &>/dev/null && alias get="sudo apt-get install"
 
 # dot is my dotfiles repository
 alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME"
+
+# docker for NAO
+alias dnt="docker run --privileged -it -v`pwd -P`:/home/dnt/repo --name dnt --rm lukx19/dnt /bin/bash"
