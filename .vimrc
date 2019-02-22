@@ -79,6 +79,8 @@ set splitbelow
 """""""""""""""""""""""
 " auto indent
 set autoindent
+set smartindent
+set smarttab
 
 " tab should have the length of four spaces
 set tabstop=8 softtabstop=4 shiftwidth=4 expandtab
@@ -214,6 +216,8 @@ if has("autocmd")
 
     " and .tex files as LaTeX
     autocmd BufRead,BufNewFile *.tex set filetype=tex
+    autocmd BufRead,BufNewFile *.tex set textwidth=78
+
 
     " start on top and in insertmode with commits
     autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
