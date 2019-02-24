@@ -25,7 +25,7 @@ endif
 
 " all vim-plug plugins
 call plug#begin('~/.vim/plugged')
-Plug 'rakr/vim-one'
+Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'nvie/vim-flake8'
 Plug 'valloric/MatchTagAlways'
@@ -51,8 +51,7 @@ if $TERM_PROGRAM == 'iTerm.app' && $ITERM_PROFILE == 'One-Dark'
     set termguicolors
 
     " use atom's one-dark theme
-    colorscheme one
-
+    colorscheme onedark
 else
     highlight Comment ctermfg=grey
     highlight ColorColumn ctermbg=grey
@@ -213,11 +212,14 @@ if has("autocmd")
 
     " Treat .md files as Markdown
     autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+    autocmd BufRead,BufNewFile *.tex setlocal textwidth=78
 
     " and .tex files as LaTeX
-    autocmd BufRead,BufNewFile *.tex set filetype=tex
-    autocmd BufRead,BufNewFile *.tex set textwidth=78
+    autocmd BufRead,BufNewFile *.tex setlocal filetype=tex
+    autocmd BufRead,BufNewFile *.tex setlocal textwidth=78
 
+    " set textwidth of .txt files to 78
+    autocmd BufRead,BufNewFile *.txt setlocal textwidth=78
 
     " start on top and in insertmode with commits
     autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
@@ -267,7 +269,7 @@ set statusline+=%m                                          " modified [+] flag
 set statusline+=%#CursorIM#                                 " colour
 set statusline+=%=                                          " right align
 set statusline+=%#DiffAdd#                                  " colour
-set statusline+=\ %{fugitive#statusline()[4:-2]}            " branch name
+set statusline+=%{fugitive#statusline()[4:-2]}              " branch name
 set statusline+=%#Visual#                                   " colour
 set statusline+=\ %Y\                                       " file type
 set statusline+=%#Cursor#                                   " colour
