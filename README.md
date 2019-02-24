@@ -2,7 +2,7 @@
 My configs for syncing across devices, sharing and other stuff.
 
 ### Screenshots
-![img](https://user-images.githubusercontent.com/23235841/50482144-6cdb8f80-09e5-11e9-9ca0-90e2b3b8209f.jpg)
+![img](https://user-images.githubusercontent.com/23235841/53305538-e5928700-3882-11e9-8842-4d1245a82ce3.jpg)
 
 ### Installation
 If you just want to install the dotfiles:
