@@ -4,8 +4,8 @@
 server() { open "http://localhost:$1" && python -m SimpleHTTPServer "$1"; }
 phpserver() { open "http://localhost:$1" && php -S "localhost:$1"; }
 
-# tell me if z can find the path
-inz() { z | grep "$1" | awk {'print $2'}; }
+# search something on youtube
+yt() { open "https://www.youtube.com/results?search_query=$1"; }
 
 # View the local git repository on Github
 # Uses alias 'git url', as seen in git/.gitconfig
