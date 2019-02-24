@@ -63,7 +63,7 @@ endif
 "        LOOKS        "
 """""""""""""""""""""""
 " dont show intro message
-set shortmess=WIF
+set shortmess=WIFs
 
 " don't show 'Thanks for flying Vim'
 set notitle
@@ -256,21 +256,23 @@ set laststatus=2
 " don't show mode
 set noshowmode
 
-" tbh I copied this so idk what's going on
-set statusline=
-set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
-set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
-set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ REPLACE\ ':''}
-set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
-set statusline+=%#CursorIM#                                 " colour
-set statusline+=\ %f\                                       " relative file name
-set statusline+=%#Cursor#                                   " colour
-set statusline+=%m                                          " modified [+] flag
-set statusline+=%#CursorIM#                                 " colour
-set statusline+=%=                                          " right align
-set statusline+=%#DiffAdd#                                  " colour
-set statusline+=%{fugitive#statusline()[4:-2]}              " branch name
-set statusline+=%#Visual#                                   " colour
-set statusline+=\ %Y\                                       " file type
-set statusline+=%#Cursor#                                   " colour
-set statusline+=\ %3l:%-2c\                                 " line + column
+set stl=
+" show current mode
+set stl+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set stl+=%#Cursor#%{(mode()=='i')?'\ \ INSERT\ ':''}
+set stl+=%#DiffDelete#%{(mode()==?'r')?'\ \ REPLACE\ ':''}
+set stl+=%#DiffChange#%{(mode()==?'v')?'\ \ VISUAL\ ':''}
+set stl+=%#DiffChange#%{(mode()==?'s')?'\ \ SELECT\ ':''}
+set stl+=%#DiffChange#%{(mode()=='t')?'\ \ TERM\ ':''}
+
+" show modified flag, else nothing -> [+]
+set stl+=%#DiffDelete#%{(&mod)?'[+]':''}
+
+" get current working directory -> /Users/Yochem/project/
+set stl+=%#CursorIM#\ %{getcwd()}/
+
+" relative fail name -> js/main.js
+set stl+=%#DiffChange#%f
+
+" show branch name -> (master)
+set stl+=%#CursorIM#\ %{fugitive#statusline()[4:-2]} " branch name
