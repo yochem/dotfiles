@@ -41,6 +41,7 @@ fi
 if [[ $(command -v apm) ]]; then
     echo -e "${orangebold}updating Atom packages...${reset}"
     apm upgrade -c false
+    apm clean
 fi
 
 # APP STORE

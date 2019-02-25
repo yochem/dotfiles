@@ -48,8 +48,10 @@
     unadd = reset
     uncommit = reset HEAD^
 
+    log = log --date=auto:human
+
     # log a pretty graph to show commits
-    graph = log --graph --pretty=format:'%Cred%h%Creset (%an) -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    graph = log --graph --pretty=format:'%Cred%h%Creset (%an) -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit
 
     # check last commit
     last = log -1 HEAD
