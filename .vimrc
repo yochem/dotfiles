@@ -262,11 +262,9 @@ set stl+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
 set stl+=%#Cursor#%{(mode()=='i')?'\ \ INSERT\ ':''}
 set stl+=%#DiffDelete#%{(mode()==?'r')?'\ \ REPLACE\ ':''}
 set stl+=%#DiffChange#%{(mode()==?'v')?'\ \ VISUAL\ ':''}
+set stl+=%#DiffChange#%{(mode()=='')?'\ \ VISUAL\ ':''}
 set stl+=%#DiffChange#%{(mode()==?'s')?'\ \ SELECT\ ':''}
 set stl+=%#DiffChange#%{(mode()=='t')?'\ \ TERM\ ':''}
-
-" show modified flag, else nothing -> [+]
-set stl+=%#DiffDelete#%{(&mod)?'[+]':''}
 
 " get current working directory -> /Users/Yochem/project/
 set stl+=%#CursorIM#\ %{getcwd()}/
@@ -276,3 +274,9 @@ set stl+=%#DiffChange#%f
 
 " show branch name -> (master)
 set stl+=%#CursorIM#\ %{fugitive#statusline()[4:-2]} " branch name
+
+" show modified flag, else nothing -> [+]
+set stl+=%#Cursor#%{(&mod)?'[+]':''}
+
+" no colour at end
+set stl+=%#CursorIM#
