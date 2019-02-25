@@ -48,8 +48,6 @@
     unadd = reset
     uncommit = reset HEAD^
 
-    log = log --date=auto:human
-
     # log a pretty graph to show commits
     graph = log --graph --pretty=format:'%Cred%h%Creset (%an) -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit
 
@@ -58,6 +56,9 @@
 
     # git status for every local branch
     branch-status = !~/bin/branch_status
+
+[log]
+    date = auto:human
 
 [color "branch"]
     current = green
