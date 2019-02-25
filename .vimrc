@@ -267,13 +267,13 @@ set stl+=%#DiffChange#%{(mode()==?'s')?'\ \ SELECT\ ':''}
 set stl+=%#DiffChange#%{(mode()=='t')?'\ \ TERM\ ':''}
 
 " get current working directory -> /Users/Yochem/project/
-set stl+=%#CursorIM#\ %{getcwd()}/
-
+set stl+=%#CursorIM#\ %{(expand('%')=~'^\/.*')?'':getcwd().'/'}
+" %{getcwd()}/
 " relative fail name -> js/main.js
 set stl+=%#DiffChange#%f
 
 " show branch name -> (master)
-set stl+=%#CursorIM#\ %{fugitive#statusline()[4:-2]} " branch name
+set stl+=%#CursorIM#\ %{fugitive#statusline()[4:-2]}\  " branch name
 
 " show modified flag, else nothing -> [+]
 set stl+=%#Cursor#%{(&mod)?'[+]':''}
