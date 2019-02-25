@@ -8,9 +8,10 @@ command -V dot > /dev/null 2>&1 && dot pull
 if [[ "$OSTYPE" == "darwin"* ]]; then
     if [[ $(command -v brew) ]]; then
 	echo -e "${orangebold}updating and upgrading Brew...${reset}"
-	brew update
 	brew upgrade
-	brew cleanup
+	brew cleanup -s
+        brew doctor
+        brew missing
     fi
 fi
 
@@ -23,7 +24,7 @@ if [[ "$OSTYPE" == "linux"* ]]; then
 fi
 
 # NPM
-if [[ $(command -v npmi) ]]; then
+if [[ $(command -v npm) ]]; then
     echo -e "${orangebold}updating and upgrading NPM...${reset}"
     npm install npm -g
     npm update -g
@@ -39,7 +40,7 @@ fi
 # ATOM
 if [[ $(command -v apm) ]]; then
     echo -e "${orangebold}updating Atom packages...${reset}"
-    apm update
+    apm upgrade -c false
 fi
 
 # APP STORE

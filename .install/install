@@ -18,65 +18,7 @@ install_brew() {
     # install brew
     ruby -e "$(curl -fsL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-    # list of all brew formulae
-    brew_apps=(
-	bash
-	bash-completion2
-	bat
-	binwalk
-	coreutils
-	dockutil
-	emacs
-	git
-	grep
-	hub
-	imagesnap
-	nano
-	pandoc
-	pandoc-citeproc
-	python
-	python3
-	ruby
-	screen
-	shpotify
-	sqlite
-	thefuck
-	tldr
-	vim
-	youtube-dl
-	zsh
-    )
-    # install list
-    brew -q install "${brew_apps[@]}"
-}
-
-install_brew_cask() {
-    # install brew cask
-    brew -q tap caskroom/cask
-    # all cask apps
-    cask_apps=(
-	arduino
-	atom
-	brave-browser
-	dropbox
-	fritzing
-	github
-	google-chrome
-	google-drive-file-stream
-	hyper
-	iterm2
-	spectacle
-	spotify
-	telegram
-	vlc
-	vuze
-	whatsapp
-	qlcolorcod
-	qlstephen
-    )
-    brew -q cask install "${cask_apps[@]}"
-    # cleanup outdated brew things
-    brew -q cleanup
+    brew bundle --file="$HOME/.install/Brewfile" || echo "Can not find Brewfile"
 }
 
 install_pip() {
@@ -115,220 +57,205 @@ install_pip() {
     sudo pip -q install "${pip_apps[@]}"
 }
 
-install() {
-    # check if install folder exists, go to there
-    [ -d "$HOME/.install" ] && cd "$HOME/.install" || exit 2
+# check if install folder exists, go to there
+[ -d "$HOME/.install" ] && cd "$HOME/.install" || exit 2
 
-    # update existing `sudo` time stamp until installation is finished
-    sudo -v
-    while true; do 
-	sudo -n true
-	sleep 60
-	kill -0 "$$" || exit
-    done 2>/dev/null &
+# update existing `sudo` time stamp until installation is finished
+sudo -v
+while true; do 
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+done 2>/dev/null &
 
-    ###################
-    ###### MACOS ######
-    ###################
-    if ! [[ "$OSTYPE" =~ ^darwin ]]; then
-	echo -e "${bad} Skipped: Homebrew (not running MacOS)\n"
-    else
-	# Close any open System Preferences panes, to prevent them from 
-	# overriding settings we’re about to change
-	osascript -e 'tell application "System Preferences" to quit'
-
-	###################
-	### BREW (CASK) ###
-	###################
-	# install homebrew. Only ask for Cask if homebrew is installed
-	echo -en "${question} Install Homebrew and formulae? "
-	read -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-	    # install HOMEBREW
-            tput cuu 1 && tput el
-	    echo -e "${good} Install Homebrew and formulae?"
-	    install_brew
-
-	    # install homebrew cask
-	    echo -en "${question} Install Homebrew Cask and apps? "
-	    read -n 1 -r
-	    echo
-	    if [[ $REPLY =~ ^[Yy]$ ]]; then
-                tput cuu 1 && tput el
-		echo -e "${good} Install Homebrew Cask and apps?"
-		install_brew_cask
-	    else
-                tput cuu 1 && tput el
-		echo -e "${bad} Install Homebrew Cask and apps?"
-	    fi
-	else
-            tput cuu 1 && tput el
-	    echo -e "${bad} Install Homebrew and formulae?"
-	fi
-
-	###################
-	###### BASH #######
-	###################
-	echo -en "${question} Update to new bash version? "
-	read -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-            tput cuu 1 && tput el
-	    echo -e "${good} Update to new bash version?"
-	    # Save Homebrew’s installed location.
-	    BREW_PREFIX=$(brew --prefix)
-	    # Switch to using brew-installed bash as default shell
-	    if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
-		echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
-		chsh -s "${BREW_PREFIX}/bin/bash"
-	    fi
-	else
-            tput cuu 1 && tput el
-	    echo -e "${bad} Update to new bash version?"
-	fi
-
-	###################
-	####### DOCK ######
-	###################
-	echo -en "${question} Change dock apps? "
-	read -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-            tput cuu 1 && tput el
-	    echo -e "${good} Change dock apps?"
-	    dockutil --no-restart --remove all
-	    dockutil --no-restart --add "/Applications/Brave Browser.app"
-	    dockutil --no-restart --add "/Applications/Mail.app"
-	    dockutil --no-restart --add "/Applications/Spotify.app"
-	    dockutil --no-restart --add "/Applications/iTerm.app"
-	    dockutil --no-restart --add "/Applications/WhatsApp.app"
-	    dockutil --no-restart --add "/Applications/Telegram.app"
-	    dockutil --no-restart --add "$HOME/Downloads" --view fan --display stack
-	    killall Dock
-	else
-            tput cuu 1 && tput el
-	    echo -e "${bad} Change dock apps?"
-	fi
-
-	###################
-	### MACDEFAULTS ###
-	###################
-	echo -en "${question} Apply mac defaults? Be careful! "
-	read -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-            tput cuu 1 && tput el
-	    echo -e "${good} Apply mac defaults? Be careful!"
-	    chmod +x "$HOME/.install/macdefaults"
-	    . "$HOME/.install/macdefaults"
-	else
-            tput cuu 1 && tput el
-	    echo -e "${bad} Apply mac defaults? Be careful!"
-	fi
-    fi  
-    
+###################
+###### MACOS ######
+###################
+if ! [[ "$OSTYPE" =~ ^darwin ]]; then
+    echo -e "${bad} Skipped: Homebrew (not running MacOS)\n"
+else
+    # Close any open System Preferences panes, to prevent them from 
+    # overriding settings we’re about to change
+    osascript -e 'tell application "System Preferences" to quit'
 
     ###################
-    ####### PIP #######
+    ### BREW (CASK) ###
     ###################
-    if type python &>/dev/null; then
-	echo -en "${question} Install PIP and packages? "
-	read -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-            tput cuu 1 && tput el
-	    echo -e "${good} Install PIP and packgaes?"
-            install_pip
-	else
-            tput cuu 1 && tput el
-	    echo -e "${bad} Install PIP and packages?"
-	fi
-    fi
-
-    ###################
-    ###### ATOM #######
-    ###################
-    if type atom &>/dev/null && type apm &>/dev/null; then
-	echo -en "${question} Install Atom packages? "
-	read -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-	    if [[ $(ls) =~ atom_packages.txt ]]; then
-                tput cuu 1 && tput el
-		echo -e "${good} Install Atom packages?"
-		apm install --package-file atom_packages.txt
-		apm upgrade -c=false
-	    else
-                tput cuu 1 && tput el
-		echo -e "${bad} Install Atom packages?"
-	    fi
-	else
-            tput cuu 1 && tput el
-	    echo -e "${bad} Install Atom packages?"
-	fi
-    else
-        tput cuu 1 && tput el
-	echo -e "${bad} Install Atom packages?"
-    fi
-
-
-    ###################
-    ##### REPOS  ######
-    ###################
-    echo -en "${question} Clone yochem's repositories to $HOME/dev/? "
+    # install homebrew. Only ask for Cask if homebrew is installed
+    echo -en "${question} Install Homebrew and formulae? "
     read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-	if [ -x ~/bin/clonerepos ]; then
+        # install HOMEBREW
+        tput cuu 1 && tput el
+        echo -e "${good} Install Homebrew and formulae?"
+        install_brew
+
+        ###################
+        ###### BASH #######
+        ###################
+        echo -en "${question} Update to new bash version? "
+        read -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
             tput cuu 1 && tput el
-	    echo -e "${good} Clone yochem's repositories to $HOME/dev/?"
-	    mkdir "$HOME/dev"
-	    clonerepos "$HOME/dev"
-	else
+            echo -e "${good} Update to new bash version?"
+            # Save Homebrew’s installed location.
+            BREW_PREFIX=$(brew --prefix)
+            # Switch to using brew-installed bash as default shell
+            if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
+                echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
+                chsh -s "${BREW_PREFIX}/bin/bash"
+            fi
+        else
             tput cuu 1 && tput el
-	    echo -e "${bad} Clone yochem's repositories to $HOME/dev/?"
-	fi
+            echo -e "${bad} Update to new bash version?"
+        fi
+
+        ###################
+        ####### DOCK ######
+        ###################
+        echo -en "${question} Change dock apps? "
+        read -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            tput cuu 1 && tput el
+            echo -e "${good} Change dock apps?"
+            dockutil --no-restart --remove all
+            dockutil --no-restart --add "/Applications/Brave Browser.app"
+            dockutil --no-restart --add "/Applications/Mail.app"
+            dockutil --no-restart --add "/Applications/Spotify.app"
+            dockutil --no-restart --add "/Applications/iTerm.app"
+            dockutil --no-restart --add "/Applications/WhatsApp.app"
+            dockutil --no-restart --add "/Applications/Telegram.app"
+            dockutil --no-restart --add "$HOME/Downloads" --view fan --display stack
+            killall Dock
+        else
+            tput cuu 1 && tput el
+            echo -e "${bad} Change dock apps?"
+        fi
     else
         tput cuu 1 && tput el
-	echo -e "${bad} Clone yochem's repositories to $HOME/dev/?"
+        echo -e "${bad} Install Homebrew and formulae?"
     fi
 
+
     ###################
-    ###### Z.SH #######
+    ### MACDEFAULTS ###
     ###################
-    echo -en "${question} Install z.sh? "
+    echo -en "${question} Apply mac defaults? Be careful! "
     read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         tput cuu 1 && tput el
-	echo -e "${good} Install z.sh?"
-	sudo curl -s "https://raw.githubusercontent.com/rupa/z/master/z.1" > "/usr/local/share/man/man1/z.1"
-	curl -s "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "$HOME/.z.sh"
+        echo -e "${good} Apply mac defaults? Be careful!"
+        chmod +x "$HOME/.install/macdefaults"
+        . "$HOME/.install/macdefaults"
     else
         tput cuu 1 && tput el
-	echo -e "${bad} Install z.sh?"
+        echo -e "${bad} Apply mac defaults? Be careful!"
     fi
+fi  
 
-    ##################
-    ## GIT TEMPLATE ##
-    ##################
-    echo -en "${question} Install git-template? "
+
+###################
+####### PIP #######
+###################
+if type python &>/dev/null; then
+    echo -en "${question} Install PIP and packages? "
     read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         tput cuu 1 && tput el
-	echo -e "${good} Install git-template?"
-        hook_path="$HOME/.config/git/templates/hooks"
-	mkdir -p $hook_path
-	curl -s https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > "$hook_path/commit-msg" && 
-	chmod +x "$hook_path/commit-msg"
+        echo -e "${good} Install PIP and packgaes?"
+        install_pip
     else
         tput cuu 1 && tput el
-	echo -e "${bad} Install git-template?"
+        echo -e "${bad} Install PIP and packages?"
     fi
+fi
 
-    # reload for all changes to appear
-    . "$HOME/.bash_profile"
-}
-install
+###################
+###### ATOM #######
+###################
+if type atom &>/dev/null && type apm &>/dev/null; then
+    echo -en "${question} Install Atom packages? "
+    read -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        if [[ $(ls) =~ atom_packages.txt ]]; then
+            tput cuu 1 && tput el
+            echo -e "${good} Install Atom packages?"
+            apm install --package-file atom_packages.txt
+            apm upgrade -c=false
+        else
+            tput cuu 1 && tput el
+            echo -e "${bad} Install Atom packages?"
+        fi
+    else
+        tput cuu 1 && tput el
+        echo -e "${bad} Install Atom packages?"
+    fi
+else
+    tput cuu 1 && tput el
+    echo -e "${bad} Install Atom packages?"
+fi
+
+
+###################
+##### REPOS  ######
+###################
+echo -en "${question} Clone yochem's repositories to $HOME/dev/? "
+read -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [ -x ~/bin/clonerepos ]; then
+        tput cuu 1 && tput el
+        echo -e "${good} Clone yochem's repositories to $HOME/dev/?"
+        mkdir "$HOME/dev"
+        clonerepos "$HOME/dev"
+    else
+        tput cuu 1 && tput el
+        echo -e "${bad} Clone yochem's repositories to $HOME/dev/?"
+    fi
+else
+    tput cuu 1 && tput el
+    echo -e "${bad} Clone yochem's repositories to $HOME/dev/?"
+fi
+
+###################
+###### Z.SH #######
+###################
+echo -en "${question} Install z.sh? "
+read -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    tput cuu 1 && tput el
+    echo -e "${good} Install z.sh?"
+    sudo curl -s "https://raw.githubusercontent.com/rupa/z/master/z.1" > "/usr/local/share/man/man1/z.1"
+    curl -s "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "$HOME/.z.sh"
+else
+    tput cuu 1 && tput el
+    echo -e "${bad} Install z.sh?"
+fi
+
+##################
+## GIT TEMPLATE ##
+##################
+echo -en "${question} Install git-template? "
+read -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    tput cuu 1 && tput el
+    echo -e "${good} Install git-template?"
+    hook_path="$HOME/.config/git/templates/hooks"
+    mkdir -p $hook_path
+    curl -s https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > "$hook_path/commit-msg" && 
+    chmod +x "$hook_path/commit-msg"
+else
+    tput cuu 1 && tput el
+    echo -e "${bad} Install git-template?"
+fi
+
+# reload for all changes to appear
+. "$HOME/.bash_profile"
