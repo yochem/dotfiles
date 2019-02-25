@@ -3,7 +3,7 @@
 # fancy ls
 ls_type="ls"
 command -V gls &>/dev/null && ls_type="gls"
-alias lst="$ls_type --group-directories-first -1F --color"
+alias ls="$ls_type --group-directories-first -1F --color"
 unset ls_type
 
 # remove LaTeX helpfiles
@@ -23,9 +23,7 @@ alias rm="rm -v"
 # reload bash profile and stuff
 alias reload="source $HOME/.bash_profile"
 
-# shorten the most used things
-alias l="less"
-alias a="atom"
+# -X makes vim faster (i think)
 alias v="vim -X"
 
 # easier way to cd back one level
