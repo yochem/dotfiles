@@ -6,11 +6,18 @@ if tput setaf 1 &>/dev/null; then
     green="\[$(tput setaf 2)\]"
     magenta="\[$(tput setaf 5)\]"
     blue="\[$(tput setaf 75)\]"
+    red="\[$(tput setaf 2)\]"
 else
     reset="\[\e[0m\]"
     green="\[\033[01;38;5;002m\]"
     magenta="\[\033[01;38;5;005m\]"
     blue="\[\033[01;38;5;006m\]"
+    red="\[\033[01;38;5;031\]"
+fi
+
+# red brackets if user is root
+if [[ "$USER" == "root" ]]; then
+    $bracketcolor="$red"
 fi
 
 # check if git rpo and which branch
@@ -31,13 +38,17 @@ prompt_git() {
 
 # build prompt
 PS1="$reset"
+PS1+="$bracketcolor"
 PS1+="[ "
+PS1+="$reset"
 # if connected using SSH, show hostname
 [ -n "$SSH_CLIENT" ] && PS1+="$magenta@\h$reset: "
-PS1+="$blue\w " # short working directory in default blue
+PS1+="$blue"
+PS1+="\w " # full path of cwd
 PS1+="$reset"
 PS1+="\$(prompt_git \"$green\" \"$reset\")" # show git branch
 PS1+="$reset"
+PS1+="$bracketcolor"
 PS1+="] "
 export PS1
 
