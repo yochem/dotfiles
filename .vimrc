@@ -273,7 +273,7 @@ set stl+=%#CursorIM#\ %{(expand('%')=~'^\/.*')?'':getcwd().'/'}
 set stl+=%#DiffChange#%f
 
 " show branch name -> (master)
-set stl+=%#CursorIM#\ %{fugitive#statusline()[4:-2]}\  " branch name
+set stl+=%#CursorIM#\ %{fugitive#statusline()[4:-2]}\ 
 
 " show modified flag, else nothing -> [+]
 set stl+=%#Cursor#%{(&mod)?'[+]':''}
