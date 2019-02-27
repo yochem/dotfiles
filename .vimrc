@@ -27,7 +27,6 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'nvie/vim-flake8'
 Plug 'valloric/MatchTagAlways'
 Plug 'scrooloose/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
