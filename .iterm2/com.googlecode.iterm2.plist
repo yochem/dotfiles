@@ -664,7 +664,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>376 232 869 230 0 0 1440 877 </string>
+	<string>376 232 869 349 0 0 1440 877 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
 	<string>412 527 616 174 0 0 1440 877 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
@@ -672,9 +672,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 138 606 469 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>166 431 796 486 0 0 1920 1057 </string>
+	<string>305 305 796 486 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>963 68 954 989 0 0 1920 1057 </string>
+	<string>0 0 1440 878 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>303 262 738 504 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -2802,7 +2802,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-02-20T16:34:43Z</date>
+	<date>2019-02-27T21:14:20Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Secure Input</key>
