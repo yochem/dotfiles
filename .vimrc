@@ -25,14 +25,23 @@ endif
 
 " all vim-plug plugins
 call plug#begin('~/.vim/plugged')
+" nice colorscheme
 Plug 'joshdick/onedark.vim'
+" better language syntax support
 Plug 'sheerun/vim-polyglot'
+" always highlight html tags you're currently in 
 Plug 'valloric/MatchTagAlways'
+" show filetree
 Plug 'scrooloose/nerdtree'
+" conform vim to editorconfig
 Plug 'editorconfig/editorconfig-vim'
+" handy git things inside of vim (branch in statusline)
 Plug 'tpope/vim-fugitive'
+" comment blocks of code
 Plug 'tpope/vim-commentary'
+" send mails from vim
 Plug 'vim-scripts/MailApp'
+" show git diff next to linenumbers
 Plug 'airblade/vim-gitgutter'
 call plug#end()
 
@@ -45,17 +54,12 @@ syntax enable
 
 " always dark
 set background=dark
-if $TERM_PROGRAM == 'iTerm.app' && $ITERM_PROFILE == 'One-Dark'
-    " make background the same as iterm2 background
-    set termguicolors
 
-    " use atom's one-dark theme
-    colorscheme onedark
-else
-    highlight Comment ctermfg=grey
-    highlight ColorColumn ctermbg=grey
-    highlight ColorColumn ctermfg=black
-endif
+" make background the same as iterm2 background
+set termguicolors
+
+" use atom's one-dark theme
+colorscheme onedark
 
 
 """""""""""""""""""""""
