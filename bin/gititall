@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-
-# database file
-FILE="$HOME/.gititall"
+if command -V fd &>/dev/null; then
+    REPOS=$(fd -H -t d .git$ ~)
+elif [ -f "$HOME/.gititall" ]; then
+    REPOS="$HOME/.gititall"
+fi
 
 # pretty print the repo paths
 color_print() {
@@ -45,21 +47,13 @@ case "$1" in
     --show|-s) color_print "$(cat "$FILE")" ;;
     --help|-h) help_menu ;;
     *)
-	# git repo with non-default git folder name is not recognised,
-	# so doing this the hard way for my dotfiles repo
-	if [ -d "$HOME/.dot" ]; then
-	    color_print "$HOME/.dot" ":"
-	    cd "$HOME"
-	    git --git-dir="${HOME}/.dot/" --work-tree="${HOME}" "$1"
-	fi
-
-	# and the other repos
-	while read -r repo; do
-	    (color_print "$repo" ":"
-	    pushd "$repo" >/dev/null 2>&1
-	    git "$1"
-	    popd >/dev/null 2>&1)
-	done < "$FILE"
+        REPOS=$(fd -H -t d .git$ ~ | sed 's/....$//')
+        for repo in $REPOS; do
+            color_print $repo
+            (pushd $repo &>/dev/null || exit 10
+            git "$1"
+            popd &>/dev/null)
+        done
 	;;
 esac
 
