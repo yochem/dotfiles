@@ -56,7 +56,9 @@ syntax enable
 set background=dark
 
 " make background the same as iterm2 background
-set termguicolors
+if $TERM_PROGRAM == 'iTerm.app'
+    set termguicolors
+endif
 
 " use atom's one-dark theme
 colorscheme onedark
@@ -149,6 +151,12 @@ nnoremap W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " use tab for indention
 nnoremap <tab> V>>
 
+" saving one key with navigating through splits
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 
 """""""""""""""""""""""
 "      MODERNIZE      "
@@ -215,14 +223,11 @@ if has("autocmd")
 
     " Treat .md files as Markdown
     autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
-    autocmd BufRead,BufNewFile *.tex setlocal textwidth=78
 
-    " and .tex files as LaTeX
+    " some LaTeX settings
     autocmd BufRead,BufNewFile *.tex setlocal filetype=tex
-    autocmd BufRead,BufNewFile *.tex setlocal textwidth=78
-
-    " set textwidth of .txt files to 78
-    autocmd BufRead,BufNewFile *.txt setlocal textwidth=78
+    autocmd VimLeave *.tex !rm *.aux *.bbl *.blg *.log *.out
+    autocmd BufRead,BufNewFile *.{tex,txt} setlocal textwidth=78
 
     " start on top and in insertmode with commits
     autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
@@ -230,6 +235,9 @@ if has("autocmd")
 
     " stop auto commenting newline
     autocmd FileType * setlocal formatoptions-=cro
+
+    " set scripts to be executable
+    au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x <afile> | endif
 endif
 
 
