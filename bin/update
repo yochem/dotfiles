@@ -34,7 +34,7 @@ fi
 if [[ $(command -v pip) ]]; then
     echo -e "${orangebold}updating and upgrading PIP...${reset}"
     pip freeze > /tmp/requirements.txt
-    pip install -r /tmp/requirements.txt --upgrade -q
+    pip install -r /tmp/requirements.txt --upgrade
 fi
 
 # ATOM
