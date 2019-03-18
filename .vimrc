@@ -30,9 +30,9 @@ Plug 'joshdick/onedark.vim'
 " better language syntax support
 Plug 'sheerun/vim-polyglot'
 " always highlight html tags you're currently in 
-Plug 'valloric/MatchTagAlways'
+Plug 'valloric/MatchTagAlways', { 'for': 'html' }
 " show filetree
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " conform vim to editorconfig
 Plug 'editorconfig/editorconfig-vim'
 " handy git things inside of vim (branch in statusline)
@@ -226,7 +226,7 @@ if has("autocmd")
 
     " some LaTeX settings
     autocmd BufRead,BufNewFile *.tex setlocal filetype=tex
-    autocmd VimLeave *.tex !rm *.aux *.bbl *.blg *.log *.out
+    autocmd VimLeave *.tex !rm *.aux *.bbl *.blg *.log *.out >/dev/null 2>&1
     autocmd BufRead,BufNewFile *.{tex,txt} setlocal textwidth=78
 
     " start on top and in insertmode with commits
@@ -238,6 +238,10 @@ if has("autocmd")
 
     " set scripts to be executable
     au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x <afile> | endif
+    au BufWritePost *.sh silent !chmod +x <afile>
+
+    highlight nonascii guibg=Red ctermbg=1
+    autocmd BufReadPost * syntax match nonascii "[^\x00-\x7F]"
 endif
 
 
