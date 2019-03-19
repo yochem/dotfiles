@@ -7,9 +7,6 @@ phpserver() { open "http://localhost:$1" && php -S "localhost:$1"; }
 # search something on youtube
 yt() { open "https://www.youtube.com/results?search_query=$1"; }
 
-# always forget these
-devnull() { echo -e "BASH: &>/dev/null\nPOSIX: >/dev/null 2>&1"; }
-
 # View the local git repository on Github
 # Uses alias 'git url', as seen in git/.gitconfig
 # 'open' opens an url in the browser on macOS. Not tested on linux
@@ -29,7 +26,7 @@ viewgh() {
 
 # use the same alias for all git repos
 # before I used 'dot' as alias for my dotfiles repo but that's way to confusing
-g() { 
+g() {
     if git status &>/dev/null; then
         git "$@"
     else
