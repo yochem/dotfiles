@@ -37,8 +37,8 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 
     # enables finders quicklook from the terminal
     alias ql="qlmanage -p &>/dev/null"
-    
-    # shorten things up 
+
+    # shorten things up
     alias cask="brew cask"
     alias o="open"
 
@@ -47,6 +47,9 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 
     # silence ~/bin/airpods
     alias airpods="airpods &>/dev/null"
+
+    # fix charging iPhone on MacBook (https://apple.stackexchange.com/a/334006)
+    alias chargephone="sudo killall -STOP -c usbd"
 fi
 
 # shorten the very, very long install command known as apt-get
