@@ -2,6 +2,7 @@
 
 # vim as default editor
 export EDITOR="vim"
+export VISUAL="vim"
 
 # add GNU core utils from brew to path
 export PATH="/Library/TeX/texbin:$PATH"
@@ -21,4 +22,4 @@ export PATH="$HOME/bin:$PATH"
 export NODE_PATH='/usr/local/lib/node_modules'
 
 # increase bash history size
-export HISTSIZE='32768';
+export HISTSIZE="32768";

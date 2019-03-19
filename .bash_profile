@@ -49,3 +49,4 @@ SHELL_SESSION_HISTORY=0
 
 # ignore these file extensions with tab-completion
 FIGNORE=".log:.aux:.pdf"
+
