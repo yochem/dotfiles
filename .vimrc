@@ -29,7 +29,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'joshdick/onedark.vim'
 " better language syntax support
 Plug 'sheerun/vim-polyglot'
-" always highlight html tags you're currently in 
+" always highlight html tags you're currently in
 Plug 'valloric/MatchTagAlways', { 'for': 'html' }
 " show filetree
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -237,11 +237,19 @@ if has("autocmd")
     autocmd FileType * setlocal formatoptions-=cro
 
     " set scripts to be executable
-    au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x <afile> | endif
+    au BufWritePost * if getline(1) =~ "^#!" | call setfperm(expand('%'), 'rwxr-xr-x') | endif
     au BufWritePost *.sh silent !chmod +x <afile>
 
-    highlight nonascii guibg=Red ctermbg=1
+    " highlight non-ascii chars
+    highlight nonascii guibg=Blue ctermbg=9
     autocmd BufReadPost * syntax match nonascii "[^\x00-\x7F]"
+
+    " highlight trailing whitespaces except the current line in insertmode
+    highlight trailingwhitespace guibg=Red ctermbg=1
+    autocmd BufWinEnter * match trailingwhitespace /\s\+$/
+    autocmd InsertEnter * match trailingwhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match trailingwhitespace /\s\+$/
+    autocmd BufWinLeave * call clearmatches()
 endif
 
 
