@@ -2,7 +2,10 @@
 reset=$(tput sgr0)
 orangebold=$(tput bold; tput setaf 166)
 
-command -V dot > /dev/null 2>&1 && dot pull
+if [[ $(command -V vim) ]]; then
+    echo -e "${orangebold}updating vim packages...${reset}"
+    vim +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean! +qall
+fi
 
 # BREW (CASK)
 if [[ "$OSTYPE" == "darwin"* ]]; then
