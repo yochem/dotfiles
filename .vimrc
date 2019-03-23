@@ -42,7 +42,7 @@ Plug 'tpope/vim-commentary'
 " send mails from vim
 Plug 'vim-scripts/MailApp'
 " show git diff next to linenumbers
-Plug 'airblade/vim-gitgutter'
+"Plug 'mhinz/vim-signify'
 call plug#end()
 
 
