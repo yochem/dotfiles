@@ -5,7 +5,7 @@
 test -e "$HOME/.iterm2_shell_integration.bash" && source "$HOME/.iterm2_shell_integration.bash"
 
 # Load the shell dotfiles, and z.sh
-for file in ~/.{aliases,exports,functions,prompt,z.sh}; do
+for file in ~/.{prompt,aliases,exports,functions,z.sh}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
 unset file
@@ -46,7 +46,4 @@ fi
 # don't let Terminal.app write session history
 # (https://stackoverflow.com/questions/32418438/how-can-i-disable-bash-sessions-in-os-x-el-capitan)
 SHELL_SESSION_HISTORY=0
-
-# ignore these file extensions with tab-completion
-FIGNORE=".log:.aux:.pdf"
 
