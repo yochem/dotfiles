@@ -24,7 +24,7 @@ alias rm="rm -v"
 alias reload="source $HOME/.bash_profile"
 
 # -X makes vim faster (i think)
-alias v="vim -X"
+alias vi="vim -X"
 
 # easier way to cd back one level
 alias ..="cd .."
@@ -35,12 +35,8 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     # hub for git
     alias git=hub
 
-    # enables finders quicklook from the terminal
-    alias ql="qlmanage -p &>/dev/null"
-
     # shorten things up
     alias cask="brew cask"
-    alias o="open"
 
     # open apps
     alias prefs="open -a System\ Preferences"
