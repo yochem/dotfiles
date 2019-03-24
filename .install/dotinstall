@@ -12,7 +12,7 @@ dot() {
 dot checkout
 
 # if git checkout returned an error, create a backup and replace
-if [ $? -ne 0 ]; then
+if [ "$?" -ne 0 ]; then
     # grep only the listed files
     files=$(dot checkout 2>&1 | grep -E "^\s+" | awk {'print $1'})
     # loop over the files
@@ -31,5 +31,8 @@ dot checkout
 # don't show untracked files
 dot config status.showUntrackedFiles no
 
+# source the new dotfiles
+. "$HOME/.bash_profile"
+
 # let the user know whats up
-echo "dotfiles installed. You might need to restart your terminal."
+echo "dotfiles installed!"
