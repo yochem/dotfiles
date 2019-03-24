@@ -26,29 +26,9 @@ if [[ "$OSTYPE" == "linux"* ]]; then
     fi
 fi
 
-# NPM
-if [[ $(command -v npm) ]]; then
-    echo -e "${orangebold}updating and upgrading NPM...${reset}"
-    npm install npm -g
-    npm update -g
-fi
-
-# PIP
-if [[ $(command -v pip) ]]; then
-    echo -e "${orangebold}updating and upgrading PIP...${reset}"
-    pip freeze > /tmp/requirements.txt
-    pip install -r /tmp/requirements.txt --upgrade
-fi
-
 # ATOM
 if [[ $(command -v apm) ]]; then
     echo -e "${orangebold}updating Atom packages...${reset}"
     apm upgrade -c false
     apm clean
-fi
-
-# APP STORE
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    echo -e "${orangebold}App Store software updates...${reset}"
-    sudo softwareupdate -i -a
 fi
