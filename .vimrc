@@ -136,9 +136,6 @@ set incsearch
 " set leader key
 let mapleader = ','
 
-" use OS clipboard
-set clipboard=unnamed
-
 " replace more characters at once in visual mode
 vmap r "_dP
 
@@ -222,19 +219,18 @@ if has("autocmd")
     filetype on
 
     " Treat .md files as Markdown
-    autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+    au BufNewFile,BufRead *.md setlocal filetype=markdown
 
     " some LaTeX settings
-    autocmd BufRead,BufNewFile *.tex setlocal filetype=tex
-    autocmd VimLeave *.tex !rm *.aux *.bbl *.blg *.log *.out >/dev/null 2>&1
-    autocmd BufRead,BufNewFile *.{tex,txt} setlocal textwidth=78
+    au BufRead,BufNewFile *.tex setlocal filetype=tex
+    au BufRead,BufNewFile *.{tex,txt,md} setlocal textwidth=78
 
     " start on top and in insertmode with commits
-    autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
-    autocmd FileType gitcommit startinsert
+    au FileType gitcommit call setpos('.', [0, 1, 1, 0])
+    au FileType gitcommit startinsert
 
     " stop auto commenting newline
-    autocmd FileType * setlocal formatoptions-=cro
+    au FileType * setlocal formatoptions-=cro
 
     " set scripts to be executable
     au BufWritePost * if getline(1) =~ "^#!" | call setfperm(expand('%'), 'rwxr-xr-x') | endif
@@ -242,14 +238,14 @@ if has("autocmd")
 
     " highlight non-ascii chars
     highlight nonascii guibg=Blue ctermbg=9
-    autocmd BufReadPost * syntax match nonascii "[^\x00-\x7F]"
+    au BufReadPost * syntax match nonascii "[^\x00-\x7F]"
 
     " highlight trailing whitespaces except the current line in insertmode
     highlight trailingwhitespace guibg=Red ctermbg=1
-    autocmd BufWinEnter * match trailingwhitespace /\s\+$/
-    autocmd InsertEnter * match trailingwhitespace /\s\+\%#\@<!$/
-    autocmd InsertLeave * match trailingwhitespace /\s\+$/
-    autocmd BufWinLeave * call clearmatches()
+    au BufWinEnter * match trailingwhitespace /\s\+$/
+    au InsertEnter * match trailingwhitespace /\s\+\%#\@<!$/
+    au InsertLeave * match trailingwhitespace /\s\+$/
+    au BufWinLeave * call clearmatches()
 endif
 
 
@@ -291,7 +287,6 @@ set stl+=%#DiffChange#%{(mode()=='t')?'\ \ TERM\ ':''}
 
 " get current working directory -> /Users/Yochem/project/
 set stl+=%#CursorIM#\ %{(expand('%')=~'^\/.*')?'':getcwd().'/'}
-" %{getcwd()}/
 " relative fail name -> js/main.js
 set stl+=%#DiffChange#%f
 
