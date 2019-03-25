@@ -7,7 +7,6 @@
 
 [core]
     pager = ~/bin/diff-highlight | less
-    editor = vim
 
 [pager]
     diff = true
@@ -22,7 +21,7 @@
     # Always commit with a message
     c = commit
 
-    # commit all files that have been modified or removed, new files not 
+    # commit all files that have been modified or removed, new files not
     # affected
     com = commit -a
 

@@ -2,7 +2,7 @@
 reset=$(tput sgr0)
 orangebold=$(tput bold; tput setaf 166)
 
-if [[ $(command -V vim) ]]; then
+if command -v vim >/dev/null 2>&1; then
     echo -e "${orangebold}updating vim packages...${reset}"
     vim +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean! +qall
 fi
@@ -27,7 +27,7 @@ if [[ "$OSTYPE" == "linux"* ]]; then
 fi
 
 # ATOM
-if [[ $(command -v apm) ]]; then
+if command -v apm >/dev/null 2>&1; then
     echo -e "${orangebold}updating Atom packages...${reset}"
     apm upgrade -c false
     apm clean
