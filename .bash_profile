@@ -5,13 +5,13 @@
 # test -e "$HOME/.iterm2_shell_integration.bash" && source "$HOME/.iterm2_shell_integration.bash"
 
 dotfiles=(
-    "~/.iterm2_shell_integration.bash"
-    "~/.prompt"
-    "~/.exports"
-    "~/.aliases"
-    "~/.functions"
-    "~/.z.sh"
-    "/usr/local/etc/profile.d/bash_completion.sh"
+    ~/.iterm2_shell_integration.bash
+    ~/.prompt
+    ~/.exports
+    ~/.aliases
+    ~/.functions
+    ~/.z.sh
+    /usr/local/etc/profile.d/bash_completion.sh
 )
 
 
