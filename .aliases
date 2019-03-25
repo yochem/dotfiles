@@ -24,7 +24,7 @@ alias rm="rm -v"
 alias reload="source $HOME/.bash_profile"
 
 # -X makes vim faster (i think)
-alias vi="vim -X"
+alias v="nvim"
 
 # easier way to cd back one level
 alias ..="cd .."
