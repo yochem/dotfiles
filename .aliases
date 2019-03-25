@@ -9,9 +9,6 @@ unset ls_type
 # remove LaTeX helpfiles
 alias rmtex="rm *.aux *.bbl *.blg *.log *.out"
 
-# i always forget what the printer command is...
-alias printer="lpr"
-
 # always color grep
 alias grep="grep --color"
 
@@ -23,8 +20,8 @@ alias rm="rm -v"
 # reload bash profile and stuff
 alias reload="source $HOME/.bash_profile"
 
-# -X makes vim faster (i think)
-alias v="nvim"
+# use $VISUAL as editor (it's mostly vim, so i've always used 'v'
+alias v=$VISUAL
 
 # easier way to cd back one level
 alias ..="cd .."
@@ -47,9 +44,6 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     # fix charging iPhone on MacBook (https://apple.stackexchange.com/a/334006)
     alias chargephone="sudo killall -STOP -c usbd"
 fi
-
-# shorten the very, very long install command known as apt-get
-type -P apt-get &>/dev/null && alias get="sudo apt-get install"
 
 # dot is my dotfiles repository
 alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME"

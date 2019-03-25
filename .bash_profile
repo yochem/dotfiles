@@ -5,7 +5,7 @@
 test -e "$HOME/.iterm2_shell_integration.bash" && source "$HOME/.iterm2_shell_integration.bash"
 
 # Load the shell dotfiles, and z.sh
-for file in ~/.{prompt,aliases,exports,functions,z.sh}; do
+for file in ~/.{prompt,exports,aliases,functions,z.sh}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
 unset file

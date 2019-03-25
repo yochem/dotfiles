@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 
-# vim as default editor
-export EDITOR="vim"
-export VISUAL="vim"
+# choose the default editor
+if command -v nvim >/dev/null 2>&1; then
+    export VISUAL="nvim"
+elif command -v vim >/dev/null 2>&1; then
+    export VISUAL="vim"
+else
+    export VISUAL="nano"
+fi
+
+export EDITOR="$VISUAL"
+
 
 # add GNU core utils from brew to path
 export PATH="/Library/TeX/texbin:$PATH"
