@@ -30,4 +30,12 @@ export PATH="$HOME/bin:$PATH"
 export NODE_PATH='/usr/local/lib/node_modules'
 
 # increase bash history size
-export HISTSIZE="32768";
+export HISTSIZE="32768"
+
+# don't put duplicates in history
+HISTCONTROL=ignoreboth
+
+# don't let Terminal.app write session history
+# (https://stackoverflow.com/questions/32418438/how-can-i-disable-bash-sessions-in-os-x-el-capitan)
+SHELL_SESSION_HISTORY=0
+

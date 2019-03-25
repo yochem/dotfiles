@@ -188,6 +188,22 @@ map <C-f> :NERDTreeToggle<CR>
 " update faster
 set updatetime=100
 
+" this makes startuptime with neovim much faster
+let g:clipboard = {
+  \ 'name': 'pbcopy',
+  \ 'copy': {
+  \    '+': 'pbcopy',
+  \    '*': 'pbcopy',
+  \  },
+  \ 'paste': {
+  \    '+': 'pbpaste',
+  \    '*': 'pbpaste',
+  \ },
+  \ 'cache_enabled': 0,
+  \ }
+
+" use the systems clipboard
+set clipboard=unnamed
 
 """""""""""""""""""""""
 "    RANDOM STUFF     "

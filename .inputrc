@@ -1,0 +1,17 @@
+# Show extra file information when completing, like `ls -F` does
+set visible-stats on
+
+# give the listed files color
+set colored-stats on
+
+# Perform file completion in a case insensitive fashion
+set completion-ignore-case on
+
+# show ambiguous files after just 1 tab press
+set show-all-if-ambiguous on
+
+# Enable history expansion with space
+Space:magic-space
+
+# intelligent completing
+set skip-completed-text on
