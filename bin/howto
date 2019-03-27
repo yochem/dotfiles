@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-usage() { echo "usage: howto <devnull|sshkey|fixusb>" 1>&2; exit 1; }
+usage() { echo "usage: howto <devnull|sshkey|fixusb|test>" 1>&2; exit 1; }
 
 [ -z "$1" ] && usage
 
@@ -19,6 +19,16 @@ case "$1" in
         ;;
     *usb* | *iphone)
         echo "sudo killall -STOP -c usbd"
+        ;;
+    *test*)
+        echo "-d    file is a directory"
+        echo "-e    file exists (type doesn't matter"
+        echo "-f    regular file"
+        echo "-n    length string is nonzero"
+        echo "-r    file is readable"
+        echo "-w    file is writable"
+        echo "-x    file is executable"
+        echo "-z    length string is zero"
         ;;
     *)
         usage
