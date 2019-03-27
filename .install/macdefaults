@@ -8,7 +8,7 @@ else
 fi
 
 # handles the I/O. Also executes the commands
-ask() { 
+ask() {
     # check if description and command is provided
     [ -z "$1" ] && return 2
     [ -z "$2" ] && return 3
@@ -19,13 +19,13 @@ ask() {
     question="\e[94m[?]\e[0m"
 
     # ask user if the default should be applied
-    echo -en "${question} $1? "
+    echo -en "    ${question} $1? "
     read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         # clear last line to replace the symbol
         tput cuu 1 && tput el
-        echo -e "${good} $1?"
+        echo -e "    ${good} $1?"
 
         # skip first arg
         shift
@@ -37,21 +37,9 @@ ask() {
         done
     else
         tput cuu 1 && tput el
-        echo -e "${bad} $1?"
+        echo -e "    ${bad} $1?"
     fi
 }
-
-# welcome screen
-cat <<EOF
-Config your Mac using MacOS defaults!
-Press y (or Y) to apply a default or any other 
-key to skip that one. Want to test?
-EOF
-read -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "You choose yes! Let's start"
-fi
 
 ask "Disable the sound effects on boot" \
     "sudo nvram SystemAudioVolume=\" \""
@@ -65,10 +53,10 @@ ask "Expand save panel by default" \
 
 ask "Expand print panel by default" \
     "defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true" \
-    "defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true" 
+    "defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true"
 
 ask "Save to disk (not to iCloud) by default" \
-    "defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false" 
+    "defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false"
 
 ask "Automatically quit printer app once the print jobs complete" \
     "defaults write com.apple.print.PrintingPrefs \"Quit When Finished\" -bool true"
