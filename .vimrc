@@ -42,7 +42,7 @@ Plug 'tpope/vim-commentary'
 " send mails from vim
 Plug 'vim-scripts/MailApp'
 " show git diff next to linenumbers
-"Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify'
 call plug#end()
 
 
@@ -52,11 +52,7 @@ call plug#end()
 " use syntax highlighting
 syntax enable
 
-" always dark
-set background=dark
-
-" make background the same as iterm2 background
-if $TERM_PROGRAM == 'iTerm.app'
+if (has("termguicolors"))
     set termguicolors
 endif
 
