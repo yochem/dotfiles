@@ -15,6 +15,17 @@ $ cd .install/
 $ bash install
 ```
 
+### What's inside?
+- **Bash**: autocompletion, some aliases, a nice looking prompt and improved
+input.
+- **Vim**: Like really, quite a lot.
+- **Other editors**: some modifications for Atom and Nano.
+- **Git**: Just some small aliases, nothing too special.
+- Configs for iterm2, nvim, terminalapp and Spectacle.
+- Some small scripts in `bin/`, like cloning all users repos, howto for when
+    you forget stuff, gititall to perform an action on all your repos, an
+    update script, switching dark mode on MacOS, etc.
+
 ### Thanks
 A big shout out to [Mathias Bynens](https://github.com/mathiasbynens/dotfiles)
 and [Lars Kappert](https://github.com/webpro/dotfiles) for their amazing work!
