@@ -2,7 +2,7 @@
 My configs for MacOS (and trying to keep it compatible for Linux). Also includes the most user-frienldy
 MacOS `defaults` installationscript ever.
 
-## Screenshots
+### Screenshots
 ![img](https://user-images.githubusercontent.com/23235841/53305538-e5928700-3882-11e9-8842-4d1245a82ce3.jpg)
 
 ### Installation
