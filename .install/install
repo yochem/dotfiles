@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 
+#
 # INSTALL EVERYTHING
 # Yochem van Rosmalen
 
@@ -62,7 +62,7 @@ install_pip() {
 
 # update existing `sudo` time stamp until installation is finished
 sudo -v
-while true; do 
+while true; do
     sudo -n true
     sleep 60
     kill -0 "$$" || exit
@@ -74,7 +74,7 @@ done 2>/dev/null &
 if ! [[ "$OSTYPE" =~ ^darwin ]]; then
     echo -e "${bad} Skipped: Homebrew (not running MacOS)\n"
 else
-    # Close any open System Preferences panes, to prevent them from 
+    # Close any open System Preferences panes, to prevent them from
     # overriding settings we’re about to change
     osascript -e 'tell application "System Preferences" to quit'
 
@@ -111,34 +111,47 @@ else
             tput cuu 1 && tput el
             echo -e "${bad} Update to new bash version?"
         fi
-
-        ###################
-        ####### DOCK ######
-        ###################
-        echo -en "${question} Change dock apps? "
-        read -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            tput cuu 1 && tput el
-            echo -e "${good} Change dock apps?"
-            dockutil --no-restart --remove all
-            dockutil --no-restart --add "/Applications/Brave Browser.app"
-            dockutil --no-restart --add "/Applications/Mail.app"
-            dockutil --no-restart --add "/Applications/Spotify.app"
-            dockutil --no-restart --add "/Applications/iTerm.app"
-            dockutil --no-restart --add "/Applications/WhatsApp.app"
-            dockutil --no-restart --add "/Applications/Telegram.app"
-            dockutil --no-restart --add "$HOME/Downloads" --view fan --display stack
-            killall Dock
-        else
-            tput cuu 1 && tput el
-            echo -e "${bad} Change dock apps?"
-        fi
     else
         tput cuu 1 && tput el
         echo -e "${bad} Install Homebrew and formulae?"
     fi
 
+    ###################
+    ####### DOCK ######
+    ###################
+    echo -en "${question} Change dock apps? "
+    read -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        tput cuu 1 && tput el
+        echo -e "${good} Change dock apps?"
+
+        # check if 3rd party apps are downloaded, else some Apple versions
+        apps=()
+        [ -e "/Applications/Brave Browser.app" ] && apps+=("Brave Browser") || apps+=("Safari")
+        [ -e "/Applications/Spark.app" ] && apps+=("Spark") || apps+=("Mail")
+        [ -e "/Applications/Spotify.app" ] && apps+=("Spotify")
+        [ -e "/Applications/iTerm.app" ] && apps+=("iTerm") || apps+=("Utilities/Terminal")
+        [ -e "/Applications/WhatsApp.app" ] && apps+=("WhatsApp")
+        [ -e "/Applications/Telegram.app" ] && apps+=("Telegram")
+
+        # build the dock
+        dockutil --no-restart --remove all
+        for ((i = 0; i < ${#apps[@]}; i++)); do
+            echo -e "    ${good} Adding ${apps[$i]} to dock"
+            dockutil --no-restart --add "/Applications/${apps[$i]}.app"
+        done
+        dockutil --no-restart --add "$HOME/Downloads" --view fan --display stack
+
+        # finally restart the dock after all --no-restarts
+        killall Dock
+
+        # stop using the apps variable
+        unset apps
+    else
+        tput cuu 1 && tput el
+        echo -e "${bad} Change dock apps?"
+    fi
 
     ###################
     ### MACDEFAULTS ###
@@ -155,7 +168,7 @@ else
         tput cuu 1 && tput el
         echo -e "${bad} Apply mac defaults? Be careful!"
     fi
-fi  
+fi
 
 
 ###################
@@ -250,7 +263,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo -e "${good} Install git-template?"
     hook_path="$HOME/.config/git/templates/hooks"
     mkdir -p $hook_path
-    curl -s https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > "$hook_path/commit-msg" && 
+    curl -s https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > "$hook_path/commit-msg" &&
     chmod +x "$hook_path/commit-msg"
 else
     tput cuu 1 && tput el
