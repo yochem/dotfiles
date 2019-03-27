@@ -624,7 +624,7 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 8</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/.iterm2</string>
+	<string>~/.config/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{720, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -664,7 +664,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>376 232 869 349 0 0 1440 877 </string>
+	<string>376 219 869 318 0 0 1440 877 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
 	<string>412 527 616 174 0 0 1440 877 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
@@ -672,9 +672,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 138 606 469 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>305 368 796 486 0 0 1440 877 </string>
+	<string>512 390 928 394 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>295 161 850 623 0 0 1440 877 </string>
+	<string>0 0 1440 878 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>303 262 738 504 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -788,11 +788,11 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.99999129772186279</real>
+				<real>1</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.99997437000274658</real>
+				<real>1</real>
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
@@ -866,26 +866,26 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.74901962280273438</real>
+				<real>1</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.69803923368453979</real>
+				<real>1</real>
 				<key>Red Component</key>
-				<real>0.67058825492858887</real>
+				<real>1</real>
 			</dict>
 			<key>Ansi 8 Color</key>
 			<dict>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.43921568989753723</real>
+				<real>0.51372549019607838</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.38823530077934265</real>
+				<real>0.46274509803921571</real>
 				<key>Red Component</key>
-				<real>0.36078432202339172</real>
+				<real>0.43529411764705883</real>
 			</dict>
 			<key>Ansi 9 Color</key>
 			<dict>
@@ -939,13 +939,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.74901962280273438</real>
+				<real>1</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.69803923368453979</real>
+				<real>1</real>
 				<key>Red Component</key>
-				<real>0.67058825492858887</real>
+				<real>1</real>
 			</dict>
 			<key>Character Encoding</key>
 			<integer>4</integer>
@@ -988,7 +988,7 @@
 				<key>Blue Component</key>
 				<real>1</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
 				<real>1</real>
 				<key>Red Component</key>
@@ -1011,13 +1011,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.92156862745098034</real>
+				<real>1</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.90588235294117647</real>
+				<real>1</real>
 				<key>Red Component</key>
-				<real>0.89803921568627454</real>
+				<real>1</real>
 			</dict>
 			<key>Guid</key>
 			<string>34931245-EC85-48BA-B92D-CA91B962C7D4</string>
@@ -2784,7 +2784,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/Yochem/.iterm2</string>
+	<string>/Users/Yochem/.config/iterm2</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -2802,7 +2802,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-02-28T21:32:24Z</date>
+	<date>2019-03-26T20:23:40Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Secure Input</key>
@@ -3690,7 +3690,7 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>3.2.7</string>
+	<string>3.2.8</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

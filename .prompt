@@ -1,19 +1,11 @@
 #!/usr/bin/env bash
 
 # Some colors to use for prompt
-if tput setaf 1 &>/dev/null; then
-    reset="\[$(tput sgr0)\]"
-    green="\[$(tput setaf 2)\]"
-    magenta="\[$(tput setaf 5)\]"
-    blue="\[$(tput setaf 75)\]"
-    bold="\[$(tput bold)\]"
-else
-    reset="\[\e[0m\]"
-    green="\[\033[01;38;5;002m\]"
-    magenta="\[\033[01;38;5;005m\]"
-    blue="\[\033[01;38;5;006m\]"
-    bold="\[\033[1m\]"
-fi
+reset="\[\033[0;97m\]"
+green="\[\033[0;92m\]"
+magenta="\[\033[01;38;5;005m\]"
+blue="\[\033[0;94m\]"
+bold="\[\033[1m\]"
 
 # check if git rpo and which branch
 prompt_git() {
@@ -38,8 +30,7 @@ PS1+="$reset"
 [ "$USER" == "root" ] && PS1+="$bold${magenta} root$reset"
 # if connected using SSH, show hostname
 [ -n "$SSH_CLIENT" ] && PS1+="$magenta@\h$reset:"
-PS1+="$blue"
-PS1+=" \w " # full path of cwd
+PS1+="$blue \w " # full path of cwd
 PS1+="$reset"
 PS1+="\$(prompt_git \"$green\" \"$reset\")" # show git branch
 PS1+="$reset"
