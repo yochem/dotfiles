@@ -16,15 +16,25 @@
 """""""""""""""""""""""
 "      PLUGINS        "
 """""""""""""""""""""""
-" if vim-plug is not downloaded, download it
-if empty(glob('~/.vim/autoload/plug.vim'))
+" download vim-plug for the right vim
+if has('nvim') && empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+elseif empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+if has('nvim')
+    let plugged_dir = '~/.local/share/nvim/plugged'
+else
+    let plugged_dir = '~/.vim/plugged'
+endif
+
 " all vim-plug plugins
-call plug#begin('~/.vim/plugged')
+call plug#begin(plugged_dir)
 " nice colorscheme
 Plug 'joshdick/onedark.vim'
 " better language syntax support
@@ -135,6 +145,9 @@ let mapleader = ','
 " replace more characters at once in visual mode
 vmap r "_dP
 
+" insert todo comment (uses vim-commentary to find current comment style)
+:command Todo :normal i TODO: <ESC>VgcxA
+
 " backspace in insert mode
 set backspace=indent,eol,start
 
@@ -212,9 +225,13 @@ set nospell
 let g:markdown_enable_spell_checking = 0
 
 " centralize backups and swaps
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-if exists("&undodir")
+if has('nvim')
+    set backupdir=~/.local/share/nvim/backups
+    set directory=~/.local/share/nvim/swaps
+    set undodir=~/.local/share/nvim/undo
+else
+    set backupdir=~/.vim/backups
+    set directory=~/.vim/swaps
     set undodir=~/.vim/undo
 endif
 
@@ -236,6 +253,7 @@ if has("autocmd")
     " some LaTeX settings
     au BufRead,BufNewFile *.tex setlocal filetype=tex
     au BufRead,BufNewFile *.{tex,txt,md} setlocal textwidth=78
+    au VimLeave *.tex silent !rm *.aux *.log *.out
 
     " start on top and in insertmode with commits
     au FileType gitcommit call setpos('.', [0, 1, 1, 0])
@@ -269,7 +287,9 @@ set autowrite
 
 " clear command output everytime when running
 set shellcmdflag=-lc
-set shell=~/.vim/clear_shell.sh
+if !has('nvim')
+    set shell=~/.vim/clear_shell.sh
+endif
 
 " compile / run current file
 nnoremap ® :!compile %<CR>
