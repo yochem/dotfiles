@@ -40,3 +40,4 @@ HISTCONTROL=ignoreboth
 SHELL_SESSION_HISTORY=0
 
 export ATOM_HOME="$HOME/.config/atom"
+export NLTK_DATA="$HOME/.local/share/nltk_data"

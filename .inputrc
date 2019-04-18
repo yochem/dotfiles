@@ -10,8 +10,5 @@ set completion-ignore-case on
 # show ambiguous files after just 1 tab press
 set show-all-if-ambiguous on
 
-# Enable history expansion with space
-Space:magic-space
-
 # intelligent completing
 set skip-completed-text on
