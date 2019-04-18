@@ -9,7 +9,10 @@ yt() { open "https://www.youtube.com/results?search_query=$1"; }
 
 
 # quickly edit a .config file
-cfg() { $EDITOR "$(fd --type file -d 2 "$1" "$HOME/.config" | sed 1q)"; }
+cfg() {
+    result="$(fd --type file -d 2 "$1" "$HOME/.config" | sed 1q)"
+    [ -n "$result" -a -f "$result" ] && "$EDITOR" "$result"
+}
 
 # View the local git repository on Github
 # Uses alias 'git url', as seen in git/.gitconfig
