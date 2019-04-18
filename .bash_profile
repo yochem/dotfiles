@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
-# first checking if iTerm. This fixes the issue of not recognising
-# $SSH_CLIENT without resourcing .bash_profile
 dotfiles=(
-    ~/.config/iterm2/iterm2_shell_integration.bash
     ~/.config/bash/prompt
     ~/.config/bash/exports
     ~/.config/bash/aliases
     ~/.config/bash/functions
     /usr/local/etc/profile.d/bash_completion.sh
-    /usr/local/etc/profile.d/autojump.sh
+    ~/.z.sh
 )
 
 # Load the shell dotfiles, and z.sh
