@@ -8,10 +8,9 @@ dotfiles=(
     ~/.config/bash/exports
     ~/.config/bash/aliases
     ~/.config/bash/functions
-    ~/.z.sh
     /usr/local/etc/profile.d/bash_completion.sh
+    /usr/local/etc/profile.d/autojump.sh
 )
-
 
 # Load the shell dotfiles, and z.sh
 for file in ${dotfiles[@]}; do
@@ -21,7 +20,7 @@ unset file
 unset dotfiles
 
 # load bash completion for commands
-[ -d /usr/local/etc/bash_completion.d ] && . /usr/local/etc/bash_completion.d/* 2>/dev/null
+[ -d /usr/local/etc/bash_completion.d ] && . /usr/local/etc/bash_completion.d/*
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
