@@ -253,6 +253,7 @@ if has("autocmd")
     " some LaTeX settings
     au BufRead,BufNewFile *.tex setlocal filetype=tex
     au BufRead,BufNewFile *.{tex,txt,md} setlocal textwidth=78
+    au Filetype tex command! W silent !pdflatex %
     au VimLeave *.tex silent !rm *.aux *.log *.out
 
     " start on top and in insertmode with commits
