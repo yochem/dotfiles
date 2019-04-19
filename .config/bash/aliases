@@ -31,22 +31,7 @@ alias ....="cd ../../.."
 if [[ "$OSTYPE" =~ ^darwin ]]; then
     # hub for git
     alias git=hub
-
-    # shorten things up
-    alias cask="brew cask"
-
-    # open apps
-    alias prefs="open -a System\ Preferences"
-
-    # silence ~/bin/airpods
-    alias airpods="airpods &>/dev/null"
-
-    # fix charging iPhone on MacBook (https://apple.stackexchange.com/a/334006)
-    alias chargephone="sudo killall -STOP -c usbd"
 fi
 
 # dot is my dotfiles repository
 alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME"
-
-# docker for NAO
-alias dnt="docker run --privileged -it -v`pwd -P`:/home/dnt/repo --name dnt --rm lukx19/dnt /bin/bash"

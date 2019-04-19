@@ -18,6 +18,7 @@ case "$1" in
         echo "6. ssh-copy-id -i ~/.ssh/KEY USER@HOSTNAME"
         ;;
     *usb* | *iphone)
+        # https://apple.stackexchange.com/a/334006
         echo "sudo killall -STOP -c usbd"
         ;;
     *test*)

@@ -1,5 +1,5 @@
 # syntax highlighting
-include ~/.nano/*.nanorc
+include ~/.config/nano/*.nanorc
 
 # linenumbers
 set linenumbers
@@ -55,18 +55,11 @@ set numbercolor normal
 set statuscolor brightnormal
 set titlecolor brightwhite
 
-# more natural way to copy
-bind M-C copytext all
-
 # easy way to list all files in working directory
 bind ^L "" all
 
 # ... and the more logical way to exit that
 bind ^X "" browser
-
-# how to scroll past end in nano...
-bind M-1 "=====================" main
-bind M-2 "---------------------" main
 
 # more natural way to undo
 bind ^Z undo main
