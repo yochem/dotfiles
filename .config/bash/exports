@@ -11,23 +11,12 @@ fi
 
 export EDITOR="$VISUAL"
 
-
 # add GNU core utils from brew to path
-export PATH="/Library/TeX/texbin:$PATH"
-export PATH="/Users/Yochem/Library/Python/3.7/bin:$PATH"
+export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 export PATH="/usr/local/Cellar/python/3.7.2/Frameworks/Python.framework/Versions/3.7/bin:$PATH"
-export PATH="/bin:$PATH"
-export PATH="/sbin:$PATH"
-export PATH="/usr/bin:$PATH"
-export PATH="/usr/sbin:$PATH"
-export PATH="$HOME/.nvm/versions/node/v8.11.1/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
-
-# set path to node_modules
-export NODE_PATH='/usr/local/lib/node_modules'
 
 # increase bash history size
 export HISTSIZE="32768"
@@ -39,5 +28,14 @@ HISTCONTROL=ignoreboth
 # (https://stackoverflow.com/questions/32418438/how-can-i-disable-bash-sessions-in-os-x-el-capitan)
 SHELL_SESSION_HISTORY=0
 
-export ATOM_HOME="$HOME/.config/atom"
-export NLTK_DATA="$HOME/.local/share/nltk_data"
+# because some apps love to have their config files in the home directory,
+# but I don't
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export ATOM_HOME="$XDG_CONFIG_HOME/atom"
+export NLTK_DATA="$XDG_DATA_HOME/nltk"
+export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
+export LESSHISTFILE="$XDG_DATA_HOME/less/less_history"
+export HISTFILE="$XDG_DATA_HOME/bash/bash_history"
+export _Z_DATA="$XDG_DATA_HOME/z/z_data"

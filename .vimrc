@@ -111,11 +111,15 @@ set colorcolumn=79
 " enable line numbers
 set number
 
-" Start scrolling five lines before the horizontal window border
+" Start scrolling five lines before the vertical window border
 set scrolloff=5
+set sidescroll=1
+set nowrap
 
 " add empty line without leaving normal mode
 set timeoutlen=250
+
+" add empty line above or below
 nmap oo m`o<Esc>``
 nmap OO m`O<Esc>``
 
@@ -153,9 +157,6 @@ set backspace=indent,eol,start
 
 " remove trailing whitespaces
 nnoremap W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
-" use tab for indention
-nnoremap <tab> V>>
 
 " saving one key with navigating through splits
 nnoremap <C-h> <C-w>h

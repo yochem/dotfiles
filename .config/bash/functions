@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
 # open python server
-server() { open "http://localhost:$1" && python -m SimpleHTTPServer "$1"; }
+server() { s="${1:-8000}"; open "http://localhost:$s" && python -m SimpleHTTPServer "$s"; }
 phpserver() { open "http://localhost:$1" && php -S "localhost:$1"; }
 
 # search something on youtube
 yt() { open "https://www.youtube.com/results?search_query=$1"; }
-
 
 # quickly edit a .config file
 cfg() {
@@ -40,9 +39,6 @@ g() {
         git --git-dir="$HOME/.dot/" --work-tree="$HOME" "$@"
     fi
 }
-
-# print a markdown file, rendered by pandoc
-printmd() { pandoc -s "$1" -o "temp.pdf" && lpr "temp.pdf" && rm "temp.pdf"; }
 
 # gi macos gives the gitignore for macos.
 # Use gi macos >> .gitignore to make file
