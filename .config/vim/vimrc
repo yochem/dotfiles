@@ -21,16 +21,16 @@ if has('nvim') && empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
     silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-elseif empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+elseif empty(glob('~/.local/share/vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/vim/autoload/plug.vim --create-dirs
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 if has('nvim')
-    let plugged_dir = '~/.local/share/nvim/plugged'
+    let plugged_dir = '$XDG_DATA_HOME/nvim/plugged'
 else
-    let plugged_dir = '~/.vim/plugged'
+    let plugged_dir = '$XDG_DATA_HOME/vim/plugged'
 endif
 
 " all vim-plug plugins
@@ -113,8 +113,6 @@ set number
 
 " Start scrolling five lines before the vertical window border
 set scrolloff=5
-set sidescroll=1
-set nowrap
 
 " add empty line without leaving normal mode
 set timeoutlen=250
@@ -225,17 +223,16 @@ filetype plugin on
 set nospell
 let g:markdown_enable_spell_checking = 0
 
-" centralize backups and swaps
+" centralize backups and swaps (and follow XDG standard)
 if has('nvim')
-    set backupdir=~/.local/share/nvim/backups
-    set directory=~/.local/share/nvim/swaps
-    set undodir=~/.local/share/nvim/undo
+    set backupdir=$XDG_CACHE_HOME/nvim/backups
+    set directory=$XDG_CACHE_HOME/nvim/swaps
+    set undodir=$XDG_CACHE_HOME/nvim/undo
 else
-    set backupdir=~/.vim/backups
-    set directory=~/.vim/swaps
-    set undodir=~/.vim/undo
+    set backupdir=$XDG_CACHE_HOME/vim/backups
+    set directory=$XDG_CACHE_HOME/vim/swaps
+    set undodir=$XDG_CACHE_HOME/vim/undo
 endif
-
 
 """""""""""""""""""""""
 "    OPENING FILES    "
