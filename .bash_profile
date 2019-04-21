@@ -7,6 +7,7 @@ dotfiles=(
     ~/.config/bash/functions
     /usr/local/etc/profile.d/bash_completion.sh
     ~/.z.sh
+    ~/.config/iterm2/iterm2_shell_integration.bash
 )
 
 # Load the shell dotfiles, and z.sh

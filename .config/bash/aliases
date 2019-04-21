@@ -16,6 +16,8 @@ alias grep="grep --color"
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -v"
+alias p="python3"
+alias p2="python"
 
 # reload bash profile and stuff
 alias reload="source $HOME/.bash_profile"
@@ -32,6 +34,9 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     # hub for git
     alias git=hub
 fi
+
+# start writing a mail in /tmp
+alias newmail="$VISUAL -c 'set ft=MailApp' /tmp/mail-`date +%s`"
 
 # dot is my dotfiles repository
 alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME"
