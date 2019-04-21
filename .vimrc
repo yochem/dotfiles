@@ -21,8 +21,8 @@ if has('nvim') && empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
     silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-elseif empty(glob('~/.local/share/vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.local/share/vim/autoload/plug.vim --create-dirs
+elseif empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -30,7 +30,7 @@ endif
 if has('nvim')
     let plugged_dir = '$XDG_DATA_HOME/nvim/plugged'
 else
-    let plugged_dir = '$XDG_DATA_HOME/vim/plugged'
+    let plugged_dir = '~/.vim/plugged'
 endif
 
 " all vim-plug plugins
@@ -162,6 +162,12 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" use tab to choose an element from completion list
+inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
+
+" start typing after a word, not a letter
+nnoremap <leader>a ea
+
 
 """""""""""""""""""""""
 "      MODERNIZE      "
@@ -191,7 +197,10 @@ let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 " toggle NerdTree
-map <C-f> :NERDTreeToggle<CR>
+map <leader>f :NERDTreeToggle<CR>
+
+" use <Tab> to complete code
+let g:kite_tab_complete=1
 
 " update faster
 set updatetime=100
@@ -229,9 +238,9 @@ if has('nvim')
     set directory=$XDG_CACHE_HOME/nvim/swaps
     set undodir=$XDG_CACHE_HOME/nvim/undo
 else
-    set backupdir=$XDG_CACHE_HOME/vim/backups
-    set directory=$XDG_CACHE_HOME/vim/swaps
-    set undodir=$XDG_CACHE_HOME/vim/undo
+    set backupdir=~/.vim/backups
+    set directory=~/.vim/swaps
+    set undodir=~/.vim/undo
 endif
 
 """""""""""""""""""""""
@@ -251,7 +260,7 @@ if has("autocmd")
     " some LaTeX settings
     au BufRead,BufNewFile *.tex setlocal filetype=tex
     au BufRead,BufNewFile *.{tex,txt,md} setlocal textwidth=78
-    au Filetype tex command! W silent !pdflatex %
+    au Filetype tex nnoremap <leader>w :!pdflatex %<CR>
     au VimLeave *.tex silent !rm *.aux *.log *.out
 
     " start on top and in insertmode with commits
@@ -292,9 +301,6 @@ endif
 
 " compile / run current file
 nnoremap ® :!compile %<CR>
-
-" set my main mail
-let MailApp_from='Yochem van Rosmalen <yochem@icloud.com>'
 
 
 """""""""""""""""""""""
