@@ -14,7 +14,7 @@ Especially on MacOS.
 `System Preferences > Dock > Prefer tabs when opening documents > Always`
 
 ### Statusbar
-Decide what to put in statusbar. Currently: 
+Decide what to put in statusbar. Currently:
 - Pulse Secure
 - Spectacle
 - Drive

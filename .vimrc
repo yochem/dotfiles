@@ -50,7 +50,7 @@ Plug 'tpope/vim-fugitive'
 " comment blocks of code
 Plug 'tpope/vim-commentary'
 " send mails from vim
-Plug 'vim-scripts/MailApp'
+Plug '~/dev/vim-mail'
 " show git diff next to linenumbers
 Plug 'mhinz/vim-signify'
 call plug#end()
@@ -111,6 +111,9 @@ set colorcolumn=79
 " enable line numbers
 set number
 
+" easy jumping between lines
+set relativenumber
+
 " Start scrolling five lines before the vertical window border
 set scrolloff=5
 
@@ -147,14 +150,11 @@ let mapleader = ','
 " replace more characters at once in visual mode
 vmap r "_dP
 
-" insert todo comment (uses vim-commentary to find current comment style)
-:command Todo :normal i TODO: <ESC>VgcxA
-
 " backspace in insert mode
 set backspace=indent,eol,start
 
 " remove trailing whitespaces
-nnoremap W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+command W let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>
 
 " saving one key with navigating through splits
 nnoremap <C-h> <C-w>h
@@ -162,11 +162,11 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" use tab to choose an element from completion list
-inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
-
 " start typing after a word, not a letter
 nnoremap <leader>a ea
+
+" don't higlight after jumping to definition
+nnoremap gd gd:noh<CR>
 
 
 """""""""""""""""""""""
@@ -243,6 +243,9 @@ else
     set undodir=~/.vim/undo
 endif
 
+" Use my email as default
+let g:MailApp_from = 'yochem@icloud.com'
+
 """""""""""""""""""""""
 "    OPENING FILES    "
 """""""""""""""""""""""
@@ -258,10 +261,16 @@ if has("autocmd")
     au BufNewFile,BufRead *.md setlocal filetype=markdown
 
     " some LaTeX settings
+    function CreateBib()
+        let _fn=expand('%:r')
+        execute '!pdflatex %; bibtex ' . _fn . '; pdflatex %; pdflatex %'
+    endfunction
+
     au BufRead,BufNewFile *.tex setlocal filetype=tex
     au BufRead,BufNewFile *.{tex,txt,md} setlocal textwidth=78
-    au Filetype tex nnoremap <leader>w :!pdflatex %<CR>
-    au VimLeave *.tex silent !rm *.aux *.log *.out
+    au Filetype tex nnoremap <leader>w :silent !pdflatex %<CR>
+    au Filetype tex nnoremap <leader>W :call CreateBib()<CR>
+    au VimLeave *.tex silent !rm *.aux *.log *.out *.bbl *.blg
 
     " start on top and in insertmode with commits
     au FileType gitcommit call setpos('.', [0, 1, 1, 0])
@@ -300,7 +309,7 @@ if !has('nvim')
 endif
 
 " compile / run current file
-nnoremap ® :!compile %<CR>
+nnoremap <leader>r :!compile %<CR>
 
 
 """""""""""""""""""""""
