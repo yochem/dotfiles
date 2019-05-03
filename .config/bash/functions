@@ -40,6 +40,7 @@ viewgh() {
 # before I used 'dot' as alias for my dotfiles repo but that's way to confusing
 g() {
     if git status &>/dev/null; then
+        echo "Use 'git', not 'g' loser"
         git "$@"
     else
         git --git-dir="$HOME/.dot/" --work-tree="$HOME" "$@"
@@ -70,3 +71,6 @@ manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
 
 # move to trash
 thrash() { mv -f "$1" "$HOME/.Trash/$1"; }
+
+# grep but output all lines
+highlight() { grep --color -i -E "$1|$" "${@:1}"; }
