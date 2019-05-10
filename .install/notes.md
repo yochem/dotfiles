@@ -43,3 +43,5 @@ Decide what to put in statusbar. Currently:
 - `Downloads`
 
 ### set up ssh connections
+
+### Set up LaTeX
