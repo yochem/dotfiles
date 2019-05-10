@@ -129,9 +129,10 @@ else
         # check if 3rd party apps are downloaded, else some Apple versions
         apps=()
         [ -e "/Applications/Brave Browser.app" ] && apps+=("Brave Browser") || apps+=("Safari")
-        [ -e "/Applications/Spark.app" ] && apps+=("Spark") || apps+=("Mail")
+        [ -e "/Applications/Canary.app" ] && apps+=("Canary") || apps+=("Mail")
         [ -e "/Applications/Spotify.app" ] && apps+=("Spotify")
         [ -e "/Applications/iTerm.app" ] && apps+=("iTerm") || apps+=("Utilities/Terminal")
+        [ -e "/Applications/Preview.app" ] && apps+=("Preview")
         [ -e "/Applications/WhatsApp.app" ] && apps+=("WhatsApp")
         [ -e "/Applications/Telegram.app" ] && apps+=("Telegram")
 
