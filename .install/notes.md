@@ -30,7 +30,7 @@ Decide what to put in statusbar. Currently:
 
 ### Logins
 - Lastpass
-- Google Drive (and correct path: `~/drive/`)
+- Google Drive (and correct path: `~/drive/` (do this before install script))
 - Dropbox
 - Spotify
 
@@ -45,3 +45,6 @@ Decide what to put in statusbar. Currently:
 ### set up ssh connections
 
 ### Set up LaTeX
+(should be done with homebrew.. I think)
+
+### Download Microsoft Office (UvA)

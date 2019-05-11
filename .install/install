@@ -16,7 +16,9 @@ install_brew() {
     xcode-select --install
 
     # install brew
-    ruby -e "$(curl -fsL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    if ! command -v brew >/dev/null 2>&1; then
+        ruby -e "$(curl -fsL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
 
     brew bundle --file="$HOME/.install/Brewfile" || echo "Can not find Brewfile"
 }
@@ -197,10 +199,10 @@ if type atom &>/dev/null && type apm &>/dev/null; then
     read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        if [[ $(ls) =~ atom_packages.txt ]]; then
+        if [ -r "$HOME/.install/atom_packages.txt" ]; then
             tput cuu 1 && tput el
             echo -e "${good} Install Atom packages?"
-            apm install --package-file atom_packages.txt
+            apm install --package-file "$HOME/.install/atom_packages.txt"
             apm upgrade -c=false
         else
             tput cuu 1 && tput el
@@ -269,6 +271,42 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 else
     tput cuu 1 && tput el
     echo -e "${bad} Install git-template?"
+fi
+
+##################
+## (N)VIM DIRS ###
+##################
+mkdir -p "$HOME/.cache/nvim/backups"
+mkdir -p "$HOME/.cache/nvim/swaps"
+mkdir -p "$HOME/.cache/nvim/undo"
+mkdir -p "$HOME/.vim/backups"
+mkdir -p "$HOME/.vim/swaps"
+mkdir -p "$HOME/.vim/undo"
+
+##################
+#### SSH KEYS ####
+##################
+echo -en "${question} Generate ssh keys? "
+read -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    tput cuu 1 && tput el
+    echo -e "${good} Generate ssh keys?"
+    ssh-keygen -t ed25519 -a 100
+    cat << EOF >> "$HOME/.ssh/config"
+Host *
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/id_ed25519
+
+Host github.com
+    HostName github.com
+EOF
+    eval "$(ssh-agent -s)"
+    ssh-add -K ~/.ssh/id_ed25519
+    echo "Don't forget to add the public key to your Github account"
+else
+    tput cuu 1 && tput el
+    echo -e "${bad} Generate ssh keys?"
 fi
 
 # reload for all changes to appear

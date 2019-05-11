@@ -82,13 +82,6 @@ ask "Enable tap to click for this user and for the login screen" \
 ask "Use natural scrolling" \
     "defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true"
 
-ask "Use scroll gesture with the Ctrl (^) modifier key to zoom" \
-    "defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true" \
-    "defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144"
-
-ask "Follow the keyboard focus while zoomed in" \
-    "defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true"
-
 ask "Set a blazingly fast keyboard repeat rate" \
     "defaults write NSGlobalDomain KeyRepeat -int 2" \
     "defaults write NSGlobalDomain InitialKeyRepeat -int 15"
@@ -249,7 +242,7 @@ ask "Enable Secure Keyboard Entry in Terminal.app" \
     # See: https://security.stackexchange.com/a/47786/8918
 
 ask "Load iTerm2 preferences from $HOME/.iterm2" \
-    "defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string \"$HOME/.iterm2\"" \
+    "defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string \"$HOME/.config/iterm2\"" \
     "defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true "
 
 ###############################################################################
