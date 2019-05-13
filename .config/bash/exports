@@ -11,6 +11,9 @@ fi
 
 export EDITOR="$VISUAL"
 
+# view manpage in neovim
+export MANPAGER='nvim +Man!'
+
 # add GNU core utils from brew to path
 export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 export PATH="/usr/local/Cellar/python/3.7.2/Frameworks/Python.framework/Versions/3.7/bin:$PATH"
@@ -20,6 +23,9 @@ export PATH="$HOME/bin:$PATH"
 
 # increase bash history size
 export HISTSIZE="32768"
+
+# add time stamp to bash history
+export HISTTIMEFORMAT="%c "
 
 # don't put duplicates in history
 HISTCONTROL=ignoreboth
