@@ -6,7 +6,7 @@ dotfiles=(
     ~/.config/bash/aliases
     ~/.config/bash/functions
     /usr/local/etc/profile.d/bash_completion.sh
-    ~/.z.sh
+    ~/bin/z.sh
     ~/.config/iterm2/iterm2_shell_integration.bash
 )
 

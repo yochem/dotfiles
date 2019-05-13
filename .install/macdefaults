@@ -87,7 +87,7 @@ ask "Set a blazingly fast keyboard repeat rate" \
     "defaults write NSGlobalDomain InitialKeyRepeat -int 15"
 
 ask "Set language to En and Nl" \
-    "defaults write NSGlobalDomain AppleLanguages -array \"en\" \"nl\""
+    "defaults write NSGlobalDomain AppleLanguages -array \"en\""
 
 ask "Use centimeters and metric" \
     "defaults write NSGlobalDomain AppleMeasurementUnits -string \"Centimeters\"" \
@@ -275,4 +275,3 @@ ask "Use the system-native print preview dialog" \
 
 echo
 echo "Done. Note that some of these changes require a logout/restart to take effect."
-exit 0
