@@ -40,7 +40,6 @@ viewgh() {
 # before I used 'dot' as alias for my dotfiles repo but that's way to confusing
 g() {
     if git status &>/dev/null; then
-        echo "Use 'git', not 'g' loser"
         git "$@"
     else
         git --git-dir="$HOME/.dot/" --work-tree="$HOME" "$@"
