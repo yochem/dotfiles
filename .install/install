@@ -249,7 +249,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     tput cuu 1 && tput el
     echo -e "${good} Install z.sh?"
     sudo curl -s "https://raw.githubusercontent.com/rupa/z/master/z.1" > "/usr/local/share/man/man1/z.1"
-    curl -s "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "$HOME/.z.sh"
+    curl -s "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "$HOME/bin/z.sh"
+    mkdir -p "$HOME/.local/share/z"
 else
     tput cuu 1 && tput el
     echo -e "${bad} Install z.sh?"
