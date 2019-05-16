@@ -41,6 +41,10 @@ ask() {
     fi
 }
 
+ask "Disable the sound effect when connecting charger" \
+    "defaults write com.apple.PowerChime ChimeOnNoHardware -bool true" \
+    "killall PowerChime"
+
 ask "Disable the sound effects on boot" \
     "sudo nvram SystemAudioVolume=\" \""
 

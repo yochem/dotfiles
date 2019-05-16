@@ -53,8 +53,11 @@ Plug 'tpope/vim-commentary'
 Plug '~/dev/vim-mail'
 " show git diff next to linenumbers
 Plug 'mhinz/vim-signify'
+" stop using j and k so much
+Plug 'takac/vim-hardtime'
 call plug#end()
 
+let g:hardtime_default_on = 1
 
 """""""""""""""""""""""
 "     COLORSCHEME     "
@@ -135,7 +138,7 @@ set gdefault
 set hlsearch
 
 " ignore cases of search
-set ignorecase
+set smartcase
 
 " highlight dynamically
 set incsearch
@@ -167,6 +170,9 @@ nnoremap <leader>a ea
 
 " don't higlight after jumping to definition
 nnoremap gd gd:noh<CR>
+
+" when jumping to definition place it in the middle of the screen
+nnoremap n nzz
 
 
 """""""""""""""""""""""

@@ -70,7 +70,7 @@
     untracked = red
 
 [hub]
-    protocol = ssh
+	protocol = ssh
 
 [filter "lfs"]
     clean = git-lfs clean -- %f
