@@ -72,4 +72,4 @@ manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
 thrash() { mv -f "$1" "$HOME/.Trash/$1"; }
 
 # grep but output all lines
-highlight() { grep --color -i -E "$1|$" "${@:1}"; }
+highlight() { grep --color -i -E "$1|$"; }
