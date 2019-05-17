@@ -53,11 +53,8 @@ Plug 'tpope/vim-commentary'
 Plug '~/dev/vim-mail'
 " show git diff next to linenumbers
 Plug 'mhinz/vim-signify'
-" stop using j and k so much
-Plug 'takac/vim-hardtime'
 call plug#end()
 
-let g:hardtime_default_on = 1
 
 """""""""""""""""""""""
 "     COLORSCHEME     "

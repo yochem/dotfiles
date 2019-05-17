@@ -14,6 +14,11 @@ export EDITOR="$VISUAL"
 # view manpage in neovim
 export MANPAGER='nvim +Man!'
 
+# brave as browser
+[ -d "/Applications/Brave Browser.app" ] && {
+    export BROWSER="open"
+}
+
 # add GNU core utils from brew to path
 export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 export PATH="/usr/local/Cellar/python/3.7.2/Frameworks/Python.framework/Versions/3.7/bin:$PATH"
@@ -33,18 +38,3 @@ HISTCONTROL=ignoreboth
 # don't let Terminal.app write session history
 # (https://stackoverflow.com/questions/32418438/how-can-i-disable-bash-sessions-in-os-x-el-capitan)
 SHELL_SESSION_HISTORY=0
-
-# because some apps love to have their config files in the home directory,
-# but I don't
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-export ATOM_HOME="$XDG_CONFIG_HOME/atom"
-export NLTK_DATA="$XDG_DATA_HOME/nltk"
-export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
-export LESSHISTFILE="$XDG_DATA_HOME/less/history"
-export HISTFILE="$XDG_DATA_HOME/bash/history"
-export _Z_DATA="$XDG_DATA_HOME/z/z_data"
-export IPYTHONDIR="$XDG_DATA_HOME/ipyton"
-export JUPYTER_CONFIG_DIR="$XDG_DATA_HOME/jupyter"
-export PYTHONHISTFILE="$XDG_DATA_HOME/python/history"

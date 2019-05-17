@@ -10,8 +10,8 @@ yt() { open "https://www.youtube.com/results?search_query=${@// /+}"; }
 # quickly edit a .config/ file
 cfg() {
     # first check if full file name is entered because it's fast
-    if [ -f "$XDG_CONFIG_HOME"/*/$1 ]; then
-        "$VISUAL" "$XDG_CONFIG_HOME"/*/$1
+    if [ -f "$XDG_CONFIG_HOME/$1"* ]; then
+        "$VISUAL" "$XDG_CONFIG_HOME/$1"*
     else
         # else use fd and edit the first result
         result="$(fd --type file -d 2 "$1" "$XDG_CONFIG_HOME" | sed 1q)"
