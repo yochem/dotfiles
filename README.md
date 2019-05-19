@@ -23,14 +23,16 @@ Where the users press 'y' to accept or any other key to skip (no key pressed
 at creating the the dock).
 
 ### What's inside?
-Most of it can be found in `.config/`. I try to comply to the XDG standard as
-much as possible.
-- **Bash**: autocompletion, some aliases, a nice looking prompt and improved
-input.
-- **Vim**: Like really, quite a lot.  **Other editors**: some modifications
-- for Atom and Nano.  **Git**: Just some small aliases, nothing too special.
-- Configs for iterm2, nvim, terminalapp and Spectacle.  Some small scripts in
-- `bin/`, like cloning all users repos, `howto` for when
+I try to comply to the [XDG
+standard](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+as much as possible.
+- **Bash**: autocompletion, some aliases, a nice looking prompt with git
+    branch and improved inputrc.
+- **Vim**: Like really, quite a lot.
+- **Other editors**: some modifications for Atom and Nano.
+- **Git**: Just some small aliases, nothing too special.
+- Configs for some other apps in `.config/`.
+- Some script in `.local/bin/`, like cloning all users repos, `howto` for when
     you forget stuff, `gititall` to perform an action on all your repos, an
     update script, switching dark mode on MacOS, etc.
 
