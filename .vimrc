@@ -196,7 +196,7 @@ set ttyfast
 set encoding=utf-8
 
 " makes starting up faster
-let g:python_host_prog = '/usr/local/bin/python'
+let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 " toggle NerdTree

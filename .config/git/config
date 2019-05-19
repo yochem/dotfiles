@@ -11,6 +11,9 @@
 [pager]
     diff = true
 
+[help]
+    autocorrect = 1
+
 [alias]
     # View the current working tree status using the short format
     s = status -s
@@ -59,6 +62,9 @@
 [log]
     date = auto:human
 
+[commit]
+    template = ~/.config/git/templates/commit
+
 [color "branch"]
     current = green
     local = normal
@@ -70,7 +76,7 @@
     untracked = red
 
 [hub]
-	protocol = ssh
+    protocol = ssh
 
 [filter "lfs"]
     clean = git-lfs clean -- %f
