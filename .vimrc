@@ -17,10 +17,12 @@
 "      PLUGINS        "
 """""""""""""""""""""""
 " download vim-plug for the right vim
-if has('nvim') && empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+if has('nvim')
+    if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+        silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    endif
 elseif empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -276,7 +278,7 @@ if has("autocmd")
     au VimLeave *.tex silent !rm *.aux *.log *.out *.bbl *.blg
 
     " start on top and in insertmode with commits
-    au FileType gitcommit call setpos('.', [0, 1, 1, 0])
+    au FileType gitcommit call setpos('.', [0, 2, 1, 0])
     au FileType gitcommit startinsert
 
     " stop auto commenting newline

@@ -5,9 +5,6 @@
 [init]
     templatedir = ~/.config/git/templates/hooks
 
-[core]
-    pager = ~/bin/diff-highlight | less
-
 [pager]
     diff = true
 
@@ -57,7 +54,7 @@
     last = log -1 HEAD
 
     # git status for every local branch
-    branch-status = !~/bin/branch_status
+    branch-status = !branch_status
 
 [log]
     date = auto:human
