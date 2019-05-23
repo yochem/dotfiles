@@ -26,7 +26,7 @@ at creating the the dock).
 I try to comply to the [XDG
 standard](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
 as much as possible. Because of this, most configuration can be found in
-`.config/`. This repo also contains my bin (`.local/bin`), which contains some
+`.config/`. This repo also contains my bin (`.local/bin/`), which contains some
 small scripts like cloning all users repos, `howto` for when you forget stuff,
 `gititall` to perform an action on all your repos, an update script, switching
 dark mode on MacOS, etc.
@@ -46,4 +46,5 @@ whatever you like with it.
 > There is a computer disease that anybody who works with computers knows
 > about. It's a very serious disease and it interferes completely with the
 > work. The trouble with computers is that you 'play' with them.
-> - Richard Feynman
+
+-- Richard Feynman
