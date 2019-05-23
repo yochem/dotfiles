@@ -164,14 +164,16 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" start typing after a word, not a letter
-nnoremap <leader>a ea
-
 " don't higlight after jumping to definition
 nnoremap gd gd:noh<CR>
 
 " when jumping to definition place it in the middle of the screen
 nnoremap n nzz
+
+" go through visual lines with j and k but don't mess with 10k etc.
+" source: http://stackoverflow.com/a/21000307/2580955
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
 
 
 """""""""""""""""""""""
