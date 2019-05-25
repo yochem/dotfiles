@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 dotfiles=(
     ~/.config/bash/xdg
     ~/.config/bash/prompt

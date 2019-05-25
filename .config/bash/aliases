@@ -6,9 +6,6 @@ command -V gls &>/dev/null && ls_type="gls"
 alias ls="$ls_type --group-directories-first -1F --color"
 unset ls_type
 
-# remove LaTeX helpfiles
-alias rmtex="rm *.aux *.bbl *.blg *.log *.out"
-
 # always color grep
 alias grep="grep --color"
 
@@ -23,7 +20,7 @@ alias p2="python"
 alias reload="source $HOME/.bash_profile"
 
 # use $VISUAL as editor (it's mostly vim, so i've always used 'v'
-alias v=$VISUAL
+alias vi=$VISUAL
 
 # easier way to cd back one level
 alias ..="cd .."

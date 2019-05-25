@@ -155,6 +155,8 @@ ask "Show the /Volumes folder" \
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #
 ###############################################################################
+ask "Show battery percentage in menubar" \
+    "defaults write com.apple.menuextra.battery ShowPercent YES"
 
 ask "Minimize windows into their application’s icon" \
     "defaults write com.apple.dock minimize-to-application -bool true"
