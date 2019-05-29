@@ -8,7 +8,7 @@ includes the most user-frienldy MacOS `defaults` installation script ever.
 ### Installation
 If you just want to install the dotfiles:
 ```bash
-$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/.install/dotinstall | $(which bash)
+$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/.local/bin/dotinstall | $(which bash)
 ```
 and installing Brew packages, Pip packages, Changing MacOS `defaults`,
 new Bash, change the Dock and even more:
@@ -21,6 +21,22 @@ Which looks something like:
 
 Where the users press 'y' to accept or any other key to skip (no key pressed
 at creating the the dock).
+
+When installing on a Mac, don't forget these steps, too:
+#### Three finger drag
+`System Preferences > Accessibility > Mouse & Trackpad > Trackpad options > Enable dragging`
+
+#### Remap capslock key to escape
+`System Preferences > Keyboard > Modifier Keys... > Caps Lock Key`
+
+#### Add other accounts to mac
+`System Preferences > Internet Accounts`
+
+#### Prefer opening in tabs instead of new window
+`System Preferences > Dock > Prefer tabs when opening documents > Always`
+
+- Sidebar Finder
+- set up ssh connections
 
 ### What's inside?
 I try to comply to the [XDG
