@@ -19,6 +19,21 @@ cfg() {
     fi
 }
 
+# make a directory and cd into it
+mkcd() { mkdir "$1"; cd "$1"; }
+
+# open a manual as pdf
+manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
+
+# move to trash
+thrash() { mv -f "$1" "$HOME/.Trash/$1"; }
+
+# grep with color but output all lines
+highlight() { grep --color -i -E "$1|$"; }
+
+# go to a selected directory from the z data file
+fzfz() { builtin cd $(z | fzf | awk '{print $2}');  }
+
 # View the local git repository on Github
 # Uses alias 'git url', as seen in git/.gitconfig
 # 'open' opens an url in the browser on macOS. Not tested on linux
@@ -61,15 +76,3 @@ clone_all_from() {
     cut -d \" -f 4 |
     xargs -L1 -P5 git clone;
 }
-
-# make a directory and cd into it
-mkcd() { mkdir "$1"; cd "$1"; }
-
-# open a manual as pdf
-manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
-
-# move to trash
-thrash() { mv -f "$1" "$HOME/.Trash/$1"; }
-
-# grep but output all lines
-highlight() { grep --color -i -E "$1|$"; }

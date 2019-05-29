@@ -64,12 +64,19 @@ call plug#end()
 " use syntax highlighting
 syntax enable
 
-if (has("termguicolors"))
-    set termguicolors
-endif
-
 " use atom's one-dark theme
-colorscheme onedark
+if $ITERM_PROFILE == 'One-Dark' || !empty($SSH_ClIENT)
+    colorscheme onedark
+
+    if has("termguicolors")
+        set termguicolors
+    endif
+else
+    highlight Normal ctermfg=15
+    highlight LineNr ctermfg=8
+    highlight ColorColumn ctermbg=8
+    highlight Comment ctermfg=8
+endif
 
 
 """""""""""""""""""""""
@@ -334,7 +341,6 @@ set stl+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
 set stl+=%#Cursor#%{(mode()=='i')?'\ \ INSERT\ ':''}
 set stl+=%#DiffDelete#%{(mode()==?'r')?'\ \ REPLACE\ ':''}
 set stl+=%#DiffChange#%{(mode()==?'v')?'\ \ VISUAL\ ':''}
-set stl+=%#DiffChange#%{(mode()=='')?'\ \ VISUAL\ ':''}
 set stl+=%#DiffChange#%{(mode()==?'s')?'\ \ SELECT\ ':''}
 set stl+=%#DiffChange#%{(mode()=='t')?'\ \ TERM\ ':''}
 
