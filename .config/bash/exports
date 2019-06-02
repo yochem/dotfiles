@@ -18,7 +18,7 @@ export MANPAGER='nvim +Man!'
 export BROWSER="open"
 
 # add local bin to path
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 
 # increase bash history size
 export HISTSIZE="32768"

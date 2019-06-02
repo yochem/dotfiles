@@ -55,6 +55,8 @@ Plug 'tpope/vim-commentary'
 Plug '~/dev/vim-mail'
 " show git diff next to linenumbers
 Plug 'mhinz/vim-signify'
+" Snow colorscheme
+Plug 'nightsense/snow'
 call plug#end()
 
 
@@ -65,13 +67,21 @@ call plug#end()
 syntax enable
 
 " use atom's one-dark theme
-if $ITERM_PROFILE == 'One-Dark' || !empty($SSH_ClIENT)
-    colorscheme onedark
-
+if $TERM_PROGRAM == 'iTerm.app' || !empty($SSH_CLIENT)
+    " better colors in iTerm2
     if has("termguicolors")
         set termguicolors
     endif
+
+    " decide which colorscheme to choose based on terminal theme
+    if $ITERM_PROFILE == 'One-Dark'
+        colorscheme onedark
+    elseif $ITERM_PROFILE == 'Snow'
+        set background=dark
+        colorscheme snow
+    endif
 else
+    colorscheme desert
     highlight Normal ctermfg=15
     highlight LineNr ctermfg=8
     highlight ColorColumn ctermbg=8
@@ -144,11 +154,13 @@ set gdefault
 set hlsearch
 
 " ignore cases of search
-set smartcase
+set ignorecase
 
 " highlight dynamically
 set incsearch
 
+" go to top when end of file is reached
+set wrapscan
 
 """""""""""""""""""""""
 "       TYPING        "

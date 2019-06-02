@@ -13,7 +13,7 @@ $ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/.local/bin/
 and installing Brew packages, Pip packages, Changing MacOS `defaults`,
 new Bash, change the Dock and even more:
 ```bash
-$ bash ~/.install/install
+$ $HOME/.local/bin/install
 ```
 Which looks something like:
 

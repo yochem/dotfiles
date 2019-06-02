@@ -17,7 +17,12 @@ unset file
 unset dotfiles
 
 # load bash completion for commands
-[ -d /usr/local/etc/bash_completion.d ] && . /usr/local/etc/bash_completion.d/*
+if [[ -d /usr/local/etc/bash_completion.d ]]; then
+    for file in /usr/local/etc/bash_completion.d/*; do
+        source $file
+    done
+    unset file
+fi
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
