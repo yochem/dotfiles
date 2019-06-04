@@ -3,7 +3,7 @@ reset=$(tput sgr0)
 orangebold=$(tput bold; tput setaf 166)
 
 if command -v nvim >/dev/null 2>&1; then
-    echo -e "${orangebold}updating nvim packages...${reset}"
+    echo -e "${orangebold}Updating nvim packages...${reset}"
     nvim +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean! +qall
 fi
 
@@ -15,17 +15,20 @@ fi
 # BREW (CASK)
 if [[ "$OSTYPE" == "darwin"* ]]; then
     if [[ $(command -v brew) ]]; then
-	echo -e "${orangebold}updating and upgrading Brew...${reset}"
+	echo -e "${orangebold}Updating and upgrading Brew...${reset}"
 	brew upgrade
+	echo -e "${orangebold}Cleaning Brew...${reset}"
 	brew cleanup -s
+	echo -e "${orangebold}Doctoring Brew...${reset}"
         brew doctor
+	echo -e "${orangebold}Missing Brew...${reset}"
         brew missing
     fi
 fi
 
 if [[ "$OSTYPE" == "linux"* ]]; then
     if [[ $(command -v apt-get) ]]; then
-	echo -e "${orangebold}updating and upgrading apt-get...${reset}"
+	echo -e "${orangebold}Updating and upgrading apt-get...${reset}"
 	sudo apt-get update
 	sudo apt-get upgrade -y
     fi
@@ -33,7 +36,8 @@ fi
 
 # ATOM
 if command -v apm >/dev/null 2>&1; then
-    echo -e "${orangebold}updating Atom packages...${reset}"
+    echo -e "${orangebold}Updating Atom packages...${reset}"
     apm upgrade -c false
+    echo -e "${orangebold}Cleaning Atom packages...${reset}"
     apm clean
 fi

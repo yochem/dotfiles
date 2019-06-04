@@ -335,7 +335,8 @@ if !has('nvim')
 endif
 
 " compile / run current file
-nnoremap <leader>r :!compile %<CR>
+nnoremap <leader>r :!%:p<CR>
+nnoremap <leader>R :!%:p 
 
 
 """""""""""""""""""""""
