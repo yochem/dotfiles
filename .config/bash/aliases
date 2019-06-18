@@ -38,6 +38,8 @@ alias newmail='$VISUAL /tmp/vim-mail-$(date +%s).mail'
 # dot is my dotfiles repository
 alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME"
 
+# use aliases when sudoing
+alias sudo="sudo "
 
 
 # open apps on mac

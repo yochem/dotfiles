@@ -17,3 +17,5 @@ color article white default
 
 confirm-exit no
 text-width 80
+
+auto-reload yes

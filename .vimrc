@@ -228,6 +228,9 @@ map <leader>f :NERDTreeToggle<CR>
 " use <Tab> to complete code
 let g:kite_tab_complete=1
 
+" don't show kite's invasive preview
+set completeopt-=preview
+
 " update faster
 set updatetime=100
 
@@ -272,6 +275,11 @@ endif
 " Use my email as default
 let g:MailApp_from = 'yochem@icloud.com'
 
+" compile / run current file
+nmap <leader>r :!%:p<CR>
+nnoremap <leader>R :!%:p 
+
+
 """""""""""""""""""""""
 "    OPENING FILES    "
 """""""""""""""""""""""
@@ -294,6 +302,7 @@ if has("autocmd")
 
     au BufRead,BufNewFile *.tex setlocal filetype=tex
     au BufRead,BufNewFile *.{tex,txt,md} setlocal textwidth=78
+    au Filetype tex nnoremap <leader>r :!pdflatex %<CR>
     au Filetype tex nnoremap <leader>w :silent !pdflatex %<CR>
     au Filetype tex nnoremap <leader>W :call CreateBib()<CR>
     au VimLeave *.tex silent !rm *.aux *.log *.out *.bbl *.blg
@@ -333,10 +342,6 @@ set shellcmdflag=-lc
 if !has('nvim')
     set shell=~/.vim/clear_shell.sh
 endif
-
-" compile / run current file
-nnoremap <leader>r :!%:p<CR>
-nnoremap <leader>R :!%:p 
 
 
 """""""""""""""""""""""
