@@ -57,6 +57,8 @@ Plug '~/dev/vim-mail'
 Plug 'mhinz/vim-signify'
 " Snow colorscheme
 Plug 'nightsense/snow'
+" gnupg support
+Plug 'jamessan/vim-gnupg'
 call plug#end()
 
 

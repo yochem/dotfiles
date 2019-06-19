@@ -19,11 +19,11 @@
     a = add
 
     # Always commit with a message
-    c = commit
+    c = commit -S
 
     # commit all files that have been modified or removed, new files not
     # affected
-    com = commit -a
+    com = commit -aS
 
     # shorten things up
     co = checkout
@@ -61,6 +61,7 @@
 
 [commit]
     template = ~/.config/git/templates/commit
+	gpgsign = true
 
 [color "branch"]
     current = green

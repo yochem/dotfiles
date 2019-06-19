@@ -30,6 +30,9 @@ export HISTSIZE="32768"
 # add time stamp to bash history
 export HISTTIMEFORMAT="%c "
 
+# gpg safety
+export GPG_TTY="$(tty)"
+
 # don't put duplicates in history
 HISTCONTROL=ignoreboth
 
