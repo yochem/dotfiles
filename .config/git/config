@@ -15,18 +15,9 @@
     # View the current working tree status using the short format
     s = status -s
 
-    # Everything short
-    a = add
-
-    # Always commit with a message
-    c = commit -S
-
     # commit all files that have been modified or removed, new files not
     # affected
-    com = commit -aS
-
-    # shorten things up
-    co = checkout
+    com = commit -a
 
     # View url to Github
     url = config --get remote.origin.url
@@ -61,7 +52,6 @@
 
 [commit]
     template = ~/.config/git/templates/commit
-	gpgsign = true
 
 [color "branch"]
     current = green

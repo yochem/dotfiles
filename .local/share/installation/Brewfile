@@ -21,7 +21,6 @@ brew "zsh"
 
 cask "atom"
 cask "brave-browser"
-cask "canary"
 cask "dropbox"
 cask "github"
 cask "iterm2"
