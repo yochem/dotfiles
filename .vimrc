@@ -312,6 +312,9 @@ if has("autocmd")
     " start on top and in insertmode with commits
     au FileType gitcommit call setpos('.', [0, 2, 1, 0])
     au FileType gitcommit startinsert
+    " navigate easier through commit templates
+    au FileType gitcommit inoremap <leader><leader> <Esc>2j02xo
+    au FileType gitcommit nnoremap <leader><leader> <Esc>2j02xo
 
     " stop auto commenting newline
     au FileType * setlocal formatoptions-=cro
