@@ -55,10 +55,10 @@ Plug 'tpope/vim-commentary'
 Plug '~/dev/vim-mail'
 " show git diff next to linenumbers
 Plug 'mhinz/vim-signify'
-" Snow colorscheme
-Plug 'nightsense/snow'
 " gnupg support
 Plug 'jamessan/vim-gnupg'
+" Spacegray colorscheme
+Plug 'ajh17/Spacegray.vim'
 call plug#end()
 
 
@@ -78,9 +78,8 @@ if $TERM_PROGRAM == 'iTerm.app' || !empty($SSH_CLIENT)
     " decide which colorscheme to choose based on terminal theme
     if $ITERM_PROFILE == 'One-Dark'
         colorscheme onedark
-    elseif $ITERM_PROFILE == 'Snow'
-        set background=dark
-        colorscheme snow
+    elseif $ITERM_PROFILE == 'Space-Gray'
+        colorscheme spacegray
     endif
 else
     colorscheme desert
@@ -334,7 +333,6 @@ if has("autocmd")
     au InsertLeave * match trailingwhitespace /\s\+$/
     au BufWinLeave * call clearmatches()
 endif
-
 
 """""""""""""""""""""""
 "    SHELL/RUNNING    "
