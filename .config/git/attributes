@@ -1,1 +1,5 @@
 *.plist binary
+
+*.png diff=exif
+*.jpg diff=exif
+*.jpeg diff=exif

@@ -928,7 +928,7 @@
 	<key>Default Arrangement Name</key>
 	<string>central</string>
 	<key>Default Bookmark Guid</key>
-	<string>C242B01D-ED2A-49A5-AF00-B7A07C881E4C</string>
+	<string>34931245-EC85-48BA-B92D-CA91B962C7D4</string>
 	<key>DeleteProfile_SilenceUntil</key>
 	<real>550431130.980762</real>
 	<key>DeleteProfile_selection</key>
@@ -1115,7 +1115,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>338 106 737 440 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>382 412 928 394 0 0 1440 877 </string>
+	<string>382 294 918 512 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>295 164 850 623 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_34931245-EC85-48BA-B92D-CA91B962C7D4</key>
