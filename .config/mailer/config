@@ -1,0 +1,5 @@
+# vim: ft=cfg
+[yochem@icloud.com]
+username = yochem@icloud.com
+server = appleid.apple.com
+smtp_server = smtp.mail.me.com

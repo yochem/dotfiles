@@ -18,21 +18,19 @@
 """""""""""""""""""""""
 " download vim-plug for the right vim
 if has('nvim')
+    let plugged_dir = '$XDG_DATA_HOME/nvim/plugged'
     if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
         silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
             \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     endif
-elseif empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-if has('nvim')
-    let plugged_dir = '$XDG_DATA_HOME/nvim/plugged'
 else
     let plugged_dir = '~/.vim/plugged'
+    if empty(glob('~/.vim/autoload/plug.vim'))
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    endif
 endif
 
 " all vim-plug plugins
@@ -77,6 +75,15 @@ if $TERM_PROGRAM == 'iTerm.app' || !empty($SSH_CLIENT)
 
     " decide which colorscheme to choose based on terminal theme
     if $ITERM_PROFILE == 'One-Dark'
+        " change the background color of the onedark theme
+        if has("autocmd")
+            let s:background = {"gui": "#111314",
+                \ "cterm": "235",
+                \ "cterm16": "0"
+                \ }
+            autocmd ColorScheme * call onedark#set_highlight("Normal", { "bg": s:background })
+        endif
+
         colorscheme onedark
     elseif $ITERM_PROFILE == 'Space-Gray'
         colorscheme spacegray

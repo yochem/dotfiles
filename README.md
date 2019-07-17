@@ -1,17 +1,33 @@
 # `/Users/yochem`
 My configs for MacOS (and trying to keep it compatible for Linux). Also
-includes the most user-frienldy MacOS `defaults` installation script ever.
+includes the most user-frienldy MacOS `defaults` [installation
+script](.local/bin/macdefaults) ever.
 
 ### Screenshots
 ![img](https://user-images.githubusercontent.com/23235841/53305538-e5928700-3882-11e9-8842-4d1245a82ce3.jpg)
+
+### What's inside?
+I try to comply to the [XDG
+standard](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+as much as possible. Because of this, most configuration can be found in
+`.config/`. **My `$HOME` directory is as litter free as possible!**
+
+My scripts can be found at (`.local/bin/`), which contains some small scripts
+like cloning all users repos, `howto` for when you forget stuff, `gititall` to
+perform an action on all your repos, an update script, switching dark mode on
+MacOS, etc.
 
 ### Installation
 If you just want to install the dotfiles:
 ```bash
 $ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/.local/bin/dotinstall | $(which bash)
 ```
-and installing Brew packages, Pip packages, Changing MacOS `defaults`,
-new Bash, change the Dock and even more:
+This script will check if there are any existing files and move them to
+`$HOME/dotfiles-backup/`. It uses a Git bare repository to manage the
+dotfiles.
+
+If you want to installand Brew packages, Pip packages, change some MacOS
+`defaults`, update Bash, change the Dock and even more:
 ```bash
 $ $HOME/.local/bin/install
 ```
@@ -21,31 +37,6 @@ Which looks something like:
 
 Where the users press 'y' to accept or any other key to skip (no key pressed
 at creating the the dock).
-
-When installing on a Mac, don't forget these steps, too:
-#### Three finger drag
-`System Preferences > Accessibility > Mouse & Trackpad > Trackpad options > Enable dragging`
-
-#### Remap capslock key to escape
-`System Preferences > Keyboard > Modifier Keys... > Caps Lock Key`
-
-#### Add other accounts to mac
-`System Preferences > Internet Accounts`
-
-#### Prefer opening in tabs instead of new window
-`System Preferences > Dock > Prefer tabs when opening documents > Always`
-
-- Sidebar Finder
-- set up ssh connections
-
-### What's inside?
-I try to comply to the [XDG
-standard](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
-as much as possible. Because of this, most configuration can be found in
-`.config/`. This repo also contains my bin (`.local/bin/`), which contains some
-small scripts like cloning all users repos, `howto` for when you forget stuff,
-`gititall` to perform an action on all your repos, an update script, switching
-dark mode on MacOS, etc.
 
 ### Thanks!
 A big shout out to [Mathias Bynens](https://github.com/mathiasbynens/dotfiles)
@@ -64,3 +55,19 @@ whatever you like with it.
 > work. The trouble with computers is that you 'play' with them.
 
 -- Richard Feynman
+
+When installing on a Mac, don't forget these steps, too:
+#### Three finger drag
+`System Preferences > Accessibility > Mouse & Trackpad > Trackpad options > Enable dragging`
+
+#### Remap capslock key to escape
+`System Preferences > Keyboard > Modifier Keys... > Caps Lock Key`
+
+#### Add other accounts to mac
+`System Preferences > Internet Accounts`
+
+#### Prefer opening in tabs instead of new window
+`System Preferences > Dock > Prefer tabs when opening documents > Always`
+
+- Sidebar Finder
+- set up ssh connections
