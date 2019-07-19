@@ -38,6 +38,11 @@ Which looks something like:
 Where the users press 'y' to accept or any other key to skip (no key pressed
 at creating the the dock).
 
+### Why?
+*"There is a computer disease that anybody who works with computers knows about.
+It's a very serious disease and it interferes completely with the work. The
+trouble with computers is that you 'play' with them."* -- Richard Feynman
+
 ### Thanks!
 A big shout out to [Mathias Bynens](https://github.com/mathiasbynens/dotfiles)
 and [Lars Kappert](https://github.com/webpro/dotfiles) for their amazing work!
@@ -45,29 +50,10 @@ Also, thank you Nicola Paolucci for [this awesome
 article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/)
 about the best way to version control your dotfiles.
 
+### Questions? Found a bug? Got an improvement?
+Please create an [issue](https://github.com/yochem/dotfiles/issues/new)!
+
 ### License
 Licensed under the [MIT
 license](https://github.com/yochem/dotfiles/blob/master/LICENSE), but do
 whatever you like with it.
-
-> There is a computer disease that anybody who works with computers knows
-> about. It's a very serious disease and it interferes completely with the
-> work. The trouble with computers is that you 'play' with them.
-
--- Richard Feynman
-
-When installing on a Mac, don't forget these steps, too:
-#### Three finger drag
-`System Preferences > Accessibility > Mouse & Trackpad > Trackpad options > Enable dragging`
-
-#### Remap capslock key to escape
-`System Preferences > Keyboard > Modifier Keys... > Caps Lock Key`
-
-#### Add other accounts to mac
-`System Preferences > Internet Accounts`
-
-#### Prefer opening in tabs instead of new window
-`System Preferences > Dock > Prefer tabs when opening documents > Always`
-
-- Sidebar Finder
-- set up ssh connections
