@@ -41,9 +41,9 @@ alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME"
 # use aliases when sudoing
 alias sudo="sudo "
 
-
 # open apps on mac
 alias brave="open -a \"Brave Browser\""
 alias email="open -a \"Canary\""
 alias whatsapp="open -a \"WhatsApp\""
 alias tg="open -a \"Telegram\""
+alias tab="open -a iterm ."
