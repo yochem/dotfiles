@@ -316,7 +316,7 @@ if has("autocmd")
     au VimLeave *.tex silent !rm *.aux *.log *.out *.bbl *.blg
 
     " start on top and in insertmode with commits
-    au FileType gitcommit call setpos('.', [0, 2, 1, 0])
+    au FileType gitcommit call setpos('.', [0, 1, 1, 0])
     au FileType gitcommit startinsert
     " navigate easier through commit templates
     au FileType gitcommit inoremap <leader><leader> <Esc>2j02xo
