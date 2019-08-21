@@ -110,6 +110,9 @@ set notitle
 set splitright
 set splitbelow
 
+" always show unicode
+set encoding=utf-8
+
 
 """""""""""""""""""""""
 "      INDENTION      "

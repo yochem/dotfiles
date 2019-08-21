@@ -262,24 +262,6 @@ else
 fi
 
 ##################
-## GIT TEMPLATE ##
-##################
-echo -en "${question} Install git-template? "
-read -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    tput cuu 1 && tput el
-    echo -e "${good} Install git-template?"
-    hook_path="$HOME/.config/git/templates/hooks"
-    mkdir -p $hook_path
-    curl -s https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > "$hook_path/commit-msg" &&
-    chmod +x "$hook_path/commit-msg"
-else
-    tput cuu 1 && tput el
-    echo -e "${bad} Install git-template?"
-fi
-
-##################
 #### SSH KEYS ####
 ##################
 echo -en "${question} Generate ssh keys? "
@@ -303,6 +285,18 @@ EOF
 else
     tput cuu 1 && tput el
     echo -e "${bad} Generate ssh keys?"
+fi
+
+echo -en "${question} Add main public key to $HOME/.ssh/authorized_keys? "
+read -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    tput cuu 1 && tput el
+    echo -e "${good} Add main public key to $HOME/.ssh/authorized_keys?"
+    curl -s "https://github.com/yochem.keys" > "$HOME/.ssh/authorized_keys"
+else
+    tput cuu 1 && tput el
+    echo -e "${bad} Add main public key to $HOME/.ssh/authorized_keys?"
 fi
 
 # reload for all changes to appear

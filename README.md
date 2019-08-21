@@ -4,7 +4,7 @@ includes the most user-frienldy MacOS `defaults` [installation
 script](.local/bin/macdefaults) ever.
 
 ### Screenshots
-![img](https://user-images.githubusercontent.com/23235841/53305538-e5928700-3882-11e9-8842-4d1245a82ce3.jpg)
+![img](https://user-images.githubusercontent.com/23235841/63441128-38638a80-c431-11e9-8e42-32f6965589aa.png)
 
 ### What's inside?
 I try to comply to the [XDG
