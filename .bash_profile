@@ -36,3 +36,4 @@ shopt -s cdspell
 # cd without typing cd
 shopt -s autocd
 
+bind '"\t":menu-complete'
