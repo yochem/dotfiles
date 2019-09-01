@@ -36,4 +36,5 @@ shopt -s cdspell
 # cd without typing cd
 shopt -s autocd
 
+# suggest from tab completion
 bind '"\t":menu-complete'
