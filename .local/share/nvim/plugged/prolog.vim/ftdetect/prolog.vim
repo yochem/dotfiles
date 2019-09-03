@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.prolog set filetype=prolog
+autocmd BufNewFile,BufRead *.pl set filetype=prolog

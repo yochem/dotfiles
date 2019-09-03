@@ -57,6 +57,8 @@ Plug 'mhinz/vim-signify'
 Plug 'jamessan/vim-gnupg'
 " Spacegray colorscheme
 Plug 'ajh17/Spacegray.vim'
+" Nice prolog syntax highlighting
+Plug 'adimit/prolog.vim'
 call plug#end()
 
 

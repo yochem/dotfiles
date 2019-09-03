@@ -15,6 +15,7 @@ alias less="less -R"
 
 alias p="python3"
 alias p2="python"
+alias swipl="swipl -f $XDG_CONFIG_HOME/swipl/swiplrc"
 
 # reload bash profile and stuff
 alias reload="source $HOME/.bash_profile"

@@ -116,7 +116,7 @@ syntax region  prologQuoted       start=/'/ end=/'/ contains=prologQuotedFormat,
 syntax match   prologErrorVariable /\<\(_\|\u\)\w*\>/
 syntax region  prologErrorTerm    start=/\<\(_\|\u\)\w*\>(/ end=/)/
 
-syntax match   prologArgs         /[()]/ contained
+syntax match   prologArgs         /[:\-,.()]/ contained
 
 """" Highlights
 
@@ -157,7 +157,7 @@ highlight link prologDCGSpecials  Type
 highlight link prologTuple        Type
 highlight link prologDiffList     Type
 
-highlight link prologArgs Normal
+highlight link prologArgs         Normal
 syn sync minlines=20 maxlines=50
 
 let b:current_syntax = "prolog"
