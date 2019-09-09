@@ -1142,7 +1142,11 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>170 295 796 486 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>295 116 850 646 0 0 1440 877 </string>
+	<string>590 231 850 646 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>360 0 720 877 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>218 231 850 646 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 23</key>
 	<string>0 0 1440 900 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_34931245-EC85-48BA-B92D-CA91B962C7D4</key>
@@ -1373,13 +1377,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.078431372549019607</real>
+				<real>0.10980392156862745</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.074509803921568626</real>
+				<real>0.10980392156862745</real>
 				<key>Red Component</key>
-				<real>0.066666666666666666</real>
+				<real>0.10980392156862745</real>
 			</dict>
 			<key>Background Image Location</key>
 			<string></string>
@@ -1882,13 +1886,13 @@
 						<key>Alpha Component</key>
 						<real>1</real>
 						<key>Blue Component</key>
-						<real>0.078431375324726105</real>
+						<real>0.10980392247438431</real>
 						<key>Color Space</key>
 						<string>sRGB</string>
 						<key>Green Component</key>
-						<real>0.074509806931018829</real>
+						<real>0.10980392247438431</real>
 						<key>Red Component</key>
-						<real>0.066666670143604279</real>
+						<real>0.10980392247438431</real>
 					</dict>
 					<key>font</key>
 					<string>.AppleSystemUIFont 12</string>
@@ -1933,13 +1937,13 @@
 									<key>Alpha Component</key>
 									<real>1</real>
 									<key>Blue Component</key>
-									<real>0.078431375324726105</real>
+									<real>0.10980392247438431</real>
 									<key>Color Space</key>
 									<string>sRGB</string>
 									<key>Green Component</key>
-									<real>0.074509806931018829</real>
+									<real>0.10980392247438431</real>
 									<key>Red Component</key>
-									<real>0.066666670143604279</real>
+									<real>0.10980392247438431</real>
 								</dict>
 								<key>font</key>
 								<string>.AppleSystemUIFont 12</string>
@@ -1982,13 +1986,13 @@
 									<key>Alpha Component</key>
 									<real>1</real>
 									<key>Blue Component</key>
-									<real>0.078431375324726105</real>
+									<real>0.10980392247438431</real>
 									<key>Color Space</key>
 									<string>sRGB</string>
 									<key>Green Component</key>
-									<real>0.074509806931018829</real>
+									<real>0.10980392247438431</real>
 									<key>Red Component</key>
-									<real>0.066666670143604279</real>
+									<real>0.10980392247438431</real>
 								</dict>
 								<key>font</key>
 								<string>.AppleSystemUIFont 12</string>
@@ -2027,13 +2031,13 @@
 									<key>Alpha Component</key>
 									<real>1</real>
 									<key>Blue Component</key>
-									<real>0.078431375324726105</real>
+									<real>0.10980392247438431</real>
 									<key>Color Space</key>
 									<string>sRGB</string>
 									<key>Green Component</key>
-									<real>0.074509806931018829</real>
+									<real>0.10980392247438431</real>
 									<key>Red Component</key>
-									<real>0.066666670143604279</real>
+									<real>0.10980392247438431</real>
 								</dict>
 								<key>font</key>
 								<string>.AppleSystemUIFont 12</string>
@@ -2078,13 +2082,13 @@
 									<key>Alpha Component</key>
 									<real>1</real>
 									<key>Blue Component</key>
-									<real>0.078431375324726105</real>
+									<real>0.10980392247438431</real>
 									<key>Color Space</key>
 									<string>sRGB</string>
 									<key>Green Component</key>
-									<real>0.074509806931018829</real>
+									<real>0.10980392247438431</real>
 									<key>Red Component</key>
-									<real>0.066666670143604279</real>
+									<real>0.10980392247438431</real>
 								</dict>
 								<key>font</key>
 								<string>.AppleSystemUIFont 12</string>
@@ -4171,23 +4175,25 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
+		<string>3.3.2</string>
 		<string>3.2.9</string>
-		<string>3.3.0</string>
 		<string>3.3.1</string>
+		<string>3.3.0</string>
+		<string>3.3.3</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1440, 900}}</string>
 		<key>topLeft</key>
-		<string>{251, 762}</string>
+		<string>{281, 807}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>87D5B0AC-BFAD-46E4-8A1F-4750736F82A6</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>6</integer>
+	<integer>12</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4500,7 +4506,15 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>id</string>
+				<string>currentTab.currentSession.presentationName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.iterm2.localhostName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -4516,55 +4530,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.name</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>titleOverrideFormat</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentTab.currentSession.presentationName</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
 				<string>frame</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentTab.currentSession.username</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<false/>
-				<key>name</key>
-				<string>currentTab</string>
-				<key>nonterminalContext</key>
-				<integer>2</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>titleOverride</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -4580,9 +4546,17 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.jobName</string>
+				<string>currentTab.currentSession.termid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>currentTab</string>
+				<key>nonterminalContext</key>
+				<integer>2</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
@@ -4604,23 +4578,23 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.tty</string>
+				<string>id</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
-				<false/>
+				<true/>
 				<key>name</key>
-				<string>iterm2</string>
+				<string>currentTab.currentSession.name</string>
 				<key>nonterminalContext</key>
-				<integer>4</integer>
+				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.iterm2.localhostName</string>
+				<string>titleOverride</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -4644,7 +4618,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.termid</string>
+				<string>number</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -4653,6 +4627,46 @@
 				<true/>
 				<key>name</key>
 				<string>currentTab.currentSession.hostname</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.tty</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.username</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>iterm2</string>
+				<key>nonterminalContext</key>
+				<integer>4</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>titleOverrideFormat</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.jobName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -4916,7 +4930,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-08-22T19:32:15Z</date>
+	<date>2019-09-08T11:30:41Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -5818,7 +5832,7 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.3.1</string>
+	<string>3.3.3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

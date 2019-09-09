@@ -59,6 +59,8 @@ Plug 'jamessan/vim-gnupg'
 Plug 'ajh17/Spacegray.vim'
 " Nice prolog syntax highlighting
 Plug 'adimit/prolog.vim'
+" better implementation for nvim terminal
+Plug 'vimlab/split-term.vim'
 call plug#end()
 
 
@@ -79,7 +81,7 @@ if $TERM_PROGRAM == 'iTerm.app' || !empty($SSH_CLIENT)
     if $ITERM_PROFILE == 'One-Dark'
         " change the background color of the onedark theme
         if has("autocmd")
-            let s:background = {"gui": "#111314",
+            let s:background = {"gui": "#1c1c1c",
                 \ "cterm": "235",
                 \ "cterm16": "0"
                 \ }
