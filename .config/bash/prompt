@@ -27,9 +27,9 @@ prompt_git() {
 PS1="$reset"
 PS1+="["
 PS1+="$reset"
-[ "$USER" == "root" ] && PS1+="$bold${magenta} root$reset"
+[ "$USER" == "root" ] && PS1+="$bold${magenta}root$reset"
 # if connected using SSH, show hostname
-[ -n "$SSH_CLIENT" ] && PS1+="$magenta@\h$reset:"
+[ -n "$SSH_CLIENT" ] && PS1+=" $magenta@\h$reset:"
 PS1+="$blue \w " # full path of cwd
 PS1+="$reset"
 PS1+="\$(prompt_git \"$green\" \"$reset\")" # show git branch
