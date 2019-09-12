@@ -36,5 +36,7 @@ shopt -s cdspell
 # cd without typing cd
 shopt -s autocd
 
-# linuxbrewe
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+# linuxbrew
+[ -r "/home/linuxbrew/.linuxbreew/bin/brew" ] && {
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+}

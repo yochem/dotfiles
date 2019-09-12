@@ -34,6 +34,10 @@ case "$1" in
     *bash*|*no*rc*)
         echo "env -i bash --norc --noprofile"
         ;;
+    *git*|*branch*)
+        echo "git push --delete <remote_name> <branch_name>"
+        echo "git branch -d <branch_name>"
+        ;;
     *)
         usage
         ;;
