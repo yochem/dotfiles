@@ -71,34 +71,21 @@ call plug#end()
 syntax enable
 
 " use atom's one-dark theme
-if $TERM_PROGRAM == 'iTerm.app' || !empty($SSH_CLIENT)
-    " better colors in iTerm2
-    if has("termguicolors")
-        set termguicolors
-    endif
-
-    " decide which colorscheme to choose based on terminal theme
-    if $ITERM_PROFILE == 'One-Dark'
-        " change the background color of the onedark theme
-        if has("autocmd")
-            let s:background = {"gui": "#1c1c1c",
-                \ "cterm": "235",
-                \ "cterm16": "0"
-                \ }
-            autocmd ColorScheme * call onedark#set_highlight("Normal", { "bg": s:background })
-        endif
-
-        colorscheme onedark
-    elseif $ITERM_PROFILE == 'Space-Gray'
-        colorscheme spacegray
-    endif
-else
-    colorscheme desert
-    highlight Normal ctermfg=15
-    highlight LineNr ctermfg=8
-    highlight ColorColumn ctermbg=8
-    highlight Comment ctermfg=8
+" better colors in iTerm2
+if has("termguicolors")
+    set termguicolors
 endif
+
+" change the background color of the onedark theme
+if has("autocmd")
+    let s:background = {"gui": "#1c1c1c",
+        \ "cterm": "235",
+        \ "cterm16": "0"
+        \ }
+    autocmd ColorScheme * call onedark#set_highlight("Normal", { "bg": s:background })
+endif
+
+colorscheme onedark
 
 
 """""""""""""""""""""""
