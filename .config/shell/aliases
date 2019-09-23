@@ -48,3 +48,5 @@ alias email="open -a \"Canary\""
 alias whatsapp="open -a \"WhatsApp\""
 alias tg="open -a \"Telegram\""
 alias tab="open -a iterm ."
+
+[ -n $(command -v nvim) ] && alias vim="nvim"

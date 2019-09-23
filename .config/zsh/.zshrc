@@ -63,4 +63,4 @@ echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # Load completions for Ruby, Git, etc.
-autoload compinit -d "$XDG_DATA_HOME/zsh/zcompdump"
+autoload compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
