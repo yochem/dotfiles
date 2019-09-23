@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# vim: ft=sh
 
 # because some apps love to have their config files in the home directory,
 # but I don't

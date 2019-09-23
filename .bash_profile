@@ -1,9 +1,9 @@
 dotfiles=(
-    ~/.config/bash/xdg
-    ~/.config/bash/prompt
-    ~/.config/bash/exports
-    ~/.config/bash/aliases
-    ~/.config/bash/functions
+    ~/.config/shell/xdg
+    ~/.config/shell/prompt
+    ~/.config/shell/exports
+    ~/.config/shell/aliases
+    ~/.config/shell/functions
     /usr/local/etc/profile.d/bash_completion.sh
     ~/.local/bin/z.sh
     ~/.config/iterm2/iterm2_shell_integration.bash
