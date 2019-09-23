@@ -44,8 +44,7 @@ if [[ "$0" == "-bash" ]]; then
     # adding color to default PS2
     export PS2="$reset$blue>$reset "
 else
-    # autoload -U colors && colors
-    # setopt PROMPT_SUBST
+    setopt PROMPT_SUBST
     PROMPT=""
     PROMPT+="["
     PROMPT+="%{$fg[magenta]%}%(!. root.)"
