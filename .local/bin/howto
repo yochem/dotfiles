@@ -31,12 +31,17 @@ case "$1" in
         echo "-x    file is executable"
         echo "-z    length string is zero"
         ;;
-    *bash*|*no*rc*)
+    *bash*|*rc*)
         echo "env -i bash --norc --noprofile"
+        echo "vim -u NONE"
         ;;
     *git*|*branch*)
         echo "git push --delete <remote_name> <branch_name>"
         echo "git branch -d <branch_name>"
+        ;;
+    redirect|overwrite|append)
+        echo ">>: append"
+        echo ">: overwrite"
         ;;
     *)
         usage

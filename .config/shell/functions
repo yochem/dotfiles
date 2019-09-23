@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # open python server
-server() { s="${1:-8000}"; open "http://localhost:$s" && python -m SimpleHTTPServer "$s"; }
+server() { s="${1:-8000}"; open "http://localhost:$s" && python3 -m http.server "$s"; }
 phpserver() { open "http://localhost:$1" && php -S "localhost:$1"; }
 
 # search something on youtube

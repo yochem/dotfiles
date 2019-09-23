@@ -76,6 +76,7 @@
     titleBar: "custom"
     useTreeSitterParsers: false
   editor:
+    preferredLineLength: 75
     scrollPastEnd: true
     showIndentGuide: true
     tabLength: 4
