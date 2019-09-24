@@ -24,17 +24,22 @@ if [[ -d /usr/local/etc/bash_completion.d ]]; then
     unset file
 fi
 
-# Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob
+if [[ $(command -v shopt) ]]; then
+    # Case-insensitive globbing (used in pathname expansion)
+    shopt -s nocaseglob
 
-# Append to the Bash history file, rather than overwriting it
-shopt -s histappend
+    # Append to the Bash history file, rather than overwriting it
+    shopt -s histappend
 
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell
+    # Autocorrect typos in path names when using `cd`
+    shopt -s cdspell
 
-# cd without typing cd
-shopt -s autocd
+    # cd without typing cd
+    shopt -s autocd
+
+    # enable recursive globbing
+    shopt -s globstar
+fi
 
 # linuxbrew
 [ -r "/home/linuxbrew/.linuxbreew/bin/brew" ] && {

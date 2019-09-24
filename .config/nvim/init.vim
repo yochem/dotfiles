@@ -53,14 +53,12 @@ Plug 'tpope/vim-commentary'
 Plug '~/dev/vim-mail'
 " show git diff next to linenumbers
 Plug 'mhinz/vim-signify'
-" gnupg support
-Plug 'jamessan/vim-gnupg'
-" Spacegray colorscheme
-Plug 'ajh17/Spacegray.vim'
 " Nice prolog syntax highlighting
 Plug 'adimit/prolog.vim'
 " better implementation for nvim terminal
 Plug 'vimlab/split-term.vim'
+" just use airline
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
 
@@ -136,12 +134,10 @@ set number
 set relativenumber
 
 " Start scrolling five lines before the vertical window border
-set scrolloff=5
+set scrolloff=3
 
 " add empty line without leaving normal mode
 set timeoutlen=250
-
-" add empty line above or below
 nmap oo m`o<Esc>``
 nmap OO m`O<Esc>``
 
@@ -217,9 +213,6 @@ set nocompatible
 " fast terminal connections
 set ttyfast
 
-" font encoding
-set encoding=utf-8
-
 " makes starting up faster
 let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
@@ -253,6 +246,9 @@ let g:clipboard = {
 " use the systems clipboard
 set clipboard=unnamed
 
+" fuzzy find when opening file
+set path+=**
+
 """""""""""""""""""""""
 "    RANDOM STUFF     "
 """""""""""""""""""""""
@@ -274,13 +270,8 @@ else
     set undodir=~/.vim/undo
 endif
 
-" Use my email as default
-let g:MailApp_from = 'yochem@icloud.com'
-
 " compile / run current file
 nmap <leader>r :!%:p<CR>
-nnoremap <leader>R :!%:p 
-
 
 """""""""""""""""""""""
 "    OPENING FILES    "
@@ -304,6 +295,7 @@ if has("autocmd")
 
     au BufRead,BufNewFile *.tex setlocal filetype=tex
     au BufRead,BufNewFile *.{tex,txt,md} setlocal textwidth=78
+    au BufRead,BufNewFile *.{tex,txt,md} setlocal formatoptions+=a
     au Filetype tex nnoremap <leader>r :!pdflatex %<CR>
     au Filetype tex nnoremap <leader>w :silent !pdflatex %<CR>
     au Filetype tex nnoremap <leader>W :call CreateBib()<CR>
@@ -312,12 +304,9 @@ if has("autocmd")
     " start on top and in insertmode with commits
     au FileType gitcommit call setpos('.', [0, 1, 1, 0])
     au FileType gitcommit startinsert
-    " navigate easier through commit templates
-    au FileType gitcommit inoremap <leader><leader> <Esc>2j02xo
-    au FileType gitcommit nnoremap <leader><leader> <Esc>2j02xo
 
-    " stop auto commenting newline
-    au FileType * setlocal formatoptions-=cro
+    " " stop auto commenting newline
+    au FileType * setlocal formatoptions-=ro
 
     " set scripts to be executable
     au BufWritePost * if getline(1) =~ "^#!" | call setfperm(expand('%'), 'rwxr-xr-x') | endif
@@ -343,9 +332,6 @@ set autowrite
 
 " clear command output everytime when running
 set shellcmdflag=-lc
-if !has('nvim')
-    set shell=~/.vim/clear_shell.sh
-endif
 
 
 """""""""""""""""""""""
@@ -357,25 +343,6 @@ set laststatus=2
 " don't show mode
 set noshowmode
 
-set stl=
-" show current mode
-set stl+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
-set stl+=%#Cursor#%{(mode()=='i')?'\ \ INSERT\ ':''}
-set stl+=%#DiffDelete#%{(mode()==?'r')?'\ \ REPLACE\ ':''}
-set stl+=%#DiffChange#%{(mode()==?'v')?'\ \ VISUAL\ ':''}
-set stl+=%#DiffChange#%{(mode()==?'s')?'\ \ SELECT\ ':''}
-set stl+=%#DiffChange#%{(mode()=='t')?'\ \ TERM\ ':''}
-
-" get current working directory -> /Users/Yochem/project/
-set stl+=%#CursorIM#\ %{(expand('%')=~'^\/.*')?'':getcwd().'/'}
-" relative fail name -> js/main.js
-set stl+=%#DiffChange#%f
-
-" show branch name -> (master)
-set stl+=%#CursorIM#\ %{fugitive#statusline()[4:-2]}\ 
-
-" show modified flag, else nothing -> [+]
-set stl+=%#Cursor#%{(&mod)?'[+]':''}
-
-" no colour at end
-set stl+=%#CursorIM#
+let g:airline_section_b = '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'
+let g:airline_section_x = []
+let g:airline_section_y = []
