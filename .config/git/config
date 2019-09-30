@@ -5,6 +5,9 @@
 [init]
     templatedir = ~/.config/git/templates/hooks
 
+[core]
+    excludesfile = ~/.config/git/ignore
+
 [pager]
     diff = true
 
