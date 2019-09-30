@@ -19,7 +19,7 @@ prompt_git() {
 ###############
 # BASH PROMPT #
 ###############
-if [[ "$0" == "-bash" ]]; then
+if [ -n "$BASH_VERSION" ]; then
     # Some colors to use for prompt
     reset="\[\033[0;97m\]"
     green="\[\033[0;92m\]"
@@ -43,7 +43,7 @@ if [[ "$0" == "-bash" ]]; then
 
     # adding color to default PS2
     export PS2="$reset$blue>$reset "
-else
+elif [ -n "$ZSH_VERSION" ]; then
     setopt PROMPT_SUBST
     PROMPT=""
     PROMPT+="["

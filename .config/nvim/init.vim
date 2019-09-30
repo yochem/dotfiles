@@ -102,6 +102,10 @@ set splitbelow
 " always show unicode
 set encoding=utf-8
 
+" make netrw better looking
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+
 
 """""""""""""""""""""""
 "      INDENTION      "
@@ -295,7 +299,6 @@ if has("autocmd")
 
     au BufRead,BufNewFile *.tex setlocal filetype=tex
     au BufRead,BufNewFile *.{tex,txt,md} setlocal textwidth=78
-    au BufRead,BufNewFile *.{tex,txt,md} setlocal formatoptions+=a
     au Filetype tex nnoremap <leader>r :!pdflatex %<CR>
     au Filetype tex nnoremap <leader>w :silent !pdflatex %<CR>
     au Filetype tex nnoremap <leader>W :call CreateBib()<CR>
