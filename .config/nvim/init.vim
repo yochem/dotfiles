@@ -314,6 +314,9 @@ if has("autocmd")
     au InsertEnter * match trailingwhitespace /\s\+\%#\@<!$/
     au InsertLeave * match trailingwhitespace /\s\+$/
     au BufWinLeave * call clearmatches()
+
+    " no linenumbers in terminal mode
+    au TermOpen * setlocal nonumber norelativenumber
 endif
 
 """""""""""""""""""""""
