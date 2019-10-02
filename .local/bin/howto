@@ -43,6 +43,11 @@ case "$1" in
         echo ">>: append"
         echo ">: overwrite"
         ;;
+    hub)
+        echo "hub fork --remote-name=origin"
+        echo "git push origin <branch>"
+        echo "hub pull-request"
+        ;;
     *)
         usage
         ;;

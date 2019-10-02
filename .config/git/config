@@ -3,7 +3,7 @@
     email = yochem@icloud.com
 
 [init]
-    templatedir = ~/.config/git/templates/hooks
+    templatedir = ~/.config/git/hooks
 
 [core]
     excludesfile = ~/.config/git/ignore
@@ -20,7 +20,10 @@
 
     # commit all files that have been modified or removed, new files not
     # affected
-    com = commit -a
+    ca = commit -a
+
+    # shoroten commit
+    com = commit
 
     # View url to Github
     url = config --get remote.origin.url
@@ -54,7 +57,7 @@
     date = auto:human
 
 [commit]
-    template = ~/.config/git/templates/commit
+    template = ~/.config/git/commit-template
 
 [color "branch"]
     current = green

@@ -22,6 +22,9 @@ highlight() { grep --color -i -E "$1|$"; }
 # go to a selected directory from the z data file
 fzfz() { builtin cd $(z | fzf | awk '{print $2}');  }
 
+# shorten pip install command
+pipi() { python3 -m pip install "$1"; }
+
 # View the local git repository on Github
 # Uses alias 'git url', as seen in git/.gitconfig
 # 'open' opens an url in the browser on macOS. Not tested on linux

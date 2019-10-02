@@ -263,17 +263,6 @@ filetype plugin on
 set nospell
 let g:markdown_enable_spell_checking = 0
 
-" centralize backups and swaps (and follow XDG standard)
-if has('nvim')
-    set backupdir=$XDG_CACHE_HOME/nvim/backups
-    set directory=$XDG_CACHE_HOME/nvim/swaps
-    set undodir=$XDG_CACHE_HOME/nvim/undo
-else
-    set backupdir=~/.vim/backups
-    set directory=~/.vim/swaps
-    set undodir=~/.vim/undo
-endif
-
 " compile / run current file
 nmap <leader>r :!%:p<CR>
 
