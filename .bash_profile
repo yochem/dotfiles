@@ -42,6 +42,6 @@ if [[ $(command -v shopt) ]]; then
 fi
 
 # linuxbrew
-[ -r "/home/linuxbrew/.linuxbreew/bin/brew" ] && {
+[ -e "/home/linuxbrew/" ] && {
     eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 }
