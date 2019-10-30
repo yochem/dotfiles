@@ -1,0 +1,8 @@
+.DS_Store
+*.swp
+*.aux
+*.log
+*.out
+*.toc
+__pycache__/
+.ipynb_checkpoints/

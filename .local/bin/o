@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# check all apps in the /Applications folder
+for app in /Applications/*.app; do
+    # 1) get the basename of the lowercase app name
+    # 2) remove the .app extension
+    base_name=$(basename ${app,,} | sed -E 's/\.app//')
+    # check if the given argument is a base name of an app
+    if [[ "$1" == "$base_name" ]]; then
+        # open the app
+        open -a "$app"
+    fi
+done

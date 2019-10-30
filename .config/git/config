@@ -3,10 +3,10 @@
     email = yochem@icloud.com
 
 [init]
-    templatedir = ~/.config/git/templates/hooks
+    templatedir = ~/.config/git/hooks
 
 [core]
-    pager = ~/bin/diff-highlight | less
+    excludesfile = ~/.config/git/ignore
 
 [pager]
     diff = true
@@ -18,18 +18,12 @@
     # View the current working tree status using the short format
     s = status -s
 
-    # Everything short
-    a = add
-
-    # Always commit with a message
-    c = commit
-
     # commit all files that have been modified or removed, new files not
     # affected
-    com = commit -a
+    ca = commit -a
 
-    # shorten things up
-    co = checkout
+    # shoroten commit
+    com = commit
 
     # View url to Github
     url = config --get remote.origin.url
@@ -43,9 +37,6 @@
     # find author of specific commit
     author = show -s --format='%an <%ae>'
 
-    # also show remote branches
-    branches = branch -a
-
     # I always forgot these
     unadd = reset
     uncommit = reset HEAD^
@@ -57,13 +48,13 @@
     last = log -1 HEAD
 
     # git status for every local branch
-    branch-status = !~/bin/branch_status
+    branch-status = !branch_status
 
 [log]
     date = auto:human
 
 [commit]
-    template = ~/.config/git/templates/commit
+    template = ~/.config/git/commit-template
 
 [color "branch"]
     current = green

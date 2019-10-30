@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# vim: ft=sh
 
 # fancy ls
 ls_type="ls"
@@ -6,24 +6,21 @@ command -V gls &>/dev/null && ls_type="gls"
 alias ls="$ls_type --group-directories-first -1F --color"
 unset ls_type
 
-# remove LaTeX helpfiles
-alias rmtex="rm *.aux *.bbl *.blg *.log *.out"
-
-# always color grep
-alias grep="grep --color"
-
-# always confirm overwriting a file
+# use some flags by default
+alias grep="grep -inE --color=auto"
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -v"
+alias less="less -R"
+
 alias p="python3"
 alias p2="python"
 
 # reload bash profile and stuff
-alias reload="source $HOME/.bash_profile"
+alias reload="exec $SHELL -l"
 
 # use $VISUAL as editor (it's mostly vim, so i've always used 'v'
-alias v=$VISUAL
+alias vi=$VISUAL
 
 # easier way to cd back one level
 alias ..="cd .."
@@ -40,3 +37,18 @@ alias newmail='$VISUAL /tmp/vim-mail-$(date +%s).mail'
 
 # dot is my dotfiles repository
 alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME"
+
+# use aliases when sudoing
+alias sudo="sudo "
+
+# open apps on mac
+alias tab="open -a iterm ."
+
+# startup vm
+alias swagbox="open ~/Documents/vm/Ubuntu/Ubuntu.vbox"
+
+# start working on homework
+alias hw="open {opdracht,hw?}.pdf; $EDITOR hw?.tex"
+
+# don't use vim
+[ -n $(command -v nvim) ] && alias vim="nvim"

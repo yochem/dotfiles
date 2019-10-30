@@ -1,23 +1,29 @@
-#!/usr/bin/env bash
+#! vim: ft=sh
 
 # open python server
-server() { s="${1:-8000}"; open "http://localhost:$s" && python -m SimpleHTTPServer "$s"; }
+server() { s="${1:-8000}"; open "http://localhost:$s" && python3 -m http.server "$s"; }
 phpserver() { open "http://localhost:$1" && php -S "localhost:$1"; }
 
 # search something on youtube
 yt() { open "https://www.youtube.com/results?search_query=${@// /+}"; }
 
-# quickly edit a .config/ file
-cfg() {
-    # first check if full file name is entered because it's fast
-    if [ -f "$XDG_CONFIG_HOME/$1"* ]; then
-        "$VISUAL" "$XDG_CONFIG_HOME/$1"*
-    else
-        # else use fd and edit the first result
-        result="$(fd --type file -d 2 "$1" "$XDG_CONFIG_HOME" | sed 1q)"
-        [ -n "$result" -a -f "$result" ] && "$VISUAL" "$result"
-    fi
-}
+# make a directory and cd into it
+mkcd() { mkdir "$1"; cd "$1"; }
+
+# open a manual as pdf
+manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
+
+# move to trash
+thrash() { mv -f "$1" "$HOME/.Trash/$1"; }
+
+# grep with color but output all lines
+highlight() { grep --color -i -E "$1|$"; }
+
+# go to a selected directory from the z data file
+fzfz() { cd "$(z | fzf | cut -f 2- -d ' ' | xargs)"; }
+
+# shorten pip install command
+pipi() { python3 -m pip install "$1"; }
 
 # View the local git repository on Github
 # Uses alias 'git url', as seen in git/.gitconfig
@@ -38,11 +44,15 @@ viewgh() {
 
 # use the same alias for all git repos
 # before I used 'dot' as alias for my dotfiles repo but that's way to confusing
+if type git &>/dev/null; then
+    complete -o default -o nospace -F _git g
+fi
+
 g() {
     if git status &>/dev/null; then
         git "$@"
     else
-        git --git-dir="$HOME/.dot/" --work-tree="$HOME" "$@"
+        git --git-dir="$XDG_DATA_HOME/dot" --work-tree="$HOME" "$@"
     fi
 }
 
@@ -62,14 +72,8 @@ clone_all_from() {
     xargs -L1 -P5 git clone;
 }
 
-# make a directory and cd into it
-mkcd() { mkdir "$1"; cd "$1"; }
+# quick calculator
+cc() { python3 -c "from math import *; print($@)"; }
 
-# open a manual as pdf
-manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
-
-# move to trash
-thrash() { mv -f "$1" "$HOME/.Trash/$1"; }
-
-# grep but output all lines
-highlight() { grep --color -i -E "$1|$"; }
+# convert hex to binary
+hex() { echo "$((16#$1))"; }

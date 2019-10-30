@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# vim: ft=sh
 
 # choose the default editor
 if command -v nvim >/dev/null 2>&1; then
@@ -15,10 +15,14 @@ export EDITOR="$VISUAL"
 export MANPAGER='nvim +Man!'
 
 # use the macos open command as browser
-export BROWSER="open"
+if [[ -e "/Applications/Brave Browser.app" ]]; then
+    export BROWSER="open -a \"Brave Browser\""
+else
+    export BROWSER="open"
+fi
 
 # add local bin to path
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 
 # increase bash history size
 export HISTSIZE="32768"
@@ -26,9 +30,15 @@ export HISTSIZE="32768"
 # add time stamp to bash history
 export HISTTIMEFORMAT="%c "
 
+# gpg safety
+export GPG_TTY="$(tty)"
+
 # don't put duplicates in history
 HISTCONTROL=ignoreboth
 
 # don't let Terminal.app write session history
 # (https://stackoverflow.com/questions/32418438/how-can-i-disable-bash-sessions-in-os-x-el-capitan)
 SHELL_SESSION_HISTORY=0
+
+# fix the bug of Apple creating a non-exisiting LC
+export LC_ALL="en_US.UTF-8"

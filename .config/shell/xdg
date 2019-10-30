@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# vim: ft=sh
 
 # because some apps love to have their config files in the home directory,
 # but I don't
@@ -14,4 +14,8 @@ export HISTFILE="$XDG_DATA_HOME/bash/history"
 export _Z_DATA="$XDG_DATA_HOME/z/z_data"
 export IPYTHONDIR="$XDG_DATA_HOME/ipython"
 export JUPYTER_CONFIG_DIR="$XDG_DATA_HOME/jupyter"
-export INPUTRC="$XDG_CONFIG_HOME/input/config"
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"

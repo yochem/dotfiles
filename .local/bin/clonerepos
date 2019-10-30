@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# is the account you're gonna clone an user or an organisation
+# {users|orgs}
+CNTX="users";
+
+# the github account name you want to clone
+NAME="yochem";
+PAGE=1
+
+if [[ $# -eq 1 ]]; then
+    mkdir -p $1 && cd $1 || exit 3
+    echo "cloning in $1"
+else
+    echo "cloning in $PWD" 
+fi
+
+# curl a users repos using the github api
+curl "https://api.github.com/$CNTX/$NAME/repos?page=$PAGE&per_page=100" |
+
+grep -e 'git_url' |
+cut -d \" -f 4 |
+xargs -L1 -P5 git clone

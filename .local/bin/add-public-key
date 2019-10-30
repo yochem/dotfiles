@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Add the public key I currently use on my main device to the authorized_keys
+# file. When this command is run I can ssh from my main device into the device
+# it is run on.
+
+user=${1:-yochem}
+
+command mkdir -p "$HOME/.ssh"
+command chmod 700 "$HOME/.ssh"
+command curl -s 'https://github.com/'$user'.keys' >> "$HOME/.ssh/authorized_keys"
+command chmod 600 "$HOME/.ssh/authorized_keys"

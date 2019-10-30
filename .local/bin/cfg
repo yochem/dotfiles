@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Quickly edit a config file using file patterns
+# Covers three cases:
+#
+# Finding the file config in a folder name:
+#       $ cfg git -> ~/.config/git/config
+# Exact path inside the config folder:
+#       $ cfg readline/inputrc -> ~/.config/readline/inputrc
+# Using fd to find a file matching the keyword:
+#       $ cfg func       -> ~/.config/*/*func*
+
+[ -z "$1" ] && exit 20
+
+config_path=${XDG_CONFIG_HOME:-$HOME/.config}
+
+if [ -f "$config_path/$1/config" ]; then
+    result="$config_path/$1/config"
+elif [ -f "$config_path/$1" ]; then
+    result="$config_path/$1"
+else
+    result="$(fd -H --type file -d 2 "$1" "$config_path" | sed 1q)"
+fi
+
+[ -n "$result" -a -f "$result" ] && "$VISUAL" "$result"

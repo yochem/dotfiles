@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+if command -V fd &>/dev/null; then
+    REPOS=$(fd -H -t d .git$ ~)
+elif [ -f "$HOME/.gititall" ]; then
+    REPOS="$HOME/.gititall"
+fi
+
+# pretty print the repo paths
+color_print() {
+    # set colors
+    if tput setaf 1 &> /dev/null; then
+	reset=$(tput sgr0)
+	orange=$(tput setaf 166)
+	bold=$(tput bold)
+    else
+	reset="\e[0m"
+	orange="\e[1;33m"
+	bold=""
+    fi
+
+    # print first argument in orange, rest in normal color
+    echo -e "$bold$orange$1$reset${@:2}"
+}
+
+# generic function to print help menu. Exists with status of 2
+help_menu() {
+    cat <<EOF
+usage: gititall [options] [pattern]
+
+options:
+    -a, --add	    add current directory to database
+    -s, --show	    show all directories listed in database
+    -h, --help	    this help menu
+
+pattern:
+    all known git commands you want to perform for every repository
+EOF
+    exit 2
+}
+
+# check if there is an argument given. If not, show help_menu
+[ -z "$1" ] && help_menu
+
+# check arguments
+case "$1" in 
+    --add|-a) pwd >> "$FILE" ;;
+    --show|-s) color_print "$(cat "$FILE")" ;;
+    --help|-h) help_menu ;;
+    *)
+        REPOS=$(fd -H -t d .git$ ~ | sed 's/....$//')
+        for repo in $REPOS; do
+            color_print $repo
+            (pushd $repo &>/dev/null || exit 10
+            git "$1"
+            popd &>/dev/null)
+        done
+	;;
+esac
+
+exit 0
