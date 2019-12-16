@@ -15,7 +15,6 @@ alias less="less -R"
 
 alias p="python3"
 alias p2="python"
-alias swipl="swipl -f $XDG_CONFIG_HOME/swipl/swiplrc"
 
 # reload bash profile and stuff
 alias reload="source $HOME/.bash_profile"
@@ -25,8 +24,6 @@ alias vi=$VISUAL
 
 # easier way to cd back one level
 alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
 
 if [[ "$OSTYPE" =~ ^darwin ]]; then
     # hub for git
@@ -39,14 +36,16 @@ alias newmail='$VISUAL /tmp/vim-mail-$(date +%s).mail'
 # dot is my dotfiles repository
 alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME"
 
+# start working on homework
+alias hw="open hw?.pdf opdracht.pdf; vi hw?.tex"
+
 # use aliases when sudoing
 alias sudo="sudo "
 
-# open apps on mac
-alias brave="open -a \"Brave Browser\""
-alias email="open -a \"Canary\""
-alias whatsapp="open -a \"WhatsApp\""
-alias tg="open -a \"Telegram\""
+# new iterm tab
 alias tab="open -a iterm ."
+
+# shorten this long command
+alias jup="jupyter notebook"
 
 [ -n $(command -v nvim) ] && alias vim="nvim"
