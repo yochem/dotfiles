@@ -14,13 +14,6 @@ export EDITOR="$VISUAL"
 # view manpage in neovim
 export MANPAGER='nvim +Man!'
 
-# use the macos open command as browser
-if [[ -e "/Applications/Brave Browser.app" ]]; then
-    export BROWSER="open -a \"Brave Browser\""
-else
-    export BROWSER="open"
-fi
-
 # add local bin to path
 export PATH="$PATH:$HOME/.local/bin"
 
