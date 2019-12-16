@@ -1,6 +1,6 @@
 [user]
     name = Yochem van Rosmalen
-    email = yochem@icloud.com
+    email = yochem+git@icloud.com
 
 [init]
     templatedir = ~/.config/git/hooks

@@ -48,7 +48,7 @@ g() {
     if git status &>/dev/null; then
         git "$@"
     else
-        git --git-dir="$HOME/.dot/" --work-tree="$HOME" "$@"
+        git --git-dir="$XDG_DATA_HOME/dot" --work-tree="$HOME" "$@"
     fi
 }
 

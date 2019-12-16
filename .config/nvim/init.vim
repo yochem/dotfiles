@@ -49,8 +49,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-fugitive'
 " comment blocks of code
 Plug 'tpope/vim-commentary'
-" send mails from vim
-Plug '~/dev/vim-mail'
 " show git diff next to linenumbers
 Plug 'mhinz/vim-signify'
 " Nice prolog syntax highlighting
@@ -59,6 +57,12 @@ Plug 'adimit/prolog.vim'
 Plug 'vimlab/split-term.vim'
 " just use airline
 Plug 'vim-airline/vim-airline'
+" lint python
+Plug 'nvie/vim-flake8'
+" Fold python docstrings
+Plug 'yhat/vim-docstring'
+" use a latex suite
+Plug 'vim-latex/vim-latex'
 call plug#end()
 
 
@@ -180,10 +184,10 @@ set backspace=indent,eol,start
 command W let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>
 
 " saving one key with navigating through splits
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <Up> <C-w>k
+nnoremap <Down> <C-w>j
+nnoremap <Left> <C-w>h
+nnoremap <Right> <C-w>l
 
 " don't higlight after jumping to definition
 nnoremap gd gd:noh<CR>
@@ -272,7 +276,7 @@ nmap <leader>r :!%:p<CR>
 if has("autocmd")
     " go to last position when opening file
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-	\| exe "normal! g'\"" | endif
+        \| exe "normal! g'\"" | endif
 
     " Enable file type detection
     filetype on
@@ -280,22 +284,8 @@ if has("autocmd")
     " Treat .md files as Markdown
     au BufNewFile,BufRead *.md setlocal filetype=markdown
 
-    " some LaTeX settings
-    function CreateBib()
-        let _fn=expand('%:r')
-        execute '!pdflatex %; bibtex ' . _fn . '; pdflatex %; pdflatex %'
-    endfunction
-
     au BufRead,BufNewFile *.tex setlocal filetype=tex
-    au BufRead,BufNewFile *.{tex,txt,md} setlocal textwidth=78
-    au Filetype tex nnoremap <leader>r :!pdflatex %<CR>
-    au Filetype tex nnoremap <leader>w :silent !pdflatex %<CR>
-    au Filetype tex nnoremap <leader>W :call CreateBib()<CR>
-    au VimLeave *.tex silent !rm *.aux *.log *.out *.bbl *.blg
-
-    " start on top and in insertmode with commits
-    au FileType gitcommit call setpos('.', [0, 1, 1, 0])
-    au FileType gitcommit startinsert
+    au BufRead,BufNewFile *.{txt,md} setlocal textwidth=78
 
     " " stop auto commenting newline
     au FileType * setlocal formatoptions-=ro
@@ -317,6 +307,9 @@ if has("autocmd")
 
     " no linenumbers in terminal mode
     au TermOpen * setlocal nonumber norelativenumber
+
+    " fold docstrings in python
+    au FileType python PyDocHide
 endif
 
 """""""""""""""""""""""
@@ -341,3 +334,4 @@ set noshowmode
 let g:airline_section_b = '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'
 let g:airline_section_x = []
 let g:airline_section_y = []
+let g:airline_section_error = []
