@@ -233,6 +233,7 @@ let g:kite_tab_complete=1
 
 " don't show kite's invasive preview
 set completeopt-=preview
+set completeopt+=menuone,noinsert
 
 " update faster
 set updatetime=100
