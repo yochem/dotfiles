@@ -21,6 +21,7 @@ brew "z"
 brew "zsh"
 
 cask "atom"
+cask "brave-browser"
 cask "iterm2"
 cask "kite"
 cask "mactex-no-gui"

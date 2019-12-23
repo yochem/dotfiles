@@ -8,13 +8,13 @@ phpserver() { open "http://localhost:$1" && php -S "localhost:$1"; }
 mkcd() { mkdir "$1"; cd "$1"; }
 
 # open a manual as pdf
-manpdf() { man -t "$1" | open -f -a /Applications/Preview.app/; }
+manpdf() { man -t "$1" | open -f -a /System/Applications/Preview.app/; }
 
 # move to trash
-thrash() { mv -f "$1" "$HOME/.Trash/$1"; }
+thrash() { mv -f {,"$HOME/.Trash/"}"$1"; }
 
 # grep with color but output all lines
-highlight() { grep --color -i -E "$1|$"; }
+highlight() { grep --color -i -E "$1|$" "$2"; }
 
 # go to a selected directory from the z data file
 fzfz() { builtin cd $(z | fzf | awk '{print $2}');  }
