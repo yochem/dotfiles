@@ -119,8 +119,16 @@ set autoindent
 set smartindent
 set smarttab
 
-" tab should have the length of four spaces
-set tabstop=8 softtabstop=4 shiftwidth=4 expandtab
+" leave tabs normal
+set tabstop=8
+" tab should look like 4 spaces
+set softtabstop=4
+" tab should actually insert spaces
+set expandtab
+" shift should move 4 spaces
+set shiftwidth=4
+" https://vi.stackexchange.com/a/9883
+set shiftround
 
 " don't reset cursor to start of line
 set nostartofline
