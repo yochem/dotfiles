@@ -18,7 +18,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	echo -e "${orangebold}Updating and upgrading Brew...${reset}"
 	brew upgrade
 	echo -e "${orangebold}Cleaning Brew...${reset}"
-	brew cleanup -s
+	brew cleanup -s --prune=0
 	echo -e "${orangebold}Doctoring Brew...${reset}"
         brew doctor
 	echo -e "${orangebold}Missing Brew...${reset}"
