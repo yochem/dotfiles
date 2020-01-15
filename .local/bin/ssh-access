@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+user="${1:-yochem}"
+
+mkdir -p "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+
+authorized_keys="$HOME/.ssh/authorized_keys"
+
+curl -s "https://github.com/yochem.keys" >> "$authorized_keys"
+chmod 600 "$authorized_keys"

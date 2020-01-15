@@ -33,28 +33,28 @@ install_pip() {
     sudo pip -q install -U pip
 
     pip_apps=(
-	autopep8
-	checkpy
-	Click
-	cookiecutter
-	dropbox
-	flask
-	httplib2
-	heupy
-	numpy
-	pandoc
-	pandoc-shortcaption
-	pandocfilters
-	pipsi
-	pybtex
-	pydrive
-	pygments
-	python-dateutil
-	requests
-	setuptools
-	style50
-	termdown
-	zerorpc
+        autopep8
+        checkpy
+        Click
+        cookiecutter
+        dropbox
+        flask
+        httplib2
+        heupy
+        numpy
+        pandoc
+        pandoc-shortcaption
+        pandocfilters
+        pipsi
+        pybtex
+        pydrive
+        pygments
+        python-dateutil
+        requests
+        setuptools
+        style50
+        termdown
+        zerorpc
     )
     sudo pip -q install "${pip_apps[@]}"
 }
@@ -279,8 +279,6 @@ Host *
 Host github.com
     HostName github.com
 EOF
-    eval "$(ssh-agent -s)"
-    ssh-add -K ~/.ssh/id_ed25519
     echo "Don't forget to add the public key to your Github account"
 else
     tput cuu 1 && tput el
@@ -293,7 +291,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     tput cuu 1 && tput el
     echo -e "${good} Add main public key to $HOME/.ssh/authorized_keys?"
-    curl -s "https://github.com/yochem.keys" > "$HOME/.ssh/authorized_keys"
+    ssh-access
 else
     tput cuu 1 && tput el
     echo -e "${bad} Add main public key to $HOME/.ssh/authorized_keys?"
