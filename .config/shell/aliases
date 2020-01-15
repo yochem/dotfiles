@@ -3,7 +3,7 @@
 # fancy ls
 ls_type="ls"
 command -V gls &>/dev/null && ls_type="gls"
-alias ls="$ls_type --group-directories-first -1F --color"
+alias ls="$ls_type --group-directories-first -1F --color=auto"
 unset ls_type
 
 # use some flags by default
@@ -49,3 +49,6 @@ alias tab="open -a iterm ."
 alias jup="jupyter notebook"
 
 [ -n $(command -v nvim) ] && alias vim="nvim"
+
+# get quick octal permissions of a file
+alias perms="stat -f '%A'"
