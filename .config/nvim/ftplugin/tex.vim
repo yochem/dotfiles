@@ -22,7 +22,11 @@ nnoremap <leader>r :call LatexRenderer()<CR>
 nnoremap <leader>w :silent call LatexRenderer()<CR>
 nnoremap <leader>W :call CreateBib()<CR>
 
+" remove all latex help files when closing vim
 au VimLeave *.tex silent !rm <afile>:r.{aux,log,out,bbl,blg}
+
+" open pdf
+nnoremap <leader>p :!open %:r.pdf<CR><CR>
 
 " stop all that folding
 let g:Tex_FoldedSections = ''
