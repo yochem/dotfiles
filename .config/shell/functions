@@ -2,7 +2,7 @@
 
 # open python server
 server() { s="${1:-8000}"; open "http://localhost:$s" && python3 -m http.server "$s"; }
-phpserver() { open "http://localhost:$1" && php -S "localhost:$1"; }
+phpserver() { s="${1:-8000}"; open "http://localhost:$s" && php -S "localhost:$s"; }
 
 # make a directory and cd into it
 mkcd() { mkdir "$1"; cd "$1"; }
