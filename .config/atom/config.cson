@@ -100,7 +100,15 @@
       "jekyll (HTML)"
       "text.html.jekyll"
     ]
+  "linter-python":
+    enableDebug: true
+    force: true
+    lintTrigger: "File modified"
+    withPep257: true
+    withPep8: true
+    withPyflakes: true
   "linter-ui-default":
+    panelHeight: 243
     useBusySignal: false
   "markdown-preview":
     useGitHubStyle: true
@@ -124,6 +132,12 @@
     highlightActiveProject: false
     showPIOHome: false
   platomformio: {}
+  "python-linters":
+    lintTrigger:
+      mypy: "LintAsYouType"
+      pydocstyle: "Never"
+    path:
+      config: "/Users/yochem/.config/atom/python/setup.cfg"
   "rst-preview-pandoc":
     pandocOpts: "-frst -thtml --webtex"
   "status-bar": {}
@@ -141,7 +155,11 @@
     hideIgnoredNames: true
   "vim-mode-plus":
     ignoreCaseForSearch: true
+    ignoreCaseForSearchCurrentWord: true
+    keymapYToYankToLastCharacterOfLine: true
     startInInsertMode: true
+    useSmartcaseForSearch: true
+    useSmartcaseForSearchCurrentWord: true
   welcome:
     showOnStartup: false
 ".jade.source":
