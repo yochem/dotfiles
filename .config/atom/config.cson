@@ -73,6 +73,10 @@
     projectHome: "/Users/Yochem/dev"
     restorePreviousWindowsOnStart: "no"
     telemetryConsent: "no"
+    themes: [
+      "one-dark-ui"
+      "dark-one-dark-syntax"
+    ]
     titleBar: "custom"
     useTreeSitterParsers: false
   editor:

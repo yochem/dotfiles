@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+GIT_DIR="$HOME/.local/share/dot"
+
 # first clone the bare repo in .dot directory
-git clone --bare "https://github.com/yochem/dotfiles.git" "$HOME/.dot"
+git clone --bare "https://github.com/yochem/dotfiles.git" "$GIT_DIR"
 
 # create function to use dot as alias more times
 dot() {
-    git --git-dir="$HOME/.dot/" --work-tree="$HOME" "$@"
+    git --git-dir="$GIT_DIR" --work-tree="$HOME" "$@"
 }
 
 # checkout gets the workingtree files
@@ -17,10 +19,10 @@ if [ "$?" -ne 0 ]; then
     files=$(dot checkout 2>&1 | grep -E "^\s+" | awk {'print $1'})
     # loop over the files
     for file in "$files"; do
-	# create directories if needed
-	mkdir -p "$HOME/dotfiles-backup/$file"
-	# mv the file to the place just created
-	mv "$file" "$_"
+        # create directories if needed
+        mkdir -p "$HOME/dotfiles-backup/$file"
+        # mv the file to the place just created
+        mv "$file" "$_"
     done
     echo "some files already exist on your computer. They have been moved to $HOME/dotfiles-backup."
 fi
