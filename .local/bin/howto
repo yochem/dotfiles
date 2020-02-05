@@ -48,6 +48,9 @@ case "$1" in
         echo "git push origin <branch>"
         echo "hub pull-request"
         ;;
+    *scp*)
+        echo "scp -P 5679 -r path swagbox:path"
+        ;;
     *)
         usage
         ;;
