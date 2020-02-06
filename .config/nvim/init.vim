@@ -63,6 +63,8 @@ Plug 'nvie/vim-flake8'
 Plug 'yhat/vim-docstring'
 " use a latex suite
 Plug 'vim-latex/vim-latex'
+" show indention guide
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 
