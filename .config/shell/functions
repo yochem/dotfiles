@@ -29,7 +29,7 @@ viewgh() {
     remote=$(git ls-remote --get-url origin)
     # format: https://github.com/USER/REPO.git
     if [[ ${remote:0:4} == "http" ]]; then
-	open "${remote}"
+        open "${remote}"
     # format: git://github.com/USER/REPO.git
     elif [[ ${remote:0:4} == "git:" ]]; then
         open "https${remote:3}"
@@ -63,4 +63,17 @@ clone_all_from() {
     grep -e 'git_url*' |
     cut -d \" -f 4 |
     xargs -L1 -P5 git clone;
+}
+
+# start or stop a virtual machine from the command line
+vm() {
+    vm_name="${2:-swagbox}"
+
+    if [ "$1" == "start" ]; then
+        VBoxManage startvm "$vm_name" --type headless
+    elif [ "$1" == "stop" ]; then
+        VBoxManage controlvm "$vm_name" poweroff --type headless
+    else
+        echo "Command not found: $1"
+    fi
 }
