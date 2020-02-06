@@ -7,5 +7,7 @@ chmod 700 "$HOME/.ssh"
 
 authorized_keys="$HOME/.ssh/authorized_keys"
 
-curl -s "https://github.com/yochem.keys" >> "$authorized_keys"
+command -v curl >/dev/null 2>&1 && prog="curl -s" || prog="wget -qO-"
+
+$prog "https://yochem.github.io/keys" >> "$authorized_keys"
 chmod 600 "$authorized_keys"
