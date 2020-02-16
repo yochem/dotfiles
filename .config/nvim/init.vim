@@ -63,6 +63,8 @@ Plug 'nvie/vim-flake8'
 Plug 'yhat/vim-docstring'
 " use a latex suite
 Plug 'vim-latex/vim-latex'
+" Linter
+Plug 'dense-analysis/ale'
 call plug#end()
 
 
@@ -192,10 +194,10 @@ set backspace=indent,eol,start
 command W let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>
 
 " saving one key with navigating through splits
-nnoremap <Up> <C-w>k
-nnoremap <Down> <C-w>j
-nnoremap <Left> <C-w>h
-nnoremap <Right> <C-w>l
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 " don't higlight after jumping to definition
 nnoremap gd gd:noh<CR>
@@ -207,6 +209,9 @@ nnoremap n nzz
 " source: http://stackoverflow.com/a/21000307/2580955
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
+
+" Open terminal quickly
+nnoremap <leader>t :VTerm<CR>
 
 
 """""""""""""""""""""""

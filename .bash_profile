@@ -22,6 +22,8 @@ if [[ -d /usr/local/etc/bash_completion.d ]]; then
         source $file
     done
     unset file
+
+    __git_complete g __git_main
 fi
 
 if [[ $(command -v shopt) ]]; then
