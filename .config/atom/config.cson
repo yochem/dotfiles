@@ -94,6 +94,9 @@
     enableExtendedBuildMode: false
   "latex-plus":
     texBin: "/Library/TeX/Distributions/Programs/texbin"
+  "linter-gcc":
+    execPath: "/usr/local/Cellar/gcc/9.2.0_3/bin/gcc-9"
+    gccDefaultCFlags: "-c -Wall -fsyntax-only"
   "linter-htmlhint":
     enabledScopes: [
       "text.html.angular"
@@ -112,7 +115,8 @@
     withPep8: true
     withPyflakes: true
   "linter-ui-default":
-    panelHeight: 243
+    panelHeight: 173
+    showPanel: true
     useBusySignal: false
   "markdown-preview":
     useGitHubStyle: true
