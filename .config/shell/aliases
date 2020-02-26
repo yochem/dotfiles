@@ -3,7 +3,7 @@
 # fancy ls
 ls_type="ls"
 command -V gls &>/dev/null && ls_type="gls"
-alias ls="$ls_type --group-directories-first -1F --color=auto"
+alias ls="\$ls_type --group-directories-first -1F --color=auto"
 unset ls_type
 
 # use some flags by default
@@ -17,10 +17,10 @@ alias p="python3"
 alias p2="python"
 
 # reload bash profile and stuff
-alias reload="source $HOME/.bash_profile"
+alias reload="source \$HOME/.bash_profile"
 
 # use $VISUAL as editor (it's mostly vim, so i've always used 'v'
-alias vi=$VISUAL
+alias vi=\$VISUAL
 
 # easier way to cd back one level
 alias ..="cd .."
@@ -34,7 +34,7 @@ fi
 alias newmail='$VISUAL /tmp/vim-mail-$(date +%s).mail'
 
 # dot is my dotfiles repository
-alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME"
+alias dot="git --git-dir=\$HOME/.dot/ --work-tree=\$HOME"
 
 # start working on homework
 alias hw="open hw?.pdf opdracht.pdf; vi hw?.tex"
@@ -48,7 +48,7 @@ alias tab="open -a iterm ."
 # shorten this long command
 alias jup="jupyter notebook"
 
-[ -n $(command -v nvim) ] && alias vim="nvim"
+[ -n "$(command -v nvim)" ] && alias vim="nvim"
 
 # get quick octal permissions of a file
 alias perms="stat -f '%A'"

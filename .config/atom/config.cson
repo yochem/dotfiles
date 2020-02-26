@@ -116,7 +116,6 @@
     withPyflakes: true
   "linter-ui-default":
     panelHeight: 173
-    showPanel: true
     useBusySignal: false
   "markdown-preview":
     useGitHubStyle: true

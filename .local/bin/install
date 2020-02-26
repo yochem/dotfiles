@@ -244,23 +244,6 @@ else
     echo -e "${bad} Clone yochem's repositories to $HOME/dev/?"
 fi
 
-###################
-###### Z.SH #######
-###################
-echo -en "${question} Install z.sh? "
-read -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    tput cuu 1 && tput el
-    echo -e "${good} Install z.sh?"
-    sudo curl -s "https://raw.githubusercontent.com/rupa/z/master/z.1" > "/usr/local/share/man/man1/z.1"
-    curl -s "https://raw.githubusercontent.com/rupa/z/master/z.sh" > "$HOME/.local/bin/z.sh"
-    mkdir -p "$HOME/.local/share/z"
-else
-    tput cuu 1 && tput el
-    echo -e "${bad} Install z.sh?"
-fi
-
 ##################
 #### SSH KEYS ####
 ##################

@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-user="${1:-yochem}"
-
 mkdir -p "$HOME/.ssh"
 chmod 700 "$HOME/.ssh"
 
 authorized_keys="$HOME/.ssh/authorized_keys"
 
+# use curl, else wget
 command -v curl >/dev/null 2>&1 && prog="curl -s" || prog="wget -qO-"
 
 $prog "https://yochem.github.io/keys" >> "$authorized_keys"
