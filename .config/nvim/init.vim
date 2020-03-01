@@ -170,7 +170,7 @@ set gdefault
 set hlsearch
 
 " ignore cases of search
-set ignorecase
+set smartcase
 
 " highlight dynamically
 set incsearch
@@ -213,6 +213,8 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 " Open terminal quickly
 nnoremap <leader>t :VTerm<CR>
 
+" hate using ctrl and using ctrl-w a lot
+nnoremap <space> <C-w>
 
 """""""""""""""""""""""
 "      MODERNIZE      "

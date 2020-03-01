@@ -25,6 +25,8 @@
     # shoroten commit
     com = commit
 
+    co = checkout
+
     # View url to Github
     url = config --get remote.origin.url
 
