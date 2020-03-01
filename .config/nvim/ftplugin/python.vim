@@ -10,6 +10,6 @@ nnoremap zz za
 " list all structs and functions in the current buffer, type :<line-num> to
 " jump
 function! FindFuncs()
-    exe 'g/^def .*:$/'
+    exe 'g/^def\|^class/'
 endfunction
 nnoremap <leader>f :call FindFuncs()<CR>
