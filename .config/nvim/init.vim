@@ -315,7 +315,7 @@ if has("autocmd")
     au BufReadPost * syntax match nonascii "[^\x00-\x7F]"
 
     " highlight trailing whitespaces except the current line in insertmode
-    highlight trailingwhitespace guibg=Red ctermbg=1
+    highlight trailingwhitespace guibg=Grey ctermbg=1
     au BufWinEnter * match trailingwhitespace /\s\+$/
     au InsertEnter * match trailingwhitespace /\s\+\%#\@<!$/
     au InsertLeave * match trailingwhitespace /\s\+$/
@@ -326,6 +326,10 @@ if has("autocmd")
 
     " fold docstrings in python
     au FileType python PyDocHide
+
+    " show me that the file is already open somewhere
+    au SwapExists * let v:swapchoice = 'o'
+    au SwapExists * echomsg 'Found a swapfile, opening read-only'
 endif
 
 """""""""""""""""""""""
