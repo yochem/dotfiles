@@ -67,7 +67,7 @@ clone_all_from() {
 
 # start or stop a virtual machine from the command line
 vm() {
-    vm_name="${2:-swagbox}"
+    vm_name="${2:-ubuntu}"
 
     if [ "$1" == "start" ]; then
         VBoxManage startvm "$vm_name" --type headless

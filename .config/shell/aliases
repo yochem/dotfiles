@@ -7,7 +7,7 @@ alias ls="$ls_type --group-directories-first -1F --color=auto"
 unset ls_type
 
 # use some flags by default
-alias grep="grep -inE --color=auto"
+alias grep="grep -iE --color=auto"
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -v"

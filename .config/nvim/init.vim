@@ -50,15 +50,13 @@ Plug 'tpope/vim-fugitive'
 " comment blocks of code
 Plug 'tpope/vim-commentary'
 " show git diff next to linenumbers
-Plug 'mhinz/vim-signify'
+" Plug 'mhinz/vim-signify'
 " Nice prolog syntax highlighting
 Plug 'adimit/prolog.vim'
 " better implementation for nvim terminal
 Plug 'vimlab/split-term.vim'
 " just use airline
 Plug 'vim-airline/vim-airline'
-" lint python
-Plug 'nvie/vim-flake8'
 " Fold python docstrings
 Plug 'yhat/vim-docstring'
 " use a latex suite
