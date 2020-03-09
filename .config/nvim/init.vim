@@ -49,8 +49,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-fugitive'
 " comment blocks of code
 Plug 'tpope/vim-commentary'
-" show git diff next to linenumbers
-" Plug 'mhinz/vim-signify'
 " Nice prolog syntax highlighting
 Plug 'adimit/prolog.vim'
 " better implementation for nvim terminal

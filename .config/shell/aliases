@@ -25,10 +25,10 @@ alias vi=\$VISUAL
 # easier way to cd back one level
 alias ..="cd .."
 
-if [[ "$OSTYPE" =~ ^darwin ]]; then
-    # hub for git
-    alias git=hub
-fi
+# use hub for github
+[ -n "$(command -v hub)" ] && alias git=hub
+
+[ "$(uname -s)" = "Darwin" ] && alias lock="pmset displaysleepnow"
 
 # start writing a mail in /tmp
 alias newmail='$VISUAL /tmp/vim-mail-$(date +%s).mail'
