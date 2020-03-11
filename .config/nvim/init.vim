@@ -166,7 +166,7 @@ set gdefault
 set hlsearch
 
 " ignore cases of search
-set smartcase
+set ignorecase
 
 " highlight dynamically
 set incsearch
