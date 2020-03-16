@@ -189,12 +189,6 @@ set backspace=indent,eol,start
 " remove trailing whitespaces
 command W let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>
 
-" saving one key with navigating through splits
-nnoremap <C-k> <C-w>k
-nnoremap <C-j> <C-w>j
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-
 " don't higlight after jumping to definition
 nnoremap gd gd:noh<CR>
 
@@ -279,8 +273,9 @@ filetype plugin on
 set nospell
 let g:markdown_enable_spell_checking = 0
 
-" compile / run current file
-nmap <leader>r :!%:p<CR>
+" don't accidently create macros'
+nnoremap Q q
+nnoremap q <nop>
 
 """""""""""""""""""""""
 "    OPENING FILES    "

@@ -20,5 +20,6 @@ nnoremap <leader>f :call FindFuncs(0)<CR>
 nnoremap <leader>F :call FindFuncs(1)<CR>
 
 " don't need that much linting with Python
+let b:ale_linters = ['autopep8', 'pylint', 'flake8']
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
