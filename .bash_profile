@@ -10,7 +10,7 @@ dotfiles=(
 )
 
 # Load the shell dotfiles, and z.sh
-for file in ${dotfiles[@]}; do
+for file in "${dotfiles[@]}"; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
 unset file
@@ -19,7 +19,7 @@ unset dotfiles
 # load bash completion for commands
 if [[ -d /usr/local/etc/bash_completion.d ]]; then
     for file in /usr/local/etc/bash_completion.d/*; do
-        source $file
+        source "$file"
     done
     unset file
 
@@ -45,5 +45,5 @@ fi
 
 # linuxbrew
 [ -e "/home/linuxbrew/" ] && {
-    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 }

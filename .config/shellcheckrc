@@ -1,0 +1,2 @@
+# allow source $variable
+disable=SC1090
