@@ -47,3 +47,9 @@ fi
 [ -e "/home/linuxbrew/" ] && {
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 }
+
+
+# always use tmux
+if command -v tmux >/dev/null && [[ -n "$PS1" ]] && [[ -z "$TMUX" ]]; then
+    tmux attach-session -t general || tmux new-session -s general
+fi
