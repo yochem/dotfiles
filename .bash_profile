@@ -49,7 +49,9 @@ fi
 }
 
 
-# always use tmux
-if command -v tmux >/dev/null && [[ -n "$PS1" ]] && [[ -z "$TMUX" ]]; then
-    tmux attach-session -t general || tmux new-session -s general
+# always use tmux on main machine
+if command -v tmux >/dev/null; then
+    if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]]; then
+        tmux attach-session -t general || tmux new-session -s general
+    fi
 fi
