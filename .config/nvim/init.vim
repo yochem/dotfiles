@@ -320,7 +320,7 @@ if has("autocmd")
 
     " show me that the file is already open somewhere
     au SwapExists * let v:swapchoice = 'o'
-    au SwapExists * echomsg 'Found a swapfile, opening read-only'
+    au SwapExists * echoerr 'Found a swapfile, opening read-only'
 endif
 
 """""""""""""""""""""""

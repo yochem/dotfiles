@@ -33,6 +33,4 @@ let g:Tex_FoldedSections = ''
 let g:Tex_FoldedEnvironments = 'figure,titlepage'
 let g:Tex_FoldedMisc = ''
 
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_enter = 0
+let b:ale_linters = []

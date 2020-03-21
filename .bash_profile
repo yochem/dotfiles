@@ -48,10 +48,15 @@ fi
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 }
 
-
-# always use tmux on main machine
-if command -v tmux >/dev/null; then
-    if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]]; then
-        tmux attach-session -t general || tmux new-session -s general
+# always start tmux on main machine
+if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]]; then
+    tmux ls | grep attached >/dev/null 2>&1
+    retval="$?"
+    if [ "$retval" -eq 1 ]; then
+        read -p "Open tmux? " -n 1 -r
+        echo
+        if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+            tmux attach-session -t general || tmux new-session -s general
+        fi
     fi
 fi
