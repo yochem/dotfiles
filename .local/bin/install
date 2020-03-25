@@ -5,10 +5,8 @@
 
 
 # for coloring output
-proc="\e[39m[~]\e[0m"
 bad="\e[91m[-]\e[0m"
 good="\e[92m[+]\e[0m"
-warning="\e[93m[!]\e[0m"
 question="\e[94m[?]\e[0m"
 
 install_brew() {
@@ -34,27 +32,14 @@ install_pip() {
 
     pip_apps=(
         autopep8
-        checkpy
-        Click
-        cookiecutter
-        dropbox
-        flask
-        httplib2
-        heupy
-        numpy
-        pandoc
-        pandoc-shortcaption
-        pandocfilters
-        pipsi
-        pybtex
-        pydrive
-        pygments
-        python-dateutil
-        requests
-        setuptools
-        style50
-        termdown
-        zerorpc
+        flake8
+        jupyter
+        jupyter-contrib-nbextensions
+        mypy
+        pylint
+        scikit-learn
+        xdg
+        youtube-dl
     )
     sudo pip -q install "${pip_apps[@]}"
 }
@@ -110,7 +95,7 @@ else
             # Save Homebrew’s installed location.
             BREW_PREFIX=$(brew --prefix)
             # Switch to using brew-installed bash as default shell
-            if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
+            if ! grep -F -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
                 echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
                 chsh -s "${BREW_PREFIX}/bin/bash"
             fi

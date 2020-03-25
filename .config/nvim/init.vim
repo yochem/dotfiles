@@ -192,6 +192,9 @@ command W let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>
 " don't higlight after jumping to definition
 nnoremap gd gd:noh<CR>
 
+" turn off search highlight
+nnoremap <ESC><ESC> :noh<CR>
+
 " when jumping to definition place it in the middle of the screen
 nnoremap n nzz
 
