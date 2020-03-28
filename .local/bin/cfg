@@ -21,7 +21,7 @@ elif [ -f "$config_path/$1" ]; then
 elif [ -f "$config_path/"*"/$1"* ]; then
     result=("$config_path/"*"/$1"*)
 else
-    result="$(fd -H --type file -d 2 "$1" "$config_path" | sed 1q)"
+    result="$(fd -H --type file -d 3 "$1" "$config_path" | sed 1q)"
 fi
 
 [ -n "$result" -a -f "$result" ] && "$VISUAL" "$result"
