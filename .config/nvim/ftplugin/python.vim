@@ -1,5 +1,5 @@
 " run the python file
-nnoremap <leader>r :!python3 %:p<CR>
+nnoremap <buffer> <leader>r :!python3 %:p<CR>
 
 " list all structs and functions in the current buffer, type :<line-num> to
 " jump
@@ -13,8 +13,8 @@ function! FindFuncs(deep)
     normal `x
 endfunction
 
-nnoremap <leader>f :call FindFuncs(0)<CR>
-nnoremap <leader>F :call FindFuncs(1)<CR>
+nnoremap <buffer> <leader>f :call FindFuncs(0)<CR>
+nnoremap <buffer> <leader>F :call FindFuncs(1)<CR>
 
 " don't need that much linting with Python
 " let b:ale_linters = []

@@ -349,3 +349,6 @@ let g:airline_section_b = '%{airline#util#wrap(airline#extensions#branch#get_hea
 let g:airline_section_x = []
 let g:airline_section_y = []
 let g:airline_section_error = []
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
