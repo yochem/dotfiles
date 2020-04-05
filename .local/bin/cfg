@@ -14,7 +14,7 @@
 
 config_path=${XDG_CONFIG_HOME:-$HOME/.config}
 
-[ "$(command -v fdfind)" ] && fd=fdfind
+[ "$(command -v fdfind)" ] && fd=fdfind || fd=fd
 
 if [ -f "$config_path/$1/config" ]; then
     result="$config_path/$1/config"
