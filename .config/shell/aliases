@@ -55,3 +55,5 @@ alias jup="jupyter notebook"
 
 # get quick octal permissions of a file
 alias perms="stat -f '%A'"
+
+alias python3.8="/usr/local/opt/python@3.8/bin/python3"

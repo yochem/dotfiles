@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir -p "$HOME/.ssh"
-chmod 700 "$HOME/.ssh"
+mkdir -m 700 "$HOME/.ssh"
 
 authorized_keys="$HOME/.ssh/authorized_keys"
 
