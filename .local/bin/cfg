@@ -6,13 +6,15 @@
 # 1) `config` file in lvl 1 folder:
 #       $ cfg git -> ~/.config/git/config
 # 2) Exact path inside lvl 0 folder:
-#       $ cfg readline/inputrc -> ~/.config/readline/inputrc
-# 3) Some path in lvl 2 folder:
-#       $ cfg ftplugin/python -> ~/.config/nvim/ftplugin/python.vim
+#       $ cfg pylintrc -> ~/.config/pylintrc
+# 3) Some path in lvl 1/2/3 folder:
+#       $ cfg python.vim -> ~/.config/nvim/ftplugin/python.vim
 
-[ -z "$1" ] && exit 20
+[ -z "$1" ] && exit 1
 
-config_path=${XDG_CONFIG_HOME:-$HOME/.config}
+config_path="${XDG_CONFIG_HOME:-$HOME/.config}"
+
+editor=${EDITOR:-vi}
 
 [ "$(command -v fdfind)" ] && fd=fdfind || fd=fd
 
@@ -20,10 +22,8 @@ if [ -f "$config_path/$1/config" ]; then
     result="$config_path/$1/config"
 elif [ -f "$config_path/$1" ]; then
     result="$config_path/$1"
-elif [ -f "$config_path/"*"/$1"* ]; then
-    result=("$config_path/"*"/$1"*)
 else
-    result="$($fd -H --type file -d 3 "$1" "$config_path" | sed 1q)"
+    result="$($fd -H --type file -d 3 "$1" "$config_path" | fzf)"
 fi
 
-[ -n "$result" -a -f "$result" ] && "$VISUAL" "$result"
+[ -f "$result" ] && "$editor" "$result" || exit 2
