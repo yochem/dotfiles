@@ -61,6 +61,8 @@ Plug 'yhat/vim-docstring'
 Plug 'vim-latex/vim-latex'
 " Linter
 Plug 'dense-analysis/ale'
+" remove trailing whitespace
+Plug 'bitc/vim-bad-whitespace'
 call plug#end()
 
 
@@ -308,12 +310,13 @@ if has("autocmd")
     highlight nonascii guibg=Blue ctermbg=9
     au BufReadPost * syntax match nonascii "[^\x00-\x7F]"
 
-    " highlight trailing whitespaces except the current line in insertmode
-    highlight trailingwhitespace guibg=Grey ctermbg=1
-    au BufWinEnter * match trailingwhitespace /\s\+$/
-    au InsertEnter * match trailingwhitespace /\s\+\%#\@<!$/
-    au InsertLeave * match trailingwhitespace /\s\+$/
-    au BufWinLeave * call clearmatches()
+    " " highlight trailing whitespaces except the current line in insertmode
+    " highlight trailingwhitespace guibg=Grey ctermbg=1
+
+    " au BufWinEnter <buffer> match trailingwhitespace /\s\+$/
+    " au InsertEnter <buffer> match trailingwhitespace /\s\+\%#\@<!$/
+    " au InsertLeave <buffer> match trailingwhitespace /\s\+$/
+    " au BufWinLeave <buffer> call clearmatches()
 
     " no linenumbers in terminal mode
     au TermOpen * setlocal nonumber norelativenumber
