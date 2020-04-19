@@ -42,7 +42,7 @@ Plug 'sheerun/vim-polyglot'
 " always highlight html tags you're currently in
 Plug 'valloric/MatchTagAlways', { 'for': 'html' }
 " show filetree
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " conform vim to editorconfig
 Plug 'editorconfig/editorconfig-vim'
 " handy git things inside of vim (branch in statusline)
@@ -50,15 +50,13 @@ Plug 'tpope/vim-fugitive'
 " comment blocks of code
 Plug 'tpope/vim-commentary'
 " Nice prolog syntax highlighting
-Plug 'adimit/prolog.vim'
+Plug 'adimit/prolog.vim', { 'for': 'prolog' }
 " better implementation for nvim terminal
 Plug 'vimlab/split-term.vim'
 " just use airline
 Plug 'vim-airline/vim-airline'
 " Fold python docstrings
 Plug 'yhat/vim-docstring'
-" use a latex suite
-Plug 'vim-latex/vim-latex'
 " Linter
 Plug 'dense-analysis/ale'
 " remove trailing whitespace
@@ -310,14 +308,6 @@ if has("autocmd")
     highlight nonascii guibg=Blue ctermbg=9
     au BufReadPost * syntax match nonascii "[^\x00-\x7F]"
 
-    " " highlight trailing whitespaces except the current line in insertmode
-    " highlight trailingwhitespace guibg=Grey ctermbg=1
-
-    " au BufWinEnter <buffer> match trailingwhitespace /\s\+$/
-    " au InsertEnter <buffer> match trailingwhitespace /\s\+\%#\@<!$/
-    " au InsertLeave <buffer> match trailingwhitespace /\s\+$/
-    " au BufWinLeave <buffer> call clearmatches()
-
     " no linenumbers in terminal mode
     au TermOpen * setlocal nonumber norelativenumber
 
@@ -355,3 +345,5 @@ let g:airline_section_error = []
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+let g:ycm_max_num_candidates = 5

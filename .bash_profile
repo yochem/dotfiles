@@ -4,9 +4,9 @@ dotfiles=(
     ~/.config/shell/exports
     ~/.config/shell/aliases
     ~/.config/shell/functions
+    ~/.config/fzf/config
     /usr/local/etc/profile.d/bash_completion.sh
     /usr/local/etc/profile.d/z.sh
-    ~/.config/iterm2/iterm2_shell_integration.bash
 )
 
 # Load the shell dotfiles, and z.sh

@@ -25,8 +25,8 @@ nnoremap <leader>W :call CreateBib()<CR>
 " remove all latex help files when closing vim
 au VimLeave *.tex silent !rm <afile>:r.{aux,log,out,bbl,blg}
 
-" open pdf
-nnoremap <leader>p :!open %:r.pdf<CR><CR>
+" open pdf and focus back to vim
+nnoremap <leader>p :!open %:r.pdf; app-switch<CR><CR>
 
 " stop all that folding
 let g:Tex_FoldedSections = ''

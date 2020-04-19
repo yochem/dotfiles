@@ -23,7 +23,7 @@ if [ -f "$config_path/$1/config" ]; then
 elif [ -f "$config_path/$1" ]; then
     result="$config_path/$1"
 else
-    result="$($fd -H --type file -d 3 "$1" "$config_path" | fzf)"
+    result="$($fd -H --type file -d 3 "$1" "$config_path" | sed 1q)"
 fi
 
 [ -f "$result" ] && "$editor" "$result" || exit 2

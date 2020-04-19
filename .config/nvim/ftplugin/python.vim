@@ -1,6 +1,8 @@
 " run the python file
 nnoremap <buffer> <leader>r :!python3 %:p<CR>
 
+nnoremap ? :!python3 -c 'help(<cword>)'<CR>
+
 " list all structs and functions in the current buffer, type :<line-num> to
 " jump
 function! FindFuncs(deep)
