@@ -36,9 +36,6 @@ alias newmail='$VISUAL /tmp/vim-mail-$(date +%s).mail'
 # dot is my dotfiles repository
 alias dot="git --git-dir=\$HOME/.dot/ --work-tree=\$HOME"
 
-# start working on homework
-alias hw="open hw?.pdf opdracht.pdf; vi hw?.tex"
-
 # use aliases when sudoing
 alias sudo="sudo "
 

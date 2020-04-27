@@ -5,7 +5,7 @@ server() { s="${1:-8000}"; open "http://localhost:$s" && python3 -m http.server 
 phpserver() { s="${1:-8000}"; open "http://localhost:$s" && php -S "localhost:$s"; }
 
 # make a directory and cd into it
-mkcd() { mkdir "$1"; cd "$1"; }
+mkcd() { mkdir "$1" && cd "$1"; }
 
 # open a manual as pdf
 manpdf() { man -t "$1" | open -f -a /System/Applications/Preview.app/; }
@@ -28,10 +28,10 @@ pipi() { python3 -m pip install "$1"; }
 viewgh() {
     remote=$(git ls-remote --get-url origin)
     # format: https://github.com/USER/REPO.git
-    if [[ ${remote:0:4} == "http" ]]; then
+    if [ ${remote:0:4} = "http" ]; then
         open "${remote}"
     # format: git://github.com/USER/REPO.git
-    elif [[ ${remote:0:4} == "git:" ]]; then
+    elif [ ${remote:0:4} = "git:" ]; then
         open "https${remote:3}"
     # format: git@github.com:USER/REPO.git
     else
@@ -60,7 +60,7 @@ ip() { ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'; }
 clone_all_from() {
     PAGE=1;
     curl "https://api.github.com/$1/repos?page=$PAGE&per_page=100" |
-    grep -e 'git_url*' |
+    grep -e 'git_url.*' |
     cut -d \" -f 4 |
     xargs -L1 -P5 git clone;
 }
@@ -69,9 +69,9 @@ clone_all_from() {
 vm() {
     vm_name="${2:-virtual}"
 
-    if [ "$1" == "start" ]; then
+    if [ "$1" = "start" ]; then
         VBoxManage startvm "$vm_name" --type headless
-    elif [ "$1" == "stop" ]; then
+    elif [ "$1" = "stop" ]; then
         VBoxManage controlvm "$vm_name" poweroff --type headless
     else
         echo "Command not found: $1"
@@ -80,3 +80,6 @@ vm() {
 
 # convert hex to decimal representation
 hex() { echo "$((16#$1))"; }
+
+# start working on latex project
+hw() { open "$1.pdf"; app-switch; "$EDITOR" "$1.tex"; }
