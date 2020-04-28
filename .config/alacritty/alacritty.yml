@@ -46,4 +46,5 @@ live_config_reload: true
 
 key_bindings:
   - { key: Return, mods: Command, action: ToggleSimpleFullscreen }
-  - { key: W, mods: Command, action: Hide }
+  - { key: W,      mods: Command, action: Hide }
+  - { key: N,      mods: Command, action: SpawnNewInstance }
