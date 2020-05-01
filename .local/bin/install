@@ -41,7 +41,7 @@ install_pip() {
         xdg
         youtube-dl
     )
-    sudo pip -q install "${pip_apps[@]}"
+    python3 -m pip -q install "${pip_apps[@]}"
 }
 
 # update existing `sudo` time stamp until installation is finished

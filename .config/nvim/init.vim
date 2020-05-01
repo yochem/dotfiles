@@ -1,17 +1,4 @@
 " .vimrc - Yochem van Rosmalen
-" 1. Plugins
-" 2. Colorscheme
-" 3. Looks
-" 4. Indention
-" 5. Lines
-" 6. Searching
-" 7. Typing
-" 8. Modernize
-" 9. Random Stuff
-" 10. Opening files
-" 11. Shell/running
-" 12. Statusline
-
 
 """""""""""""""""""""""
 "      PLUGINS        "
@@ -39,10 +26,6 @@ call plug#begin(plugged_dir)
 Plug 'joshdick/onedark.vim'
 " better language syntax support
 Plug 'sheerun/vim-polyglot'
-" always highlight html tags you're currently in
-Plug 'valloric/MatchTagAlways', { 'for': 'html' }
-" show filetree
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " conform vim to editorconfig
 Plug 'editorconfig/editorconfig-vim'
 " handy git things inside of vim (branch in statusline)
@@ -56,11 +39,13 @@ Plug 'vimlab/split-term.vim'
 " just use airline
 Plug 'vim-airline/vim-airline'
 " Fold python docstrings
-Plug 'yhat/vim-docstring'
+Plug 'yhat/vim-docstring', { 'for': 'python' }
 " Linter
 Plug 'dense-analysis/ale'
 " remove trailing whitespace
 Plug 'bitc/vim-bad-whitespace'
+" Completion
+Plug 'ycm-core/YouCompleteMe'
 call plug#end()
 
 
@@ -186,12 +171,6 @@ vmap r "_dP
 " backspace in insert mode
 set backspace=indent,eol,start
 
-" remove trailing whitespaces
-command W let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>
-
-" don't higlight after jumping to definition
-nnoremap gd gd:noh<CR>
-
 " turn off search highlight
 nnoremap <ESC><ESC> :noh<CR>
 
@@ -208,6 +187,16 @@ nnoremap <leader>t :VTerm<CR>
 
 " hate using ctrl and using ctrl-w a lot
 nnoremap <space> <C-w>
+
+" Go to definition on steroids
+nnoremap <silent> gd :YcmCompleter GoTo<CR>
+let g:ycm_max_num_candidates = 5
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+
+nnoremap <silent> <leader>t :20Lex<CR>
 
 """""""""""""""""""""""
 "      MODERNIZE      "
@@ -232,16 +221,6 @@ set ttyfast
 " makes starting up faster
 let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
-
-" toggle NerdTree
-map <leader>f :NERDTreeToggle<CR>
-
-" use <Tab> to complete code
-let g:kite_tab_complete=1
-
-" don't show kite's invasive preview
-set completeopt-=preview
-set completeopt+=menuone,noinsert
 
 " update faster
 set updatetime=100
@@ -274,7 +253,6 @@ filetype plugin on
 
 " dont care about spelling
 set nospell
-let g:markdown_enable_spell_checking = 0
 
 " don't accidently create macros'
 nnoremap Q q
@@ -342,8 +320,4 @@ let g:airline_section_b = '%{airline#util#wrap(airline#extensions#branch#get_hea
 let g:airline_section_x = []
 let g:airline_section_y = []
 let g:airline_section_error = []
-
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-let g:ycm_max_num_candidates = 5
+let g:airline_section_warning = []

@@ -1,3 +1,5 @@
+# vim: ft=toml
+
 [pylint]
 disable = C0103, # invalid-name
           C0114, # missing-module-docstring

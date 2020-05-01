@@ -27,7 +27,7 @@
 	<key>BadgeTopMargin</key>
 	<integer>10</integer>
 	<key>Command</key>
-	<string></string>
+	<string>/usr/local/bin/bash</string>
 	<key>CommandSelection</key>
 	<true/>
 	<key>Coprocess MRU</key>
@@ -1148,13 +1148,15 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>170 295 796 486 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>351 220 738 504 0 0 1440 877 </string>
+	<string>960 0 960 1057 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 0 1440 900 0 0 1440 900 </string>
+	<string>16 447 696 414 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>295 152 850 646 0 0 1440 877 </string>
+	<string>728 16 696 414 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 23</key>
 	<string>0 0 1440 900 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>16 16 696 414 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_34931245-EC85-48BA-B92D-CA91B962C7D4</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_34931245-EC85-48BA-B92D-CA91B962C7D4_selection</key>
@@ -4183,13 +4185,13 @@
 	<array>
 		<string>3.3.6</string>
 		<string>3.3.8</string>
-		<string>3.3.0</string>
+		<string>3.2.9</string>
 		<string>3.3.1</string>
 		<string>3.3.3</string>
 		<string>3.3.5</string>
 		<string>3.3.7</string>
 		<string>3.3.9</string>
-		<string>3.2.9</string>
+		<string>3.3.0</string>
 		<string>3.3.2</string>
 		<string>3.3.4</string>
 	</array>
@@ -4203,16 +4205,16 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1440, 900}}</string>
+		<string>{{0, 0}, {1920, 1080}}</string>
 		<key>topLeft</key>
-		<string>{287, 697}</string>
+		<string>{502, 728}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>87D5B0AC-BFAD-46E4-8A1F-4750736F82A6</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>103</integer>
+	<integer>115</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4981,7 +4983,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-03-25T19:27:11Z</date>
+	<date>2020-04-30T13:32:32Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
@@ -4989,7 +4991,7 @@
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>Secure Input</key>
-	<false/>
+	<true/>
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>

@@ -1,2 +1,2 @@
 # allow source $variable
-disable=SC1090
+disable=SC1090,SC2155,SC2139
