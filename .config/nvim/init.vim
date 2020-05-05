@@ -172,7 +172,7 @@ vmap r "_dP
 set backspace=indent,eol,start
 
 " turn off search highlight
-nnoremap <ESC><ESC> :noh<CR>
+nnoremap <silent> <ESC><ESC> :noh<CR>
 
 " when jumping to definition place it in the middle of the screen
 nnoremap n nzz
@@ -190,13 +190,22 @@ nnoremap <space> <C-w>
 
 " Go to definition on steroids
 nnoremap <silent> gd :YcmCompleter GoTo<CR>
+nnoremap <silent> ? :YcmCompleter GetDoc<CR>
 let g:ycm_max_num_candidates = 5
 
+" Go to next or previous error
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
+" Open new file in split
+nnoremap <silent> <leader>t :Vexplore<CR>
 
-nnoremap <silent> <leader>t :20Lex<CR>
+let g:ale_sign_error = '!'
+let g:ale_sign_warning = '~'
+
+" ZZ is the same as :q, make it act different
+nnoremap <silent> ZZ :qall<CR>
+
 
 """""""""""""""""""""""
 "      MODERNIZE      "
