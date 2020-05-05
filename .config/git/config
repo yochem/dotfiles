@@ -18,6 +18,9 @@
     # View the current working tree status using the short format
     s = status -s
 
+    # show diff summary
+    ds = diff master --compact-summary
+
     # commit all files that have been modified or removed, new files not
     # affected
     ca = commit -a
