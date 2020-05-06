@@ -5,8 +5,8 @@
 """""""""""""""""""""""
 " download vim-plug for the right vim
 if has('nvim')
-    let plugged_dir = '$XDG_DATA_HOME/nvim/plugged'
-    if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    let plugged_dir = stdpath('data') . '/plugged'
+    if empty(glob(stdpath('data') . '/site/autoload/plug.vim'))
         silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
             \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -189,7 +189,8 @@ nnoremap <leader>t :VTerm<CR>
 nnoremap <space> <C-w>
 
 " Go to definition on steroids
-nnoremap <silent> gd :YcmCompleter GoTo<CR>
+nnoremap <silent> gd :YcmCompleter GoToDeclaration<CR>
+nnoremap <silent> gr :YcmCompleter GoToReferences<CR>
 nnoremap <silent> ? :YcmCompleter GetDoc<CR>
 let g:ycm_max_num_candidates = 5
 

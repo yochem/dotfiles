@@ -15,22 +15,22 @@ fi
 # BREW (CASK)
 if [[ "$OSTYPE" == "darwin"* ]]; then
     if [[ $(command -v brew) ]]; then
-	echo -e "${orangebold}Updating and upgrading Brew...${reset}"
-	brew upgrade
-	echo -e "${orangebold}Cleaning Brew...${reset}"
-	brew cleanup -s --prune=0
-	echo -e "${orangebold}Doctoring Brew...${reset}"
+        echo -e "${orangebold}Updating and upgrading Brew...${reset}"
+        brew upgrade
+        echo -e "${orangebold}Cleaning Brew...${reset}"
+        brew cleanup -s --prune=0
+        echo -e "${orangebold}Doctoring Brew...${reset}"
         brew doctor
-	echo -e "${orangebold}Missing Brew...${reset}"
+        echo -e "${orangebold}Missing Brew...${reset}"
         brew missing
     fi
 fi
 
 if [[ "$OSTYPE" == "linux"* ]]; then
     if [[ $(command -v apt-get) ]]; then
-	echo -e "${orangebold}Updating and upgrading apt-get...${reset}"
-	sudo apt-get update
-	sudo apt-get upgrade -y
+        echo -e "${orangebold}Updating and upgrading apt-get...${reset}"
+        sudo apt-get update
+        sudo apt-get upgrade -y
     fi
 fi
 
