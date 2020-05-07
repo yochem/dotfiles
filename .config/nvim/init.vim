@@ -188,11 +188,16 @@ nnoremap <leader>t :VTerm<CR>
 " hate using ctrl and using ctrl-w a lot
 nnoremap <space> <C-w>
 
-" Go to definition on steroids
+" YouCompleteMe settings
 nnoremap <silent> gd :YcmCompleter GoToDeclaration<CR>
 nnoremap <silent> gr :YcmCompleter GoToReferences<CR>
 nnoremap <silent> ? :YcmCompleter GetDoc<CR>
-let g:ycm_max_num_candidates = 5
+" let g:ycm_max_num_candidates = 5
+set completeopt-=preview
+
+let g:ycm_semantic_triggers =  {
+  \   'python': ['(', ', '],
+  \ }
 
 " Go to next or previous error
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)

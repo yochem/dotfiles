@@ -17,7 +17,7 @@ thrash() { mv -f "$1" "$HOME/.Trash/$1"; }
 highlight() { grep --color -i -E "$1|$" "$2"; }
 
 # go to a selected directory from the z data file
-fzfz() { builtin cd "$(z | fzf | awk '{print $2}')";  }
+fzfz() { builtin cd "$(z | fzf | cut -d' ' -f 2- | tr -d '[[:space:]]')";  }
 
 # shorten pip install command
 pipi() { python3 -m pip install "$1"; }
