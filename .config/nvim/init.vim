@@ -188,16 +188,19 @@ nnoremap <leader>t :VTerm<CR>
 " hate using ctrl and using ctrl-w a lot
 nnoremap <space> <C-w>
 
-" YouCompleteMe settings
-nnoremap <silent> gd :YcmCompleter GoToDeclaration<CR>
+" Completer (YCM and Kite) settings
+nnoremap <silent> gd :YcmCompleter GoToDefinition<CR>
 nnoremap <silent> gr :YcmCompleter GoToReferences<CR>
 nnoremap <silent> ? :YcmCompleter GetDoc<CR>
-" let g:ycm_max_num_candidates = 5
-set completeopt-=preview
 
-let g:ycm_semantic_triggers =  {
-  \   'python': ['(', ', '],
-  \ }
+let g:ycm_max_num_candidates = 5
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_filetype_specific_completion_to_disable = { 'python': 1 }
+
+" Kite nicer complete menu and support for go
+set completeopt-=preview
+set completeopt+=noinsert
+let g:kite_supported_languages = ['python', 'go']
 
 " Go to next or previous error
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)

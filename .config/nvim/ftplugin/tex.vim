@@ -18,15 +18,15 @@ function LatexRenderer()
     execute '!' . render . ' %'
 endfunction
 
-nnoremap <leader>r :call LatexRenderer()<CR>
-nnoremap <leader>w :silent call LatexRenderer()<CR>
-nnoremap <leader>W :call CreateBib()<CR>
+nnoremap <silent> <leader>r :call LatexRenderer()<CR>
+nnoremap <silent> <leader>w :silent call LatexRenderer()<CR>
+nnoremap <silent> <leader>W :call CreateBib()<CR>
 
 " remove all latex help files when closing vim
 au VimLeave *.tex silent !rm <afile>:r.{aux,log,out,bbl,blg}
 
 " open pdf and focus back to vim
-nnoremap <leader>p :!open %:r.pdf; app-switch<CR><CR>
+nnoremap <silent> <leader>p :!open %:r.pdf; app-switch<CR><CR>
 
 " stop all that folding
 let g:Tex_FoldedSections = ''
