@@ -15,7 +15,11 @@ export EDITOR="$VISUAL"
 export MANPAGER='nvim +Man!'
 
 # add local bin to path
-export PATH="$PATH:$HOME/.local/bin"
+if [ "$(uname -s)" = "Darwin" ]; then
+    export PATH="$PATH:$HOME/Library/Scripts"
+else
+    export PATH="$PATH:$HOME/.local/bin"
+fi
 
 # increase bash history size
 export HISTSIZE="32768"

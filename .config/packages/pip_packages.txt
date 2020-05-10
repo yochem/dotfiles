@@ -1,0 +1,11 @@
+autopep8
+flake8
+jupyter
+jupyter-contrib-nbextensions
+mypy
+pandas
+pylint
+pynvim
+scikit-learn
+xdg
+youtube-dl

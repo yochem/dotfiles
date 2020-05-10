@@ -18,7 +18,7 @@ install_brew() {
         ruby -e "$(curl -fsL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    brew bundle --file="$HOME/.local/share/installation/Brewfile" || echo "Can not find Brewfile"
+    brew bundle --file="$HOME/.config/packages/Brewfile" || echo "Can not find Brewfile"
 }
 
 install_pip() {
@@ -30,18 +30,7 @@ install_pip() {
 
     sudo pip -q install -U pip
 
-    pip_apps=(
-        autopep8
-        flake8
-        jupyter
-        jupyter-contrib-nbextensions
-        mypy
-        pylint
-        scikit-learn
-        xdg
-        youtube-dl
-    )
-    python3 -m pip -q install "${pip_apps[@]}"
+    python3 -m pip -q install -r "$HOME/.config/packages/pip_packages.txt"
 }
 
 # update existing `sudo` time stamp until installation is finished
@@ -51,14 +40,6 @@ while true; do
     sleep 60
     kill -0 "$$" || exit
 done 2>/dev/null &
-
-##################
-## (N)VIM DIRS ###
-##################
-mkdir -p "$HOME/.cache/nvim/backups"
-mkdir -p "$HOME/.cache/nvim/swaps"
-mkdir -p "$HOME/.cache/nvim/undo"
-mkdir -p "$HOME/.local/bin"
 
 ###################
 ###### MACOS ######
@@ -122,9 +103,9 @@ else
         apps=()
         [ -e "/Applications/Brave Browser.app" ] && apps+=("Brave Browser") || apps+=("Safari")
         [ -e "/Applications/Mail.app" ] && apps+=("Mail")
+        [ -e "/Applications/Preview.app" ] && apps+=("Preview")
         [ -e "/Applications/Spotify.app" ] && apps+=("Spotify")
         [ -e "/Applications/iTerm.app" ] && apps+=("iTerm") || apps+=("Utilities/Terminal")
-        [ -e "/Applications/Preview.app" ] && apps+=("Preview")
         [ -e "/Applications/WhatsApp.app" ] && apps+=("WhatsApp")
         [ -e "/Applications/Telegram.app" ] && apps+=("Telegram")
 
@@ -155,8 +136,8 @@ else
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         tput cuu 1 && tput el
         echo -e "${good} Apply mac defaults? Be careful!"
-        chmod +x "$HOME/.local/bin/macdefaults"
-        . "$HOME/.local/bin/macdefaults"
+        chmod +x "$HOME/Library/Scripts/macdefaults"
+        . "$HOME/Library/Scripts/macdefaults"
     else
         tput cuu 1 && tput el
         echo -e "${bad} Apply mac defaults? Be careful!"
@@ -167,13 +148,13 @@ fi
 ###################
 ####### PIP #######
 ###################
-if type python &>/dev/null; then
+if type python3 &>/dev/null; then
     echo -en "${question} Install PIP and packages? "
     read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         tput cuu 1 && tput el
-        echo -e "${good} Install PIP and packgaes?"
+        echo -e "${good} Install PIP and packages?"
         install_pip
     else
         tput cuu 1 && tput el
@@ -192,7 +173,7 @@ if type atom &>/dev/null && type apm &>/dev/null; then
         if [ -r "$HOME/.local/share/installation/atom_packages.txt" ]; then
             tput cuu 1 && tput el
             echo -e "${good} Install Atom packages?"
-            apm install --package-file "$HOME/.local/share/installation/atom_packages.txt"
+            apm install --package-file "$HOME/.config/packages/atom_packages.txt"
             apm upgrade -c=false
         else
             tput cuu 1 && tput el

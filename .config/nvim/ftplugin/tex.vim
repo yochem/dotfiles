@@ -26,7 +26,7 @@ nnoremap <silent> <leader>W :call CreateBib()<CR>
 au VimLeave *.tex silent !rm <afile>:r.{aux,log,out,bbl,blg}
 
 " open pdf and focus back to vim
-nnoremap <silent> <leader>p :!open %:r.pdf; app-switch<CR><CR>
+nnoremap <silent> <leader>p :silent !open %:r.pdf; app-switch<CR><CR>
 
 " stop all that folding
 let g:Tex_FoldedSections = ''

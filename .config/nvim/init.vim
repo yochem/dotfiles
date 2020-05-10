@@ -33,7 +33,7 @@ Plug 'tpope/vim-fugitive'
 " comment blocks of code
 Plug 'tpope/vim-commentary'
 " Nice prolog syntax highlighting
-Plug 'adimit/prolog.vim', { 'for': 'prolog' }
+Plug 'yochem/prolog.vim', { 'for': 'prolog' }
 " better implementation for nvim terminal
 Plug 'vimlab/split-term.vim'
 " just use airline
