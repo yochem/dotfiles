@@ -182,9 +182,6 @@ nnoremap n nzz
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
-" Open terminal quickly
-nnoremap <leader>t :VTerm<CR>
-
 " hate using ctrl and using ctrl-w a lot
 nnoremap <space> <C-w>
 
@@ -196,10 +193,12 @@ nnoremap <silent> ? :YcmCompleter GetDoc<CR>
 let g:ycm_max_num_candidates = 5
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_filetype_specific_completion_to_disable = { 'python': 1 }
+let g:ycm_filetype_blacklist = { 'python': 1 }
 
 " Kite nicer complete menu and support for go
 set completeopt-=preview
 set completeopt+=noinsert
+let g:kite_tab_complete=1
 let g:kite_supported_languages = ['python', 'go']
 
 " Go to next or previous error
@@ -335,7 +334,4 @@ set laststatus=2
 set noshowmode
 
 let g:airline_section_b = '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'
-let g:airline_section_x = []
-let g:airline_section_y = []
-let g:airline_section_error = []
-let g:airline_section_warning = []
+let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['z']]
