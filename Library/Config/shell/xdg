@@ -2,14 +2,15 @@
 
 # because some apps love to have their config files in the home directory,
 # but I don't
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 if [ "$(uname -s)" = "Darwin" ]; then
-    export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/Library/Caches}"
-    export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/Library/Share}"
+    export XDG_CONFIG_HOME="$HOME/Library/Config"
+    export XDG_CACHE_HOME="$HOME/Library/Caches"
+    export XDG_DATA_HOME="$HOME/Library/Share"
 else
-    export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-    export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+    export XDG_CONFIG_HOME="$HOME/.config"
+    export XDG_CACHE_HOME="$HOME/.cache"
+    export XDG_DATA_HOME="$HOME/.local/share"
 fi
 
 export ATOM_HOME="$XDG_CONFIG_HOME/atom"

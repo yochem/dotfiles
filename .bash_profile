@@ -1,17 +1,18 @@
 dotfiles=(
-    ~/.config/shell/xdg
-    ~/.config/shell/prompt
-    ~/.config/shell/exports
-    ~/.config/shell/aliases
-    ~/.config/shell/functions
-    ~/.config/fzf/config
-    /usr/local/etc/profile.d/bash_completion.sh
-    /usr/local/etc/profile.d/z.sh
+    # This assumes MacOS
+    ~/Library/Config/shell/xdg
+    "$XDG_CONFIG_HOME/shell/prompt"
+    "$XDG_CONFIG_HOME/shell/exports"
+    "$XDG_CONFIG_HOME/shell/aliases"
+    "$XDG_CONFIG_HOME/shell/functions"
+    "$XDG_CONFIG_HOME/fzf/config"
+    "/usr/local/etc/profile.d/bash_completion.sh"
+    "/usr/local/etc/profile.d/z.sh"
 )
 
 # Load the shell dotfiles, and z.sh
 for file in "${dotfiles[@]}"; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file"
+    [ -f "$file" ] && source "$file" || echo "file $file not found"
 done
 unset file
 unset dotfiles
