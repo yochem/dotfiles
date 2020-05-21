@@ -6,16 +6,16 @@ script](.local/bin/macdefaults) ever.
 ### Screenshots
 ![img](https://user-images.githubusercontent.com/23235841/63441128-38638a80-c431-11e9-8e42-32f6965589aa.png)
 
-### What's inside?
 I try to comply to the [XDG
 standard](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
-as much as possible. Because of this, most configuration can be found in
-`.config/`. **My `$HOME` directory is as litter free as possible!**
+as much as possible. **My `$HOME` directory is as litter free as possible!**
 
-My scripts can be found at (`.local/bin/`), which contains some small scripts
-like cloning all users repos, `howto` for when you forget stuff, `gititall` to
-perform an action on all your repos, an update script, switching dark mode on
-MacOS, etc.
+XDG               | MacOS               | Linux
+------------------|---------------------|-----------------
+`XDG_CONFIG_HOME` | `~/Library/Config`  | `~/.config`
+`XDG_DATA_HOME`   | `~/Library/Share`   | `~/.local/share`
+`XDG_CACHE_HOME`  | `~/Library/Caches`  | `~/.cache`
+bin               | `~/Library/Scripts` | `~/.local/bin`
 
 ### Installation
 If you just want to install the dotfiles:
