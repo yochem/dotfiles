@@ -63,10 +63,18 @@ endif
 
 " change the background color of the onedark theme
 if has("autocmd")
-    let s:background = {"gui": "#1c1c1c",
-        \ "cterm": "235",
-        \ "cterm16": "0"
-        \ }
+    if $ITERM_PROFILE == 'One-Light'
+        let s:background = {"gui": "000000",
+            \ "cterm": "0",
+            \ "cterm16": "0"
+            \ }
+        set background=light
+    else
+        let s:background = {"gui": "1c1c1c",
+            \ "cterm": "235",
+            \ "cterm16": "0"
+            \ }
+    endif
     autocmd ColorScheme * call onedark#set_highlight("Normal", { "bg": s:background })
 endif
 
@@ -158,6 +166,9 @@ set incsearch
 
 " go to top when end of file is reached
 set wrapscan
+
+set wildignore=*.swp,*.bak,*.pyc,*.pdf,*.out,*.aux,*.bbl,*.blg
+
 
 """""""""""""""""""""""
 "       TYPING        "

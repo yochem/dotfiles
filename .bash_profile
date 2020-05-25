@@ -1,13 +1,13 @@
 dotfiles=(
     # This assumes MacOS
     ~/Library/Config/shell/xdg
-    "$XDG_CONFIG_HOME/shell/prompt"
-    "$XDG_CONFIG_HOME/shell/exports"
-    "$XDG_CONFIG_HOME/shell/aliases"
-    "$XDG_CONFIG_HOME/shell/functions"
-    "$XDG_CONFIG_HOME/fzf/config"
-    "/usr/local/etc/profile.d/bash_completion.sh"
-    "/usr/local/etc/profile.d/z.sh"
+    ~/Library/Config/shell/prompt
+    ~/Library/Config/shell/exports
+    ~/Library/Config/shell/aliases
+    ~/Library/Config/shell/functions
+    ~/Library/Config/fzf/config
+    /usr/local/etc/profile.d/bash_completion.sh
+    /usr/local/etc/profile.d/z.sh
 )
 
 # Load the shell dotfiles, and z.sh

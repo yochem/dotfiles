@@ -13,8 +13,14 @@
 [ -z "$1" ] && exit 1
 
 config_path="${XDG_CONFIG_HOME:-$HOME/.config}"
-
 editor=${EDITOR:-vi}
+
+# create the file if flag -n or --new is given
+if [ "$1" = "-n" ] || [ "$1" = "--new" ]; then
+    [ -z "$2" ] && exit 3
+    "$editor" "$config_path/$2"
+    exit 0
+fi
 
 [ "$(command -v fdfind)" ] && fd=fdfind || fd=fd
 

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+[ -z "$XDG_CONFIG_HOME" ] && { echo "XDG_CONFIG_HOME not set"; exit 1; }
+[ -z "$XDG_DATA_HOME" ] && { echo "XDG_DATA_HOME not set"; exit 1; }
+[ -z "$XDG_CACHE_HOME" ] && { echo "XDG_CACHE_HOME not set"; exit 1; }
+
+[ "$(uname -s)" = "Darwin" ] && { echo "This scripts switches from Mac to
+Linux"; exit 1; }
+
+
+[ "$1" = "-f" ] && force="-f" || force="-n"
+
+mkdir -p "$HOME/.config/"
+mv "$force" "$HOME/Library/Config/"* "$HOME/.config/"
+
+mkdir -p "$HOME/.local/share/"
+mv "$force" "$HOME/Library/Share/"* "$HOME/.local/share/"
+
+mkdir -p "$HOME/.cache/"
+mv "$force" "$HOME/Library/Caches/"* "$HOME/.cache/"
+
+exit 0

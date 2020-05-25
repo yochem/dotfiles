@@ -1,3 +1,6 @@
+" don't two-space after a period when joining lines
+set nojoinspaces
+
 function CreateBib()
     let _fn=expand('%:r')
     execute '!pdflatex %; bibtex ' . _fn . '; pdflatex %; pdflatex %'
