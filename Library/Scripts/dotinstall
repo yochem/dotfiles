@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 
-GIT_DIR="$HOME/.local/share/dot"
+GIT_DIR="$HOME/Library/Share/dot"
 
 # first clone the bare repo in .dot directory
 git clone --bare "https://github.com/yochem/dotfiles.git" "$GIT_DIR"
 
 # create function to use dot as alias more times
-dot() {
-    git --git-dir="$GIT_DIR" --work-tree="$HOME" "$@"
-}
+dot() { git --git-dir="$GIT_DIR" --work-tree="$HOME" "$@"; }
 
 # checkout gets the workingtree files
 dot checkout
@@ -34,8 +32,5 @@ dot checkout
 # don't show untracked files
 dot config status.showUntrackedFiles no
 
-# source the new dotfiles
-. "$HOME/.bash_profile"
-
 # let the user know whats up
-echo "dotfiles installed!"
+echo "dotfiles installed! Run '. ~/.bash_profile' to reload"

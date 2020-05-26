@@ -21,7 +21,7 @@ mkdir -p "$XDG_CACHE_HOME"
 mv "$force" "$HOME/Library/Caches/"* "$XDG_CACHE_HOME"
 
 mkdir -p "$HOME/.local/bin/"
-mv "$force" "$HOME/Library/Scripts"* "$HOME/.local/bin/"
+mv "$force" "$HOME/Library/Scripts/"* "$HOME/.local/bin"
 
 rm -rf "$HOME/Library"
 
