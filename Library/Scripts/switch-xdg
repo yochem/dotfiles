@@ -4,19 +4,25 @@
 [ -z "$XDG_DATA_HOME" ] && { echo "XDG_DATA_HOME not set"; exit 1; }
 [ -z "$XDG_CACHE_HOME" ] && { echo "XDG_CACHE_HOME not set"; exit 1; }
 
-[ "$(uname -s)" = "Darwin" ] && { echo "This scripts switches from Mac to
-Linux"; exit 1; }
-
+[ "$(uname -s)" = "Darwin" ] && {
+    echo "This scripts switches from Mac to Linux"
+    exit 1
+}
 
 [ "$1" = "-f" ] && force="-f" || force="-n"
 
-mkdir -p "$HOME/.config/"
-mv "$force" "$HOME/Library/Config/"* "$HOME/.config/"
+mkdir -p "$XDG_CONFIG_HOME"
+mv "$force" "$HOME/Library/Config/"* "$XDG_CONFIG_HOME"
 
-mkdir -p "$HOME/.local/share/"
-mv "$force" "$HOME/Library/Share/"* "$HOME/.local/share/"
+mkdir -p "$XDG_DATA_HOME"
+mv "$force" "$HOME/Library/Share/"* "$XDG_DATA_HOME"
 
-mkdir -p "$HOME/.cache/"
-mv "$force" "$HOME/Library/Caches/"* "$HOME/.cache/"
+mkdir -p "$XDG_CACHE_HOME"
+mv "$force" "$HOME/Library/Caches/"* "$XDG_CACHE_HOME"
+
+mkdir -p "$HOME/.local/bin/"
+mv "$force" "$HOME/Library/Scripts"* "$HOME/.local/bin/"
+
+rm -rf "$HOME/Library"
 
 exit 0

@@ -46,6 +46,8 @@ Plug 'dense-analysis/ale'
 Plug 'bitc/vim-bad-whitespace'
 " Completion
 Plug 'ycm-core/YouCompleteMe'
+" LaTeX features
+Plug 'lervag/vimtex', { 'for': 'tex' }
 call plug#end()
 
 
