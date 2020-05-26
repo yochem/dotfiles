@@ -20,7 +20,7 @@ bin               | `~/Library/Scripts` | `~/.local/bin`
 ### Installation
 If you just want to install the dotfiles:
 ```bash
-$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/.local/bin/dotinstall | $(which bash)
+$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/Library/Scripts/dotinstall | $(which bash)
 ```
 This script will check if there are any existing files and move them to
 `$HOME/dotfiles-backup/`. It uses a Git bare repository to manage the
@@ -29,7 +29,7 @@ dotfiles.
 If you want to installand Brew packages, Pip packages, change some MacOS
 `defaults`, update Bash, change the Dock and even more:
 ```bash
-$ $HOME/.local/bin/install
+$ $HOME/Library/Scripts/install
 ```
 Which looks something like:
 
