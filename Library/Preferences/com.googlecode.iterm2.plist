@@ -1095,9 +1095,9 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/.config/iterm2</string>
+	<string>~/Library/Config/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{712, 448}</string>
+	<string>{799, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -1143,12 +1143,14 @@
 	<string>0 160 224 275 0 0 1440 877 </string>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>338 106 737 440 0 0 1440 877 </string>
+	<key>NSWindow Frame NSNavPanelAutosaveName</key>
+	<string>560 456 799 448 0 0 1920 1057 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>370 255 700 537 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>170 295 796 486 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>155 93 830 605 0 0 1440 877 </string>
+	<string>545 226 830 605 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>16 447 696 414 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -4189,15 +4191,15 @@
 	<array>
 		<string>3.3.6</string>
 		<string>3.3.8</string>
-		<string>3.2.9</string>
+		<string>3.3.4</string>
 		<string>3.3.1</string>
 		<string>3.3.3</string>
 		<string>3.3.5</string>
 		<string>3.3.7</string>
 		<string>3.3.9</string>
-		<string>3.3.0</string>
+		<string>3.2.9</string>
 		<string>3.3.2</string>
-		<string>3.3.4</string>
+		<string>3.3.0</string>
 	</array>
 	<key>NoSyncFrame_SessionsPreferences</key>
 	<dict>
@@ -4209,16 +4211,18 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1440, 900}}</string>
+		<string>{{0, 0}, {1920, 1080}}</string>
 		<key>topLeft</key>
-		<string>{228, 679}</string>
+		<string>{452, 818}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>87D5B0AC-BFAD-46E4-8A1F-4750736F82A6</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>115</integer>
+	<integer>134</integer>
+	<key>NoSyncNeverPromptToChangeOption</key>
+	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4971,7 +4975,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/yochem/.config/iterm2</string>
+	<string>/Users/yochem/Library/Config/iterm2</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -4987,7 +4991,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-05-01T13:32:42Z</date>
+	<date>2020-05-28T15:52:42Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
