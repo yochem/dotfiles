@@ -227,6 +227,11 @@ let g:ale_sign_warning = '~'
 " ZZ is the same as :q, make it act different
 nnoremap <silent> ZZ :qall<CR>
 
+" fast comment a line
+nmap <leader>c gcc
+
+" don't use visual lines!
+nnoremap V <nop>
 
 """""""""""""""""""""""
 "      MODERNIZE      "

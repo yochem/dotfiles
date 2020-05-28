@@ -31,7 +31,9 @@ ask() {
         shift
         for arg; do
             # apply default, exit if not working
-            eval "$arg" || exit 5
+            eval "$arg" 2>/dev/null || {
+                echo "Something went wrong with this command"
+            }
             # if show-commands flag is given, show the command in gray
             [ "$show_commands" -eq 1 ] && echo -e "    \e[0;37m$arg\e[0m"
         done
@@ -42,8 +44,7 @@ ask() {
 }
 
 ask "Disable the sound effect when connecting charger" \
-    "defaults write com.apple.PowerChime ChimeOnNoHardware -bool true" \
-    "killall PowerChime"
+    "defaults write com.apple.PowerChime ChimeOnNoHardware -bool true"
 
 ask "Disable the sound effects on boot" \
     "sudo nvram SystemAudioVolume=\" \""
@@ -147,7 +148,8 @@ ask "Use collumn view in all Finder windows by default" \
     # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 
 ask "Show the ~/Library folder" \
-    "chflags nohidden ~/Library"
+    "xattr -d com.apple.FinderInfo $HOME/Library 2>/dev/null"
+    "chflags nohidden $HOME/Library"
 
 ask "Show the /Volumes folder" \
     "sudo chflags nohidden /Volumes"
@@ -243,12 +245,8 @@ ask "Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app" \
 # Terminal & iTerm 2                                                          #
 ###############################################################################
 
-ask "Enable Secure Keyboard Entry in Terminal.app" \
-    "defaults write com.apple.terminal SecureKeyboardEntry -bool true"
-    # See: https://security.stackexchange.com/a/47786/8918
-
-ask "Load iTerm2 preferences from $HOME/.iterm2" \
-    "defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string \"$HOME/.config/iterm2\"" \
+ask "Load iTerm2 preferences from $HOME/Library/Config/iterm2" \
+    "defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string \"$HOME/Library/Config/iterm2\"" \
     "defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true "
 
 ###############################################################################
@@ -270,14 +268,6 @@ ask "Install System data files & security updates" \
 
 ask "Prevent Photos from opening automatically when devices are plugged in" \
     "defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true"
-
-###############################################################################
-# Google Chrome & Google Chrome Canary                                        #
-###############################################################################
-
-ask "Use the system-native print preview dialog" \
-    "defaults write com.google.Chrome DisablePrintPreview -bool true" \
-    "defaults write com.google.Chrome.canary DisablePrintPreview -bool true"
 
 echo
 echo "Done. Note that some of these changes require a logout/restart to take effect."

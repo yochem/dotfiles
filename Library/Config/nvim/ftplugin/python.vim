@@ -17,6 +17,6 @@ nnoremap <buffer> <leader>f :call FindFuncs(0)<CR>
 nnoremap <buffer> <leader>F :call FindFuncs(1)<CR>
 
 " don't need that much linting with Python
-" let b:ale_linters = ['pylint', 'mypy']
+let b:ale_linters = []
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0

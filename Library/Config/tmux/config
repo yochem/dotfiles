@@ -25,11 +25,14 @@ set -g status-fg colour137
 setw -g window-status-current-format ' #I#[fg=colour250]: #[fg=colour255]#W '
 setw -g window-status-format ' #I#[fg=colour237]: #[fg=colour250]#W '
 
-set-option -g history-limit 10000
+set-option -g history-limit 100000
 
 bind R source-file ~/.config/tmux/config \; display-message "Config reloaded..."
 
+# fixes bug in vim
 set -s escape-time 0
 
 bind - split-window -v
 bind | split-window -h
+
+set -g base-index 1

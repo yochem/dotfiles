@@ -5,7 +5,6 @@ dotfiles=(
     ~/Library/Config/shell/exports
     ~/Library/Config/shell/aliases
     ~/Library/Config/shell/functions
-    ~/Library/Config/fzf/config
     /usr/local/etc/profile.d/bash_completion.sh
     /usr/local/etc/profile.d/z.sh
 )
