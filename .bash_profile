@@ -60,3 +60,5 @@ if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]]; then
         fi
     fi
 fi
+
+stty -echoctl

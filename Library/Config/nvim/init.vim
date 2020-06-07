@@ -37,7 +37,8 @@ Plug 'yochem/prolog.vim', { 'for': 'prolog' }
 " better implementation for nvim terminal
 Plug 'vimlab/split-term.vim'
 " just use airline
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 " Fold python docstrings
 Plug 'yhat/vim-docstring', { 'for': 'python' }
 " Linter
@@ -351,5 +352,14 @@ set laststatus=2
 " don't show mode
 set noshowmode
 
-let g:airline_section_b = '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'
-let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['z']]
+let g:lightline = {
+    \ 'colorscheme': 'one',
+    \ 'active': {
+    \ 'left': [['mode', 'paste'],
+    \ ['readonly', 'filename', 'gitbranch', 'modified']],
+    \ 'right': [['lineinfo'], ['percent'], ['filetype']]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'FugitiveHead'
+    \ }
+    \ }
