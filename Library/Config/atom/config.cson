@@ -115,7 +115,8 @@
     withPep8: true
     withPyflakes: true
   "linter-ui-default":
-    panelHeight: 173
+    panelHeight: 146
+    showPanel: true
     useBusySignal: false
   "markdown-preview":
     useGitHubStyle: true
@@ -144,7 +145,7 @@
       mypy: "LintAsYouType"
       pydocstyle: "Never"
     path:
-      config: "/Users/yochem/.config/atom/python/setup.cfg"
+      config: "/Users/yochem/Library/Config/atom/python/setup.cfg"
   "rst-preview-pandoc":
     pandocOpts: "-frst -thtml --webtex"
   "status-bar": {}

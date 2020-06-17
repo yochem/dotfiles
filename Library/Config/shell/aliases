@@ -56,5 +56,5 @@ alias perms="stat -f '%A'"
 # use python3.8 sometimes
 alias python3.8="/usr/local/opt/python@3.8/bin/python3"
 
-# open a pdf quick
-alias pdf="open \"\$(fd -e pdf | fzf)\""
+# typo prevention
+alias gs="g s"
