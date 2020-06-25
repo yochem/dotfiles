@@ -22,33 +22,18 @@ endif
 
 " all vim-plug plugins
 call plug#begin(plugged_dir)
-" nice colorscheme
 Plug 'joshdick/onedark.vim'
-" better language syntax support
 Plug 'sheerun/vim-polyglot'
-" conform vim to editorconfig
 Plug 'editorconfig/editorconfig-vim'
-" handy git things inside of vim (branch in statusline)
 Plug 'tpope/vim-fugitive'
-" comment blocks of code
 Plug 'tpope/vim-commentary'
-" Nice prolog syntax highlighting
 Plug 'yochem/prolog.vim', { 'for': 'prolog' }
-" better implementation for nvim terminal
 Plug 'vimlab/split-term.vim'
-" just use airline
-" Plug 'vim-airline/vim-airline'
 Plug 'itchyny/lightline.vim'
-" Fold python docstrings
 Plug 'yhat/vim-docstring', { 'for': 'python' }
-" Linter
 Plug 'dense-analysis/ale'
-" remove trailing whitespace
 Plug 'bitc/vim-bad-whitespace'
-" Completion
 Plug 'ycm-core/YouCompleteMe'
-" LaTeX features
-Plug 'lervag/vimtex', { 'for': 'tex' }
 call plug#end()
 
 
@@ -233,6 +218,8 @@ nmap <leader>c gcc
 
 " don't use visual lines!
 nnoremap V <nop>
+nnoremap S <nop>
+nnoremap Y y$
 
 """""""""""""""""""""""
 "      MODERNIZE      "
@@ -327,6 +314,8 @@ if has("autocmd")
 
     " fold docstrings in python
     au FileType python PyDocHide
+
+    au BufRead,BufNewFile COMMIT_EDITMSG Gdiff
 
     " show me that the file is already open somewhere
     au SwapExists * let v:swapchoice = 'o'
