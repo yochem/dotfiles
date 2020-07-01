@@ -6,9 +6,9 @@ nnoremap <buffer> <leader>r :!python3 %:p<CR>
 function! FindFuncs(deep)
     normal mx
     if a:deep
-        exe 'g/def\|^class/#'
+        exe 'g/def \|^class /#'
     else
-        exe 'g/^def\|^class/#'
+        exe 'g/^def \|^class /#'
     endif
     normal `x
 endfunction
