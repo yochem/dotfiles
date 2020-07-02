@@ -5,16 +5,15 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "vm"
 
   config.vm.provider "virtualbox" do |vb|
+    vb.customize ["setproperty", "machinefolder", ENV["HOME"] + "/Documents/vm/"]
     vb.name = "vm"
     vb.gui = false
     vb.memory = "4096"
   end
 
   config.vm.provision "shell", inline: <<-SHELL
-    apt-get update
-    apt-get install -y curl git openssh-server
-    curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/Library/Scripts/dotinstall | $(which bash)
-    rm -rf dotfiles-backup
-    Library/Scripts/switch-xdg
+    apt update
+    apt install -y curl
+    apt install -y git
   SHELL
 end

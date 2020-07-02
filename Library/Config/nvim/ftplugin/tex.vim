@@ -26,7 +26,7 @@ nnoremap <silent> <leader>w :silent call LatexRenderer()<CR>
 nnoremap <silent> <leader>W :call CreateBib()<CR>
 
 " remove all latex help files when closing vim
-au VimLeave *.tex silent !rm <afile>:r.{aux,log,out,bbl,blg,toc}
+au VimLeave *.tex silent !rm <afile>:r.{aux,log,out,bbl,blg,toc,bcf,run.xml}
 
 " open pdf and focus back to vim
 nnoremap <silent> <leader>p :silent !open %:r.pdf; app-switch<CR><CR>

@@ -89,6 +89,7 @@ set encoding=utf-8
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
+set nowrap
 
 """""""""""""""""""""""
 "      INDENTION      "
@@ -130,6 +131,7 @@ set relativenumber
 
 " Start scrolling five lines before the vertical window border
 set scrolloff=3
+set sidescrolloff=3
 
 " add empty line without leaving normal mode
 set timeoutlen=250

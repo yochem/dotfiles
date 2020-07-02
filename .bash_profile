@@ -11,7 +11,7 @@ dotfiles=(
 
 # Load the shell dotfiles, and z.sh
 for file in "${dotfiles[@]}"; do
-    [ -f "$file" ] && source "$file" || echo "file $file not found"
+    [ -f "$file" ] && source "$file"
 done
 unset file
 unset dotfiles

@@ -9,7 +9,7 @@ git clone --bare "https://github.com/yochem/dotfiles.git" "$GIT_DIR"
 dot() { git --git-dir="$GIT_DIR" --work-tree="$HOME" "$@"; }
 
 # checkout gets the workingtree files
-dot checkout
+dot checkout >/dev/null 2>&1
 
 # if git checkout returned an error, create a backup and replace
 if [ "$?" -ne 0 ]; then
@@ -27,7 +27,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 # checkout again to really do the checkout
-dot checkout
+dot checkout >/dev/null 2>&1
 
 # don't show untracked files
 dot config status.showUntrackedFiles no
