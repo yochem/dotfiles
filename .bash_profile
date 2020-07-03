@@ -1,10 +1,11 @@
+[ "$(uname -s)" = "Darwin" ] && dot_path="Library/Config" || dot_path=".config"
+
 dotfiles=(
-    # This assumes MacOS
-    ~/Library/Config/shell/xdg
-    ~/Library/Config/shell/prompt
-    ~/Library/Config/shell/exports
-    ~/Library/Config/shell/aliases
-    ~/Library/Config/shell/functions
+    ~/"$dot_path"/shell/xdg
+    ~/"$dot_path"/shell/prompt
+    ~/"$dot_path"/shell/exports
+    ~/"$dot_path"/shell/aliases
+    ~/"$dot_path"/shell/functions
     /usr/local/etc/profile.d/bash_completion.sh
     /usr/local/etc/profile.d/z.sh
 )
@@ -15,6 +16,7 @@ for file in "${dotfiles[@]}"; do
 done
 unset file
 unset dotfiles
+unset dot_path
 
 # load bash completion for commands
 if [[ -d /usr/local/etc/bash_completion.d ]]; then
@@ -46,6 +48,7 @@ fi
 # linuxbrew
 [ -e "/home/linuxbrew/" ] && {
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    [ -f "$file" ] && source "/home/linuxbrew/.linuxbrew/etc/profile.d/z.sh"
 }
 
 # always start tmux on main machine
