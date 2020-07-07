@@ -6,11 +6,7 @@ https://liveoverflow.com/rss/ "infosec" "programming" "blog"
 http://github.com/blog.atom "programming" "blog"
 http://mathiasbynens.be/notes.rss "blog" "programming"
 http://tpo.pe/feed "blog" "programming"
-
-
-# uni
-https://canvas.uva.nl/feeds/announcements/enrollment_hJHIHTV0TWor8fEEhyclHfHjogmMDiFWgnYNX3ge.atom "uni"
-https://canvas.uva.nl/feeds/announcements/enrollment_YVoygEQbZof2ZlTZlIgvvFf0KRzvQX8lEvNWDYGr.atom "uni"
+https://github.com/yochem.private.atom?token=AFRI2ANXOSR2YO5SXBKQCE55BYF6G
 
 # youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UClcE-kVhqyiHCcjYwcpfj9w "youtube" "infosec" "programming"

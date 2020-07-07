@@ -25,4 +25,6 @@ mv "$force" "$HOME/Library/Scripts/"* "$HOME/.local/bin"
 
 rm -rf "$HOME/Library"
 
+[ -f "$HOME/.config/git/config" ] && sed -i 's/Library\/Config/.config/g' "$HOME/.config/git/config"
+
 exit 0

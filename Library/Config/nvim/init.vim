@@ -34,6 +34,7 @@ Plug 'yhat/vim-docstring', { 'for': 'python' }
 Plug 'dense-analysis/ale'
 Plug 'bitc/vim-bad-whitespace'
 Plug 'ycm-core/YouCompleteMe'
+Plug 'FooSoft/vim-argwrap'
 call plug#end()
 
 
@@ -68,6 +69,8 @@ endif
 
 colorscheme onedark
 
+" set leader key
+let mapleader = ','
 
 """""""""""""""""""""""
 "        LOOKS        "
@@ -163,8 +166,9 @@ set wildignore=*.swp,*.bak,*.pyc,*.pdf,*.out,*.aux,*.bbl,*.blg
 """""""""""""""""""""""
 "       TYPING        "
 """""""""""""""""""""""
-" set leader key
-let mapleader = ','
+" toggle list wrapping
+nmap <leader>a :ArgWrap<CR>
+let g:argwrap_wrap_closing_brace = 0
 
 " replace more characters at once in visual mode
 vmap r "_dP
