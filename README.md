@@ -1,6 +1,6 @@
 # `/Users/yochem`
-My configs for MacOS (and trying to keep it compatible for Linux). Also
-includes the most user-frienldy MacOS `defaults` [installation
+My configs for MacOS and Linux (tested on Ubuntu). Also
+includes the most user-frienldy MacOS [installation
 script](.local/bin/macdefaults) ever.
 
 ### Screenshots
@@ -8,19 +8,19 @@ script](.local/bin/macdefaults) ever.
 
 I try to comply to the [XDG
 standard](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
-as much as possible. **My `$HOME` directory is as litter free as possible!**
+as much as possible. **My `$HOME` directory is litter free!**
 
-XDG               | MacOS               | Linux
-------------------|---------------------|-----------------
-`XDG_CONFIG_HOME` | `~/Library/Config`  | `~/.config`
-`XDG_DATA_HOME`   | `~/Library/Share`   | `~/.local/share`
-`XDG_CACHE_HOME`  | `~/Library/Caches`  | `~/.cache`
-bin               | `~/Library/Scripts` | `~/.local/bin`
+XDG               | Linux & MacOS
+------------------|-----------------
+`XDG_CONFIG_HOME` | `~/.config`
+`XDG_DATA_HOME`   | `~/.local/share`
+`XDG_CACHE_HOME`  | `~/.cache`
+bin               | `~/.local/bin`
 
 ### Installation
 If you just want to install the dotfiles:
 ```bash
-$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/Library/Scripts/dotinstall | $(which bash)
+$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/.local/bin/dotinstall | $(which bash)
 ```
 This script will check if there are any existing files and move them to
 `$HOME/dotfiles-backup/`. It uses a Git bare repository to manage the
@@ -29,7 +29,7 @@ dotfiles.
 If you want to installand Brew packages, Pip packages, change some MacOS
 `defaults`, update Bash, change the Dock and even more:
 ```bash
-$ $HOME/Library/Scripts/install
+$ $HOME/.local/bin/install
 ```
 Which looks something like:
 
