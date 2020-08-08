@@ -29,4 +29,9 @@ dot config status.showUntrackedFiles no
 dot update-index --assume-unchanged README.md
 rm "$HOME/README.md" >/dev/null 2>&1
 
+if [ "$(uname -s)" = "Linux" ]; then
+    dot update-index --assume-unchanged "$HOME/Library/"
+    rm -rf "$HOME/Library" >/dev/null 2>&1
+fi
+
 echo "dotfiles installed! Run '. ~/.bash_profile' to reload"
