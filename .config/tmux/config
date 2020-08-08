@@ -1,0 +1,38 @@
+# vim: ft=tmux
+# better mouse support
+set -g mouse on
+
+set -g default-terminal "screen-256color"
+set-option -sa terminal-overrides ',xterm-256color:RGB'
+
+unbind C-b
+set -g prefix `
+bind-key ` last-window
+bind-key e send-prefix
+
+setw -g mode-keys vi
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+bind x kill-pane
+bind X kill-window
+
+set -g status-bg colour234
+set -g status-fg colour137
+
+setw -g window-status-current-format ' #I#[fg=colour250]: #[fg=colour255]#W '
+setw -g window-status-format ' #I#[fg=colour237]: #[fg=colour250]#W '
+
+set-option -g history-limit 100000
+
+bind R source-file ~/.config/tmux/config \; display-message "Config reloaded..."
+
+# fixes bug in vim
+set -s escape-time 0
+
+bind - split-window -v
+bind | split-window -h
+
+set -g base-index 1

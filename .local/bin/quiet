@@ -1,0 +1,8 @@
+#!/usr/bin/env osascript
+
+# mute volume
+set volume output muted true
+
+# using C-\ as keyboard shortcut for do-not-disturb
+tell application "System Events" to key code 42 using control down 
+

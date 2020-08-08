@@ -1,0 +1,247 @@
+#!/usr/bin/env bash
+#
+# INSTALL EVERYTHING
+# Yochem van Rosmalen
+
+
+# for coloring output
+bad="\e[91m[-]\e[0m"
+good="\e[92m[+]\e[0m"
+question="\e[94m[?]\e[0m"
+
+install_brew() {
+    # need xcode tools to install brew
+    xcode-select --install
+
+    # install brew
+    if ! command -v brew >/dev/null 2>&1; then
+        ruby -e "$(curl -fsL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+
+    brew bundle --file="$HOME/.local/share/packages/Brewfile" || echo "Can not find Brewfile"
+}
+
+install_pip() {
+    # download pip from website
+    curl -s https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+
+    # install pip
+    python3 /tmp/get-pip.py
+
+    sudo pip -q install -U pip
+
+    python3 -m pip -q install -r "$HOME/.local/share/packages/pip_packages.txt"
+}
+
+# update existing `sudo` time stamp until installation is finished
+sudo -v
+while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+done 2>/dev/null &
+
+###################
+###### MACOS ######
+###################
+if ! [[ "$OSTYPE" =~ ^darwin ]]; then
+    echo -e "${bad} Skipped: Homebrew (not running MacOS)\n"
+else
+    # Close any open System Preferences panes, to prevent them from
+    # overriding settings we’re about to change
+    osascript -e 'tell application "System Preferences" to quit'
+
+    ###################
+    ### BREW (CASK) ###
+    ###################
+    # install homebrew. Only ask for Cask if homebrew is installed
+    echo -en "${question} Install Homebrew and formulae? "
+    read -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        # install HOMEBREW
+        tput cuu 1 && tput el
+        echo -e "${good} Install Homebrew and formulae?"
+        install_brew
+
+        ###################
+        ###### BASH #######
+        ###################
+        echo -en "${question} Update to new bash version? "
+        read -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            tput cuu 1 && tput el
+            echo -e "${good} Update to new bash version?"
+            # Save Homebrew’s installed location.
+            BREW_PREFIX=$(brew --prefix)
+            # Switch to using brew-installed bash as default shell
+            if ! grep -F -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
+                echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
+                chsh -s "${BREW_PREFIX}/bin/bash"
+            fi
+        else
+            tput cuu 1 && tput el
+            echo -e "${bad} Update to new bash version?"
+        fi
+    else
+        tput cuu 1 && tput el
+        echo -e "${bad} Install Homebrew and formulae?"
+    fi
+
+    ###################
+    ####### DOCK ######
+    ###################
+    echo -en "${question} Change dock apps? "
+    read -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        tput cuu 1 && tput el
+        echo -e "${good} Change dock apps?"
+
+        # check if 3rd party apps are downloaded, else some Apple versions
+        apps=()
+        [ -e "/Applications/Brave Browser.app" ] && apps+=("Brave Browser") || apps+=("Safari")
+        [ -e "/Applications/Mail.app" ] && apps+=("Mail")
+        [ -e "/Applications/Preview.app" ] && apps+=("Preview")
+        [ -e "/Applications/Spotify.app" ] && apps+=("Spotify")
+        [ -e "/Applications/iTerm.app" ] && apps+=("iTerm") || apps+=("Utilities/Terminal")
+        [ -e "/Applications/WhatsApp.app" ] && apps+=("WhatsApp")
+        [ -e "/Applications/Telegram.app" ] && apps+=("Telegram")
+
+        # build the dock
+        dockutil --no-restart --remove all
+        for ((i = 0; i < ${#apps[@]}; i++)); do
+            echo -e "    ${good} Adding ${apps[$i]} to dock"
+            dockutil --no-restart --add "/Applications/${apps[$i]}.app"
+        done
+        dockutil --no-restart --add "$HOME/Downloads" --view fan --display stack
+
+        # finally restart the dock after all --no-restarts
+        killall Dock
+
+        # stop using the apps variable
+        unset apps
+    else
+        tput cuu 1 && tput el
+        echo -e "${bad} Change dock apps?"
+    fi
+
+    ###################
+    ### MACDEFAULTS ###
+    ###################
+    echo -en "${question} Apply mac defaults? Be careful! "
+    read -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        tput cuu 1 && tput el
+        echo -e "${good} Apply mac defaults? Be careful!"
+        chmod +x "$HOME/.local/bin/macdefaults"
+        . "$HOME/.local/bin/macdefaults"
+    else
+        tput cuu 1 && tput el
+        echo -e "${bad} Apply mac defaults? Be careful!"
+    fi
+fi
+
+
+###################
+####### PIP #######
+###################
+if type python3 &>/dev/null; then
+    echo -en "${question} Install PIP and packages? "
+    read -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        tput cuu 1 && tput el
+        echo -e "${good} Install PIP and packages?"
+        install_pip
+    else
+        tput cuu 1 && tput el
+        echo -e "${bad} Install PIP and packages?"
+    fi
+fi
+
+###################
+###### ATOM #######
+###################
+if type atom &>/dev/null && type apm &>/dev/null; then
+    echo -en "${question} Install Atom packages? "
+    read -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        if [ -r "$HOME/.local/share/installation/atom_packages.txt" ]; then
+            tput cuu 1 && tput el
+            echo -e "${good} Install Atom packages?"
+            apm install --package-file "$HOME/.config/packages/atom_packages.txt"
+            apm upgrade -c=false
+        else
+            tput cuu 1 && tput el
+            echo -e "${bad} Install Atom packages?"
+        fi
+    else
+        tput cuu 1 && tput el
+        echo -e "${bad} Install Atom packages?"
+    fi
+else
+    tput cuu 1 && tput el
+    echo -e "${bad} Install Atom packages?"
+fi
+
+
+###################
+##### REPOS  ######
+###################
+echo -en "${question} Clone yochem's repositories to $HOME/dev/? "
+read -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [ -x ~/bin/clonerepos ]; then
+        tput cuu 1 && tput el
+        echo -e "${good} Clone yochem's repositories to $HOME/dev/?"
+        mkdir "$HOME/dev"
+        clonerepos "$HOME/dev"
+    else
+        tput cuu 1 && tput el
+        echo -e "${bad} Clone yochem's repositories to $HOME/dev/?"
+    fi
+else
+    tput cuu 1 && tput el
+    echo -e "${bad} Clone yochem's repositories to $HOME/dev/?"
+fi
+
+##################
+#### SSH KEYS ####
+##################
+echo -en "${question} Generate ssh keys? "
+read -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    tput cuu 1 && tput el
+    echo -e "${good} Generate ssh keys?"
+    ssh-keygen -t ed25519 -a 100
+    cat << EOF >> "$HOME/.ssh/config"
+Host *
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/id_ed25519
+
+Host github.com
+    HostName github.com
+EOF
+    echo "Don't forget to add the public key to your Github account"
+else
+    tput cuu 1 && tput el
+    echo -e "${bad} Generate ssh keys?"
+fi
+
+echo -en "${question} Add main public key to $HOME/.ssh/authorized_keys? "
+read -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    tput cuu 1 && tput el
+    echo -e "${good} Add main public key to $HOME/.ssh/authorized_keys?"
+    ssh-access
+else
+    tput cuu 1 && tput el
+    echo -e "${bad} Add main public key to $HOME/.ssh/authorized_keys?"
+fi

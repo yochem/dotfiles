@@ -1,0 +1,273 @@
+#!/usr/bin/env bash
+
+# check if the user gives the show-commands flag
+if [ "$#" -gt 0 ] && [ "$1" == "--show-commands" ]; then
+    show_commands=1
+else
+    show_commands=0
+fi
+
+# handles the I/O. Also executes the commands
+ask() {
+    # check if description and command is provided
+    [ -z "$1" ] && return 2
+    [ -z "$2" ] && return 3
+
+    # for coloring output
+    bad="\e[91m[-]\e[0m"
+    good="\e[92m[+]\e[0m"
+    question="\e[94m[?]\e[0m"
+
+    # ask user if the default should be applied
+    echo -en "    ${question} $1? "
+    read -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        # clear last line to replace the symbol
+        tput cuu 1 && tput el
+        echo -e "    ${good} $1?"
+
+        # skip first arg
+        shift
+        for arg; do
+            # apply default, exit if not working
+            eval "$arg" 2>/dev/null || {
+                echo "Something went wrong with this command"
+            }
+            # if show-commands flag is given, show the command in gray
+            [ "$show_commands" -eq 1 ] && echo -e "    \e[0;37m$arg\e[0m"
+        done
+    else
+        tput cuu 1 && tput el
+        echo -e "    ${bad} $1?"
+    fi
+}
+
+ask "Disable the sound effect when connecting charger" \
+    "defaults write com.apple.PowerChime ChimeOnNoHardware -bool true"
+
+ask "Disable the sound effects on boot" \
+    "sudo nvram SystemAudioVolume=\" \""
+
+ask "Disable audio feedback when volume is changed" \
+    "defaults write com.apple.sound.beep.feedback -bool false"
+
+ask "Expand save panel by default" \
+    "defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true" \
+    "defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true"
+
+ask "Expand print panel by default" \
+    "defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true" \
+    "defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true"
+
+ask "Save to disk (not to iCloud) by default" \
+    "defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false"
+
+ask "Automatically quit printer app once the print jobs complete" \
+    "defaults write com.apple.print.PrintingPrefs \"Quit When Finished\" -bool true"
+
+ask "Disable auto-correct" \
+    "defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false"
+
+ask "only show scrollbars when scrolling" \
+    "defaults write NSGlobalDomain AppleShowScrollBars -string \"WhenScrolling\""
+
+ask "Disable automatic termination of inactive apps" \
+    "defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true"
+
+###############################################################################
+# Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
+###############################################################################
+
+ask "Enable tap to click for this user and for the login screen" \
+    "defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true" \
+    "defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1" \
+    "defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1"
+
+ask "Use natural scrolling" \
+    "defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true"
+
+ask "Set a blazingly fast keyboard repeat rate" \
+    "defaults write NSGlobalDomain KeyRepeat -int 2" \
+    "defaults write NSGlobalDomain InitialKeyRepeat -int 15"
+
+ask "Set language to En and Nl" \
+    "defaults write NSGlobalDomain AppleLanguages -array \"en\""
+
+ask "Use centimeters and metric" \
+    "defaults write NSGlobalDomain AppleMeasurementUnits -string \"Centimeters\"" \
+    "defaults write NSGlobalDomain AppleMetricUnits -bool true"
+
+ask "Use three finger tap to Look up & data detectors" \
+    "defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 2" \
+    "defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 2"
+
+###############################################################################
+# Screen                                                                      #
+###############################################################################
+
+ask "Require password immediately after sleep or screen saver begins" \
+    "defaults write com.apple.screensaver askForPassword -int 1" \
+    "defaults write com.apple.screensaver askForPasswordDelay -int 0"
+
+ask "Save screenshots to the desktop" \
+    "defaults write com.apple.screencapture location -string \"${HOME}/Desktop\""
+
+ask "Save screenshots in PNG format" \
+    "defaults write com.apple.screencapture type -string \"png\""
+    # other options: BMP, GIF, JPG, PDF, TIFF
+
+ask "Always put FaceTime on top" \
+    "defaults write com.apple.facetime alwaysOnTop -int 1"
+
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
+ask "Only show icons for external harddrives on desktop" \
+    "defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true" \
+    "defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false" \
+    "defaults write com.apple.finder ShowMountedServersOnDesktop -bool false" \
+    "defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false"
+
+ask "Set ~/drive as the default location for new Finder windows" \
+    "defaults write com.apple.finder NewWindowTarget -string \"PfLo\"" \
+    "defaults write com.apple.finder NewWindowTargetPath -string \"file://$HOME/drive/\""
+
+ask "Don't show status bar in Finder" \
+    "defaults write com.apple.finder ShowStatusBar -bool false"
+
+ask "Display full POSIX path as Finder window title" \
+    "defaults write com.apple.finder _FXShowPosixPathInTitle -bool true"
+
+ask "Keep folders on top when sorting by name in Finder" \
+    "defaults write com.apple.finder _FXSortFoldersFirst -bool true"
+
+ask "Use collumn view in all Finder windows by default" \
+    "defaults write com.apple.finder FXPreferredViewStyle -string \"clmv\""
+    # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
+
+ask "Show the ~/Library folder" \
+    "xattr -d com.apple.FinderInfo $HOME/Library 2>/dev/null"
+    "chflags nohidden $HOME/Library"
+
+ask "Show the /Volumes folder" \
+    "sudo chflags nohidden /Volumes"
+
+###############################################################################
+# Dock, Dashboard, and hot corners                                            #
+###############################################################################
+ask "Show battery percentage in menubar" \
+    "defaults write com.apple.menuextra.battery ShowPercent YES"
+
+ask "Minimize windows into their application’s icon" \
+    "defaults write com.apple.dock minimize-to-application -bool true"
+
+ask "turn magification in the Dock on" \
+    "defaults write com.apple.dock magnification -bool true"
+
+ask "Use 'genie' as hide effect for applications" \
+    "defaults write com.apple.dock mineffect -string \"genie\""
+
+ask "set dock size to 52" \
+    "defaults write com.apple.dock titlesize -int 52"
+
+ask "Show indicator lights for open applications in the Dock" \
+    "defaults write com.apple.dock show-process-indicators -bool true"
+
+ask "Don’t show Dashboard as a Space" \
+    "defaults write com.apple.dock dashboard-in-overlay -bool true"
+
+ask "Don’t automatically rearrange Spaces based on most recent use" \
+    "defaults write com.apple.dock mru-spaces -bool false"
+
+ask "Don’t show recent applications in Dock" \
+    "defaults write com.apple.dock show-recents -bool false"
+
+###############################################################################
+# Safari & WebKit                                                             #
+###############################################################################
+
+ask "Don’t send search queries from Safari to Apple" \
+    "defaults write com.apple.Safari UniversalSearchEnabled -bool false" \
+    "defaults write com.apple.Safari SuppressSearchSuggestions -bool true"
+
+ask "Set Safari’s home page to 'about:blank'" \
+    "defaults write com.apple.Safari HomePage -string \"about:blank\""
+
+ask "Prevent Safari from opening ‘safe’ files automatically after downloading" \
+    "defaults write com.apple.Safari AutoOpenSafeDownloads -bool false"
+
+ask "Hide Safari’s bookmarks bar by default" \
+    "defaults write com.apple.Safari ShowFavoritesBar -bool false"
+
+ask "Hide Safari’s sidebar in Top Sites" \
+    "defaults write com.apple.Safari ShowSidebarInTopSites -bool false"
+
+ask "Enable Safari’s debug menu" \
+    "defaults write com.apple.Safari IncludeInternalDebugMenu -bool true"
+
+ask "Enable the Develop menu and the Web Inspector in Safari" \
+    "defaults write com.apple.Safari IncludeDevelopMenu -bool true" \
+    "defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true" \
+    "defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true"
+
+ask "Enable continuous spellchecking in Safari" \
+    "defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true"
+
+ask "Disable auto-correct in Safari" \
+    "defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false"
+
+ask "Warn about fraudulent websites" \
+    "defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true"
+
+ask "Block pop-up windows in Safari" \
+    "defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false" \
+    "defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false"
+
+ask "Enable 'Do Not Track' in Safari" \
+    "defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true"
+
+ask "Update Safari extensions automatically" \
+    "defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true"
+
+###############################################################################
+# Mail                                                                        #
+###############################################################################
+
+ask "Copy email addresses as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app" \
+    "defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false"
+
+ask "Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app" \
+    "defaults write com.apple.mail NSUserKeyEquivalents -dict-add \"Send\" \"@\U21a9\""
+
+###############################################################################
+# Terminal & iTerm 2                                                          #
+###############################################################################
+
+ask "Load iTerm2 preferences from $HOME/Library/Preferences" \
+    "defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string \"$HOME/Library/Preferences\"" \
+    "defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true "
+
+###############################################################################
+# Mac App Store                                                               #
+###############################################################################
+
+ask "Enable the automatic update check in App Store" \
+    "defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true"
+
+ask "Download newly available updates in background" \
+    "defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1"
+
+ask "Install System data files & security updates" \
+    "defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1"
+
+###############################################################################
+# Photos                                                                      #
+###############################################################################
+
+ask "Prevent Photos from opening automatically when devices are plugged in" \
+    "defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true"
+
+echo
+echo "Done. Note that some of these changes require a logout/restart to take effect."

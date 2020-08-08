@@ -1,0 +1,174 @@
+"*":
+  Zen:
+    softWrap: true
+    typewriter: true
+  "atom-beautify":
+    arduino: {}
+    bash: {}
+    css:
+      align_assignments: true
+      convert_quotes: "double"
+    general:
+      _analyticsUserId: "1c87e35c-18a6-4cf0-b04c-d8bd06d6b2f4"
+      beautifyEntireFileOnSave: false
+      showLoadingView: false
+    html: {}
+    js: {}
+    json: {}
+    latex: {}
+    less: {}
+    markdown: {}
+    python: {}
+    sass: {}
+  "atom-clock":
+    showTooltip: true
+  "atom-latex":
+    preview_after_build: "View in PDF viewer tab"
+  "atom-package-deps":
+    ignored: [
+      "linter-ui-default"
+      "build"
+    ]
+  "autocomplete-plus":
+    confirmCompletion: "tab always, enter when suggestion explicitly selected"
+  "autohide-tree-view":
+    pushEditor: true
+  build: {}
+  core:
+    closeDeletedFileTabs: true
+    customFileTypes:
+      "source.prolog": [
+        "pl"
+      ]
+    disabledPackages: [
+      "spell-check"
+      "markdown-preview"
+      "whitespace"
+      "relative-numbers"
+    ]
+    ignoredNames: [
+      "*.swp"
+      "venv"
+      "build"
+      ".git"
+      "dist"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "Icon"
+      "Gemfile.lock"
+      ".localized"
+      "_site"
+      ".dropbox.cache"
+      ".dropbox"
+      "*.pyc"
+      "*.egg-info"
+      ".pioenvs"
+      ".piolibdeps"
+      ".clang_complete"
+      ".gcc-flags.json"
+      ".sass-cache"
+      "Gemfile"
+    ]
+    projectHome: "/Users/Yochem/dev"
+    restorePreviousWindowsOnStart: "no"
+    telemetryConsent: "no"
+    themes: [
+      "one-dark-ui"
+      "dark-one-dark-syntax"
+    ]
+    titleBar: "custom"
+    useTreeSitterParsers: false
+  editor:
+    preferredLineLength: 79
+    scrollPastEnd: true
+    showIndentGuide: true
+    tabLength: 4
+  "exception-reporting":
+    userId: "65697317-0264-bd7e-904b-0baf33eb482e"
+  "file-icons":
+    strategies: {}
+  kite:
+    showWelcomeNotificationOnStartup: false
+  latex:
+    enableExtendedBuildMode: false
+  "latex-plus":
+    texBin: "/Library/TeX/Distributions/Programs/texbin"
+  "linter-gcc":
+    execPath: "/usr/local/Cellar/gcc/9.2.0_3/bin/gcc-9"
+    gccDefaultCFlags: "-c -Wall -fsyntax-only"
+  "linter-htmlhint":
+    enabledScopes: [
+      "text.html.angular"
+      "text.html.basic"
+      "text.html.gohtml"
+      "text.html.jsp"
+      "text.html.mustache"
+      "jekyll (HTML)"
+      "text.html.jekyll"
+    ]
+  "linter-python":
+    enableDebug: true
+    force: true
+    lintTrigger: "File modified"
+    withPep257: true
+    withPep8: true
+    withPyflakes: true
+  "linter-ui-default":
+    panelHeight: 146
+    useBusySignal: false
+  "markdown-preview":
+    useGitHubStyle: true
+  "markdown-preview-plus":
+    mathConfig:
+      enableLatexRenderingByDefault: true
+    useGitHubStyle: true
+  minimap:
+    disablePythonDocLinks: true
+  "native-ui":
+    ui: {}
+  "one-dark-ui": {}
+  "php-debug":
+    showWelcome: false
+  pigments:
+    markerType: "native-dot"
+  "platformio-ide":
+    advanced:
+      checkAuthOnStartup: false
+    autoUpdateIDE: true
+    highlightActiveProject: false
+    showPIOHome: false
+  platomformio: {}
+  "python-linters":
+    lintTrigger:
+      mypy: "LintAsYouType"
+      pydocstyle: "Never"
+    path:
+      config: "/Users/yochem/.config/atom/python/setup.cfg"
+  "rst-preview-pandoc":
+    pandocOpts: "-frst -thtml --webtex"
+  "status-bar": {}
+  termination:
+    style:
+      animationSpeed: 0
+      fontFamily: "menlo"
+      theme: "one-dark"
+    toggles:
+      cursorBlink: false
+  "tool-bar":
+    position: "Left"
+    visible: false
+  "tree-view":
+    hideIgnoredNames: true
+  "vim-mode-plus":
+    ignoreCaseForSearch: true
+    ignoreCaseForSearchCurrentWord: true
+    keymapYToYankToLastCharacterOfLine: true
+    startInInsertMode: true
+    useSmartcaseForSearch: true
+    useSmartcaseForSearchCurrentWord: true
+  welcome:
+    showOnStartup: false
+".jade.source":
+  editor:
+    autoIndent: true

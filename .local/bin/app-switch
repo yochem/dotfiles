@@ -1,0 +1,5 @@
+#!/usr/bin/env osascript
+
+tell application "System Events"
+    key code 48 using command down
+end

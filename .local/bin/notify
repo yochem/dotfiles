@@ -1,0 +1,3 @@
+#!/usr/bin/env osascript
+
+display notification "Done!"
