@@ -1,4 +1,0 @@
-% vim: ft=prolog
-cl :- write('\e[H\e[2J').
-mk :- cl, make.
-tr(X) :- trace, X, notrace, nodebug, cl.

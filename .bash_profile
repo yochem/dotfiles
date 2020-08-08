@@ -1,11 +1,9 @@
-[ "$(uname -s)" = "Darwin" ] && dot_path="Library/Config" || dot_path=".config"
-
 dotfiles=(
-    ~/"$dot_path"/shell/xdg
-    ~/"$dot_path"/shell/prompt
-    ~/"$dot_path"/shell/exports
-    ~/"$dot_path"/shell/aliases
-    ~/"$dot_path"/shell/functions
+    ~/.config/shell/xdg
+    ~/.config/shell/prompt
+    ~/.config/shell/exports
+    ~/.config/shell/aliases
+    ~/.config/shell/functions
     /usr/local/etc/profile.d/bash_completion.sh
     /usr/local/etc/profile.d/z.sh
 )
