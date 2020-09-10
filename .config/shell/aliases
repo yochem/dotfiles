@@ -52,3 +52,6 @@ alias perms="stat -f '%A'"
 
 # typo prevention
 alias gs="g s"
+
+# force starting a prompt
+alias py="python3 -i -c ''"

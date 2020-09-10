@@ -35,6 +35,7 @@ Plug 'dense-analysis/ale'
 Plug 'bitc/vim-bad-whitespace'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'FooSoft/vim-argwrap'
+Plug 'wellle/targets.vim'
 call plug#end()
 
 
@@ -182,6 +183,10 @@ nnoremap <silent> <ESC><ESC> :noh<CR>
 " when jumping to definition place it in the middle of the screen
 nnoremap n nzz
 
+" use arows to quickly scroll
+nnoremap <UP> <C-u>
+nnoremap <DOWN> <C-d>
+
 " go through visual lines with j and k but don't mess with 10k etc.
 " source: http://stackoverflow.com/a/21000307/2580955
 nnoremap <expr> j v:count ? 'j' : 'gj'
@@ -198,13 +203,13 @@ nnoremap <silent> ? :YcmCompleter GetDoc<CR>
 let g:ycm_max_num_candidates = 5
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_filetype_specific_completion_to_disable = { 'python': 1 }
-let g:ycm_filetype_blacklist = { 'python': 1 }
+let g:ycm_filetype_blacklist = { 'python': 1, 'text': 1 }
 
 " Kite nicer complete menu and support for go
 set completeopt-=preview
 set completeopt+=noinsert
 let g:kite_tab_complete=1
-let g:kite_supported_languages = ['python', 'go']
+let g:kite_supported_languages = ['python', 'go', 'javascript']
 
 " Go to next or previous error
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
