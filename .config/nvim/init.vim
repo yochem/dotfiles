@@ -30,7 +30,6 @@ Plug 'tpope/vim-commentary'
 Plug 'yochem/prolog.vim', { 'for': 'prolog' }
 Plug 'vimlab/split-term.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'yhat/vim-docstring', { 'for': 'python' }
 Plug 'dense-analysis/ale'
 Plug 'bitc/vim-bad-whitespace'
 Plug 'ycm-core/YouCompleteMe'
@@ -183,6 +182,9 @@ nnoremap <silent> <ESC><ESC> :noh<CR>
 " when jumping to definition place it in the middle of the screen
 nnoremap n nzz
 
+" delete trailing whitespace
+nnoremap W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
 " use arows to quickly scroll
 nnoremap <UP> <C-u>
 nnoremap <DOWN> <C-d>
@@ -322,9 +324,6 @@ if has("autocmd")
 
     " no linenumbers in terminal mode
     au TermOpen * setlocal nonumber norelativenumber
-
-    " fold docstrings in python
-    au FileType python PyDocHide
 
     au BufRead,BufNewFile COMMIT_EDITMSG Gdiff
 

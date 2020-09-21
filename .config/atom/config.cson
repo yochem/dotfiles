@@ -43,8 +43,15 @@
     disabledPackages: [
       "spell-check"
       "markdown-preview"
-      "whitespace"
-      "relative-numbers"
+      "welcome"
+      "update-package-dependencies"
+      "timecop"
+      "autoflow"
+      "background-tips"
+      "github"
+      "go-to-line"
+      "open-on-github"
+      "package-generator"
     ]
     ignoredNames: [
       "*.swp"

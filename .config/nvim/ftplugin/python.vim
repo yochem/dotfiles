@@ -16,6 +16,25 @@ endfunction
 nnoremap <buffer> <leader>F :call FindFuncs(0)<CR>
 nnoremap <buffer> <leader>f :call FindFuncs(1)<CR>
 
+" docstring as text object
+autocmd User targets#mappings#user call targets#mappings#extend({
+    \ 'd': {'pair': [{'o': '"""', 'c': '"""'}]},
+    \ })
+
+" fold docstrings beautifully
+setlocal foldmethod=syntax
+setlocal foldenable
+setlocal foldtext=MyFoldText()
+setlocal fillchars+=fold:\ 
+function MyFoldText()
+    let line0 = getline(v:foldstart)
+    if line0 =~ '\v.*""".+'
+        return v:folddashes . line0
+    else
+        return v:folddashes . getline(v:foldstart+1)
+    endif
+endfunction
+
 " don't need that much linting with Python
 let b:ale_linters = ['autopep8', 'mypy', 'pylint']
 let g:ale_lint_on_text_changed = 'never'

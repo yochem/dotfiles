@@ -15,6 +15,7 @@ bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
+bind = select-layout -E
 
 bind x kill-pane
 bind X kill-window
