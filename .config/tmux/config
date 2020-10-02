@@ -36,4 +36,7 @@ set -s escape-time 0
 bind - split-window -v
 bind | split-window -h
 
+# open new window with current directory
+bind C new-window -c "#{pane_current_path}"
+
 set -g base-index 1

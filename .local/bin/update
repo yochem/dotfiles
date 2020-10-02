@@ -17,7 +17,7 @@ if [[ $(command -v brew) ]]; then
     echo -e "${orangebold}Updating and upgrading Brew...${reset}"
     brew upgrade
     echo -e "${orangebold}Upgrading Brew Casks...${reset}"
-    brew cask upgrade
+    brew upgrade --cask
     echo -e "${orangebold}Cleaning Brew...${reset}"
     brew cleanup -s --prune=0
     echo -e "${orangebold}Doctoring Brew...${reset}"
@@ -26,12 +26,10 @@ if [[ $(command -v brew) ]]; then
     brew missing
 fi
 
-if [[ "$OSTYPE" == "linux"* ]]; then
-    if [[ $(command -v apt-get) ]]; then
-        echo -e "${orangebold}Updating and upgrading apt-get...${reset}"
-        sudo apt-get update
-        sudo apt-get upgrade -y
-    fi
+if [[ $(command -v apt-get) ]]; then
+    echo -e "${orangebold}Updating and upgrading apt-get...${reset}"
+    sudo apt-get update
+    sudo apt-get upgrade -y
 fi
 
 # ATOM

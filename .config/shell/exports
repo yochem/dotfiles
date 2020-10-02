@@ -35,3 +35,5 @@ export SHELL_SESSION_HISTORY=0
 
 # fix the bug of Apple creating a non-exisiting LC
 export LC_ALL="en_US.UTF-8"
+
+export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python3.8/site-packages/"

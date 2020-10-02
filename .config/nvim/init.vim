@@ -27,7 +27,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-Plug 'yochem/prolog.vim', { 'for': 'prolog' }
+Plug 'yochem/prolog.vim'
 Plug 'vimlab/split-term.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
@@ -233,6 +233,7 @@ nmap <leader>c gcc
 nnoremap V <nop>
 nnoremap S <nop>
 nnoremap Y y$
+
 
 """""""""""""""""""""""
 "      MODERNIZE      "
