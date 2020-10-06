@@ -36,6 +36,7 @@ function MyFoldText()
 endfunction
 
 " don't need that much linting with Python
-let b:ale_linters = ['autopep8', 'mypy', 'pylint']
+" let b:ale_linters = ['autopep8', 'mypy', 'pylint']
+let b:ale_linters = []
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0

@@ -18,6 +18,7 @@ highlight() { grep --color -i -E "$1|$" "$2"; }
 
 # go to a selected directory from the z data file
 fzfz() { builtin cd "$(z | fzf | cut -d' ' -f 2- | tr -d '[[:space:]]')";  }
+cdd() { builtin cd "$(fd --type d -E Library -E Pictures | fzf --height '40%' --layout reverse)";  }
 
 # shorten pip install command
 pipi() { python3 -m pip install "$1"; }
