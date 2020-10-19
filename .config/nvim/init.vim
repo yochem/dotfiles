@@ -183,7 +183,7 @@ nnoremap <silent> <ESC><ESC> :noh<CR>
 nnoremap n nzz
 
 " delete trailing whitespace
-nnoremap W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+nnoremap <silent> W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>
 
 " use arows to quickly scroll
 nnoremap <UP> <C-u>
@@ -198,14 +198,14 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 nnoremap <space> <C-w>
 
 " Completer (YCM and Kite) settings
-nnoremap <silent> gd :YcmCompleter GoToDefinition<CR>
+nnoremap <silent> gD :YcmCompleter GoToDefinition<CR>
 nnoremap <silent> gr :YcmCompleter GoToReferences<CR>
 nnoremap <silent> ? :YcmCompleter GetDoc<CR>
 
 let g:ycm_max_num_candidates = 5
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_filetype_specific_completion_to_disable = { 'python': 1 }
-let g:ycm_filetype_blacklist = { 'python': 1, 'text': 1 }
+let g:ycm_filetype_blacklist = { 'python': 1, 'text': 1, 'markdown': 1}
 
 " Kite nicer complete menu and support for go
 set completeopt-=preview
