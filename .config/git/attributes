@@ -1,4 +1,6 @@
 *.plist binary
+*.json binary
+*.xml binary
 
 *.png diff=exif
 *.jpg diff=exif

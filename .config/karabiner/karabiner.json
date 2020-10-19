@@ -16,6 +16,30 @@
                 },
                 "rules": [
                     {
+                        "description": "Disable wifi logging.",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Eject to Lock Screen",
                         "manipulators": [
                             {
