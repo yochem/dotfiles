@@ -168,7 +168,6 @@ set wildignore=*.swp,*.bak,*.pyc,*.pdf,*.out,*.aux,*.bbl,*.blg
 """""""""""""""""""""""
 " toggle list wrapping
 nmap <leader>a :ArgWrap<CR>
-let g:argwrap_wrap_closing_brace = 0
 
 " replace more characters at once in visual mode
 vmap r "_dP
@@ -230,7 +229,6 @@ nnoremap <silent> ZZ :qall<CR>
 nmap <leader>c gcc
 
 " don't use visual lines!
-nnoremap V <nop>
 nnoremap S <nop>
 nnoremap Y y$
 

@@ -58,6 +58,9 @@
     # git status for every local branch
     branch-status = !branch_status
 
+    # see all files tracked
+    files = ls-tree --full-tree -r --name-only HEAD
+
 [log]
     date = auto:human
 
