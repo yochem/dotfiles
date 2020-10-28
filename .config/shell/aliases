@@ -4,6 +4,7 @@
 ls_type="ls"
 command -V gls &>/dev/null && ls_type="gls"
 alias ls="$ls_type --group-directories-first -1F --color=auto"
+alias ll="$ls_type --group-directories-first -oAF --color=auto"
 unset ls_type
 
 # use some flags by default
