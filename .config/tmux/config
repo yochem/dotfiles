@@ -23,8 +23,11 @@ bind X kill-window
 set -g status-bg colour234
 set -g status-fg colour137
 
-setw -g window-status-current-format ' #I#[fg=colour250]: #[fg=colour255]#W '
-setw -g window-status-format ' #I#[fg=colour237]: #[fg=colour250]#W '
+setw -g window-status-current-format '| #[fg=colour255,bold]#I: #W'
+setw -g window-status-format '| #[fg=colour255]#I: #W'
+set -g status-left-length 50
+set -g status-left ''
+set -g status-right '| #S | #{?client_prefix,`,#{?copy_cursor_line,C,N}} | #("/usr/bin/whoami")@#H'
 
 set-option -g history-limit 100000
 

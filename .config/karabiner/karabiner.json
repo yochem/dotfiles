@@ -32,7 +32,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "escape"
+                                        "shell_command": "open -a 'WhatsApp'"
                                     }
                                 ],
                                 "type": "basic"
@@ -156,11 +156,11 @@
                         ]
                     },
                     {
-                        "description": "CapsLock to Hyper/Escape",
+                        "description": "fn to hyper key",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "caps_lock",
+                                    "key_code": "fn",
                                     "modifiers": {
                                         "optional": [
                                             "any"
@@ -175,11 +175,6 @@
                                             "right_control",
                                             "right_option"
                                         ]
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "escape"
                                     }
                                 ],
                                 "type": "basic"
@@ -306,7 +301,24 @@
                 "delay_milliseconds_before_open_device": 1000
             },
             "selected": true,
-            "simple_modifications": [],
+            "simple_modifications": [
+                {
+                    "from": {
+                        "key_code": "escape"
+                    },
+                    "to": {
+                        "key_code": "caps_lock"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "caps_lock"
+                    },
+                    "to": {
+                        "key_code": "escape"
+                    }
+                }
+            ],
             "virtual_hid_keyboard": {
                 "country_code": 0,
                 "mouse_key_xy_scale": 100
