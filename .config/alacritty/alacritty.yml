@@ -36,12 +36,11 @@ window:
   padding:
     x: 15
     y: 10
+  dynamic_title: true
 
 selection:
   save_to_clipboard: true
 
-
-dynamic_title: true
 live_config_reload: true
 
 key_bindings:
