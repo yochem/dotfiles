@@ -84,3 +84,6 @@ hex() { echo "$((16#$1))"; }
 
 # start working on latex project
 hw() { open "$1.pdf"; app-switch; "$EDITOR" "$1.tex"; }
+
+# find ip of router (used to ssh to it: ssh yochem@$(router))
+router() { ifconfig | grep 'inet ' | grep -v '127' | cut -d ' ' -f 2; }
