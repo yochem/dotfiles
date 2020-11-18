@@ -1,8 +1,3 @@
-" .vimrc - Yochem van Rosmalen
-
-"""""""""""""""""""""""
-"      PLUGINS        "
-"""""""""""""""""""""""
 " download vim-plug for the right vim
 if has('nvim')
     let plugged_dir = stdpath('data') . '/plugged'
@@ -34,86 +29,61 @@ Plug 'dense-analysis/ale'
 Plug 'bitc/vim-bad-whitespace'
 Plug 'FooSoft/vim-argwrap'
 Plug 'wellle/targets.vim'
-Plug 'mileszs/ack.vim'
 call plug#end()
 
 
-"""""""""""""""""""""""
-"     COLORSCHEME     "
-"""""""""""""""""""""""
-" use syntax highlighting
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Basic settings: set ..., let ...
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 
-" use atom's one-dark theme
-" better colors in iTerm2
 if has("termguicolors")
     set termguicolors
 endif
 
 " change the background color of the onedark theme
-if has("autocmd")
-    if $ITERM_PROFILE == 'One-Light'
-        let s:background = {"gui": "000000",
-            \ "cterm": "0",
-            \ "cterm16": "0"
-            \ }
-        set background=light
-    else
-        let s:background = {"gui": "1b1b1b",
-            \ "cterm": "235",
-            \ "cterm16": "0"
-            \ }
-    endif
-    autocmd ColorScheme * call onedark#set_highlight("Normal", { "bg": s:background })
-endif
+let s:background = {"gui": "1b1b1b",
+    \ "cterm": "235",
+    \ "cterm16": "0"
+    \ }
+autocmd ColorScheme * call onedark#set_highlight("Normal", {"bg":
+    \ {"gui": "1b1b1b",
+        \ "cterm": "235",
+        \ "cterm16": "0"
+        \ }})
 
 colorscheme onedark
 
-" set leader key
 let mapleader = ','
 
-"""""""""""""""""""""""
-"        LOOKS        "
-"""""""""""""""""""""""
-" dont show intro message
+" dont show unnecessary stuff
 set shortmess=WIFs
-
-" don't show 'Thanks for flying Vim'
 set notitle
+set encoding=utf-8
+set nospell
+set noerrorbells
+set nowrap
 
 " split normal
 set splitright
 set splitbelow
 
-" always show unicode
-set encoding=utf-8
-
 " make netrw better looking
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
-set nowrap
-
-"""""""""""""""""""""""
-"      INDENTION      "
-"""""""""""""""""""""""
-" auto indent
 set autoindent
 set smartindent
 set smarttab
 
-" leave tabs normal
+" 4 spaces when tab pressed
 set tabstop=8
-" tab should look like 4 spaces
 set softtabstop=4
-" tab should actually insert spaces
 set expandtab
-" shift should move 4 spaces
 set shiftwidth=4
-" https://vi.stackexchange.com/a/9883
 set shiftround
 
-" don't reset cursor to start of line
+" don't reset cursor to start of line while scrolling
 set nostartofline
 
 " i really hate folding
@@ -122,58 +92,82 @@ set nofoldenable
 " atom-like line to show where the 79 char bound is
 set colorcolumn=79
 
-
-"""""""""""""""""""""""
-"        LINES        "
-"""""""""""""""""""""""
-" enable line numbers
+" (relative) line numbers
 set number
-
-" easy jumping between lines
 set relativenumber
 
 " Start scrolling five lines before the vertical window border
 set scrolloff=3
 set sidescrolloff=3
 
-" add empty line without leaving normal mode
+" add empty line below or above in normal mode
 set timeoutlen=250
 nmap oo m`o<Esc>``
 nmap OO m`O<Esc>``
 
 
-"""""""""""""""""""""""
-"      SEARCHING      "
-"""""""""""""""""""""""
-" g flag with search as default
+" search global, highlight, ignore case and go to top when bottom
 set gdefault
-
-"highlight all search results
 set hlsearch
-
-" ignore cases of search
 set ignorecase
-
-" highlight dynamically
 set incsearch
-
-" go to top when end of file is reached
 set wrapscan
-
 set wildignore=*.swp,*.bak,*.pyc,*.pdf,*.out,*.aux,*.bbl,*.blg
 
+" use backspace
+set backspace=indent,eol,start
 
-"""""""""""""""""""""""
-"       TYPING        "
-"""""""""""""""""""""""
+" cursor in insert mode
+if !has('nvim')
+    set esckeys
+endif
+
+set mouse=a
+set nocompatible
+set ttyfast
+
+" makes starting up faster on mac
+if has('mac')
+    let g:python_host_prog = '/usr/bin/python'
+    let g:python3_host_prog = '/usr/local/bin/python3'
+    let g:clipboard = {
+    \ 'name': 'pbcopy',
+    \ 'copy': {
+    \    '+': 'pbcopy',
+    \    '*': 'pbcopy',
+    \  },
+    \ 'paste': {
+    \    '+': 'pbpaste',
+    \    '*': 'pbpaste',
+    \ },
+    \ 'cache_enabled': 0,
+    \ }
+endif
+
+" update faster
+set updatetime=100
+
+" use the systems clipboard
+set clipboard=unnamed
+
+" fuzzy find when opening file
+set path+=**
+
+filetype plugin on
+
+" improve file-run experience
+set autowrite
+set shellcmdflag=-lc
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remaps
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " toggle list wrapping
 nmap <leader>a :ArgWrap<CR>
 
 " replace more characters at once in visual mode
 vmap r "_dP
-
-" backspace in insert mode
-set backspace=indent,eol,start
 
 " turn off search highlight
 nnoremap <silent> <ESC><ESC> :noh<CR>
@@ -196,158 +190,62 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 " hate using ctrl and using ctrl-w a lot
 nnoremap <space> <C-w>
 
-" Completer (YCM and Kite) settings
-nnoremap <silent> gD :YcmCompleter GoToDefinition<CR>
-nnoremap <silent> gr :YcmCompleter GoToReferences<CR>
-nnoremap <silent> ? :YcmCompleter GetDoc<CR>
-
-let g:ycm_max_num_candidates = 5
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_filetype_specific_completion_to_disable = { 'python': 1 }
-let g:ycm_filetype_blacklist = { 'python': 1, 'text': 1, 'markdown': 1}
-
-" Kite nicer complete menu and support for go
-set completeopt-=preview
-set completeopt+=noinsert
-let g:kite_tab_complete=1
-let g:kite_supported_languages = ['python', 'go', 'javascript']
-
-" Go to next or previous error
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
 " Open new file in split
 nnoremap <silent> <leader>t :Vexplore<CR>
-
-let g:ale_sign_error = '!'
-let g:ale_sign_warning = '~'
-
-" ZZ is the same as :q, make it act different
 nnoremap <silent> ZZ :qall<CR>
-
-" fast comment a line
 nmap <leader>c gcc
-
-" don't use visual lines!
 nnoremap S <nop>
 nnoremap Y y$
-
-
-"""""""""""""""""""""""
-"      MODERNIZE      "
-"""""""""""""""""""""""
-" cursor in insert mode
-if !has('nvim')
-    set esckeys
-endif
-
-" enable mouse in all modes
-set mouse=a
-
-" no error bells
-set noerrorbells
-
-" make vim more useful
-set nocompatible
-
-" fast terminal connections
-set ttyfast
-
-" makes starting up faster
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
-
-" update faster
-set updatetime=100
-
-" this makes startuptime with neovim much faster
-let g:clipboard = {
-  \ 'name': 'pbcopy',
-  \ 'copy': {
-  \    '+': 'pbcopy',
-  \    '*': 'pbcopy',
-  \  },
-  \ 'paste': {
-  \    '+': 'pbpaste',
-  \    '*': 'pbpaste',
-  \ },
-  \ 'cache_enabled': 0,
-  \ }
-
-" use the systems clipboard
-set clipboard=unnamed
-
-" fuzzy find when opening file
-set path+=**
-
-"""""""""""""""""""""""
-"    RANDOM STUFF     "
-"""""""""""""""""""""""
-" enable filetype for plugins
-filetype plugin on
-
-" dont care about spelling
-set nospell
 
 " don't accidently create macros'
 nnoremap Q q
 nnoremap q <nop>
 
-"""""""""""""""""""""""
-"    OPENING FILES    "
-"""""""""""""""""""""""
-if has("autocmd")
-    " go to last position when opening file
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-        \| exe "normal! g'\"" | endif
 
-    " Enable file type detection
-    filetype on
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" plugin settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Kite nicer complete menu and support for go
+set completeopt+=menuone,menu,noinsert
+let g:kite_tab_complete=1
+nnoremap <silent> <leader>gd :KiteGotoDefinition<CR>
 
-    " Treat .md files as Markdown
-    au BufNewFile,BufRead *.md setlocal filetype=markdown
-
-    au BufRead,BufNewFile *.tex setlocal filetype=tex
-    au BufRead,BufNewFile *.{txt,md} setlocal textwidth=78
-
-    " " stop auto commenting newline
-    au FileType * setlocal formatoptions-=ro
-
-    " set scripts to be executable
-    au BufWritePost * if getline(1) =~ "^#!" | call setfperm(expand('%'), 'rwxr-xr-x') | endif
-    au BufWritePost *.sh silent !chmod +x <afile>
-
-    " highlight non-ascii chars
-    highlight nonascii guibg=Blue ctermbg=9
-    au BufReadPost * syntax match nonascii "[^\x00-\x7F]"
-
-    " no linenumbers in terminal mode
-    au TermOpen * setlocal nonumber norelativenumber
-
-    au BufRead,BufNewFile COMMIT_EDITMSG Gdiff
-
-    " show me that the file is already open somewhere
-    au SwapExists * let v:swapchoice = 'o'
-    au SwapExists * echoerr 'Found a swapfile, opening read-only'
-endif
-
-"""""""""""""""""""""""
-"    SHELL/RUNNING    "
-"""""""""""""""""""""""
-" autosave when 'running' the file
-set autowrite
-
-" clear command output everytime when running
-set shellcmdflag=-lc
+let g:ale_sign_error = '!'
+let g:ale_sign_warning = '~'
 
 
-"""""""""""""""""""""""
-"      STATUSLINE     "
-"""""""""""""""""""""""
-" always show statusline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autocommands
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" go to last position when opening file
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+
+filetype on
+au BufNewFile,BufRead *.md setlocal filetype=markdown
+au BufRead,BufNewFile *.tex setlocal filetype=tex
+au BufRead,BufNewFile *.{txt,md} setlocal textwidth=78
+au FileType * setlocal formatoptions-=ro
+
+" set scripts to be executable
+au BufWritePost * if getline(1) =~ "^#!" | call setfperm(expand('%'), 'rwxr-xr-x') | endif
+au BufWritePost *.sh silent !chmod +x <afile>
+
+highlight nonascii guibg=Blue ctermbg=9
+au BufReadPost * syntax match nonascii "[^\x00-\x7F]"
+
+au TermOpen * setlocal nonumber norelativenumber
+
+au BufRead,BufNewFile COMMIT_EDITMSG Gdiff
+
+au SwapExists * let v:swapchoice = 'o'
+au SwapExists * echoerr 'Found a swapfile, opening read-only'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Statusline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set laststatus=2
-
-" don't show mode
 set noshowmode
 
 let g:lightline = {

@@ -52,6 +52,7 @@
       "go-to-line"
       "open-on-github"
       "package-generator"
+      "python-linters"
     ]
     ignoredNames: [
       "*.swp"
@@ -148,7 +149,7 @@
   platomformio: {}
   "python-linters":
     lintTrigger:
-      mypy: "LintAsYouType"
+      flake8: "LintOnFileSave"
       pydocstyle: "Never"
     path:
       config: "/Users/yochem/.config/atom/python/setup.cfg"
