@@ -35,8 +35,5 @@ function MyFoldText()
     endif
 endfunction
 
-" don't need that much linting with Python
-" let b:ale_linters = ['autopep8', 'mypy', 'pylint']
+nnoremap <leader>b :silent !black %<CR>
 let b:ale_linters = []
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0

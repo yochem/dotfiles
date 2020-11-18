@@ -28,13 +28,13 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'yochem/prolog.vim'
-Plug 'vimlab/split-term.vim'
+Plug 'yochem/vim-mail'
 Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
 Plug 'bitc/vim-bad-whitespace'
-Plug 'ycm-core/YouCompleteMe'
 Plug 'FooSoft/vim-argwrap'
 Plug 'wellle/targets.vim'
+Plug 'mileszs/ack.vim'
 call plug#end()
 
 
@@ -59,7 +59,7 @@ if has("autocmd")
             \ }
         set background=light
     else
-        let s:background = {"gui": "1c1c1c",
+        let s:background = {"gui": "1b1b1b",
             \ "cterm": "235",
             \ "cterm16": "0"
             \ }
