@@ -54,10 +54,6 @@ if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]]; then
     tmux ls 2>/dev/null | grep attached >/dev/null
     retval="$?"
     if [ "$retval" -eq 1 ]; then
-        read -p "Open tmux? " -n 1 -r
-        echo
-        if [[ "$REPLY" =~ ^[Yy]$ ]]; then
-            tmux attach-session -t general || tmux new-session -s general
-        fi
+        tmux attach-session -t general || tmux new-session -s general
     fi
 fi
