@@ -53,6 +53,7 @@
       "open-on-github"
       "package-generator"
       "python-linters"
+      "autocomplete-snippets"
     ]
     ignoredNames: [
       "*.swp"
@@ -96,6 +97,19 @@
     userId: "65697317-0264-bd7e-904b-0baf33eb482e"
   "file-icons":
     strategies: {}
+  "ide-python":
+    pylsPlugins:
+      autopep8:
+        enabled: false
+      jedi_definition:
+        follow_builtin_imports: true
+        follow_imports: true
+      jedi_signature_help: {}
+      pycodestyle:
+        enabled: false
+      pyflakes:
+        enabled: false
+    python: "python3"
   kite:
     showWelcomeNotificationOnStartup: false
   latex:

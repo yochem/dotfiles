@@ -42,3 +42,14 @@
 
 '.tree-view':
     'r': 'tree-view:rename'
+
+'atom-text-editor.vim-mode-plus:not(.insert-mode)':
+    'space h': 'window:focus-pane-on-left'
+    'space l': 'window:focus-pane-on-right'
+    'space k': 'window:focus-pane-above'
+    'space j': 'window:focus-pane-below'
+    'space =': 'vim-mode-plus:equalize-panes'
+    'space H': 'vim-mode-plus:move-pane-to-very-left'
+    'space L': 'vim-mode-plus:move-pane-to-very-right'
+    'space K': 'vim-mode-plus:move-pane-to-very-top'
+    'space J': 'vim-mode-plus:move-pane-to-very-bottom'
