@@ -13,8 +13,8 @@ function! FindFuncs(deep)
     normal `x
 endfunction
 
-nnoremap <buffer> <leader>F :call FindFuncs(0)<CR>
-nnoremap <buffer> <leader>f :call FindFuncs(1)<CR>
+nnoremap <silent> <buffer> <leader>F :call FindFuncs(0)<CR>
+nnoremap <silent> <buffer> <leader>f :call FindFuncs(1)<CR>
 
 " docstring as text object
 autocmd User targets#mappings#user call targets#mappings#extend({

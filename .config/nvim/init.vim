@@ -90,7 +90,7 @@ set nostartofline
 set nofoldenable
 
 " atom-like line to show where the 79 char bound is
-set colorcolumn=79
+set colorcolumn=83
 
 " (relative) line numbers
 set number
@@ -207,6 +207,7 @@ nnoremap q <nop>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Kite nicer complete menu and support for go
 set completeopt+=menuone,menu,noinsert
+set completeopt-=preview
 let g:kite_tab_complete=1
 nnoremap <silent> <leader>gd :KiteGotoDefinition<CR>
 
