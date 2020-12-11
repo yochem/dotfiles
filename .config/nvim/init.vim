@@ -64,6 +64,9 @@ set nospell
 set noerrorbells
 set nowrap
 
+" open buffers without having to write current one
+set hidden
+
 " split normal
 set splitright
 set splitbelow
