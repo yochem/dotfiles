@@ -29,6 +29,7 @@ Plug 'dense-analysis/ale'
 Plug 'bitc/vim-bad-whitespace'
 Plug 'FooSoft/vim-argwrap'
 Plug 'wellle/targets.vim'
+Plug 'romainl/vim-cool'
 call plug#end()
 
 
@@ -171,9 +172,6 @@ nmap <leader>a :ArgWrap<CR>
 
 " replace more characters at once in visual mode
 vmap r "_dP
-
-" turn off search highlight
-nnoremap <silent> <ESC><ESC> :noh<CR>
 
 " when jumping to definition place it in the middle of the screen
 nnoremap n nzz
