@@ -17,7 +17,7 @@ if [[ $(command -v brew) ]]; then
     echo -e "${orangebold}Updating and upgrading Brew...${reset}"
     brew upgrade
     echo -e "${orangebold}Upgrading Casks...${reset}"
-    for d in $(brew ls --cask -1); do brew upgrade "$d"; done
+    for d in $(brew ls --cask -1); do brew upgrade --cask "$d"; done
     echo -e "${orangebold}Cleaning Brew...${reset}"
     brew cleanup -s --prune=0
     echo -e "${orangebold}Doctoring Brew...${reset}"

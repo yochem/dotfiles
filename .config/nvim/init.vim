@@ -30,6 +30,7 @@ Plug 'bitc/vim-bad-whitespace'
 Plug 'FooSoft/vim-argwrap'
 Plug 'wellle/targets.vim'
 Plug 'romainl/vim-cool'
+Plug 'gruvbox-community/gruvbox'
 call plug#end()
 
 
@@ -42,18 +43,9 @@ if has("termguicolors")
     set termguicolors
 endif
 
-" change the background color of the onedark theme
-let s:background = {"gui": "1b1b1b",
-    \ "cterm": "235",
-    \ "cterm16": "0"
-    \ }
-autocmd ColorScheme * call onedark#set_highlight("Normal", {"bg":
-    \ {"gui": "1b1b1b",
-        \ "cterm": "235",
-        \ "cterm16": "0"
-        \ }})
-
-colorscheme onedark
+colorscheme gruvbox
+let g:gruvbox_contrast_dark='soft'
+highlight Normal guibg='#1b1b1b'
 
 let mapleader = ','
 
@@ -114,6 +106,7 @@ nmap OO m`O<Esc>``
 set gdefault
 set hlsearch
 set ignorecase
+set smartcase
 set incsearch
 set wrapscan
 set wildignore=*.swp,*.bak,*.pyc,*.pdf,*.out,*.aux,*.bbl,*.blg
@@ -251,7 +244,7 @@ set laststatus=2
 set noshowmode
 
 let g:lightline = {
-    \ 'colorscheme': 'one',
+    \ 'colorscheme': 'gruvbox',
     \ 'active': {
     \ 'left': [['mode', 'paste'],
     \ ['readonly', 'filename', 'gitbranch', 'modified']],
