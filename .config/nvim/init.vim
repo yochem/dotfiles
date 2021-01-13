@@ -1,36 +1,23 @@
-" download vim-plug for the right vim
-if has('nvim')
-    let plugged_dir = stdpath('data') . '/plugged'
-    if empty(glob(stdpath('data') . '/site/autoload/plug.vim'))
-        silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-    endif
-else
-    let plugged_dir = '~/.vim/plugged'
-    if empty(glob('~/.vim/autoload/plug.vim'))
-        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-    endif
+if empty(glob(stdpath('data') . '/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " all vim-plug plugins
-call plug#begin(plugged_dir)
+call plug#begin(stdpath('data') . '/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'yochem/prolog.vim'
-Plug 'yochem/vim-mail'
 Plug 'itchyny/lightline.vim'
-Plug 'dense-analysis/ale'
-Plug 'bitc/vim-bad-whitespace'
 Plug 'FooSoft/vim-argwrap'
 Plug 'wellle/targets.vim'
 Plug 'romainl/vim-cool'
-Plug 'gruvbox-community/gruvbox'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 call plug#end()
 
 
@@ -43,14 +30,20 @@ if has("termguicolors")
     set termguicolors
 endif
 
-colorscheme gruvbox
-let g:gruvbox_contrast_dark='soft'
-highlight Normal guibg='#1b1b1b'
+" change the background color of the onedark theme
+let s:background = {
+    \ "gui": "#1c1c1c",
+    \ "cterm": "235",
+    \ "cterm16": "0"
+    \ }
+autocmd ColorScheme * call onedark#set_highlight("Normal", { "bg": s:background })
+
+colorscheme onedark
 
 let mapleader = ','
 
 " dont show unnecessary stuff
-set shortmess=WIFs
+set shortmess=WIFsc
 set notitle
 set encoding=utf-8
 set nospell
@@ -200,13 +193,9 @@ nnoremap q <nop>
 " plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Kite nicer complete menu and support for go
-set completeopt+=menuone,menu,noinsert
-set completeopt-=preview
+set completeopt=menuone,noinsert
 let g:kite_tab_complete=1
 nnoremap <silent> <leader>gd :KiteGotoDefinition<CR>
-
-let g:ale_sign_error = '!'
-let g:ale_sign_warning = '~'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -244,7 +233,7 @@ set laststatus=2
 set noshowmode
 
 let g:lightline = {
-    \ 'colorscheme': 'gruvbox',
+    \ 'colorscheme': 'onedark',
     \ 'active': {
     \ 'left': [['mode', 'paste'],
     \ ['readonly', 'filename', 'gitbranch', 'modified']],
@@ -254,3 +243,31 @@ let g:lightline = {
     \   'gitbranch': 'FugitiveHead'
     \ }
     \ }
+
+lua << EOF
+local lsp = require('lspconfig')
+
+lsp.pyls.setup{
+    on_attach=require'completion'.on_attach;
+    settings={
+        pyls={
+            plugins={
+                mccabe={enabled=false};
+                pycodestyle={enabled=false};
+                pydocstyle={enabled=false};
+                pyflakes={enabled=false};
+                pylint={enabled=false};
+                yapf={enabled=false};
+                pyls_mypy={enabled=true; live_mode=false}
+            }
+        }
+    }
+}
+
+lsp.bashls.setup{on_attach=require'completion'.on_attach; filetypes={'sh'}}
+lsp.clangd.setup{on_attach=require'completion'.on_attach}
+lsp.gopls.setup{on_attach=require'completion'.on_attach}
+lsp.jsonls.setup{on_attach=require'completion'.on_attach}
+lsp.texlab.setup{on_attach=require'completion'.on_attach}
+lsp.tsserver.setup{on_attach=require'completion'.on_attach}
+EOF
