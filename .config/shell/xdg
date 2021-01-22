@@ -14,6 +14,7 @@ fi
 export ATOM_HOME="$XDG_CONFIG_HOME/atom"
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export GOPATH="$XDG_DATA_HOME/go"
 export HISTFILE="$XDG_DATA_HOME/bash/history"
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export IPYTHONDIR="$XDG_DATA_HOME/ipython"

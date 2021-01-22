@@ -1,7 +1,7 @@
 nnoremap <buffer> <leader>r :!go run %:p<CR>
-nnoremap <buffer> <leader>f :silent !go fmt %:p<CR>
+nnoremap <buffer> <leader>f :silent !go fmt -w %:p<CR>
 
-set tabstop=4
-set softtabstop=0
-set noexpandtab
-set shiftwidth=4
+setlocal tabstop=4
+setlocal softtabstop=0
+setlocal noexpandtab
+setlocal shiftwidth=4

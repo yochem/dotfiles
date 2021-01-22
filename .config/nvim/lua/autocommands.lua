@@ -1,8 +1,11 @@
 cmd = vim.cmd
 
 cmd [[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]
-cmd [[au BufNewFile,BufRead *.md setlocal filetype=markdown]]
+
+cmd [[au BufRead,BufNewFile *.md setlocal filetype=markdown]]
 cmd [[au BufRead,BufNewFile *.tex setlocal filetype=tex]]
+cmd [[au BufRead,BufNewFile *.tmpl setlocal filetype=gohtmltmpl]]
+
 cmd [[au BufRead,BufNewFile *.{txt,md} setlocal textwidth=78]]
 cmd [[au FileType * setlocal formatoptions-=ro]]
 
