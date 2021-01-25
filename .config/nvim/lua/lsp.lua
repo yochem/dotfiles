@@ -1,7 +1,13 @@
 local lsp = require('lspconfig')
 
+-- default configuration
+lsp.util.default_config = vim.tbl_extend(
+    "force",
+    lsp.util.default_config,
+    {on_attach=require'completion'.on_attach}
+)
+
 lsp.pyls.setup{
-    on_attach=require'completion'.on_attach;
     settings={
         pyls={
             plugins={
@@ -9,7 +15,7 @@ lsp.pyls.setup{
                 pycodestyle={enabled=false};
                 pydocstyle={enabled=false};
                 pyflakes={enabled=false};
-                pylint={enabled=false};
+                pylint={enabled=true};
                 yapf={enabled=false};
                 pyls_mypy={enabled=true; live_mode=false}
             }
@@ -36,10 +42,7 @@ lsp.sumneko_lua.setup {
     },
 }
 
-lsp.bashls.setup{on_attach=require'completion'.on_attach; filetypes={'sh'}}
-lsp.clangd.setup{on_attach=require'completion'.on_attach}
 lsp.gopls.setup{
-    on_attach=require'completion'.on_attach,
     cmd = {"gopls", "serve"},
     settings = {
         gopls = {
@@ -48,6 +51,19 @@ lsp.gopls.setup{
         },
     },
 }
-lsp.jsonls.setup{on_attach=require'completion'.on_attach}
-lsp.texlab.setup{on_attach=require'completion'.on_attach}
-lsp.tsserver.setup{on_attach=require'completion'.on_attach}
+
+lsp.bashls.setup{filetypes={'sh'}}
+lsp.clangd.setup{}
+lsp.jsonls.setup{}
+lsp.texlab.setup{}
+lsp.tsserver.setup{}
+
+-- use popups instead of virtual text on the same line
+vim.cmd [[autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = false,
+        signs = false,
+        update_in_insert = false,
+    }
+)
