@@ -14,4 +14,5 @@ return require('packer').startup(function()
     use 'romainl/vim-cool'
     use 'neovim/nvim-lspconfig'
     use 'nvim-lua/completion-nvim'
+    use 'yegappan/mru'
 end)

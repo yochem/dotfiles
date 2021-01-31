@@ -27,6 +27,6 @@ cmd [[au BufRead,BufNewFile COMMIT_EDITMSG Gdiff]]
 cmd [[au SwapExists * let v:swapchoice = 'o']]
 cmd [[au SwapExists * echoerr 'Found a swapfile, opening read-only']]
 
-cmd [[au BufWritePost plugins.lua PackerCompile]]
+cmd [[au BufWritePost plugins.lua PackerInstall]]
 
 cmd [[au ColorScheme * call onedark#set_highlight("Normal",{"bg":{"gui":"#1c1c1c","cterm":"235","cterm16": "0"}})]]

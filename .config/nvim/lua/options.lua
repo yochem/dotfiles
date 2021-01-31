@@ -57,7 +57,6 @@ opt('o', 'sidescrolloff', 3)
 
 -- indentation settings
 opt('b', 'autoindent', true)
-opt('b', 'smartindent', true)
 opt('o', 'smarttab', true)
 
 -- tabs / spaces settings
@@ -70,6 +69,7 @@ opt('o', 'shiftround', true)
 -- global variables
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
+vim.g.MRU_File = vim.fn.stdpath('data') .. '/mru.txt'
 
 if vim.fn.has('mac') == 1 then
     vim.g.python3_host_prog = '/usr/local/bin/python3'
