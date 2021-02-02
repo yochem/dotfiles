@@ -20,7 +20,7 @@ bin               | `~/.local/bin`
 ### Installation
 If you just want to install the dotfiles:
 ```bash
-$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/master/.local/bin/dotinstall | $(which bash)
+$ curl -Lks https://raw.githubusercontent.com/yochem/dotfiles/main/.local/bin/dotinstall | $(which bash)
 ```
 This script will check if there are any existing files and move them to
 `$HOME/dotfiles-backup/`. It uses a Git bare repository to manage the
@@ -54,6 +54,4 @@ about the best way to version control your dotfiles.
 Please create an [issue](https://github.com/yochem/dotfiles/issues/new)!
 
 ### License
-Licensed under the [MIT
-license](https://github.com/yochem/dotfiles/blob/master/LICENSE), but do
-whatever you like with it.
+Licensed under the MIT license.
