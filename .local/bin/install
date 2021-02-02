@@ -15,7 +15,7 @@ install_brew() {
 
     # install brew
     if ! command -v brew >/dev/null 2>&1; then
-        ruby -e "$(curl -fsL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
 
     brew bundle --file="$HOME/.local/share/packages/Brewfile" || echo "Can not find Brewfile"
