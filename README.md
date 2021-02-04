@@ -26,7 +26,7 @@ This script will check if there are any existing files and move them to
 `$HOME/dotfiles-backup/`. It uses a Git bare repository to manage the
 dotfiles.
 
-If you want to installand Brew packages, Pip packages, change some MacOS
+If you want to install Brew packages, Pip packages, change some MacOS
 `defaults`, update Bash, change the Dock and even more:
 ```bash
 $ $HOME/.local/bin/install
