@@ -32,6 +32,7 @@ opt('o', 'errorbells', false)
 opt('w', 'spell', false)
 opt('o', 'laststatus', 2)
 opt('o', 'showmode', false)
+opt('w', 'fillchars', 'eob: ')
 
 -- window settings
 opt('o', 'splitright', true)

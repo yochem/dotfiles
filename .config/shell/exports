@@ -27,7 +27,8 @@ export HISTTIMEFORMAT="%c "
 export GPG_TTY="$(tty)"
 
 # don't put duplicates in history
-HISTCONTROL=ignoreboth
+export HISTCONTROL="ignoreboth"
+export HISTIGNORE='rm *'
 
 # don't let Terminal.app write session history
 # (https://stackoverflow.com/questions/32418438/how-can-i-disable-bash-sessions-in-os-x-el-capitan)
