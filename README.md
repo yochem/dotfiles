@@ -1,6 +1,6 @@
 # `/Users/yochem`
 My configs for MacOS and Linux (tested on Ubuntu). Also
-includes the most user-frienldy MacOS [installation
+includes the most user-friendly MacOS [installation
 script](.local/bin/macdefaults) ever.
 
 ### Screenshots
