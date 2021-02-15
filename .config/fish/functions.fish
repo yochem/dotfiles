@@ -22,9 +22,9 @@ abbr pipi python3 -m pip install
 # before I used 'dot' as alias for my dotfiles repo but that's way to confusing
 function g
     if git status &>/dev/null
-        git "$argv"
+        git $argv
     else
-        git --git-dir="$XDG_DATA_HOME/dot" --work-tree="$HOME" "$argv"
+        git --git-dir="$XDG_DATA_HOME/dot" --work-tree="$HOME" $argv
     end
 end
 

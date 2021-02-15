@@ -4,6 +4,11 @@ set -g fish_cursor_insert line; set -g fish_cursor_default block
 
 function fish_greeting; end
 
+set -g fish_color_command normal
+set -g fish_color_comment 6f7683
+set -g fish_color_quote green
+set -g fish_color_redirection magenta
+
 set files \
     "$HOME/.config/fish/xdg.fish" \
     "$HOME/.config/fish/prompt.fish" \
@@ -17,7 +22,7 @@ end
 
 [ -e "/home/linuxbrew/" ] && eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-if [ -n "$PS1" ] && [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
+if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
     tmux ls 2>/dev/null | grep attached >/dev/null
     if [ "$status" = "1" ]; then
         tmux attach-session -t general || tmux new-session -s general
