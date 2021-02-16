@@ -67,3 +67,20 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         update_in_insert = false,
     }
 )
+
+local configs = require'lspconfig/configs'
+-- Check if it's already defined for when reloading this file.
+if not lsp.prolog_lsp then
+  configs.prolog_lsp = {
+    default_config = {
+      cmd = {"swipl", "-g", "use_module(library(lsp_server)).", "-g",
+        "lsp_server:main", "-t", "halt", "--", "stdio"};
+      filetypes = {'prolog'};
+      root_dir = function(fname)
+        return lsp.util.find_git_ancestor(fname) or "."
+      end;
+      settings = {};
+    };
+  }
+end
+lsp.prolog_lsp.setup{}

@@ -8,6 +8,7 @@ set -g fish_color_command normal
 set -g fish_color_comment 6f7683
 set -g fish_color_quote green
 set -g fish_color_redirection magenta
+set -g fish_color_autosuggestion 6f7683
 
 set files \
     "$HOME/.config/fish/xdg.fish" \

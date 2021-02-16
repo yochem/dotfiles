@@ -56,6 +56,3 @@ elif [ -n "$ZSH_VERSION" ]; then
     PROMPT+="%{$reset_color%}"
     PROMPT+="] "
 fi
-
-# immediately add to history after command
-PROMPT_COMMAND="history -a;history -n; $PROMPT_COMMAND"

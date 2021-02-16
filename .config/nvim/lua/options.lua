@@ -93,7 +93,7 @@ vim.g.lightline = {
     active = {
         left = {
             {"mode", "paste"},
-            {"readonly", "filename", "gitbranch", "modified"}
+            {"readonly", "absolutepath", "gitbranch", "modified"}
         },
         right = {
             {"lineinfo"},

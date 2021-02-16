@@ -4,6 +4,7 @@
 # but I don't
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_BIN_HOME="$HOME/.local/bin"
 
 if [ "$(uname -s)" = Darwin ]; then
     export XDG_CACHE_HOME="$HOME/Library/Caches"
@@ -13,6 +14,7 @@ fi
 
 export ATOM_HOME="$XDG_CONFIG_HOME/atom"
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
+export GHCUP_USE_XDG_DIRS="1"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GOPATH="$XDG_DATA_HOME/go"
 export HISTFILE="$XDG_DATA_HOME/bash/history"
