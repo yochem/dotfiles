@@ -33,7 +33,7 @@ alias sudo "sudo "
 [ -n (command -v nvim) ] && alias vim "nvim"
 
 # fd is fdfind on ubuntu
-[ -n (command -v fdfind) ] && alias fd "fdfind"
+command -v fdfind >/dev/null && alias fd "fdfind"
 
 # get quick octal permissions of a file
 alias perms "stat -f '%A'"

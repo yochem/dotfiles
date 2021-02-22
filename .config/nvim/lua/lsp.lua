@@ -62,8 +62,9 @@ lsp.tsserver.setup{}
 vim.cmd [[autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
+        underline = false,
         virtual_text = false,
-        signs = false,
+        signs = true,
         update_in_insert = false,
     }
 )

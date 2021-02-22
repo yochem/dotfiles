@@ -42,3 +42,9 @@ map('n', 'q', '<nop>')
 -- add empty line below or above in normal mode
 map('n', 'oo', 'm`o<Esc>``')
 map('n', 'OO', 'm`O<Esc>``')
+
+-- some lsp remaps
+map('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
+map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
+map('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>')
+map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
