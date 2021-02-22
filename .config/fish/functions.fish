@@ -10,10 +10,14 @@ function phpserver
 end
 
 # make a directory and cd into it
-function mkcd; mkdir "$1" && cd "$1"; end
+function mkcd
+    mkdir "$1" && cd "$1"
+end
 
 # move to trash
-function thrash; mv -f "$1" "$HOME/.Trash/$1"; end
+function thrash
+    mv -f "$1" "$HOME/.Trash/$1"
+end
 
 # shorten pip install command
 abbr pipi python3 -m pip install
@@ -29,7 +33,9 @@ function g
 end
 
 # echo your computers ip-address
-function ip; ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'; end
+function ip
+    ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'
+end
 
 # usage: clone_all_from users/username or clone_all_from orgs/orgname
 function clone_all_from
@@ -41,4 +47,6 @@ function clone_all_from
 end
 
 # find ip of router (used to ssh to it: ssh yochem@$(router))
-function router; ifconfig | grep 'inet ' | grep -v '127' | cut -d ' ' -f 2; end
+function router
+    ifconfig | grep 'inet ' | grep -v '127' | cut -d ' ' -f 2
+end

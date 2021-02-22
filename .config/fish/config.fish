@@ -1,8 +1,10 @@
 fish_vi_key_bindings
 fish_vi_cursor --force-iterm
-set -g fish_cursor_insert line; set -g fish_cursor_default block
+set -g fish_cursor_insert line
+set -g fish_cursor_default block
 
-function fish_greeting; end
+function fish_greeting
+end
 
 set -g fish_color_command normal
 set -g fish_color_comment 6f7683
@@ -25,7 +27,7 @@ end
 
 if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
     tmux ls 2>/dev/null | grep attached >/dev/null
-    if [ "$status" = "1" ]; then
+    if [ "$status" = "1" ]
         tmux attach-session -t general || tmux new-session -s general
     end
 end

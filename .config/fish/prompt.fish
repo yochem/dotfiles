@@ -1,5 +1,6 @@
 # don't prepend prompt with vi command mode
-function fish_mode_prompt; end
+function fish_mode_prompt
+end
 
 # function for showing the git branch
 function prompt_git
