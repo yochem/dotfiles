@@ -1,6 +1,6 @@
 # `/Users/yochem`
 My configs for MacOS and Linux (tested on Ubuntu). Also
-includes the most user-frienldy MacOS [installation
+includes the most user-friendly MacOS [installation
 script](.local/bin/macdefaults) ever.
 
 ### Screenshots
@@ -26,7 +26,7 @@ This script will check if there are any existing files and move them to
 `$HOME/dotfiles-backup/`. It uses a Git bare repository to manage the
 dotfiles.
 
-If you want to installand Brew packages, Pip packages, change some MacOS
+If you want to install Brew packages, Pip packages, change some MacOS
 `defaults`, update Bash, change the Dock and even more:
 ```bash
 $ $HOME/.local/bin/install
@@ -36,7 +36,7 @@ Which looks something like:
 ![installation script](https://media.giphy.com/media/3pAPsTr66NdEe8cgGa/giphy.gif)
 
 Where the users press 'y' to accept or any other key to skip (no key pressed
-at creating the the dock).
+at creating the dock).
 
 ### Why?
 *"There is a computer disease that anybody who works with computers knows about.
