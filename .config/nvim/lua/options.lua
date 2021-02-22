@@ -67,6 +67,9 @@ opt('b', 'expandtab', true)
 opt('b', 'shiftwidth', 4)
 opt('o', 'shiftround', true)
 
+-- show the LSP warningsigns in the number column
+opt('w', 'signcolumn', 'number')
+
 -- global variables
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3

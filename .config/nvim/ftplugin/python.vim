@@ -1,6 +1,9 @@
 " run the python file
 nnoremap <buffer> <leader>r :!python3 %:p<CR>
 
+" format it right using gq
+set formatprg=python-format
+
 " list all structs and functions in the current buffer, type :<line-num> to
 " jump
 function! FindFuncs(deep)
@@ -14,7 +17,6 @@ function! FindFuncs(deep)
 endfunction
 
 nnoremap <silent> <buffer> <leader>F :call FindFuncs(0)<CR>
-nnoremap <silent> <buffer> <leader>f :call FindFuncs(1)<CR>
 
 " fold docstrings beautifully
 setlocal foldenable

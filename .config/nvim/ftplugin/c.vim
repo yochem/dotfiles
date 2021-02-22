@@ -10,4 +10,7 @@ endif
 function! FindFuncs()
     exe 'g/^[a-z].*[{,]$/'
 endfunction
-nnoremap <leader>f :call FindFuncs()<CR>
+nnoremap <leader>F :call FindFuncs()<CR>
+
+" use clang-format for gq
+set formatprg=clang-format

@@ -14,9 +14,13 @@ cmd [[au FileType * setlocal formatoptions-=ro]]
 cmd [[au BufWritePost * if getline(1) =~ "^#!" | call setfperm(expand('%'), 'rwxr-xr-x') | endif]]
 cmd [[au BufWritePost *.sh silent !chmod +x <afile>]]
 
--- highligt non-ascii
+-- highligt non-ascii and trailing whitespace
 cmd [[highlight nonascii guibg=Blue ctermbg=9]]
-cmd [[au BufReadPost * syntax match nonascii "[^\x00-\x7F]"]]
+cmd [[match nonascii "[^\x00-\x7F]"]]
+
+cmd [[au ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red]]
+cmd [[au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/]]
+cmd [[au InsertLeave * match ExtraWhitespace /\s\+$/]]
 
 -- no line numbers in terminal
 cmd [[au TermOpen * setlocal nonumber norelativenumber]]

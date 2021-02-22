@@ -48,3 +48,6 @@ map('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
 map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>')
 map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+
+-- format whole file
+map('n', '<leader>f', 'gggqG')
