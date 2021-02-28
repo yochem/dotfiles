@@ -81,12 +81,12 @@
                                         ]
                                     }
                                 ],
-                                "type": "basic",
                                 "to_if_alone": [
                                     {
                                         "key_code": 53
                                     }
-                                ]
+                                ],
+                                "type": "basic"
                             }
                         ]
                     }

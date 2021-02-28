@@ -46,6 +46,7 @@ lsp.gopls.setup {
 }
 
 lsp.bashls.setup {filetypes = {'sh'}}
+lsp.cssls.setup {root_dir = lsp.util.root_pattern("index.html")}
 lsp.jsonls.setup {}
 lsp.tsserver.setup {}
 
