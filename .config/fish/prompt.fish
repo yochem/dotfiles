@@ -25,6 +25,7 @@ end
 # [ root ~/Documents ]
 # [ root@host: ~/Documents ]
 function fish_prompt
+    z --add "$PWD"
     set_color normal
     printf "[ "
 

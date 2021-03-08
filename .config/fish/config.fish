@@ -13,6 +13,7 @@ set -g fish_color_redirection magenta
 set -g fish_color_autosuggestion 6f7683
 
 set files \
+    "$HOME/.config/fish/z.fish" \
     "$HOME/.config/fish/xdg.fish" \
     "$HOME/.config/fish/prompt.fish" \
     "$HOME/.config/fish/exports.fish" \

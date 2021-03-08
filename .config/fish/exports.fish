@@ -11,7 +11,7 @@ end
 set -xU EDITOR "$VISUAL"
 
 # add local bin to path
-set -xU fish_user_paths "$HOME/.local/bin"
+fish_add_path -a "$HOME/.local/bin"
 
 # fix the bug of Apple creating a non-exisiting LC
 set -xU LC_ALL "en_US.UTF-8"
