@@ -49,6 +49,7 @@ lsp.bashls.setup {filetypes = {'sh'}}
 lsp.cssls.setup {root_dir = lsp.util.root_pattern("index.html")}
 lsp.jsonls.setup {}
 lsp.tsserver.setup {}
+lsp.erlangls.setup {}
 
 -- use popups instead of virtual text on the same line
 vim.cmd [[autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]

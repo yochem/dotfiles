@@ -14,7 +14,7 @@ map('v', 'r', '"_dP')
 map('n', 'n', 'nzz')
 
 -- delete trailing whitespace
-map('n', 'W', [[:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>]])
+map('n', 'W', [[m`:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>``]])
 
 -- use arows to quickly scroll
 map('n', '<UP>', '<C-u>')

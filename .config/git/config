@@ -4,6 +4,7 @@
 
 [init]
     templatedir = ~/.config/git/hooks
+    defaultBranch = main
 
 [core]
     excludesfile = ~/.config/git/ignore

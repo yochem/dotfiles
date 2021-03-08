@@ -1,5 +1,3 @@
-vim.cmd('let mapleader=","')
-
 local function opt(scope, key, value)
     local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
     scopes[scope][key] = value
@@ -20,7 +18,6 @@ opt('o', 'completeopt', 'menuone,noinsert')
 
 -- visible settings
 opt('o', 'shortmess', 'WIFsc')
-opt('o', 'title', false)
 opt('w', 'spell', false)
 opt('o', 'showmode', false)
 opt('w', 'fillchars', 'eob: ')
@@ -55,6 +52,7 @@ opt('o', 'shiftround', true)
 opt('w', 'signcolumn', 'number')
 
 -- global variables
+vim.g.mapleader = ","
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 
