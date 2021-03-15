@@ -18,17 +18,16 @@ set files \
     "$HOME/.config/fish/prompt.fish" \
     "$HOME/.config/fish/exports.fish" \
     "$HOME/.config/fish/aliases.fish" \
-    "$HOME/.config/fish/functions.fish" \
-
+    "$HOME/.config/fish/functions.fish"
 for file in $files
     [ -f "$file" ] && source $file
 end
 
-[ -e "/home/linuxbrew/" ] && eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+[ -e /home/linuxbrew/ ] && eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
     tmux ls 2>/dev/null | grep attached >/dev/null
-    if [ "$status" = "1" ]
+    if [ "$status" = 1 ]
         tmux attach-session -t general || tmux new-session -s general
     end
 end

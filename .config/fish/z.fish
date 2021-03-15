@@ -23,7 +23,7 @@ function z -d "Jump to a recent directory."
     set -l datafile "/Users/yochem/.local/share/z/z_data"
 
     # add entries
-    if [ "$argv[1]" = "--add" ]
+    if [ "$argv[1]" = --add ]
         set -e argv[1]
 
         # $HOME isn't worth matching
@@ -53,13 +53,13 @@ function z -d "Jump to a recent directory."
                     for( i in rank ) print i "|" 0.9*rank[i] "|" time[i] # aging
                 } else for( i in rank ) print i "|" rank[i] "|" time[i]
             }
-        ' $datafile ^/dev/null > $tempfile
+        ' $datafile ^/dev/null >$tempfile
 
         command mv -f $tempfile $datafile
 
-    # tab completion
+        # tab completion
     else
-        if [ "$argv[1]" = "--complete" ]
+        if [ "$argv[1]" = --complete ]
             command awk -v q="$argv[2]" -F"|" '
                 BEGIN {
                     if( q == tolower(q) ) nocase = 1
@@ -86,16 +86,16 @@ function z -d "Jump to a recent directory."
 
             while [ (count $argv) -gt 0 ]
                 switch "$argv[1]"
-                    case -- '-h'
+                    case -- -h
                         echo "z [-h][-l][-r][-t] args" >&2
                         return
-                    case -- '-l'
+                    case -- -l
                         set list 1
-                    case -- '-r'
-                        set typ "rank"
-                    case -- '-t'
-                        set typ "recent"
-                    case -- '--'
+                    case -- -r
+                        set typ rank
+                    case -- -t
+                        set typ recent
+                    case -- --
                         while [ "$argv[1]" ]
                             set -e argv[1]
                             set fnd "$fnd $argv[1]"

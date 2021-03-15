@@ -12,7 +12,7 @@ end
 
 set -xU ATOM_HOME "$XDG_CONFIG_HOME/atom"
 set -xU BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME/bundle"
-set -xU GHCUP_USE_XDG_DIRS "1"
+set -xU GHCUP_USE_XDG_DIRS 1
 set -xU GNUPGHOME "$XDG_DATA_HOME/gnupg"
 set -xU GOPATH "$XDG_DATA_HOME/go"
 set -xU HISTFILE "$XDG_DATA_HOME/bash/history"

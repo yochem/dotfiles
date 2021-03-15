@@ -71,6 +71,6 @@ vim.g.lightline = {
         },
         right = {{'lineinfo'}, {'percent'}, {'filetype'}}
     },
-    colorscheme = 'onedark',
+    colorscheme = 'one',
     component_function = {gitbranch = 'FugitiveHead'}
 }

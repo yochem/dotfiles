@@ -5,7 +5,7 @@ end
 # function for showing the git branch
 function prompt_git
     git rev-parse --is-inside-work-tree &>/dev/null
-    if [ "$status" = "0" ]
+    if [ "$status" = 0 ]
         set branchName (git symbolic-ref --quiet --short HEAD 2> /dev/null || \
             git rev-parse --short HEAD 2> /dev/null || \
             echo -e '(unknown)')
@@ -29,9 +29,9 @@ function fish_prompt
     set_color normal
     printf "[ "
 
-    if [ "$USER" = "root" ]
+    if [ "$USER" = root ]
         set_color brmagenta --bold
-        printf "root"
+        printf root
         set_color normal
     end
 
@@ -43,7 +43,7 @@ function fish_prompt
         printf ": "
     end
 
-    if [ "$USER" = "root" ] && [ -z "$SSH_CLIENT" ]
+    if [ "$USER" = root ] && [ -z "$SSH_CLIENT" ]
         printf " "
     end
 

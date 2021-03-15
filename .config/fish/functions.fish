@@ -1,11 +1,11 @@
 # open python server
 function server
-    [ -n $argv[1] ] && set s $argv[1] || set s "8000"
+    [ -n $argv[1] ] && set s $argv[1] || set s 8000
     open "http://localhost:$s" && python3 -m http.server "$s"
 end
 
 function phpserver
-    [ -n $argv[1] ] && set s $argv[1] || set s "8000"
+    [ -n $argv[1] ] && set s $argv[1] || set s 8000
     open "http://localhost:$s" && php -S "localhost:$s"
 end
 
@@ -41,12 +41,18 @@ end
 function clone_all_from
     set PAGE 1
     curl "https://api.github.com/"$argv[1]"/repos?page=$PAGE&per_page=100" |
-    grep -e 'git_url.*' |
-    cut -d \" -f 4 |
-    xargs -L1 -P5 git clone
+        grep -e 'git_url.*' |
+        cut -d \" -f 4 |
+        xargs -L1 -P5 git clone
 end
 
 # find ip of router (used to ssh to it: ssh yochem@$(router))
 function router
-    ifconfig | grep 'inet ' | grep -v '127' | cut -d ' ' -f 2
+    ifconfig | grep 'inet ' | grep -v 127 | cut -d ' ' -f 2
+end
+
+function cd -d "Check for Python virtual envs on cd'ing"
+    test -d .venv && deactivate
+    builtin cd $argv
+    test -d .venv && source .venv/bin/activate.fish
 end

@@ -34,4 +34,4 @@ cmd [[au SwapExists * echoerr 'Found a swapfile, opening read-only']]
 
 cmd [[au BufWritePost plugins.lua PackerInstall]]
 
-cmd [[au ColorScheme * call onedark#set_highlight("Normal",{"bg":{"gui":"#1c1c1c","cterm":"235","cterm16": "0"}})]]
+cmd [[au ColorScheme onedark call onedark#set_highlight("Normal",{"bg":{"gui":"#1c1c1c","cterm":"235","cterm16": "0"}})]]

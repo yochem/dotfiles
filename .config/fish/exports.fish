@@ -1,11 +1,11 @@
 # choose the default editor
 if command -v nvim >/dev/null 2>&1
-    set -xU VISUAL "nvim"
+    set -xU VISUAL nvim
     set -xU MANPAGER 'nvim +Man!'
 else if command -v vim >/dev/null 2>&1
-    set -xU VISUAL "vim"
+    set -xU VISUAL vim
 else
-    set -xU VISUAL "nano"
+    set -xU VISUAL nano
 end
 
 set -xU EDITOR "$VISUAL"

@@ -42,7 +42,8 @@ lsp.sumneko_lua.setup {
 
 lsp.gopls.setup {
     cmd = {"gopls", "serve"},
-    settings = {gopls = {analyses = {unusedparams = true}, staticcheck = true}}
+    settings = {gopls = {analyses = {unusedparams = true}, staticcheck = true}},
+    root_dir = lsp.util.root_pattern(".")
 }
 
 lsp.bashls.setup {filetypes = {'sh'}}
