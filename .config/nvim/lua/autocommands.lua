@@ -16,7 +16,7 @@ cmd [[au BufWritePost *.sh silent !chmod +x <afile>]]
 
 -- highligt non-ascii and trailing whitespace
 cmd [[highlight nonascii guibg=Blue ctermbg=9]]
-cmd [[match nonascii "[^\x00-\x7F]"]]
+cmd [[au BufEnter,InsertLeave match nonascii "[^\x00-\x7F]"]]
 
 cmd [[au ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red]]
 cmd [[au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/]]
@@ -32,6 +32,9 @@ cmd [[au BufRead,BufNewFile COMMIT_EDITMSG Gdiff]]
 cmd [[au SwapExists * let v:swapchoice = 'o']]
 cmd [[au SwapExists * echoerr 'Found a swapfile, opening read-only']]
 
-cmd [[au BufWritePost plugins.lua PackerInstall]]
+-- help for vim options in lua files
+local cfgdir = vim.fn.stdpath('config')
+cmd("au BufEnter " .. cfgdir .. "* setlocal keywordprg=:help")
+cmd("au BufEnter " .. cfgdir .. "* setlocal path+=" .. cfgdir .. "/lua/")
 
 cmd [[au ColorScheme onedark call onedark#set_highlight("Normal",{"bg":{"gui":"#1c1c1c","cterm":"235","cterm16": "0"}})]]
