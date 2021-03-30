@@ -32,7 +32,7 @@ map('n', '<space>', '<C-w>')
 -- Open new file in split
 map('n', '<leader>t', ':Vexplore<CR>')
 map('n', 'ZZ', ':qall<CR>')
-map('n', '<leader>c', 'gcc')
+map('n', '<leader>c', '<Cmd>Commentary<CR>')
 map('n', 'S', '<nop>')
 map('n', 'Y', 'y$')
 
@@ -52,3 +52,7 @@ map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
 
 -- format whole file and keep cursor at same position
 map('n', '<leader>f', "magggqG'a")
+
+-- use tab to cycle through lsp completions
+map('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], {expr = true})
+map('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], {expr = true})
