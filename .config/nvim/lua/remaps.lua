@@ -7,10 +7,10 @@ end
 -- toggle list wrapping
 map('n', '<leader>a', ':ArgWrap<CR>')
 
--- replace more characters at once in visual mode
+-- when text is visual selected, replace it with system clipboard
 map('v', 'r', '"_dP')
 
--- when jumping to definition place it in the middle of the screen
+-- when jumping through search always center
 map('n', 'n', 'nzz')
 
 -- delete trailing whitespace
@@ -26,17 +26,23 @@ map('n', '<DOWN>', '<C-d>')
 map('n', 'j', [[v:count ? 'j' : 'gj']], {expr = true})
 map('n', 'k', [[v:count ? 'k' : 'gk']], {expr = true})
 
--- hate using ctrl and using ctrl-w a lot
+-- I should use space for something better now I use tmux
 map('n', '<space>', '<C-w>')
 
 -- Open new file in split
 map('n', '<leader>t', ':Vexplore<CR>')
+
+-- don't care, just quit
 map('n', 'ZZ', ':qall<CR>')
+
+-- quickly comment line
 map('n', '<leader>c', '<Cmd>Commentary<CR>')
+
+-- often pressed accidently, cc works fine too
 map('n', 'S', '<nop>')
 map('n', 'Y', 'y$')
 
--- don't accidently create macros
+-- don't accidently create macros when trying to quit
 map('n', 'Q', 'q')
 map('n', 'q', '<nop>')
 
