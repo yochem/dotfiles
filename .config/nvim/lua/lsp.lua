@@ -2,7 +2,10 @@ local lsp = require('lspconfig')
 
 -- default configuration
 lsp.util.default_config = vim.tbl_extend("force", lsp.util.default_config, {
-    on_attach = require'completion'.on_attach
+    on_attach = function(client)
+        require'illuminate'.on_attach(client)
+        require'completion'.on_attach()
+    end
 })
 
 lsp.pyls.setup {
@@ -47,11 +50,15 @@ lsp.gopls.setup {
 }
 
 lsp.bashls.setup {filetypes = {'sh'}}
-lsp.cssls.setup {root_dir = lsp.util.root_pattern("index.html")}
-lsp.jsonls.setup {}
-lsp.tsserver.setup {}
-lsp.erlangls.setup {}
 lsp.clangd.setup {cmd = {'/usr/local/Cellar/llvm/11.1.0/bin/clangd'}}
+lsp.cssls.setup {root_dir = lsp.util.root_pattern("index.html")}
+lsp.erlangls.setup {}
+lsp.jsonls.setup {}
+lsp.texlab.setup {
+    root_dir = lsp.util.root_pattern("."),
+    settings = {latex = {build = {onSave = true}}}
+}
+lsp.tsserver.setup {}
 
 -- use popups instead of virtual text on the same line
 vim.cmd [[autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]

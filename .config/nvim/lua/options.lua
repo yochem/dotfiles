@@ -11,6 +11,9 @@ opt('o', 'clipboard', 'unnamed')
 opt('o', 'autowrite', true)
 opt('o', 'shellcmdflag', '-lc')
 opt('o', 'completeopt', 'menuone,noinsert')
+opt('b', 'formatoptions', '')
+opt('o', 'exrc', true)
+opt('o', 'secure', true)
 
 -- undo in cache dir, not data
 opt('b', 'undofile', true)
@@ -56,11 +59,14 @@ opt('o', 'shiftround', true)
 
 -- show the LSP warningsigns in the number column
 opt('w', 'signcolumn', 'number')
+opt('w', 'fillchars', 'eob: ')
 
 -- global variables
 vim.g.mapleader = ","
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
+vim.g.Illuminate_highlightUnderCursor = 0
+vim.g.python_highlight_all = 1
 
 -- speed improvement
 if vim.fn.has('mac') == 1 then

@@ -1,7 +1,7 @@
 vim.cmd('packadd packer.nvim')
 
 return require('packer').startup(function(use)
-    use {'wbthomason/packer.nvim', opt = true}
+    use 'wbthomason/packer.nvim'
     use 'joshdick/onedark.vim'
     use 'editorconfig/editorconfig-vim'
     use 'tpope/vim-fugitive'
@@ -12,8 +12,11 @@ return require('packer').startup(function(use)
     use 'romainl/vim-cool'
     use 'neovim/nvim-lspconfig'
     use 'nvim-lua/completion-nvim'
+    use 'RRethy/vim-illuminate'
 
     -- filetypes
     use 'yochem/prolog.vim'
     use 'blankname/vim-fish'
+    use 'vim-python/python-syntax'
+    use 'Vimjas/vim-python-pep8-indent'
 end)

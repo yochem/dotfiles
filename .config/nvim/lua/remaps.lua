@@ -4,6 +4,10 @@ local function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+-- add empty line below or above in normal mode
+map('n', 'oo', 'm`o<Esc>``')
+map('n', 'OO', 'm`O<Esc>``')
+
 -- toggle list wrapping
 map('n', '<leader>a', ':ArgWrap<CR>')
 
@@ -46,15 +50,12 @@ map('n', 'Y', 'y$')
 map('n', 'Q', 'q')
 map('n', 'q', '<nop>')
 
--- add empty line below or above in normal mode
-map('n', 'oo', 'm`o<Esc>``')
-map('n', 'OO', 'm`O<Esc>``')
-
 -- some lsp remaps
-map('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
-map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
-map('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>')
-map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+map('n', '<leader>D', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
+map('n', '<leader>d', '<Cmd>lua vim.lsp.buf.definition()<CR>')
+map('n', '<leader>r', '<Cmd>lua vim.lsp.buf.references()<CR>')
+map('n', '<leader>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>')
+map('n', '<leader>F', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
 
 -- format whole file and keep cursor at same position
 map('n', '<leader>f', "magggqG'a")
@@ -62,3 +63,6 @@ map('n', '<leader>f', "magggqG'a")
 -- use tab to cycle through lsp completions
 map('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], {expr = true})
 map('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], {expr = true})
+
+-- Use tab to go to next buffer
+map('n', '<Tab>', '<Cmd>bn<CR>')
