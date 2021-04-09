@@ -48,7 +48,7 @@ function fish_prompt
     end
 
     set_color blue
-    printf (pwd | sed "s|$HOME|~|")
+    printf (pwd | sed "s|$HOME|~|i")
     set_color normal
 
     printf (prompt_git)

@@ -56,3 +56,12 @@ function cd -d "Check for Python virtual envs on cd'ing"
     builtin cd $argv
     test -d .venv && source .venv/bin/activate.fish
 end
+
+function fish_title
+    if [ fish != $_ ]
+        tmux rename-window "$_"
+    else
+        set basename (basename (pwd) | sed 's/yochem/home/i')
+        tmux rename-window "$basename/"
+    end
+end
