@@ -6,7 +6,7 @@ return require('packer').startup(function(use)
     use 'editorconfig/editorconfig-vim'
     use 'tpope/vim-fugitive'
     use 'tpope/vim-commentary'
-    use 'itchyny/lightline.vim'
+    use 'hoob3rt/lualine.nvim'
     use {'FooSoft/vim-argwrap', cmd = 'ArgWrap'}
     use 'wellle/targets.vim'
     use 'romainl/vim-cool'

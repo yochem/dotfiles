@@ -62,7 +62,7 @@ opt('w', 'signcolumn', 'number')
 opt('w', 'fillchars', 'eob: ')
 
 -- global variables
-vim.g.mapleader = ","
+vim.g.mapleader = ','
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.Illuminate_highlightUnderCursor = 0
@@ -74,16 +74,3 @@ if vim.fn.has('mac') == 1 then
 else
     vim.g.python3_host_prog = '/usr/bin/python3'
 end
-
--- lightline config
-vim.g.lightline = {
-    active = {
-        left = {
-            {'mode', 'paste'},
-            {'readonly', 'absolutepath', 'gitbranch', 'modified'}
-        },
-        right = {{'lineinfo'}, {'percent'}, {'filetype'}}
-    },
-    colorscheme = 'one',
-    component_function = {gitbranch = 'FugitiveHead'}
-}
