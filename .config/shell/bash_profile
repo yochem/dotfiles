@@ -1,0 +1,62 @@
+dotfiles=(
+    # This assumes MacOS
+    ~/Library/Config/shell/xdg
+    ~/Library/Config/shell/prompt
+    ~/Library/Config/shell/exports
+    ~/Library/Config/shell/aliases
+    ~/Library/Config/shell/functions
+    /usr/local/etc/profile.d/bash_completion.sh
+    /usr/local/etc/profile.d/z.sh
+)
+
+# Load the shell dotfiles, and z.sh
+for file in "${dotfiles[@]}"; do
+    [ -f "$file" ] && source "$file" || echo "file $file not found"
+done
+unset file
+unset dotfiles
+
+# load bash completion for commands
+if [[ -d /usr/local/etc/bash_completion.d ]]; then
+    for file in /usr/local/etc/bash_completion.d/*; do
+        source "$file"
+    done
+    unset file
+
+    __git_complete g __git_main
+fi
+
+if [[ $(command -v shopt) ]]; then
+    # Case-insensitive globbing (used in pathname expansion)
+    shopt -s nocaseglob
+
+    # Append to the Bash history file, rather than overwriting it
+    shopt -s histappend
+
+    # Autocorrect typos in path names when using `cd`
+    shopt -s cdspell
+
+    # cd without typing cd
+    shopt -s autocd
+
+    # enable recursive globbing
+    shopt -s globstar
+fi
+
+# linuxbrew
+[ -e "/home/linuxbrew/" ] && {
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+}
+
+# always start tmux on main machine
+if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]]; then
+    tmux ls 2>/dev/null | grep attached >/dev/null
+    retval="$?"
+    if [ "$retval" -eq 1 ]; then
+        read -p "Open tmux? " -n 1 -r
+        echo
+        if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+            tmux attach-session -t general || tmux new-session -s general
+        fi
+    fi
+fi
