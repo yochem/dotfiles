@@ -5,14 +5,14 @@ return require('packer').startup(function(use)
     use 'joshdick/onedark.vim'
     use 'editorconfig/editorconfig-vim'
     use 'tpope/vim-fugitive'
-    use 'tpope/vim-commentary'
+    -- use 'tpope/vim-commentary'
+    use 'b3nj5m1n/kommentary'
     use 'hoob3rt/lualine.nvim'
     use {'FooSoft/vim-argwrap', cmd = 'ArgWrap'}
     use 'wellle/targets.vim'
     use 'romainl/vim-cool'
     use 'neovim/nvim-lspconfig'
     use 'nvim-lua/completion-nvim'
-    use 'RRethy/vim-illuminate'
 
     -- filetypes
     use 'yochem/prolog.vim'

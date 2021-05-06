@@ -2,10 +2,7 @@ local lsp = require('lspconfig')
 
 -- default configuration
 lsp.util.default_config = vim.tbl_extend("force", lsp.util.default_config, {
-    on_attach = function(client)
-        require'illuminate'.on_attach(client)
-        require'completion'.on_attach()
-    end
+    on_attach = function(client) require'completion'.on_attach() end
 })
 
 lsp.pyls.setup {

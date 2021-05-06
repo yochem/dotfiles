@@ -40,7 +40,7 @@ map('n', '<leader>t', ':Vexplore<CR>')
 map('n', 'ZZ', ':qall<CR>')
 
 -- quickly comment line
-map('n', '<leader>c', '<Cmd>Commentary<CR>')
+map('n', '<leader>c', '<Plug>kommentary_line_default', {noremap = false})
 
 -- often pressed accidently, cc works fine too
 map('n', 'S', '<nop>')

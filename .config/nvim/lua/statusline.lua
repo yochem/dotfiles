@@ -1,7 +1,20 @@
 local function path()
-    local val = vim.fn.expand('%:p'):gsub(vim.env.HOME, '~')
-    return val ~= '' and val or '[No Name]'
+    local full_path = vim.fn.expand('%:p'):gsub(vim.env.HOME, '~')
+    local val = full_path ~= '' and full_path or '[No Name]'
+    if vim.bo.modified then
+        val = val .. ' [+]'
+    elseif vim.bo.modifiable == false or vim.bo.readonly == true then
+        val = val .. ' [-]'
+    end
+    return val
 end
+
+local options = {
+    icons_enabled = false,
+    theme = 'onedark',
+    section_separators = '',
+    component_separators = ''
+}
 
 local statusline = {
     lualine_a = {'mode'},
@@ -22,12 +35,7 @@ local statusline = {
 }
 
 require('lualine').setup {
-    options = {
-        icons_enabled = false,
-        theme = 'onedark',
-        section_separators = '',
-        component_separators = ''
-    },
+    options = options,
     sections = statusline,
     inactive_sections = vim.deepcopy(statusline)
 }
