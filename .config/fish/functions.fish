@@ -46,15 +46,9 @@ function clone_all_from
         xargs -L1 -P5 git clone
 end
 
-# find ip of router (used to ssh to it: ssh yochem@$(router))
+# find ip of router (used to ssh to it: ssh yochem@(router))
 function router
     ifconfig | grep 'inet ' | grep -v 127 | cut -d ' ' -f 2
-end
-
-function cd -d "Check for Python virtual envs on cd'ing"
-    test -d .venv && deactivate
-    builtin cd $argv
-    test -d .venv && source .venv/bin/activate.fish
 end
 
 function fish_title
@@ -64,4 +58,13 @@ function fish_title
         set basename (basename (pwd) | sed 's/yochem/home/i')
         tmux rename-window "$basename/"
     end
+    # tmux set-option automatic-rename on
+end
+
+function appify
+    "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser" --app=$argv[1]
+end
+
+function airpods
+    blueutil --connect e4-76-84-50-e8-07
 end

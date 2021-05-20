@@ -12,10 +12,6 @@ alias rm "rm -v"
 alias less "less -R"
 alias swipl "swipl -q"
 
-alias python python3
-alias py python3
-alias p2 python
-
 # reload bash profile and stuff
 alias reload "source \$HOME/.config/fish/config.fish"
 
