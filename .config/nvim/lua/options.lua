@@ -7,7 +7,6 @@ end
 opt('o', 'termguicolors', true)
 opt('o', 'hidden', true)
 opt('o', 'wildignore', '*.swp,*.bak,*.pyc,*.out,*.aux,*.bbl,*.blg')
-opt('o', 'clipboard', 'unnamed')
 opt('o', 'autowrite', true)
 opt('o', 'shellcmdflag', '-lc')
 opt('o', 'completeopt', 'menuone,noinsert')
@@ -65,7 +64,6 @@ opt('w', 'fillchars', 'eob: ')
 vim.g.mapleader = ','
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
-vim.g.Illuminate_highlightUnderCursor = 0
 vim.g.python_highlight_all = 1
 
 -- speed improvement
@@ -74,3 +72,5 @@ if vim.fn.has('mac') == 1 then
 else
     vim.g.python3_host_prog = '/usr/bin/python3'
 end
+
+require('hlslens').setup({calm_down = true})

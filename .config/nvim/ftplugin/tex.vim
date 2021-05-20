@@ -20,10 +20,10 @@ endfunction
 nnoremap <silent> <leader>r :call LatexRenderer()<CR>
 
 " remove all latex help files when closing vim
-au VimLeave *.tex silent !rm <afile>:r.{aux,log,out,bbl,blg,toc,bcf,run.xml,fls,fdb_latexmk,synctex.gz}
+au VimLeave *.tex silent !rm *.{aux,log,out,bbl,blg,toc,bcf,run.xml,fls,fdb_latexmk,synctex.gz}
 
 " open pdf and focus back to vim
-nnoremap <silent> <leader>p :silent !open %:r.pdf; open -a iterm<CR><CR>
+nnoremap <silent> <space>p :silent !open --background %:r.pdf<CR><CR>
 
 " stop all that folding
 let g:Tex_FoldedSections = ''

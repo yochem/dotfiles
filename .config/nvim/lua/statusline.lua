@@ -1,6 +1,8 @@
 local function path()
     local full_path = vim.fn.expand('%:p'):gsub(vim.env.HOME, '~')
     local val = full_path ~= '' and full_path or '[No Name]'
+    val = vim.bo.filetype == 'help' and vim.fn.expand('%:t') or val
+
     if vim.bo.modified then
         val = val .. ' [+]'
     elseif vim.bo.modifiable == false or vim.bo.readonly == true then

@@ -66,3 +66,13 @@ map('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], {expr = true})
 
 -- Use tab to go to next buffer
 map('n', '<Tab>', '<Cmd>bn<CR>')
+
+-- Easier use of the system clipboard
+map('n', '<leader>y', '"+y')
+map('n', '<leader>Y', '"+y$')
+
+map('v', '<leader>y', '"+y')
+map('v', '<leader>Y', '"+y$')
+
+map('n', '<leader>p', '"+p')
+map('n', '<leader>P', '"+P')

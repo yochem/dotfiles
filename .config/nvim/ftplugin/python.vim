@@ -12,7 +12,7 @@ function! FindFuncs()
     normal `x
 endfunction
 
-nnoremap <silent> <buffer> <leader>F :call FindFuncs()<CR>
+nnoremap <buffer> <space>f :call FindFuncs()<CR>
 
 " fold docstrings beautifully
 setlocal foldenable

@@ -29,10 +29,6 @@ cmd [[au TermOpen * setlocal nonumber norelativenumber]]
 -- open commit with diff
 cmd [[au BufRead,BufNewFile COMMIT_EDITMSG Gdiff]]
 
--- fix workings of swap files
-cmd [[au SwapExists * let v:swapchoice = 'o']]
-cmd [[au SwapExists * echoerr 'Found a swapfile, opening read-only']]
-
 -- :help for lua files in nvim config dir
 local cfgdir = vim.fn.stdpath('config')
 cmd("au BufEnter " .. cfgdir .. "/* setlocal keywordprg=:help")
@@ -44,6 +40,6 @@ cmd("au BufWritePost " .. cfgdir .. "/lua/plugins.lua PackerCompile")
 -- bg same as terminal
 cmd [[au ColorScheme onedark call onedark#set_highlight("Normal",{"bg":{"gui":"#1c1c1c","cterm":"235","cterm16": "0"}})]]
 
--- if (vim.env.TMUX ~= nil) then
---     cmd [[autocmd BufReadPost,FileReadPost * call system("tmux rename-window '" . expand("%:t") . "'")]]
--- end
+if (vim.env.TMUX ~= nil) then
+    cmd [[autocmd BufReadPost,FileReadPost * call system("tmux rename-window '" . expand("%:t") . "'")]]
+end
