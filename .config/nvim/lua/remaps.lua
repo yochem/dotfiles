@@ -27,8 +27,10 @@ map('n', '<DOWN>', '<C-d>')
 
 -- go through visual lines with j and k but don't mess with 10k etc.
 -- source: http://stackoverflow.com/a/21000307/2580955
-map('n', 'j', [[v:count ? 'j' : 'gj']], {expr = true})
-map('n', 'k', [[v:count ? 'k' : 'gk']], {expr = true})
+if vim.api.nvim_win_get_option(0, 'wrap') == true then
+    map('n', 'j', [[v:count ? 'j' : 'gj']], {expr = true})
+    map('n', 'k', [[v:count ? 'k' : 'gk']], {expr = true})
+end
 
 -- I should use space for something better now I use tmux
 map('n', '<space>', '<C-w>')
@@ -76,3 +78,7 @@ map('v', '<leader>Y', '"+y$')
 
 map('n', '<leader>p', '"+p')
 map('n', '<leader>P', '"+P')
+
+-- gx does not work on macOS, temporary fix from vim #4738
+map('n', 'gx',
+    ":call netrw#BrowseX(expand((exists('g:netrw_gx')? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>")

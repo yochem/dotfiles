@@ -6,7 +6,7 @@ require('packer').startup(function(use)
     use 'editorconfig/editorconfig-vim'
     use 'tpope/vim-fugitive'
     use 'b3nj5m1n/kommentary'
-    use 'hoob3rt/lualine.nvim'
+    use 'ojroques/nvim-hardline'
     use {'FooSoft/vim-argwrap', cmd = 'ArgWrap'}
     use 'wellle/targets.vim'
     use 'neovim/nvim-lspconfig'
@@ -21,3 +21,31 @@ require('packer').startup(function(use)
 end)
 
 require('hlslens').setup({calm_down = true})
+require('hardline').setup({
+    theme = 'one',
+    sections = {
+        {class = 'mode', item = require('hardline.parts.mode').get_item},
+        {
+            class = 'high',
+            item = require('hardline.parts.git').get_item,
+            hide = 80
+        }, '%<',
+        {class = 'low', item = require('hardline.parts.filename').get_item},
+        {class = 'med', item = '%='},
+        {
+            class = 'low',
+            item = require('hardline.parts.wordcount').get_item,
+            hide = 80
+        }, {class = 'error', item = require('hardline.parts.lsp').get_error},
+        {class = 'warning', item = require('hardline.parts.lsp').get_warning},
+        {
+            class = 'warning',
+            item = require('hardline.parts.whitespace').get_item
+        },
+        {
+            class = 'high',
+            item = require('hardline.parts.filetype').get_item,
+            hide = 80
+        }, {class = 'mode', item = require('hardline.parts.line').get_item}
+    }
+})

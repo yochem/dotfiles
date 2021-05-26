@@ -52,8 +52,9 @@ lsp.cssls.setup {root_dir = lsp.util.root_pattern("index.html")}
 lsp.erlangls.setup {}
 lsp.jsonls.setup {}
 lsp.texlab.setup {
-    root_dir = lsp.util.root_pattern("."),
-    settings = {latex = {build = {onSave = true}}}
+    settings = {
+        build = {args = {"-pvc", "-view=pdf", "%f"}, isContinuous = true}
+    }
 }
 lsp.tsserver.setup {}
 

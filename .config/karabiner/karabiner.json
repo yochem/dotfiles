@@ -124,18 +124,6 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "6",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ]
-                                    }
-                                },
-                                "to": [],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
                                     "key_code": "q",
                                     "modifiers": {
                                         "mandatory": [
