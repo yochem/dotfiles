@@ -20,6 +20,10 @@ require('packer').startup(function(use)
     use 'Vimjas/vim-python-pep8-indent'
 end)
 
+local function line_info()
+    return string.format('%d:%d', vim.fn.line('.'), vim.fn.col('.'))
+end
+
 require('hlslens').setup({calm_down = true})
 require('hardline').setup({
     theme = 'one',
@@ -46,6 +50,6 @@ require('hardline').setup({
             class = 'high',
             item = require('hardline.parts.filetype').get_item,
             hide = 80
-        }, {class = 'mode', item = require('hardline.parts.line').get_item}
+        }, {class = 'mode', item = line_info}
     }
 })

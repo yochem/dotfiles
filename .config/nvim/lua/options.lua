@@ -1,64 +1,62 @@
-local function opt(scope, key, value)
-    local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
-    scopes[scope][key] = value
-    if scope ~= 'o' then scopes['o'][key] = value end
-end
+local opt = vim.opt
 
-opt('o', 'termguicolors', true)
-opt('o', 'hidden', true)
-opt('o', 'wildignore', '*.swp,*.bak,*.pyc,*.out,*.aux,*.bbl,*.blg')
-opt('o', 'autowrite', true)
-opt('o', 'shellcmdflag', '-lc')
-opt('o', 'completeopt', 'menuone,noinsert')
-opt('b', 'formatoptions', '')
-opt('o', 'exrc', true)
-opt('o', 'secure', true)
+opt.termguicolors = true
+opt.hidden = true
+opt.wildignore:append({
+    '*.swp', '*.bak', '*.pyc', '*.out', ' *.aux', '*.bbl', '*.blg'
+})
+opt.autowrite = true
+opt.shellcmdflag = '-lc'
+opt.completeopt = {'menuone', 'noinsert'}
+opt.formatoptions = {}
+opt.exrc = true
+opt.secure = true
 
 -- undo in cache dir, not data
-opt('b', 'undofile', true)
-opt('o', 'undodir', vim.fn.stdpath('cache') .. '/undo')
+opt.undofile = true
+opt.undodir = vim.fn.stdpath('cache') .. '/undo'
 
 -- sometimes scrolling is nice
-opt('o', 'mouse', 'a')
+opt.mouse = 'a'
 
 -- respond quicker
-opt('o', 'timeoutlen', 250)
-opt('o', 'updatetime', 100)
+opt.timeoutlen = 250
+opt.updatetime = 100
 
 -- visible settings
-opt('o', 'shortmess', 'WIFsc')
-opt('w', 'spell', false)
-opt('o', 'showmode', false)
+opt.shortmess = 'WIFsc'
+opt.spell = false
+opt.showmode = false
 
 -- window settings
-opt('o', 'splitright', true)
-opt('o', 'splitbelow', true)
-opt('w', 'number', true)
-opt('w', 'relativenumber', true)
+opt.splitright = true
+opt.splitbelow = true
+opt.number = true
+opt.relativenumber = true
 
 -- search settings
-opt('o', 'gdefault', true)
-opt('o', 'ignorecase', true)
-opt('o', 'smartcase', true)
-opt('o', 'wrapscan', true)
+opt.gdefault = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.wrapscan = true
 
 -- scroll behaviour
-opt('w', 'foldenable', false)
-opt('w', 'colorcolumn', '83')
-opt('o', 'scrolloff', 3)
-opt('w', 'wrap', false)
-opt('o', 'sidescrolloff', 3)
+opt.foldenable = false
+opt.colorcolumn = {83}
+opt.scrolloff = 3
+opt.wrap = false
+opt.sidescrolloff = 3
 
 -- tabs / spaces settings
-opt('b', 'tabstop', 8)
-opt('b', 'softtabstop', 4)
-opt('b', 'expandtab', true)
-opt('b', 'shiftwidth', 4)
-opt('o', 'shiftround', true)
+opt.tabstop = 8
+opt.softtabstop = 4
+opt.expandtab = true
+opt.shiftwidth = 4
+opt.shiftround = true
 
 -- show the LSP warningsigns in the number column
-opt('w', 'signcolumn', 'number')
-opt('w', 'fillchars', 'eob: ')
+opt.signcolumn = 'number'
+opt.fillchars = {eob = ' '}
 
 -- global variables
 vim.g.mapleader = ','
@@ -72,5 +70,3 @@ if vim.fn.has('mac') == 1 then
 else
     vim.g.python3_host_prog = '/usr/bin/python3'
 end
-
-require('hlslens').setup({calm_down = true})

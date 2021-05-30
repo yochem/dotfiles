@@ -26,9 +26,6 @@ cmd [[au InsertLeave * match ExtraWhitespace /\s\+$/]]
 -- no line numbers in terminal
 cmd [[au TermOpen * setlocal nonumber norelativenumber]]
 
--- open commit with diff
-cmd [[au BufRead,BufNewFile COMMIT_EDITMSG Gdiff]]
-
 -- :help for lua files in nvim config dir
 local cfgdir = vim.fn.stdpath('config')
 cmd("au BufEnter " .. cfgdir .. "/* setlocal keywordprg=:help")
