@@ -20,7 +20,7 @@ function thrash
 end
 
 # shorten pip install command
-abbr pipi python3 -m pip install
+abbr pip python3 -m pip
 
 # use the same alias for all git repos
 # before I used 'dot' as alias for my dotfiles repo but that's way to confusing

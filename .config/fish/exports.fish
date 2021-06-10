@@ -15,5 +15,3 @@ fish_add_path -a "$HOME/.local/bin"
 
 # fix the bug of Apple creating a non-exisiting LC
 set -xU LC_ALL "en_US.UTF-8"
-
-set -xU PYTHONPATH "/usr/local/lib/python3.9/site-packages:$PYTHONPATH"

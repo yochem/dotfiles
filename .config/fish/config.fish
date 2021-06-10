@@ -31,3 +31,9 @@ if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
         tmux attach-session -t general || tmux new-session -s general
     end
 end
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
+
