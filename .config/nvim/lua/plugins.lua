@@ -16,15 +16,13 @@ require('packer').startup(function(use)
     -- filetypes
     use 'yochem/prolog.vim'
     use 'blankname/vim-fish'
-    use 'vim-python/python-syntax'
-    use 'Vimjas/vim-python-pep8-indent'
+    use {'vim-python/python-syntax', ft = {'python'}}
+    use {'Vimjas/vim-python-pep8-indent', ft = {'python'}}
+    use {'chrisbra/csv.vim', ft = {'csv'}}
 end)
 
-local function line_info()
-    return string.format('%d:%d', vim.fn.line('.'), vim.fn.col('.'))
-end
-
 require('hlslens').setup({calm_down = true})
+
 require('hardline').setup({
     theme = 'one',
     sections = {
@@ -50,6 +48,11 @@ require('hardline').setup({
             class = 'high',
             item = require('hardline.parts.filetype').get_item,
             hide = 80
-        }, {class = 'mode', item = line_info}
+        }, {
+            class = 'mode',
+            item = function()
+                return string.format('%d:%d', vim.fn.line('.'), vim.fn.col('.'))
+            end
+        }
     }
 })

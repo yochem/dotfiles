@@ -38,5 +38,5 @@ cmd("au BufWritePost " .. cfgdir .. "/lua/plugins.lua PackerCompile")
 cmd [[au ColorScheme onedark call onedark#set_highlight("Normal",{"bg":{"gui":"#1c1c1c","cterm":"235","cterm16": "0"}})]]
 
 if (vim.env.TMUX ~= nil) then
-    cmd [[autocmd VimEnter * call system("tmux rename-window '" . expand("%:t") . "'")]]
+    os.execute("tmux rename-window '" .. vim.fn.expand('%:t') .. "'")
 end
