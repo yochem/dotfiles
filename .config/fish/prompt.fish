@@ -48,7 +48,12 @@ function fish_prompt
     end
 
     set_color blue
-    printf (pwd | sed "s|$HOME|~|i")
+    set full (pwd | sed "s|$HOME|~|i")
+    if [ (string length $full) -gt 36 ]
+        echo -n (prompt_pwd)
+    else
+        printf $full
+    end
     set_color normal
 
     printf (prompt_git)
