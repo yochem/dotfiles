@@ -21,10 +21,6 @@ map('n', 'n', 'nzz')
 map('n', 'W',
     [[m`:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>``]])
 
--- use arows to quickly scroll
-map('n', '<UP>', '<C-u>')
-map('n', '<DOWN>', '<C-d>')
-
 -- go through visual lines with j and k but don't mess with 10k etc.
 -- source: http://stackoverflow.com/a/21000307/2580955
 if vim.api.nvim_win_get_option(0, 'wrap') == true then
@@ -67,7 +63,7 @@ map('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], {expr = true})
 map('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], {expr = true})
 
 -- Use tab to go to next buffer
-map('n', '<Tab>', '<Cmd>bn<CR>')
+-- map('n', '<Tab>', '<Cmd>bn<CR>')
 
 -- Easier use of the system clipboard
 map('n', '<leader>y', '"+y')

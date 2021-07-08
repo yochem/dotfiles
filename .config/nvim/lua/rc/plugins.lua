@@ -6,12 +6,16 @@ require('packer').startup(function(use)
     use 'editorconfig/editorconfig-vim'
     use 'tpope/vim-fugitive'
     use 'b3nj5m1n/kommentary'
+    use 'junegunn/fzf.vim'
     use 'ojroques/nvim-hardline'
+    use 'kevinhwang91/nvim-hlslens'
     use {'FooSoft/vim-argwrap', cmd = 'ArgWrap'}
     use 'wellle/targets.vim'
+
+    -- LSP
     use 'neovim/nvim-lspconfig'
     use 'nvim-lua/completion-nvim'
-    use 'kevinhwang91/nvim-hlslens'
+    use 'seblj/nvim-echo-diagnostics'
 
     -- filetypes
     use 'yochem/prolog.vim'
@@ -20,6 +24,10 @@ require('packer').startup(function(use)
     use {'Vimjas/vim-python-pep8-indent', ft = {'python'}}
     use {'chrisbra/csv.vim', ft = {'csv'}}
 end)
+
+require('kommentary.config').configure_language("lua", {
+    prefer_single_line_comments = true,
+})
 
 require('hlslens').setup({calm_down = true})
 

@@ -1,5 +1,5 @@
 " run the python file
-nnoremap <buffer> <leader>r :!python3 %:p<CR>
+nnoremap <buffer> <space>r :!python3 %:p<CR>
 
 " format it right using gq
 set formatprg=python-format

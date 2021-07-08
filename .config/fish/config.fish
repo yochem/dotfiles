@@ -32,7 +32,9 @@ if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
     end
 end
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" hook $argv | source
-# <<< conda initialize <<<
+
+set -Ux PYENV_ROOT $XDG_DATA_HOME/pyenv
+set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
+
+status is-login; and pyenv init --path | source
+status is-login; and pyenv init -path | source

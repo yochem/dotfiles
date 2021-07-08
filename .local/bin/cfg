@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+depth=4
+
 if [ -n "$1" ]; then
-    num="$(fd -d 3 --type f "$1" "$HOME/.config/" | wc -l)"
-    [ "$num" -eq 1 ] && nvim "$(fd -d 3 --type f "$1" "$HOME/.config/")" && exit
+    num="$(fd -d "$depth" --type f "$1" "$HOME/.config/" | wc -l)"
+    [ "$num" -eq 1 ] && nvim "$(fd -d "$depth" --type f "$1" "$HOME/.config/")" && exit
 fi
 
-res="$(fd -d 3 --type f "$1" "$HOME/.config/" | fzf --height '40%' --layout reverse)"
+res="$(fd -d "$depth" --type f "$1" "$HOME/.config/" | fzf --height '40%' --layout reverse)"
 [ -n "$res" ] && nvim "$res"

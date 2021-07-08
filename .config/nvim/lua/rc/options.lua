@@ -2,12 +2,10 @@ local opt = vim.opt
 
 opt.termguicolors = true
 opt.hidden = true
-opt.wildignore:append({
-    '*.swp', '*.bak', '*.pyc', '*.out', ' *.aux', '*.bbl', '*.blg'
-})
+opt.wildignore = {'*.swp', '*.bak', '*.pyc', '*.out', '*.aux', '*.bbl', '*.blg'}
 opt.autowrite = true
 opt.shellcmdflag = '-lc'
-opt.completeopt = {'menuone', 'noinsert'}
+opt.completeopt = {'menuone', 'noinsert', 'noselect'}
 opt.formatoptions = {}
 opt.exrc = true
 opt.secure = true
@@ -20,7 +18,7 @@ opt.undodir = vim.fn.stdpath('cache') .. '/undo'
 opt.mouse = 'a'
 
 -- respond quicker
-opt.timeoutlen = 250
+opt.timeoutlen = 500
 opt.updatetime = 100
 
 -- visible settings
@@ -58,11 +56,16 @@ opt.shiftround = true
 opt.signcolumn = 'number'
 opt.fillchars = {eob = ' '}
 
+-- FZF
+opt.runtimepath:append('/usr/local/opt/fzf')
+
+
 -- global variables
 vim.g.mapleader = ','
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.python_highlight_all = 1
+
 
 -- speed improvement
 if vim.fn.has('mac') == 1 then

@@ -2,7 +2,7 @@ local lsp = require('lspconfig')
 
 -- default configuration
 lsp.util.default_config = vim.tbl_extend("force", lsp.util.default_config, {
-    on_attach = function(client) require'completion'.on_attach() end
+    on_attach = require'completion'.on_attach
 })
 
 lsp.pyls.setup {
@@ -13,9 +13,9 @@ lsp.pyls.setup {
                 pycodestyle = {enabled = false},
                 pydocstyle = {enabled = false},
                 pyflakes = {enabled = false},
-                pylint = {enabled = true},
+                pylint = {enabled = false},
                 yapf = {enabled = false},
-                pyls_mypy = {enabled = true, live_mode = false}
+                pyls_mypy = {enabled = false, live_mode = false}
             }
         }
     }
@@ -53,17 +53,17 @@ lsp.erlangls.setup {}
 lsp.jsonls.setup {}
 lsp.texlab.setup {
     settings = {
-        build = {args = {"-pvc", "-view=pdf", "%f"}, isContinuous = true}
+        build = {args = {"-pvc", "-view=pdf", "%f"}, isContinuous = true},
     }
 }
 lsp.tsserver.setup {}
 
 -- use popups instead of virtual text on the same line
-vim.cmd [[autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        underline = false,
+        underline = true,
         virtual_text = false,
         signs = true,
-        update_in_insert = false
+        update_in_insert = false,
+        severity_sort = true
     })
