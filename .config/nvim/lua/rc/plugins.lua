@@ -26,7 +26,7 @@ require('packer').startup(function(use)
 end)
 
 require('kommentary.config').configure_language("lua", {
-    prefer_single_line_comments = true,
+    prefer_single_line_comments = true
 })
 
 require('hlslens').setup({calm_down = true})

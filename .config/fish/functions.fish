@@ -52,6 +52,7 @@ function router
 end
 
 function fish_title
+    [ -z $TMUX ] && return
     if [ fish != $_ ]
         tmux rename-window "$_"
     else

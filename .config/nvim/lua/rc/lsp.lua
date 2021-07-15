@@ -53,10 +53,10 @@ lsp.erlangls.setup {}
 lsp.jsonls.setup {}
 lsp.texlab.setup {
     settings = {
-        build = {args = {"-pvc", "-view=pdf", "%f"}, isContinuous = true},
+        build = {args = {"-pvc", "-view=pdf", "%f"}, isContinuous = true}
     }
 }
-lsp.tsserver.setup {}
+
 
 -- use popups instead of virtual text on the same line
 vim.lsp.handlers["textDocument/publishDiagnostics"] =

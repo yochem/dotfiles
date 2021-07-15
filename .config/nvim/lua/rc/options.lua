@@ -59,13 +59,11 @@ opt.fillchars = {eob = ' '}
 -- FZF
 opt.runtimepath:append('/usr/local/opt/fzf')
 
-
 -- global variables
 vim.g.mapleader = ','
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.python_highlight_all = 1
-
 
 -- speed improvement
 if vim.fn.has('mac') == 1 then

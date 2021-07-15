@@ -2,6 +2,8 @@
   Zen:
     softWrap: true
     typewriter: true
+  "arduino-toolbelt":
+    devicePort: "/dev/tty.Bluetooth-Incoming-Port"
   "atom-beautify":
     arduino: {}
     bash: {}
@@ -144,7 +146,7 @@
   "markdown-preview-plus":
     mathConfig:
       enableLatexRenderingByDefault: true
-    useGitHubStyle: true
+    style: "github"
   minimap:
     disablePythonDocLinks: true
   "native-ui":
