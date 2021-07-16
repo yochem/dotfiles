@@ -5,7 +5,7 @@ lsp.util.default_config = vim.tbl_extend("force", lsp.util.default_config, {
     on_attach = require'completion'.on_attach
 })
 
-lsp.pyls.setup {
+lsp.pylsp.setup {
     settings = {
         pyls = {
             plugins = {
