@@ -5,19 +5,13 @@ opt.hidden = true
 opt.wildignore = {'*.swp', '*.bak', '*.pyc', '*.out', '*.aux', '*.bbl', '*.blg'}
 opt.autowrite = true
 opt.shellcmdflag = '-lc'
-opt.completeopt = {'menuone', 'noinsert', 'noselect'}
+opt.completeopt = {'menuone', 'noinsert'}
 opt.formatoptions = {}
 opt.exrc = true
 opt.secure = true
-
--- undo in cache dir, not data
+opt.fileformat = 'unix'
 opt.undofile = true
-opt.undodir = vim.fn.stdpath('cache') .. '/undo'
-
--- sometimes scrolling is nice
 opt.mouse = 'a'
-
--- respond quicker
 opt.timeoutlen = 500
 opt.updatetime = 100
 
@@ -51,6 +45,8 @@ opt.softtabstop = 4
 opt.expandtab = true
 opt.shiftwidth = 4
 opt.shiftround = true
+opt.smartindent = true
+
 
 -- show the LSP warningsigns in the number column
 opt.signcolumn = 'number'

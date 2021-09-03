@@ -75,6 +75,10 @@ map('v', '<leader>Y', '"+y$')
 map('n', '<leader>p', '"+p')
 map('n', '<leader>P', '"+P')
 
+-- populate jumplist with relative jumps
+map('n', 'k', "(v:count > 5 ? \"m'\" . v:count : '') . 'k'", {expr = true})
+map('n', 'j', "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", {expr = true})
+
 -- gx does not work on macOS, temporary fix from vim #4738
 map('n', 'gx',
     ":call netrw#BrowseX(expand((exists('g:netrw_gx')? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>")
