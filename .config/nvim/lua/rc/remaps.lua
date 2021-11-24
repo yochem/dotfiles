@@ -55,6 +55,10 @@ map('n', '<leader>r', '<Cmd>lua vim.lsp.buf.references()<CR>')
 map('n', '<leader>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>')
 map('n', '<leader>F', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
 
+map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<CR>')
+map('n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<CR>')
+map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<CR>')
+
 -- format whole file and keep cursor at same position
 map('n', '<leader>f', "magggqG'a")
 

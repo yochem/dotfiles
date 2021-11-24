@@ -18,11 +18,17 @@ require('packer').startup(function(use)
     use 'kevinhwang91/nvim-hlslens'
     use {'FooSoft/vim-argwrap', cmd = 'ArgWrap'}
     use 'wellle/targets.vim'
+    use 'lukas-reineke/indent-blankline.nvim'
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {{'nvim-lua/plenary.nvim'}}
+    }
 
     -- LSP
     use 'neovim/nvim-lspconfig'
-    use 'nvim-lua/completion-nvim'
+    use 'ms-jpq/coq_nvim'
     use 'seblj/nvim-echo-diagnostics'
+    use {'nvim-treesitter/nvim-treesitter', {cmd = 'TSUpdate'}}
 
     -- filetypes
     use 'yochem/prolog.vim'
@@ -34,6 +40,10 @@ end)
 
 require('kommentary.config').configure_language("lua", {
     prefer_single_line_comments = true
+})
+
+require('indent_blankline').setup({
+    filetype_exclude = {'help', 'man'}
 })
 
 require('hlslens').setup({calm_down = true})

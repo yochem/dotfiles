@@ -13,7 +13,6 @@ set -g fish_color_redirection magenta
 set -g fish_color_autosuggestion 6f7683
 
 set files \
-    "$HOME/.config/fish/z.fish" \
     "$HOME/.config/fish/xdg.fish" \
     "$HOME/.config/fish/prompt.fish" \
     "$HOME/.config/fish/exports.fish" \
@@ -32,9 +31,9 @@ if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
     end
 end
 
-
-set -Ux PYENV_ROOT $XDG_DATA_HOME/pyenv
 set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
 set -U fish_user_paths $fish_user_paths $GOPATH/bin
 
-status is-login; and pyenv init - | source
+status is-interactive; and pyenv init --path | source
+status is-interactive; and pyenv init - | source
+status is-interactive; and pyenv virtualenv-init - | source

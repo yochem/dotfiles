@@ -1,8 +1,10 @@
+vim.cmd[[let g:coq_settings = { 'auto_start': 'shut-up', 'display.icons.mode': 'none' }]]
 local lsp = require('lspconfig')
+local coq = require('coq')
 
 -- default configuration
 lsp.util.default_config = vim.tbl_extend("force", lsp.util.default_config, {
-    on_attach = require'completion'.on_attach
+    capabilities = coq.lsp_ensure_capabilities()
 })
 
 lsp.pylsp.setup {
@@ -40,6 +42,8 @@ lsp.sumneko_lua.setup {
     }
 }
 
+lsp.arduino_language_server.setup {}
+
 lsp.gopls.setup {
     cmd = {"gopls", "serve"},
     settings = {gopls = {analyses = {unusedparams = true}, staticcheck = true}},
@@ -50,6 +54,12 @@ lsp.bashls.setup {filetypes = {'sh'}}
 lsp.clangd.setup {cmd = {'/usr/local/Cellar/llvm/11.1.0/bin/clangd'}}
 lsp.cssls.setup {root_dir = lsp.util.root_pattern("index.html")}
 lsp.erlangls.setup {}
+lsp.eslint.setup {}
+
+lsp.html.setup {
+  capabilities = capabilities,
+}
+
 lsp.jsonls.setup {}
 lsp.texlab.setup {
     settings = {

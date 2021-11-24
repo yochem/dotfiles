@@ -40,17 +40,33 @@
                         ]
                     },
                     {
-                        "description": "Eject to Lock Screen",
+                        "description": "Screenshot with F5 and F6",
                         "manipulators": [
                             {
                                 "from": {
-                                    "consumer_key_code": "eject"
+                                    "key_code": "f5"
                                 },
                                 "to": [
                                     {
-                                        "key_code": "q",
+                                        "key_code": "4",
                                         "modifiers": [
-                                            "left_control",
+                                            "left_shift",
+                                            "left_command",
+                                            "left_control"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "f6"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "5",
+                                        "modifiers": [
+                                            "left_shift",
                                             "left_command"
                                         ]
                                     }
@@ -487,6 +503,16 @@
                             "key_code": "caps_lock"
                         }
                     ]
+                },
+                {
+                    "from": {
+                        "consumer_key_code": "eject"
+                    },
+                    "to": [
+                        {
+                            "consumer_key_code": "al_terminal_lock_or_screensaver"
+                        }
+                    ]
                 }
             ],
             "virtual_hid_keyboard": {
@@ -497,3 +523,4 @@
         }
     ]
 }
+
