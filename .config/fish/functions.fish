@@ -69,3 +69,9 @@ end
 function airpods
     blueutil --connect e4-76-84-50-e8-07
 end
+
+function startpyenv
+    status is-login; and pyenv init --path | source
+    status is-login; and pyenv init - | source
+    status is-login; and pyenv virtualenv-init - | source
+end

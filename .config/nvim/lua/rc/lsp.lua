@@ -1,11 +1,4 @@
-vim.cmd[[let g:coq_settings = { 'auto_start': 'shut-up', 'display.icons.mode': 'none' }]]
 local lsp = require('lspconfig')
-local coq = require('coq')
-
--- default configuration
-lsp.util.default_config = vim.tbl_extend("force", lsp.util.default_config, {
-    capabilities = coq.lsp_ensure_capabilities()
-})
 
 lsp.pylsp.setup {
     settings = {
@@ -55,10 +48,7 @@ lsp.clangd.setup {cmd = {'/usr/local/Cellar/llvm/11.1.0/bin/clangd'}}
 lsp.cssls.setup {root_dir = lsp.util.root_pattern("index.html")}
 lsp.erlangls.setup {}
 lsp.eslint.setup {}
-
-lsp.html.setup {
-  capabilities = capabilities,
-}
+lsp.html.setup {}
 
 lsp.jsonls.setup {}
 lsp.texlab.setup {
@@ -77,3 +67,15 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
         update_in_insert = false,
         severity_sort = true
     })
+    --
+-- default configuration
+lsp.util.default_config = vim.tbl_extend("force", lsp.util.default_config, {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+})
+
+vim.cmd[[
+sign define LspDiagnosticsSignError text=● texthl=LspDiagnosticsSignError linehl= numhl=
+sign define LspDiagnosticsSignWarning text=● texthl=LspDiagnosticsSignWarning linehl= numhl=
+sign define LspDiagnosticsSignInformation text=● texthl=LspDiagnosticsSignInformation linehl= numhl=
+sign define LspDiagnosticsSignHint text=● texthl=LspDiagnosticsSignHint linehl= numhl=
+]]

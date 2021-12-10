@@ -32,6 +32,7 @@ opt.gdefault = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.wrapscan = true
+opt.inccommand = 'split'
 
 -- scroll behaviour
 opt.foldenable = false
@@ -57,7 +58,7 @@ opt.fillchars = {eob = ' '}
 opt.runtimepath:append('/usr/local/opt/fzf')
 
 -- global variables
-vim.g.mapleader = ','
+vim.g.mapleader = ' '
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.python_highlight_all = 1

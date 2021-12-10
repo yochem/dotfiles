@@ -53,14 +53,18 @@ map('n', '<leader>D', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
 map('n', '<leader>d', '<Cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', '<leader>r', '<Cmd>lua vim.lsp.buf.references()<CR>')
 map('n', '<leader>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>')
-map('n', '<leader>F', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
+map('n', '<leader>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
+map('n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
+map('n', '<leader>h', '<cmd>lua vim.lsp.buf.hover()<CR>')
+map('n', '<leader>[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
+map('n', '<leader>]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
 
 map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<CR>')
 map('n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<CR>')
 map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<CR>')
 
 -- format whole file and keep cursor at same position
-map('n', '<leader>f', "magggqG'a")
+map('n', '<leader>F', "magggqG'a")
 
 -- use tab to cycle through lsp completions
 map('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], {expr = true})
@@ -86,3 +90,23 @@ map('n', 'j', "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", {expr = true})
 -- gx does not work on macOS, temporary fix from vim #4738
 map('n', 'gx',
     ":call netrw#BrowseX(expand((exists('g:netrw_gx')? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>")
+
+function _G.negateBoolUnderCursor()
+    local word = vim.fn.expand('<cword>')
+    if word == 'true' then
+        vim.cmd[[exe "norm! ciw" . 'false']]
+        return 'false'
+    elseif word == 'false' then
+        vim.cmd[[exe "norm! ciw" . 'true']]
+    elseif word == 'True' then
+        vim.cmd[[exe "norm! ciw" . 'False']]
+    elseif word == 'False' then
+        vim.cmd[[exe "norm! ciw" . 'True']]
+    end
+end
+
+map('n', '!', ':lua negateBoolUnderCursor()<CR>')
+
+if vim.fn.expand('%:t') == 'plugins.lua' then
+    map('n', 'gh', [[:silent exe "!open https://github.com/" . substitute(expand("<cWORD>"), "'", "", 'g')<CR>]])
+end

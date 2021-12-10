@@ -22,7 +22,7 @@ for file in $files
     [ -f "$file" ] && source $file
 end
 
-[ -e /home/linuxbrew/ ] && eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+# [ -e /home/linuxbrew/ ] && eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
     tmux ls 2>/dev/null | grep attached >/dev/null
@@ -30,10 +30,3 @@ if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
         tmux attach-session -t general || tmux new-session -s general
     end
 end
-
-set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
-set -U fish_user_paths $fish_user_paths $GOPATH/bin
-
-status is-interactive; and pyenv init --path | source
-status is-interactive; and pyenv init - | source
-status is-interactive; and pyenv virtualenv-init - | source

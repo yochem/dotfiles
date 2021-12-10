@@ -19,7 +19,7 @@ cmd [[highlight nonascii guibg=Blue ctermbg=9]]
 cmd [[au BufEnter,InsertLeave match nonascii "[^\x00-\x7F]"]]
 
 -- highlight trailing whitespace intrusive red
-cmd [[au ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red]]
+cmd [[au BufReadPost * highlight ExtraWhitespace ctermbg=red guibg=red]]
 cmd [[au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/]]
 cmd [[au InsertLeave * match ExtraWhitespace /\s\+$/]]
 
@@ -34,14 +34,8 @@ cmd("au BufEnter " .. cfgdir .. "/* setlocal path+=" .. cfgdir .. "/lua/")
 -- compile packer after changing file
 cmd("au BufWritePost " .. cfgdir .. "/lua/plugins.lua PackerCompile")
 
--- bg same as terminal
-cmd [[au ColorScheme onedark call onedark#set_highlight("Normal",{"bg":{"gui":"#1c1c1c","cterm":"235","cterm16": "0"}})]]
-
 if (vim.env.TMUX ~= nil) then
     local fn = vim.fn.expand('%:t')
     fn = fn ~= '' and fn or 'nvim'
     os.execute("tmux rename-window '" .. fn .. "'")
 end
-
--- Show diagnostics in echo line
-vim.cmd [[autocmd CursorHold * lua require('echo-diagnostics').echo_line_diagnostic()]]
