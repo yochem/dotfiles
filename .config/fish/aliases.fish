@@ -13,15 +13,12 @@ alias less "less -R"
 alias swipl "swipl -q"
 
 # reload bash profile and stuff
-alias reload "source \$HOME/.config/fish/config.fish"
+abbr reload "source \$HOME/.config/fish/config.fish"
 
 alias vi \$VISUAL
 
 # easier way to cd back one level
-alias .. "cd .."
-
-# start writing a mail in /tmp
-alias newmail '$VISUAL /tmp/vim-mail-(date +%s).mail'
+abbr .. "cd .."
 
 # use aliases when sudoing
 alias sudo "sudo "
@@ -32,7 +29,7 @@ alias sudo "sudo "
 command -v fdfind >/dev/null && alias fd fdfind
 
 # get quick octal permissions of a file
-alias perms "stat -f '%A'"
+abbr perms "stat -f '%A'"
 
 # typo prevention
-alias gs "g s"
+abbr gs "g s"

@@ -22,7 +22,9 @@ for file in $files
     [ -f "$file" ] && source $file
 end
 
-# [ -e /home/linuxbrew/ ] && eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+if type -q brew
+    eval (brew shellenv)
+end
 
 if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
     tmux ls 2>/dev/null | grep attached >/dev/null
