@@ -1,7 +1,7 @@
 local function map(mode, lhs, rhs, opts)
     local options = {noremap = true, silent = true}
     if opts then options = vim.tbl_extend('force', options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    vim.keymap.set(mode, lhs, rhs, options)
 end
 
 -- add empty line below or above in normal mode
@@ -9,13 +9,23 @@ map('n', 'oo', 'm`o<Esc>``')
 map('n', 'OO', 'm`O<Esc>``')
 
 -- toggle list wrapping
-map('n', '<leader>a', ':ArgWrap<CR>')
+map('n', '<leader>a', '<cmd>ArgWrap<CR>')
 
 -- when text is visual selected, replace it with system clipboard
-map('v', 'r', '"_dP')
+map('v', 'p', '"_dP')
 
 -- when jumping through search always center
 map('n', 'n', 'nzz')
+
+-- stay in visual selection when indenting
+map('v', '<', '<gv')
+map('v', '>', '>gv')
+
+-- resize windows
+map('n', '<S-Up>', '<cmd>resize +2<CR>')
+map('n', '<S-Down>', '<cmd>resize -2<CR>')
+map('n', '<S-Left>', '<cmd>vertical resize +2<CR>')
+map('n', '<S-Right>', '<cmd>vertical resize -2<CR>')
 
 -- delete trailing whitespace
 map('n', 'W',
@@ -29,10 +39,10 @@ if vim.api.nvim_win_get_option(0, 'wrap') == true then
 end
 
 -- I should use space for something better now I use tmux
-map('n', '<space>', '<C-w>')
+map('n', '<space>', '<c-w>')
 
 -- Open new file in split
-map('n', '<leader>t', ':Vexplore<CR>')
+map('n', '<leader>e', ':25Lexplore<CR>')
 
 -- don't care, just quit
 map('n', 'ZZ', ':qall<CR>')
@@ -42,33 +52,36 @@ map('n', '<leader>c', '<Plug>kommentary_line_default', {noremap = false})
 
 -- often pressed accidently, cc works fine too
 map('n', 'S', '<nop>')
-map('n', 'Y', 'y$')
 
 -- don't accidently create macros when trying to quit
 map('n', 'Q', 'q')
 map('n', 'q', '<nop>')
 
 -- some lsp remaps
-map('n', '<leader>D', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
-map('n', '<leader>d', '<Cmd>lua vim.lsp.buf.definition()<CR>')
-map('n', '<leader>r', '<Cmd>lua vim.lsp.buf.references()<CR>')
-map('n', '<leader>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>')
-map('n', '<leader>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
-map('n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
-map('n', '<leader>h', '<cmd>lua vim.lsp.buf.hover()<CR>')
-map('n', '<leader>[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
-map('n', '<leader>]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+map('n', '<leader>D', vim.lsp.buf.declaration)
+map('n', '<leader>gd', vim.lsp.buf.definition)
+map('n', '<leader>r', vim.lsp.buf.references)
+map('n', '<leader>rn', vim.lsp.buf.rename)
+map('n', '<leader>f', vim.lsp.buf.formatting)
+map('n', '<leader>d', vim.diagnostic.open_float)
+map('n', '<leader>h', vim.lsp.buf.hover)
+map('n', '<leader>[', vim.lsp.diagnostic.goto_prev)
+map('n', '<leader>]', vim.lsp.diagnostic.goto_next)
 
-map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<CR>')
-map('n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<CR>')
-map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<CR>')
+map('n', '<leader>ff', require("telescope.builtin").find_files)
+map('n', '<leader>fg', require("telescope.builtin").live_grep)
+map('n', '<leader>fb', require("telescope.builtin").buffers)
 
 -- format whole file and keep cursor at same position
 map('n', '<leader>F', "magggqG'a")
 
 -- use tab to cycle through lsp completions
-map('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], {expr = true})
-map('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], {expr = true})
+map('i', '<Tab>', function()
+    return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
+end, {expr = true})
+map('i', '<S-Tab>', function()
+    return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
+end, {expr = true})
 
 -- Use tab to go to next buffer
 -- map('n', '<Tab>', '<Cmd>bn<CR>')
@@ -91,22 +104,26 @@ map('n', 'j', "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", {expr = true})
 map('n', 'gx',
     ":call netrw#BrowseX(expand((exists('g:netrw_gx')? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>")
 
-function _G.negateBoolUnderCursor()
+-- use ! to negate a boolean under cursor
+map('n', '!', function()
+    local negates = {
+        ['true'] = 'false',
+        ['false'] = 'true',
+        ['True'] = 'False',
+        ['False'] = 'True',
+    }
     local word = vim.fn.expand('<cword>')
-    if word == 'true' then
-        vim.cmd[[exe "norm! ciw" . 'false']]
-        return 'false'
-    elseif word == 'false' then
-        vim.cmd[[exe "norm! ciw" . 'true']]
-    elseif word == 'True' then
-        vim.cmd[[exe "norm! ciw" . 'False']]
-    elseif word == 'False' then
-        vim.cmd[[exe "norm! ciw" . 'True']]
+    if negates[word] ~= nil then
+        -- results in: exe "norm! ciwFalse"
+        vim.cmd('exe "norm! ciw' .. negates[word] .. '"')
     end
-end
+end)
 
-map('n', '!', ':lua negateBoolUnderCursor()<CR>')
-
+-- go to the github repo of plugins
 if vim.fn.expand('%:t') == 'plugins.lua' then
-    map('n', 'gh', [[:silent exe "!open https://github.com/" . substitute(expand("<cWORD>"), "'", "", 'g')<CR>]])
+    map('n', 'gh', function()
+        -- strip ' and , from WORD under cursor
+        local repo = vim.fn.substitute(vim.fn.expand('<cWORD>'), "[',]", '', 'g')
+        os.execute('open https://github.com/' .. repo)
+    end)
 end

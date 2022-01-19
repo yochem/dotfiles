@@ -6,14 +6,14 @@ opt.wildignore = {'*.swp', '*.bak', '*.pyc', '*.out', '*.aux', '*.bbl', '*.blg'}
 opt.autowrite = true
 opt.shellcmdflag = '-lc'
 opt.completeopt = {'menu', 'menuone'}
-opt.textwidth=79
+opt.textwidth = 79
 opt.formatoptions = {'tcfqnj'}
 opt.exrc = true
 opt.secure = true
 opt.fileformat = 'unix'
 opt.undofile = true
 opt.mouse = 'a'
-opt.timeoutlen = 500
+opt.timeoutlen = 600
 opt.updatetime = 100
 
 -- visible settings

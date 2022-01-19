@@ -74,8 +74,8 @@ lsp.util.default_config = vim.tbl_extend("force", lsp.util.default_config, {
 })
 
 vim.cmd[[
-sign define LspDiagnosticsSignError text=● texthl=LspDiagnosticsSignError linehl= numhl=
-sign define LspDiagnosticsSignWarning text=● texthl=LspDiagnosticsSignWarning linehl= numhl=
-sign define LspDiagnosticsSignInformation text=● texthl=LspDiagnosticsSignInformation linehl= numhl=
-sign define LspDiagnosticsSignHint text=● texthl=LspDiagnosticsSignHint linehl= numhl=
+sign define DiagnosticSignError text=● texthl=DiagnosticSignError linehl= numhl=
+sign define DiagnosticSignWarn text=● texthl=DiagnosticSignWarn linehl= numhl=
+sign define DiagnosticSignInfo text=● texthl=DiagnosticSignInfo linehl= numhl=
+sign define DiagnosticSignHint text=● texthl=DiagnosticSignHint linehl= numhl=
 ]]

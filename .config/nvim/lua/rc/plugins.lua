@@ -17,8 +17,9 @@ require('packer').startup(function(use)
     use {
         'b3nj5m1n/kommentary',
         config = function()
-            require('kommentary.config').configure_language("lua", {
-                prefer_single_line_comments = true
+            require('kommentary.config').configure_language('default', {
+                prefer_single_line_comments = true,
+                use_consistent_indentation = true,
             })
         end
     }
@@ -26,72 +27,35 @@ require('packer').startup(function(use)
     use 'junegunn/fzf.vim'
 
     use {
-        'ojroques/nvim-hardline',
+        'nvim-lualine/lualine.nvim',
         config = function()
-            require('hardline').setup({
-                theme = 'one',
+            local function lsp()
+                return vim.lsp.buf_get_clients()[1].name
+            end
+            require('lualine').setup({
+                options = {
+                    icons_enabled = false,
+                    component_separators = { left = '|', right = '|'},
+                    section_separators = { left = '', right = ''},
+                },
                 sections = {
-                    {
-                        class = 'mode',
-                        item = require('hardline.parts.mode').get_item
-                    },
-                    {
-                        class = 'high',
-                        item = require('hardline.parts.git').get_item,
-                        hide = 80
-                    }, '%<',
-                    {
-                        class = 'low',
-                        item = require('hardline.parts.filename').get_item
-                    },
-                    {
-                        class = 'med',
-                        item = '%='
-                    },
-                    {
-                        class = 'low',
-                        item = require('hardline.parts.wordcount').get_item,
-                        hide = 80
-                    },
-                    {
-                        class = 'error',
-                        item = require('hardline.parts.lsp').get_error
-                    },
-                    {
-                        class = 'warning',
-                        item = require('hardline.parts.lsp').get_warning
-                    },
-                    {
-                        class = 'warning',
-                        item = require('hardline.parts.whitespace').get_item
-                    },
-                    {
-                        class = 'high',
-                        item = require('hardline.parts.filetype').get_item,
-                        hide = 80
-                    },
-                    {
-                        class = 'mode',
-                        item = function()
-                            return string.format('%d:%d', vim.fn.line('.'), vim.fn.col('.'))
-                        end
-                    }
-                }
+                    lualine_a = {'mode'},
+                    lualine_b = {'branch', 'diff'},
+                    lualine_c = {{'filename', path = 1}},
+                    lualine_x = {'encoding', 'filetype'},
+                    lualine_y = {lsp, 'diagnostics'},
+                    lualine_z = {'location'}
+                },
             })
         end
     }
 
     use {
         'kevinhwang91/nvim-hlslens',
-        config = function()
-            require('hlslens').setup({calm_down = true})
-        end
+        config = function() require('hlslens').setup({calm_down = true}) end
     }
 
-    use {
-        'FooSoft/vim-argwrap',
-        cmd = 'ArgWrap'
-    }
+    use {'FooSoft/vim-argwrap', cmd = 'ArgWrap'}
 
     use 'wellle/targets.vim'
 
@@ -106,9 +70,8 @@ require('packer').startup(function(use)
                 function_style = "NONE",
                 variable_style = "NONE",
                 colors = {
-                    fg = '#ffffff',
+                    fg0 = '#ffffff',
                     fg_light = '#ffffff',
-                    fg_dark = '#ffffff'
                 }
             })
         end
@@ -123,6 +86,11 @@ require('packer').startup(function(use)
                 show_trailing_blankline_indent = false
             })
         end
+    }
+
+    use {
+        'lukas-reineke/virt-column.nvim',
+        config = function() require('virt-column').setup() end
     }
 
     use {
@@ -154,22 +122,22 @@ require('packer').startup(function(use)
                 select = true,
                 },
                 ['<Tab>'] = function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                else
-                    fallback()
-                end
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif luasnip.expand_or_jumpable() then
+                        luasnip.expand_or_jump()
+                    else
+                        fallback()
+                    end
                 end,
                 ['<S-Tab>'] = function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
-                else
-                    fallback()
-                end
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    elseif luasnip.jumpable(-1) then
+                        luasnip.jump(-1)
+                    else
+                        fallback()
+                    end
                 end,
             },
             sources = {{ name = 'nvim_lsp' }}
@@ -182,8 +150,8 @@ require('packer').startup(function(use)
         }
     }
 
-    -- use 'seblj/nvim-echo-diagnostics'
-    use {'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate'}
+
+    use 'nvim-treesitter/nvim-treesitter'
 
     -- filetypes
     use 'yochem/prolog.vim'
