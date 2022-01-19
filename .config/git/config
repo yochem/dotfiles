@@ -3,7 +3,6 @@
     email = yochem+git@icloud.com
 
 [init]
-    templatedir = ~/.config/git/hooks
     defaultBranch = main
 
 [core]
@@ -20,16 +19,11 @@
     s = status -s
 
     # show diff summary
-    ds = diff master --compact-summary
+    diffsum = diff master --compact-summary
 
     # commit all files that have been modified or removed, new files not
     # affected
     ca = commit -a
-
-    # shoroten commit
-    com = commit
-
-    co = checkout
 
     # View url to Github
     url = config --get remote.origin.url
