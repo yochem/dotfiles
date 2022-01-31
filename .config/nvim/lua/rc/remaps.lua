@@ -4,15 +4,21 @@ local function map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, options)
 end
 
+local function cmd(command)
+    return function ()
+        vim.cmd(command)
+    end
+end
+
 -- add empty line below or above in normal mode
 map('n', 'oo', 'm`o<Esc>``')
 map('n', 'OO', 'm`O<Esc>``')
 
 -- toggle list wrapping
-map('n', '<leader>a', '<cmd>ArgWrap<CR>')
+map('n', '<leader>a', cmd'ArgWrap')
 
--- when text is visual selected, replace it with system clipboard
-map('v', 'p', '"_dP')
+-- substitute word with content of default register
+map('n', 'gr', require('substitute').operator)
 
 -- when jumping through search always center
 map('n', 'n', 'nzz')
@@ -22,10 +28,10 @@ map('v', '<', '<gv')
 map('v', '>', '>gv')
 
 -- resize windows
-map('n', '<S-Up>', '<cmd>resize +2<CR>')
-map('n', '<S-Down>', '<cmd>resize -2<CR>')
-map('n', '<S-Left>', '<cmd>vertical resize +2<CR>')
-map('n', '<S-Right>', '<cmd>vertical resize -2<CR>')
+map('n', '<S-Up>', cmd'resize +2')
+map('n', '<S-Down>', cmd'resize -2')
+map('n', '<S-Left>', cmd'vertical resize +2')
+map('n', '<S-Right>', cmd'vertical resize -2')
 
 -- delete trailing whitespace
 map('n', 'W',
@@ -42,10 +48,10 @@ end
 map('n', '<space>', '<c-w>')
 
 -- Open new file in split
-map('n', '<leader>e', ':25Lexplore<CR>')
+map('n', '<leader>e', cmd'25Lexplore')
 
 -- don't care, just quit
-map('n', 'ZZ', ':qall<CR>')
+map('n', 'ZZ', cmd'qall')
 
 -- quickly comment line
 map('n', '<leader>c', '<Plug>kommentary_line_default', {noremap = false})
@@ -84,7 +90,7 @@ map('i', '<S-Tab>', function()
 end, {expr = true})
 
 -- Use tab to go to next buffer
--- map('n', '<Tab>', '<Cmd>bn<CR>')
+map('n', '<Tab>', cmd'bnext')
 
 -- Easier use of the system clipboard
 map('n', '<leader>y', '"+y')
@@ -102,7 +108,7 @@ map('n', 'j', "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", {expr = true})
 
 -- gx does not work on macOS, temporary fix from vim #4738
 map('n', 'gx',
-    ":call netrw#BrowseX(expand((exists('g:netrw_gx')? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>")
+    cmd"call netrw#BrowseX(expand((exists('g:netrw_gx')? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())")
 
 -- use ! to negate a boolean under cursor
 map('n', '!', function()

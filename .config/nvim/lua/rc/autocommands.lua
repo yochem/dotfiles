@@ -4,10 +4,7 @@ local cmd = vim.cmd
 cmd [[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]
 
 -- right filetypes
-cmd [[au BufRead,BufNewFile *.md setlocal filetype=markdown]]
-cmd [[au BufRead,BufNewFile *.tex setlocal filetype=tex]]
 cmd [[au BufRead,BufNewFile *.tmpl setlocal filetype=gohtmltmpl]]
-cmd [[au BufRead,BufNewFile *.plt setlocal filetype=prolog]]
 cmd [[au BufRead,BufNewFile *.{txt,md} setlocal textwidth=78]]
 
 -- highligt non-ascii blue
@@ -25,10 +22,22 @@ cmd("au BufEnter " .. cfgdir .. "/* setlocal keywordprg=:help")
 cmd("au BufEnter " .. cfgdir .. "/* setlocal path+=" .. cfgdir .. "/lua/")
 
 -- compile packer after changing file
-cmd("au BufWritePost " .. cfgdir .. "/lua/plugins.lua PackerCompile")
+cmd([[augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+augroup end]])
 
 if (vim.env.TMUX ~= nil) then
     local fn = vim.fn.expand('%:t')
     fn = fn ~= '' and fn or 'nvim'
     os.execute("tmux rename-window '" .. fn .. "'")
 end
+
+vim.api.nvim_add_user_command('Scratch', function()
+    vim.cmd('execute "new "')
+    vim.opt_local.buftype = 'nofile'
+    vim.opt_local.bufhidden = 'hide'
+    vim.opt_local.swapfile = false
+    vim.cmd('file scratch')
+    vim.cmd('startinsert')
+end, {})

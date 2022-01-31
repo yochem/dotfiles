@@ -29,8 +29,12 @@ require('packer').startup(function(use)
     use {
         'nvim-lualine/lualine.nvim',
         config = function()
+            local gps = require('nvim-gps')
             local function lsp()
-                return vim.lsp.buf_get_clients()[1].name
+                if #vim.lsp.buf_get_clients() > 0 then
+                    return 'LSP'
+                end
+                return ''
             end
             require('lualine').setup({
                 options = {
@@ -41,7 +45,10 @@ require('packer').startup(function(use)
                 sections = {
                     lualine_a = {'mode'},
                     lualine_b = {'branch', 'diff'},
-                    lualine_c = {{'filename', path = 1}},
+                    lualine_c = {
+                        {'filename', path = 1},
+                        {gps.get_location, cond = gps.is_available}
+                    },
                     lualine_x = {'encoding', 'filetype'},
                     lualine_y = {lsp, 'diagnostics'},
                     lualine_z = {'location'}
@@ -71,8 +78,13 @@ require('packer').startup(function(use)
                 variable_style = "NONE",
                 colors = {
                     fg0 = '#ffffff',
-                    fg_light = '#ffffff',
-                }
+                },
+                overrides = function(c)
+                    return {
+                        MsgArea = {fg = c.fg0},
+                        LineNr = {fg = c.fg_light},
+                    }
+                end
             })
         end
     }
@@ -163,4 +175,14 @@ require('packer').startup(function(use)
     use {'Vimjas/vim-python-pep8-indent', ft = {'python'}}
 
     use {'chrisbra/csv.vim', ft = {'csv'}}
+
+    use {'SmiteshP/nvim-gps', config = function()
+        require("nvim-gps").setup({disable_icons = true, separator = '.'})
+    end}
+
+    use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
+
+    use {'gbprod/substitute.nvim', config = function ()
+        require("substitute").setup()
+    end}
 end)

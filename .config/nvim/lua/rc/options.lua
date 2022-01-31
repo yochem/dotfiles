@@ -1,7 +1,6 @@
 local opt = vim.opt
 
 opt.termguicolors = true
-opt.hidden = true
 opt.wildignore = {'*.swp', '*.bak', '*.pyc', '*.out', '*.aux', '*.bbl', '*.blg'}
 opt.autowrite = true
 opt.shellcmdflag = '-lc'
@@ -26,6 +25,7 @@ opt.splitright = true
 opt.splitbelow = true
 opt.number = true
 opt.relativenumber = true
+opt.switchbuf = 'usetab,newtab'
 
 -- search settings
 opt.gdefault = true
@@ -53,6 +53,7 @@ opt.smartindent = true
 -- show the LSP warningsigns in the number column
 opt.signcolumn = 'number'
 opt.fillchars = {eob = ' '}
+
 
 -- FZF
 opt.runtimepath:append('/usr/local/opt/fzf')
