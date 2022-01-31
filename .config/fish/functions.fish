@@ -57,7 +57,11 @@ function fish_title
         tmux rename-window "$_"
     else
         set basename (basename (pwd) | sed 's/yochem/home/i')
-        tmux rename-window "$basename/"
+        if [ $basename = "/" ]
+            tmux rename-window "/"
+        else
+            tmux rename-window "$basename/"
+        end
     end
     # tmux set-option automatic-rename on
 end

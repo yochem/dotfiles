@@ -32,4 +32,4 @@ command -v fdfind >/dev/null && alias fd fdfind
 abbr perms "stat -f '%A'"
 
 # typo prevention
-abbr gs "g s"
+abbr gs "git status -s"
