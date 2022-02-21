@@ -10,7 +10,7 @@ vim.cmd('packadd packer.nvim')
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
-    use 'editorconfig/editorconfig-vim'
+    use 'gpanders/editorconfig.nvim'
 
     use 'tpope/vim-fugitive'
 
@@ -23,8 +23,6 @@ require('packer').startup(function(use)
             })
         end
     }
-
-    use 'junegunn/fzf.vim'
 
     use {
         'nvim-lualine/lualine.nvim',
@@ -83,6 +81,7 @@ require('packer').startup(function(use)
                     return {
                         MsgArea = {fg = c.fg0},
                         LineNr = {fg = c.fg_light},
+                        ColorColumn = {bg = c.none},
                     }
                 end
             })
@@ -159,16 +158,17 @@ require('packer').startup(function(use)
             'hrsh7th/nvim-cmp',
             'hrsh7th/cmp-nvim-lsp',
             'saadparwaiz1/cmp_luasnip'
-        }
+        },
+        event = 'VimEnter'
     }
 
 
     use 'nvim-treesitter/nvim-treesitter'
 
     -- filetypes
-    use 'yochem/prolog.vim'
+    use {'yochem/prolog.vim', ft = {'prolog'}}
 
-    use 'blankname/vim-fish'
+    use {'blankname/vim-fish', ft = {'fish'}}
 
     use {'vim-python/python-syntax', ft = {'python'}}
 
@@ -176,9 +176,14 @@ require('packer').startup(function(use)
 
     use {'chrisbra/csv.vim', ft = {'csv'}}
 
-    use {'SmiteshP/nvim-gps', config = function()
-        require("nvim-gps").setup({disable_icons = true, separator = '.'})
-    end}
+    use {
+        'SmiteshP/nvim-gps',
+        config = function()
+            require("nvim-gps").setup({disable_icons = true, separator = '.'})
+        end
+    }
+
+    use {'theprimeagen/jvim.nvim'}
 
     use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
 
