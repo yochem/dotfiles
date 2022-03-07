@@ -36,19 +36,18 @@ opt.inccommand = 'split'
 
 -- scroll behaviour
 opt.foldenable = false
-opt.colorcolumn = {83}
+-- opt.colorcolumn = {80}
 opt.scrolloff = 3
 opt.wrap = false
 opt.sidescrolloff = 3
 
 -- tabs / spaces settings
-opt.tabstop = 8
+opt.tabstop = 4
 opt.softtabstop = 4
 opt.expandtab = true
 opt.shiftwidth = 4
 opt.shiftround = true
 opt.smartindent = true
-
 
 -- show the LSP warningsigns in the number column
 opt.signcolumn = 'number'

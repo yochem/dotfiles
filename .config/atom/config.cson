@@ -113,6 +113,7 @@
         enabled: false
     python: "python3"
   kite:
+    installPausedNotifShown: true
     showWelcomeNotificationOnStartup: false
   latex:
     enableExtendedBuildMode: false

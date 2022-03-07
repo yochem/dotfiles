@@ -15,7 +15,7 @@ fi
 # BREW (CASK)
 if [[ $(command -v brew) ]]; then
     echo -e "${orangebold}Updating and upgrading Brew...${reset}"
-    brew upgrade
+    brew upgrade --quiet
     echo -e "${orangebold}Upgrading Casks...${reset}"
     defaults export com.apple.dock "/tmp/dockdefaults"
     for d in $(brew ls --cask -1); do brew upgrade --cask "$d"; done

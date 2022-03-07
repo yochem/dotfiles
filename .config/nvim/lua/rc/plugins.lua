@@ -34,6 +34,12 @@ require('packer').startup(function(use)
                 end
                 return ''
             end
+            local function wordcount()
+                if vim.bo.filetype == 'markdown' then
+                    return vim.fn.wordcount().words .. ' words'
+                end
+                return ''
+            end
             require('lualine').setup({
                 options = {
                     icons_enabled = false,
@@ -47,7 +53,7 @@ require('packer').startup(function(use)
                         {'filename', path = 1},
                         {gps.get_location, cond = gps.is_available}
                     },
-                    lualine_x = {'encoding', 'filetype'},
+                    lualine_x = {wordcount, 'encoding', 'filetype'},
                     lualine_y = {lsp, 'diagnostics'},
                     lualine_z = {'location'}
                 },
@@ -183,7 +189,17 @@ require('packer').startup(function(use)
         end
     }
 
-    use {'theprimeagen/jvim.nvim'}
+    use 'preservim/vim-markdown'
+
+    use {
+        'nmac427/guess-indent.nvim',
+        config = function()
+            require('guess-indent').setup({tabstop = 4})
+        end
+    }
+
+    -- use {'theprimeagen/jvim.nvim'}
+    use {'/Users/yochem/Documents/jvim.nvim'}
 
     use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
 

@@ -18,7 +18,11 @@ map('n', 'OO', 'm`O<Esc>``')
 map('n', '<leader>a', cmd'ArgWrap')
 
 -- substitute word with content of default register
-map('n', 'gr', require('substitute').operator)
+local substitute = require('substitute')
+map('n', '<leader>s', substitute.operator)
+map('n', '<leader>ss', substitute.line)
+map('n', '<leader>S', substitute.eol)
+map('x', '<leader>s', substitute.visual)
 
 -- when jumping through search always center
 map('n', 'n', 'nzz')
@@ -55,9 +59,6 @@ map('n', 'ZZ', cmd'qall')
 
 -- quickly comment line
 map('n', '<leader>c', '<Plug>kommentary_line_default', {noremap = false})
-
--- often pressed accidently, cc works fine too
-map('n', 'S', '<nop>')
 
 -- don't accidently create macros when trying to quit
 map('n', 'Q', 'q')
