@@ -1,5 +1,8 @@
 local autocmd = vim.api.nvim_create_autocmd
 
+local groupname = 'rc'
+vim.api.nvim_create_augroup(groupname, {})
+
 -- open file with cursor on last position
 autocmd('BufReadPost', {
     callback = function ()
@@ -7,42 +10,51 @@ autocmd('BufReadPost', {
         if 0 < mark and mark <= vim.fn.line("$") then
             vim.api.nvim_command([[normal! g'"]])
         end
-    end
+    end,
+    group = groupname
 })
 
--- right filetypes
-local function set_filetype(ext, ft)
-    autocmd({'BufRead', 'BufNewFile'}, {
-        pattern = '*.' .. ext,
-        command = 'setlocal filetype=' .. ft
-    })
-end
-set_filetype('tex', 'tex')
-set_filetype('tmpl', 'gohtmltmpl')
-
 -- highligt non-ascii blue
-vim.cmd [[highlight nonascii guibg=Blue ctermbg=9]]
-vim.cmd [[au BufEnter,InsertLeave match nonascii "[^\x00-\x7F]"]]
+autocmd({'BufEnter', 'InsertLeave'}, {
+    callback = function ()
+        vim.cmd([[highlight nonascii guibg=Blue ctermbg=9]])
+        vim.cmd([[syntax match nonascii "[^\x00-\x7F]"]])
+    end,
+    group = groupname
+})
 
 -- highlight trailing whitespace intrusive red
-autocmd('BufReadPost', {command = 'highlight ExtraWhitespace ctermbg=red guibg=red'})
-autocmd('InsertEnter', {command = [[match ExtraWhitespace /\s\+\%#\@<!$/]]})
-autocmd('InsertLeave', {command = [[match ExtraWhitespace /\s\+$/]]})
+autocmd('BufReadPost', {
+    command = 'highlight ExtraWhitespace ctermbg=red guibg=red',
+    group = groupname
+})
+
+autocmd('InsertEnter', {
+    command = [[match ExtraWhitespace /\s\+\%#\@<!$/]],
+    group = groupname
+})
+
+autocmd('InsertLeave', {
+    command = [[match ExtraWhitespace /\s\+$/]],
+    group = groupname
+})
 
 -- :help for lua files in nvim config dir
 local cfgdir = vim.fn.stdpath('config')
-autocmd('BufEnter', {
+autocmd('BufReadPost', {
     pattern = cfgdir .. '/*',
     callback = function ()
         vim.opt_local.keywordprg = ':help'
         vim.opt_local.path:append(cfgdir .. '/lua/')
     end,
+    group = groupname
 })
 
 -- compile packer after changing file
 autocmd('BufWritePost', {
     pattern = 'plugins.lua',
-    command = 'source <afile> | PackerCompile'
+    command = 'source <afile> | PackerCompile',
+    group = groupname
 })
 
 -- rename tmux window to current filename

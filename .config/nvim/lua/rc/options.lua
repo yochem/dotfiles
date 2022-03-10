@@ -53,7 +53,6 @@ opt.smartindent = true
 opt.signcolumn = 'number'
 opt.fillchars = {eob = ' '}
 
-
 -- FZF
 opt.runtimepath:append('/usr/local/opt/fzf')
 

@@ -43,7 +43,7 @@ map('n', 'W',
 
 -- go through visual lines with j and k but don't mess with 10k etc.
 -- source: http://stackoverflow.com/a/21000307/2580955
-if vim.api.nvim_win_get_option(0, 'wrap') == true then
+if vim.opt.wrap:get() then
     map('n', 'j', [[v:count ? 'j' : 'gj']], {expr = true})
     map('n', 'k', [[v:count ? 'k' : 'gk']], {expr = true})
 end
@@ -94,11 +94,8 @@ end, {expr = true})
 map('n', '<Tab>', cmd'bnext')
 
 -- Easier use of the system clipboard
-map('n', '<leader>y', '"+y')
-map('n', '<leader>Y', '"+y$')
-
-map('v', '<leader>y', '"+y')
-map('v', '<leader>Y', '"+y$')
+map({'n', 'v'}, '<leader>y', '"+y')
+map({'n', 'v'}, '<leader>Y', '"+y$')
 
 map('n', '<leader>p', '"+p')
 map('n', '<leader>P', '"+P')
