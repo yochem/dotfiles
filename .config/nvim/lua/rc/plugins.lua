@@ -42,6 +42,7 @@ require('packer').startup(function(use)
             end
             require('lualine').setup({
                 options = {
+                    theme = 'onedark',
                     icons_enabled = false,
                     component_separators = { left = '|', right = '|'},
                     section_separators = { left = '', right = ''},
@@ -206,4 +207,9 @@ require('packer').startup(function(use)
     use {'gbprod/substitute.nvim', config = function ()
         require("substitute").setup()
     end}
+
+    use {
+        'glacambre/firenvim',
+        run = function() vim.fn['firenvim#install'](0) end,
+    }
 end)

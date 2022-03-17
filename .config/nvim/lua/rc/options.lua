@@ -1,7 +1,7 @@
 local opt = vim.opt
 
 opt.termguicolors = true
-opt.wildignore = {'*.swp', '*.bak', '*.pyc', '*.out', '*.aux', '*.bbl', '*.blg'}
+opt.suffixes = {'.swp', '.bak', '.pyc', '.out', '.aux', '.bbl', '.blg'}
 opt.autowrite = true
 opt.shellcmdflag = '-lc'
 opt.completeopt = {'menu', 'menuone'}

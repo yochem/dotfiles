@@ -81,3 +81,9 @@ function startpyenv
     status is-login; and pyenv init - | source
     status is-login; and pyenv virtualenv-init - | source
 end
+
+function line -e fish_postexec -d "print line after command to seperate commands"
+    set_color brblack
+    seq -f '–' -s '' $COLUMNS
+    echo
+end
