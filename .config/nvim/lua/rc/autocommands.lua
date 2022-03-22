@@ -58,11 +58,15 @@ autocmd('BufWritePost', {
 })
 
 -- rename tmux window to current filename
-if (vim.env.TMUX ~= nil) then
-    local fn = vim.fn.expand('%:t')
-    fn = fn ~= '' and fn or 'nvim'
-    os.execute("tmux rename-window '" .. fn .. "'")
-end
+autocmd('BufEnter', {
+    callback = function ()
+        if (vim.env.TMUX ~= nil) then
+            local fn = vim.fn.expand('%:t')
+            fn = fn ~= '' and fn or 'nvim'
+            os.execute("tmux rename-window '" .. fn .. "'")
+        end
+    end
+})
 
 vim.api.nvim_add_user_command('Scratch', function()
     vim.cmd('execute "new "')

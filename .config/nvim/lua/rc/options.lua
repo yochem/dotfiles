@@ -36,7 +36,7 @@ opt.inccommand = 'split'
 
 -- scroll behaviour
 opt.foldenable = false
--- opt.colorcolumn = {80}
+opt.colorcolumn = {80}
 opt.scrolloff = 3
 opt.wrap = false
 opt.sidescrolloff = 3

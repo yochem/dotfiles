@@ -25,44 +25,6 @@ require('packer').startup(function(use)
     }
 
     use {
-        'nvim-lualine/lualine.nvim',
-        config = function()
-            local gps = require('nvim-gps')
-            local function lsp()
-                if #vim.lsp.buf_get_clients() > 0 then
-                    return 'LSP'
-                end
-                return ''
-            end
-            local function wordcount()
-                if vim.bo.filetype == 'markdown' then
-                    return vim.fn.wordcount().words .. ' words'
-                end
-                return ''
-            end
-            require('lualine').setup({
-                options = {
-                    theme = 'onedark',
-                    icons_enabled = false,
-                    component_separators = { left = '|', right = '|'},
-                    section_separators = { left = '', right = ''},
-                },
-                sections = {
-                    lualine_a = {'mode'},
-                    lualine_b = {'branch', 'diff'},
-                    lualine_c = {
-                        {'filename', path = 1},
-                        {gps.get_location, cond = gps.is_available}
-                    },
-                    lualine_x = {wordcount, 'encoding', 'filetype'},
-                    lualine_y = {lsp, 'diagnostics'},
-                    lualine_z = {'location'}
-                },
-            })
-        end
-    }
-
-    use {
         'kevinhwang91/nvim-hlslens',
         config = function() require('hlslens').setup({calm_down = true}) end
     }
@@ -212,4 +174,64 @@ require('packer').startup(function(use)
         'glacambre/firenvim',
         run = function() vim.fn['firenvim#install'](0) end,
     }
+
+    use {'nvim-lualine/lualine.nvim', config = function ()
+        local gps = require('nvim-gps')
+
+        local function lsp()
+            if #vim.lsp.buf_get_clients() > 0 then
+                return 'LSP'
+            end
+            return ''
+        end
+
+        local function wordcount()
+            local ft = vim.bo.filetype
+            if ft == 'markdown' or ft == 'text' then
+                if vim.fn.wordcount().visual_words then
+                    return vim.fn.wordcount().visual_words .. ' words'
+                else
+                    return vim.fn.wordcount().words .. ' words'
+                end
+            end
+            return ''
+        end
+
+        local function filename()
+            local ft = vim.bo.filetype
+            if ft == 'help' or ft == 'man' then
+                return vim.fn.expand('%')
+            else
+                local fn = vim.fn.expand('%:p')
+                fn = fn:gsub('/Users/yochem', '~')
+
+                if #fn > 30 then
+                    fn = fn:gsub('/(%.?%w%)%w+/', '/%1/', 1)
+                end
+
+                return fn
+            end
+        end
+
+        require('lualine').setup({
+            options = {
+                icons_enabled = false,
+                component_separators = { left = '|', right = '|'},
+                section_separators = { left = '', right = ''},
+                globalstatus = true,
+                theme = 'onedark',
+            },
+            sections = {
+                lualine_a = {'mode'},
+                lualine_b = {'branch', 'diff'},
+                lualine_c = {
+                    filename,
+                    {gps.get_location, cond = gps.is_available}
+                },
+                lualine_x = {wordcount, 'filetype'},
+                lualine_y = {lsp, 'diagnostics'},
+                lualine_z = {'location'}
+            },
+        })
+    end}
 end)
