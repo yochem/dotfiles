@@ -48,8 +48,8 @@ if vim.opt.wrap:get() then
     map('n', 'k', [[v:count ? 'k' : 'gk']], {expr = true})
 end
 
--- I should use space for something better now I use tmux
-map('n', '<space>', '<c-w>')
+-- use comma to switch windows
+map('n', ',', '<c-w>')
 
 -- Open new file in split
 map('n', '<leader>e', cmd'25Lexplore')

@@ -6,7 +6,12 @@ opt.autowrite = true
 opt.shellcmdflag = '-lc'
 opt.completeopt = {'menu', 'menuone'}
 opt.textwidth = 79
-opt.formatoptions = {'tcfqnj'}
+-- opt.formatoptions:append('t')
+-- opt.formatoptions:append('c')
+-- opt.formatoptions:append('f')
+-- opt.formatoptions:append('q')
+-- opt.formatoptions:append('n')
+-- opt.formatoptions:append('j')
 opt.exrc = true
 opt.secure = true
 opt.fileformat = 'unix'

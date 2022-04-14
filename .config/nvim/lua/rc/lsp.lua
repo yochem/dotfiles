@@ -44,7 +44,7 @@ lsp.gopls.setup {
 }
 
 lsp.bashls.setup {filetypes = {'sh'}}
-lsp.clangd.setup {cmd = {'/usr/local/Cellar/llvm/11.1.0/bin/clangd'}}
+lsp.clangd.setup {cmd = {'clangd'}}
 lsp.cssls.setup {root_dir = lsp.util.root_pattern("index.html")}
 lsp.erlangls.setup {}
 lsp.eslint.setup {}

@@ -185,6 +185,7 @@
     visible: false
   "tree-view":
     hideIgnoredNames: true
+    squashDirectoryNames: true
   "vim-mode-plus":
     ignoreCaseForSearch: true
     ignoreCaseForSearchCurrentWord: true

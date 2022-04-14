@@ -14,6 +14,14 @@ autocmd('BufReadPost', {
     group = groupname
 })
 
+-- use template if available
+autocmd('BufNewFile', {
+    pattern = {'*.c', '*.tex', '*.go'},
+    command = '0r ' .. vim.fn.stdpath('config') .. '/templates/<afile>:e',
+    group = groupname,
+    once = true,
+})
+
 -- highligt non-ascii blue
 autocmd({'BufEnter', 'InsertLeave'}, {
     callback = function ()
@@ -58,7 +66,7 @@ autocmd('BufWritePost', {
 })
 
 -- rename tmux window to current filename
-autocmd('BufEnter', {
+autocmd({'BufEnter', 'BufWritePost'}, {
     callback = function ()
         if (vim.env.TMUX ~= nil) then
             local fn = vim.fn.expand('%:t')

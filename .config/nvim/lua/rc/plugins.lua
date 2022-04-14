@@ -8,7 +8,7 @@ end
 vim.cmd('packadd packer.nvim')
 
 require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'
+    use {'wbthomason/packer.nvim', opt = true}
 
     use 'gpanders/editorconfig.nvim'
 
@@ -61,7 +61,7 @@ require('packer').startup(function(use)
         'lukas-reineke/indent-blankline.nvim',
         config = function ()
             require('indent_blankline').setup({
-                filetype_exclude = {'help', 'man'},
+                filetype_exclude = {'help', 'man', 'packer'},
                 show_first_indent_level = false,
                 show_trailing_blankline_indent = false
             })
@@ -170,11 +170,6 @@ require('packer').startup(function(use)
         require("substitute").setup()
     end}
 
-    use {
-        'glacambre/firenvim',
-        run = function() vim.fn['firenvim#install'](0) end,
-    }
-
     use {'nvim-lualine/lualine.nvim', config = function ()
         local gps = require('nvim-gps')
 
@@ -205,6 +200,10 @@ require('packer').startup(function(use)
                 local fn = vim.fn.expand('%:p')
                 fn = fn:gsub('/Users/yochem', '~')
 
+                if fn == '' then
+                    return '[No Name]'
+                end
+
                 if #fn > 30 then
                     fn = fn:gsub('/(%.?%w%)%w+/', '/%1/', 1)
                 end
@@ -219,7 +218,7 @@ require('packer').startup(function(use)
                 component_separators = { left = '|', right = '|'},
                 section_separators = { left = '', right = ''},
                 globalstatus = true,
-                theme = 'onedark',
+                theme = 'auto',
             },
             sections = {
                 lualine_a = {'mode'},

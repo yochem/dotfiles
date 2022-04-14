@@ -16,6 +16,23 @@
                 },
                 "rules": [
                     {
+                        "description": "Reload eqMac",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f6",
+                                    "modifiers": {}
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "killall eqMac; open -a 'eqMac.app'"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Disable wifi logging.",
                         "manipulators": [
                             {
@@ -450,6 +467,16 @@
             "simple_modifications": [
                 {
                     "from": {
+                        "consumer_key_code": "eject"
+                    },
+                    "to": [
+                        {
+                            "consumer_key_code": "al_terminal_lock_or_screensaver"
+                        }
+                    ]
+                },
+                {
+                    "from": {
                         "key_code": "caps_lock"
                     },
                     "to": [
@@ -467,16 +494,6 @@
                             "key_code": "caps_lock"
                         }
                     ]
-                },
-                {
-                    "from": {
-                        "consumer_key_code": "eject"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "al_terminal_lock_or_screensaver"
-                        }
-                    ]
                 }
             ],
             "virtual_hid_keyboard": {
@@ -487,4 +504,3 @@
         }
     ]
 }
-
