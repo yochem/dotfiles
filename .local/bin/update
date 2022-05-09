@@ -14,6 +14,7 @@ fi
 
 # BREW (CASK)
 if [[ $(command -v brew) ]]; then
+    HOMEBREW_NO_INSTALL_CLEANUP=1
     echo -e "${orangebold}Updating and upgrading Brew...${reset}"
     brew upgrade --quiet
     echo -e "${orangebold}Upgrading Casks...${reset}"

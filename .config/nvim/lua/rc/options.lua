@@ -44,7 +44,7 @@ opt.foldenable = false
 opt.colorcolumn = {80}
 opt.scrolloff = 3
 opt.wrap = false
-opt.sidescrolloff = 3
+opt.sidescrolloff = 1
 
 -- tabs / spaces settings
 opt.tabstop = 4

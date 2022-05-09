@@ -1,7 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 
-local groupname = 'rc'
-vim.api.nvim_create_augroup(groupname, {})
+local id = vim.api.nvim_create_augroup('rc', {})
 
 -- open file with cursor on last position
 autocmd('BufReadPost', {
@@ -11,15 +10,15 @@ autocmd('BufReadPost', {
             vim.api.nvim_command([[normal! g'"]])
         end
     end,
-    group = groupname
+    group = id
 })
 
 -- use template if available
 autocmd('BufNewFile', {
     pattern = {'*.c', '*.tex', '*.go'},
     command = '0r ' .. vim.fn.stdpath('config') .. '/templates/<afile>:e',
-    group = groupname,
     once = true,
+    group = id
 })
 
 -- highligt non-ascii blue
@@ -28,23 +27,23 @@ autocmd({'BufEnter', 'InsertLeave'}, {
         vim.cmd([[highlight nonascii guibg=Blue ctermbg=9]])
         vim.cmd([[syntax match nonascii "[^\x00-\x7F]"]])
     end,
-    group = groupname
+    group = id
 })
 
 -- highlight trailing whitespace intrusive red
 autocmd('BufReadPost', {
     command = 'highlight ExtraWhitespace ctermbg=red guibg=red',
-    group = groupname
+    group = id
 })
 
 autocmd('InsertEnter', {
     command = [[match ExtraWhitespace /\s\+\%#\@<!$/]],
-    group = groupname
+    group = id
 })
 
 autocmd('InsertLeave', {
     command = [[match ExtraWhitespace /\s\+$/]],
-    group = groupname
+    group = id
 })
 
 -- :help for lua files in nvim config dir
@@ -55,14 +54,14 @@ autocmd('BufReadPost', {
         vim.opt_local.keywordprg = ':help'
         vim.opt_local.path:append(cfgdir .. '/lua/')
     end,
-    group = groupname
+    group = id
 })
 
 -- compile packer after changing file
 autocmd('BufWritePost', {
     pattern = 'plugins.lua',
     command = 'source <afile> | PackerCompile',
-    group = groupname
+    group = id
 })
 
 -- rename tmux window to current filename
@@ -73,10 +72,11 @@ autocmd({'BufEnter', 'BufWritePost'}, {
             fn = fn ~= '' and fn or 'nvim'
             os.execute("tmux rename-window '" .. fn .. "'")
         end
-    end
+    end,
+    group = id
 })
 
-vim.api.nvim_add_user_command('Scratch', function()
+vim.api.nvim_create_user_command('Scratch', function()
     vim.cmd('execute "new "')
     vim.opt_local.buftype = 'nofile'
     vim.opt_local.bufhidden = 'hide'

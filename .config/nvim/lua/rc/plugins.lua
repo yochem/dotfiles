@@ -170,6 +170,17 @@ require('packer').startup(function(use)
         require("substitute").setup()
     end}
 
+    use {
+        '/tmp/nvim-lightbulb',
+        config = function ()
+            require('nvim-lightbulb').setup({
+                sign = {enabled = false},
+                status_text = {enabled = true},
+                autocmd = {enabled = true},
+            })
+        end
+    }
+
     use {'nvim-lualine/lualine.nvim', config = function ()
         local gps = require('nvim-gps')
 
@@ -228,9 +239,15 @@ require('packer').startup(function(use)
                     {gps.get_location, cond = gps.is_available}
                 },
                 lualine_x = {wordcount, 'filetype'},
-                lualine_y = {lsp, 'diagnostics'},
+                lualine_y = {
+                    lsp,
+                    "require('nvim-lightbulb').get_status_text()",
+                    'diagnostics'
+                },
                 lualine_z = {'location'}
             },
         })
     end}
+
+    use 'lewis6991/spellsitter.nvim'
 end)

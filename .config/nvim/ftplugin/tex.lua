@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd('VimLeave', {
             'out',
             'toc',
         }, ',')
-        vim.schedule(os.execute('rm ' .. fn .. '.{' .. exts .. '}'))
+        vim.schedule(os.execute('rm ' .. fn .. '.{' .. exts .. '} >/dev/null 2>&1'))
     end,
     group = 'rc'
 })

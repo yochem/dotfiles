@@ -1,5 +1,5 @@
 local function map(mode, lhs, rhs, opts)
-    local options = {noremap = true, silent = true}
+    local options = {silent = true}
     if opts then options = vim.tbl_extend('force', options, opts) end
     vim.keymap.set(mode, lhs, rhs, options)
 end
@@ -57,12 +57,9 @@ map('n', '<leader>e', cmd'25Lexplore')
 -- don't care, just quit
 map('n', 'ZZ', cmd'qall')
 
--- quickly comment line
-map('n', '<leader>c', '<Plug>kommentary_line_default', {noremap = false})
-
 -- don't accidently create macros when trying to quit
 map('n', 'Q', 'q')
-map('n', 'q', '<nop>')
+map('n', 'q', '')
 
 -- some lsp remaps
 map('n', '<leader>D', vim.lsp.buf.declaration)
@@ -72,8 +69,9 @@ map('n', '<leader>rn', vim.lsp.buf.rename)
 map('n', '<leader>f', vim.lsp.buf.formatting)
 map('n', '<leader>d', vim.diagnostic.open_float)
 map('n', '<leader>h', vim.lsp.buf.hover)
-map('n', '<leader>[', vim.lsp.diagnostic.goto_prev)
-map('n', '<leader>]', vim.lsp.diagnostic.goto_next)
+map('n', '<leader>[', vim.diagnostic.goto_prev)
+map('n', '<leader>]', vim.diagnostic.goto_next)
+map('n', '<leader>c', vim.lsp.buf.code_action)
 
 map('n', '<leader>ff', require("telescope.builtin").find_files)
 map('n', '<leader>fg', require("telescope.builtin").live_grep)

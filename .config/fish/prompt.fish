@@ -48,7 +48,7 @@ function fish_prompt
 
     set_color blue
     set full (pwd | sed "s|$HOME|~|i")
-    if [ (string length $full) -gt 36 ]
+    if [ (string length $full) -gt (math $COLUMNS / 3) ]
         echo -n (prompt_pwd)
     else
         printf $full

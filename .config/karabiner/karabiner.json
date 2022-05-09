@@ -335,6 +335,40 @@
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
                     "simple_modifications": []
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [
+                        {
+                            "from": {
+                                "key_code": "f5"
+                            },
+                            "to": [
+                                {
+                                    "apple_vendor_top_case_key_code": "illumination_down"
+                                }
+                            ]
+                        },
+                        {
+                            "from": {
+                                "key_code": "f6"
+                            },
+                            "to": [
+                                {
+                                    "apple_vendor_top_case_key_code": "illumination_up"
+                                }
+                            ]
+                        }
+                    ],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 634,
+                        "vendor_id": 1452
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": true,
+                    "simple_modifications": []
                 }
             ],
             "fn_function_keys": [
@@ -384,7 +418,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "dictation"
+                            "apple_vendor_top_case_key_code": "illumination_down"
                         }
                     ]
                 },
@@ -394,7 +428,7 @@
                     },
                     "to": [
                         {
-                            "key_code": "f6"
+                            "apple_vendor_top_case_key_code": "illumination_up"
                         }
                     ]
                 },
