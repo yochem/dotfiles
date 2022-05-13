@@ -1,54 +1,45 @@
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+require('paq')({
+    -- improving vim experience
+    'b3nj5m1n/kommentary',
+    'kevinhwang91/nvim-hlslens',
+    'FooSoft/vim-argwrap',
+    'wellle/targets.vim',
+    'gbprod/substitute.nvim',
+    'nmac427/guess-indent.nvim',
 
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.api.nvim_command 'packadd packer.nvim'
-end
+    -- improve vim looks
+    'ful1e5/onedark.nvim',
+    'lukas-reineke/indent-blankline.nvim',
+    'lukas-reineke/virt-column.nvim',
+    'nvim-lualine/lualine.nvim',
 
-vim.cmd('packadd packer.nvim')
+    -- IDE functionality
+    'gpanders/editorconfig.nvim',
+    'tpope/vim-fugitive',
+    'neovim/nvim-lspconfig',
+        'hrsh7th/nvim-cmp',
+        'hrsh7th/cmp-nvim-lsp',
+        'saadparwaiz1/cmp_luasnip',
+    'L3MON4D3/LuaSnip',
+    'nvim-treesitter/nvim-treesitter',
+    'lewis6991/spellsitter.nvim',
+    'nvim-treesitter/playground',
+    'SmiteshP/nvim-gps',
+       'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope.nvim',
 
-require('packer').startup(function(use)
-    use {'wbthomason/packer.nvim', opt = true}
-    use 'gpanders/editorconfig.nvim'
-    use 'tpope/vim-fugitive'
-    use 'b3nj5m1n/kommentary'
-    use 'kevinhwang91/nvim-hlslens'
-    use {'FooSoft/vim-argwrap', cmd = 'ArgWrap'}
-    use 'wellle/targets.vim'
-    use 'ful1e5/onedark.nvim'
-    use 'lukas-reineke/indent-blankline.nvim'
-    use 'lukas-reineke/virt-column.nvim'
-    use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/plenary.nvim'}}}
+    -- better filetypes
+    'yochem/prolog.vim',
+    'blankname/vim-fish',
+    'vim-python/python-syntax',
+    'Vimjas/vim-python-pep8-indent',
+    'chrisbra/csv.vim',
+    'preservim/vim-markdown',
+})
 
-    -- LSP
-    use 'neovim/nvim-lspconfig'
-    use {'L3MON4D3/LuaSnip', requires = {
-            'hrsh7th/nvim-cmp',
-            'hrsh7th/cmp-nvim-lsp',
-            'saadparwaiz1/cmp_luasnip'
-        }
-    }
-
-    use 'nvim-treesitter/nvim-treesitter'
-    use 'lewis6991/spellsitter.nvim'
-    use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
-    use '/Users/yochem/Documents/jvim.nvim'
-
-    -- filetypes
-    use {'yochem/prolog.vim', ft = {'prolog'}}
-    use {'blankname/vim-fish', ft = {'fish'}}
-    use {'vim-python/python-syntax', ft = {'python'}}
-    use {'Vimjas/vim-python-pep8-indent', ft = {'python'}}
-    use {'chrisbra/csv.vim', ft = {'csv'}}
-    use {'preservim/vim-markdown', ft = {'markdown'}}
-
-    use 'nmac427/guess-indent.nvim'
-    use 'gbprod/substitute.nvim'
-    use 'SmiteshP/nvim-gps'
-    use '/tmp/nvim-lightbulb'
-
-    use 'nvim-lualine/lualine.nvim'
-end)
+-- paq does not support local packages
+vim.opt.runtimepath:append('/Users/yochem/Documents/nvim-lightbulb')
+vim.opt.runtimepath:append('/Users/yochem/Documents/jvim.nvim')
 
 require('kommentary.config').configure_language('default', {
     prefer_single_line_comments = true,
@@ -57,13 +48,13 @@ require('kommentary.config').configure_language('default', {
 
 require('hlslens').setup({calm_down = true})
 
-require("onedark").setup({
+require('onedark').setup({
     transparent = true,
     transparent_sidebar = false,
-    comment_style = "NONE",
-    keyword_style = "NONE",
-    function_style = "NONE",
-    variable_style = "NONE",
+    comment_style = 'NONE',
+    keyword_style = 'NONE',
+    function_style = 'NONE',
+    variable_style = 'NONE',
     colors = {
         fg0 = '#ffffff',
     },
@@ -125,11 +116,11 @@ cmp.setup({
     sources = {{ name = 'nvim_lsp' }}
 })
 
-require("nvim-gps").setup({disable_icons = true, separator = '.'})
+require('nvim-gps').setup({disable_icons = true, separator = '.'})
 
 require('guess-indent').setup({tabstop = 4})
 
-require("substitute").setup()
+require('substitute').setup()
 
 require('nvim-lightbulb').setup({
     sign = {enabled = false},
@@ -196,7 +187,7 @@ require('lualine').setup({
         lualine_x = {wordcount, 'filetype'},
         lualine_y = {
             lsp,
-            "require('nvim-lightbulb').get_status_text()",
+            'require("nvim-lightbulb").get_status_text()',
             'diagnostics'
         },
         lualine_z = {'location'}

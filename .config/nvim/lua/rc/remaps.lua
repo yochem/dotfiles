@@ -120,12 +120,3 @@ map('n', '!', function()
         vim.cmd('exe "norm! ciw' .. negates[word] .. '"')
     end
 end)
-
--- go to the github repo of plugins
-if vim.fn.expand('%:t') == 'plugins.lua' then
-    map('n', 'gh', function()
-        -- strip ' and , from WORD under cursor
-        local repo = vim.fn.substitute(vim.fn.expand('<cWORD>'), "[',]", '', 'g')
-        os.execute('open https://github.com/' .. repo)
-    end)
-end

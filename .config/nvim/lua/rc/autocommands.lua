@@ -60,7 +60,7 @@ autocmd('BufReadPost', {
 -- compile packer after changing file
 autocmd('BufWritePost', {
     pattern = 'plugins.lua',
-    command = 'source <afile> | PackerCompile',
+    command = 'source <afile>',
     group = id
 })
 
@@ -72,6 +72,20 @@ autocmd({'BufEnter', 'BufWritePost'}, {
             fn = fn ~= '' and fn or 'nvim'
             os.execute("tmux rename-window '" .. fn .. "'")
         end
+    end,
+    group = id
+})
+
+-- go to the github repo of plugins
+-- if vim.fn.expand('%:t') == 'plugins.lua' then
+autocmd({'BufEnter'}, {
+    pattern = 'plugins.lua',
+    callback = function ()
+        vim.keymap.set('n', 'gh', function()
+            -- strip ' and , from WORD under cursor
+            local repo = vim.fn.substitute(vim.fn.expand('<cWORD>'), "[',]", '', 'g')
+            os.execute('open https://github.com/' .. repo)
+        end)
     end,
     group = id
 })
