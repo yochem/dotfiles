@@ -6,7 +6,7 @@ set -g fish_cursor_default block
 function fish_greeting
 end
 
-set -g fish_color_command normal
+set -g fish_color_command blue
 set -g fish_color_comment 6f7683
 set -g fish_color_quote green
 set -g fish_color_redirection magenta
@@ -22,9 +22,8 @@ for file in $files
     [ -f "$file" ] && source $file
 end
 
-if type -q brew
-    eval (brew shellenv)
-end
+bind --mode insert dn "commandline -i ' >/dev/null '"
+bind --mode insert 2dn "commandline -i ' 2>/dev/null '"
 
 if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
     tmux ls 2>/dev/null | grep attached >/dev/null
