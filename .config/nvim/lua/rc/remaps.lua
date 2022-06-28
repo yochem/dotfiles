@@ -15,7 +15,8 @@ map('n', 'oo', 'm`o<Esc>``')
 map('n', 'OO', 'm`O<Esc>``')
 
 -- toggle list wrapping
-map('n', '<leader>a', cmd'ArgWrap')
+-- map('n', '<leader>a', cmd'ArgWrap')
+map('n', '<leader>a', ':ArgWrap<CR>')
 
 -- substitute word with content of default register
 local substitute = require('substitute')

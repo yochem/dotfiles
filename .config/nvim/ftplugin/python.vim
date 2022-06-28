@@ -1,29 +1,3 @@
-" run the python file
-nnoremap <buffer> <space>r :!python3 %:p<CR>
-
-" format it right using gq
-set formatprg=python-format
-
-" list all structs and functions in the current buffer, type :<line-num> to
-" jump
-function! FindFuncs()
-    normal mx
-    exe 'g/def .*:$\|^class /#'
-    normal `x
-endfunction
-
-nnoremap <buffer> ,f :call FindFuncs()<CR>
-
-" fold docstrings beautifully
-setlocal foldenable
-setlocal fillchars+=fold:\ 
-
-nnoremap <leader>b :silent !black %<CR>
-
-setlocal foldmethod=syntax
-setlocal foldtext=FoldText()
-setlocal fillchars=
-
 function! s:Strip(string)
   return substitute(a:string, '^[[:space:][:return:][:cntrl:]]\+\|[[:space:][:return:][:cntrl:]]\+$', '', '')
 endfunction

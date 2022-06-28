@@ -1,4 +1,6 @@
 require('paq')({
+    'savq/paq-nvim',
+
     -- improving vim experience
     'b3nj5m1n/kommentary',
     'kevinhwang91/nvim-hlslens',
@@ -22,11 +24,14 @@ require('paq')({
         'saadparwaiz1/cmp_luasnip',
     'L3MON4D3/LuaSnip',
     'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter-textobjects',
     'lewis6991/spellsitter.nvim',
     'nvim-treesitter/playground',
     'SmiteshP/nvim-gps',
        'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope.nvim',
+    'kosayoda/nvim-lightbulb',
+    'lewis6991/gitsigns.nvim',
 
     -- better filetypes
     'yochem/prolog.vim',
@@ -34,12 +39,15 @@ require('paq')({
     'vim-python/python-syntax',
     'Vimjas/vim-python-pep8-indent',
     'chrisbra/csv.vim',
-    'preservim/vim-markdown',
 })
 
 -- paq does not support local packages
-vim.opt.runtimepath:append('/Users/yochem/Documents/nvim-lightbulb')
-vim.opt.runtimepath:append('/Users/yochem/Documents/jvim.nvim')
+vim.opt.runtimepath:append('~/Documents/jvim.nvim')
+vim.opt.runtimepath:append('~/Documents/autosplit.nvim')
+
+require('autosplit').setup({split = 'auto'})
+vim.cmd('cabbrev sp Split')
+vim.cmd('cabbrev vs Split')
 
 require('kommentary.config').configure_language('default', {
     prefer_single_line_comments = true,
@@ -59,10 +67,19 @@ require('onedark').setup({
         fg0 = '#ffffff',
     },
     overrides = function(c)
+        local Styles = require('onedark.types').od.HighlightStyle
         return {
             MsgArea = {fg = c.fg0},
             LineNr = {fg = c.fg_light},
             ColorColumn = {bg = c.none},
+            TSField = {fg = c.fg0},
+            TSOperator = {fg = c.fg0},
+            TSParameter = {fg = c.orange0},
+            pythonTSFuncBuiltin = {fg = c.blue0},
+            TSVariable = {fg = c.fg0},
+            TSPunctBracket = {c.fg0},
+            TSConstructor = {fg = c.fg0},
+            TSEmphasis = {style = Styles.Bold},
         }
     end
 })
@@ -193,3 +210,23 @@ require('lualine').setup({
         lualine_z = {'location'}
     },
 })
+
+require('nvim-treesitter.configs').setup({
+    highlight = {enable = true},
+    indent = {enable = true},
+    textobjects = {
+        select = {
+            enable = true,
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ab"] = "@block.outer",
+                ["ib"] = "@block.inner",
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
+            },
+        },
+    },
+})
+
+require('gitsigns').setup()

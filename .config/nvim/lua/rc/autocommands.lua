@@ -1,6 +1,14 @@
-local autocmd = vim.api.nvim_create_autocmd
-
 local id = vim.api.nvim_create_augroup('rc', {})
+local autocmd = function (event, opts)
+    opts = vim.tbl_extend('keep', opts, {group = id})
+    vim.api.nvim_create_autocmd(event, opts)
+end
+
+autocmd('TextYankPost', {
+    callback = function()
+        vim.highlight.on_yank({timeout = 200, higroup = 'Visual'})
+    end
+})
 
 -- open file with cursor on last position
 autocmd('BufReadPost', {
@@ -9,42 +17,28 @@ autocmd('BufReadPost', {
         if 0 < mark and mark <= vim.fn.line("$") then
             vim.api.nvim_command([[normal! g'"]])
         end
-    end,
-    group = id
+    end
 })
 
 -- use template if available
 autocmd('BufNewFile', {
     pattern = {'*.c', '*.tex', '*.go'},
     command = '0r ' .. vim.fn.stdpath('config') .. '/templates/<afile>:e',
-    once = true,
-    group = id
+    once = true
 })
 
 -- highligt non-ascii blue
+vim.api.nvim_set_hl(0, 'nonascii', {bg = 'Blue'})
 autocmd({'BufEnter', 'InsertLeave'}, {
     callback = function ()
-        vim.cmd([[highlight nonascii guibg=Blue ctermbg=9]])
         vim.cmd([[syntax match nonascii "[^\x00-\x7F]"]])
-    end,
-    group = id
+    end
 })
 
 -- highlight trailing whitespace intrusive red
-autocmd('BufReadPost', {
-    command = 'highlight ExtraWhitespace ctermbg=red guibg=red',
-    group = id
-})
-
-autocmd('InsertEnter', {
-    command = [[match ExtraWhitespace /\s\+\%#\@<!$/]],
-    group = id
-})
-
-autocmd('InsertLeave', {
-    command = [[match ExtraWhitespace /\s\+$/]],
-    group = id
-})
+vim.api.nvim_set_hl(0, 'ExtraWhitespace', {bg = 'red'})
+autocmd('InsertEnter', {command = [[match ExtraWhitespace /\s\+\%#\@<!$/]]})
+autocmd('InsertLeave', {command = [[match ExtraWhitespace /\s\+$/]]})
 
 -- :help for lua files in nvim config dir
 local cfgdir = vim.fn.stdpath('config')
@@ -53,15 +47,13 @@ autocmd('BufReadPost', {
     callback = function ()
         vim.opt_local.keywordprg = ':help'
         vim.opt_local.path:append(cfgdir .. '/lua/')
-    end,
-    group = id
+    end
 })
 
 -- compile packer after changing file
 autocmd('BufWritePost', {
-    pattern = 'plugins.lua',
-    command = 'source <afile>',
-    group = id
+    pattern = cfgdir .. '/lua/*',
+    command = 'source <afile>'
 })
 
 -- rename tmux window to current filename
@@ -72,13 +64,12 @@ autocmd({'BufEnter', 'BufWritePost'}, {
             fn = fn ~= '' and fn or 'nvim'
             os.execute("tmux rename-window '" .. fn .. "'")
         end
-    end,
-    group = id
+    end
 })
 
 -- go to the github repo of plugins
 -- if vim.fn.expand('%:t') == 'plugins.lua' then
-autocmd({'BufEnter'}, {
+autocmd('BufEnter', {
     pattern = 'plugins.lua',
     callback = function ()
         vim.keymap.set('n', 'gh', function()
@@ -86,9 +77,18 @@ autocmd({'BufEnter'}, {
             local repo = vim.fn.substitute(vim.fn.expand('<cWORD>'), "[',]", '', 'g')
             os.execute('open https://github.com/' .. repo)
         end)
-    end,
-    group = id
+    end
 })
+
+-- autocmd({'VimEnter'}, {
+--     callback = function ()
+--         local ft = vim.opt.filetype:get()
+--         vim.schedule(function ()
+--             vim.cmd('TSInstall ' .. ft)
+--         end)
+--     end,
+--     group = id
+-- })
 
 vim.api.nvim_create_user_command('Scratch', function()
     vim.cmd('execute "new "')
@@ -98,3 +98,5 @@ vim.api.nvim_create_user_command('Scratch', function()
     vim.cmd('file scratch')
     vim.cmd('startinsert')
 end, {})
+
+vim.api.nvim_set_hl(0, 'htmlBold', {bold = true})

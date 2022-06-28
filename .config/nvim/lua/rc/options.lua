@@ -6,12 +6,7 @@ opt.autowrite = true
 opt.shellcmdflag = '-lc'
 opt.completeopt = {'menu', 'menuone'}
 opt.textwidth = 79
--- opt.formatoptions:append('t')
--- opt.formatoptions:append('c')
--- opt.formatoptions:append('f')
--- opt.formatoptions:append('q')
--- opt.formatoptions:append('n')
--- opt.formatoptions:append('j')
+opt.formatoptions = 'tcqnj'
 opt.exrc = true
 opt.secure = true
 opt.fileformat = 'unix'
@@ -54,12 +49,15 @@ opt.shiftwidth = 4
 opt.shiftround = true
 opt.smartindent = true
 
--- show the LSP warningsigns in the number column
-opt.signcolumn = 'number'
+-- LSP signs
+opt.signcolumn = 'yes:1'
+opt.numberwidth = 1
 opt.fillchars = {eob = ' '}
 
 -- FZF
 opt.runtimepath:append('/usr/local/opt/fzf')
+
+opt.conceallevel = 3
 
 -- global variables
 vim.g.mapleader = ' '

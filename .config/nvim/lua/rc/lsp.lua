@@ -18,8 +18,8 @@ lsp.pylsp.setup {
 
 lsp.sumneko_lua.setup {
     cmd = {
-        '/Users/yochem/.local/bin/luals/bin/macOS/lua-language-server', '-E',
-        '/Users/yochem/.local/bin/luals/main.lua'
+        '/Users/yochem/Library/Bin/luals/bin/macOS/lua-language-server', '-E',
+        '/Users/yochem/Library/Bin/luals/main.lua'
     },
     settings = {
         Lua = {
@@ -61,7 +61,7 @@ lsp.texlab.setup {
 -- use popups instead of virtual text on the same line
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        underline = true,
+        underline = false,
         virtual_text = false,
         signs = true,
         update_in_insert = false,
@@ -72,9 +72,3 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 lsp.util.default_config = vim.tbl_extend("force", lsp.util.default_config, {
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 })
-
-
-vim.fn.sign_define("DiagnosticSignError", {numhl = "DiagnosticSignError"})
-vim.fn.sign_define("DiagnosticSignWarn", {numhl = "DiagnosticSignWarn"})
-vim.fn.sign_define("DiagnosticSignInfo", {numhl = "DiagnosticSignInfo"})
-vim.fn.sign_define("DiagnosticSignHint", {numhl = "DiagnosticSignHint"})

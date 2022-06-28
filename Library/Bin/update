@@ -4,13 +4,9 @@ orangebold=$(tput bold; tput setaf 166)
 
 if command -v nvim >/dev/null 2>&1; then
     echo -e "${orangebold}Updating nvim packages...${reset}"
-    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    nvim --headless +PaqSync +qall
+    echo
 fi
-
-# if command -v vim >/dev/null 2>&1; then
-#     echo -e "${orangebold}updating vim packages...${reset}"
-#     vim +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean! +qall
-# fi
 
 # BREW (CASK)
 if [[ $(command -v brew) ]]; then
