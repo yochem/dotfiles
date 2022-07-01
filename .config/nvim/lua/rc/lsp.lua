@@ -18,8 +18,8 @@ lsp.pylsp.setup {
 
 lsp.sumneko_lua.setup {
 	cmd = {
-		'/Users/yochem/Library/Bin/luals/bin/macOS/lua-language-server', '-E',
-		'/Users/yochem/Library/Bin/luals/main.lua'
+		'/Users/yochem/.local/bin/luals/bin/macOS/lua-language-server', '-E',
+		'/Users/yochem/.local/bin/luals/main.lua'
 	},
 	settings = {
 		Lua = {

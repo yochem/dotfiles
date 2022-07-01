@@ -23,6 +23,7 @@ require('paq')({
 		'hrsh7th/cmp-nvim-lsp',
 		'saadparwaiz1/cmp_luasnip',
 	'L3MON4D3/LuaSnip',
+	'ms-jpq/coq_nvim',
 	'nvim-treesitter/nvim-treesitter',
 	'nvim-treesitter/nvim-treesitter-textobjects',
 	'lewis6991/spellsitter.nvim',
