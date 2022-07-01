@@ -27,27 +27,27 @@ pipi() { python3 -m pip install "$1"; }
 # Uses alias 'git url', as seen in git/.gitconfig
 # 'open' opens an url in the browser on macOS. Not tested on linux
 viewgh() {
-    remote=$(git ls-remote --get-url origin)
-    # format: https://github.com/USER/REPO.git
-    if [ ${remote:0:4} = "http" ]; then
-        open "${remote}"
-    # format: git://github.com/USER/REPO.git
-    elif [ ${remote:0:4} = "git:" ]; then
-        open "https${remote:3}"
-    # format: git@github.com:USER/REPO.git
-    else
-        open "https:$(echo ${remote:4} | tr : /)"
-    fi
+	remote=$(git ls-remote --get-url origin)
+	# format: https://github.com/USER/REPO.git
+	if [ ${remote:0:4} = "http" ]; then
+		open "${remote}"
+	# format: git://github.com/USER/REPO.git
+	elif [ ${remote:0:4} = "git:" ]; then
+		open "https${remote:3}"
+	# format: git@github.com:USER/REPO.git
+	else
+		open "https:$(echo ${remote:4} | tr : /)"
+	fi
 }
 
 # use the same alias for all git repos
 # before I used 'dot' as alias for my dotfiles repo but that's way to confusing
 g() {
-    if git status &>/dev/null; then
-        git "$@"
-    else
-        git --git-dir="$XDG_DATA_HOME/dot" --work-tree="$HOME" "$@"
-    fi
+	if git status &>/dev/null; then
+		git "$@"
+	else
+		git --git-dir="$XDG_DATA_HOME/dot" --work-tree="$HOME" "$@"
+	fi
 }
 
 # gi macos gives the gitignore for macos.
@@ -59,24 +59,24 @@ ip() { ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'; }
 
 # usage: clone_all_from users/username or clone_all_from orgs/orgname
 clone_all_from() {
-    PAGE=1;
-    curl "https://api.github.com/$1/repos?page=$PAGE&per_page=100" |
-    grep -e 'git_url.*' |
-    cut -d \" -f 4 |
-    xargs -L1 -P5 git clone;
+	PAGE=1;
+	curl "https://api.github.com/$1/repos?page=$PAGE&per_page=100" |
+	grep -e 'git_url.*' |
+	cut -d \" -f 4 |
+	xargs -L1 -P5 git clone;
 }
 
 # start or stop a virtual machine from the command line
 vm() {
-    vm_name="${2:-virtual}"
+	vm_name="${2:-virtual}"
 
-    if [ "$1" = "start" ]; then
-        VBoxManage startvm "$vm_name" --type headless
-    elif [ "$1" = "stop" ]; then
-        VBoxManage controlvm "$vm_name" poweroff --type headless
-    else
-        echo "Command not found: $1"
-    fi
+	if [ "$1" = "start" ]; then
+		VBoxManage startvm "$vm_name" --type headless
+	elif [ "$1" = "stop" ]; then
+		VBoxManage controlvm "$vm_name" poweroff --type headless
+	else
+		echo "Command not found: $1"
+	fi
 }
 
 # convert hex to decimal representation

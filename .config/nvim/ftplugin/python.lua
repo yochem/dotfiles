@@ -7,11 +7,11 @@ vim.opt.formatprg = 'python-format'
 
 -- list all functions in the current buffer, type :<line-num> to jump to it
 vim.keymap.set('n', ',f', function ()
-    vim.cmd([[
-    normal mx
-    exe 'g/def .*:$\|^class /#'
-    normal `x
-    ]])
+	vim.cmd([[
+	normal mx
+	exe 'g/def .*:$\|^class /#'
+	normal `x
+	]])
 end, {})
 
 -- fold docstrings beautifully

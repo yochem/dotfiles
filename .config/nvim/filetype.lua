@@ -1,6 +1,6 @@
 vim.filetype.add({
-    extension = {
-        tex = 'tex',
-        tmpl = 'gohtmltmpl',
-    },
+	extension = {
+		tex = 'tex',
+		tmpl = 'gohtmltmpl',
+	},
 })

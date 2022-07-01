@@ -5,55 +5,55 @@ usage() { echo "usage: howto <devnull|sshkey|fixusb|test|bashnorc>" 1>&2; exit 1
 [ -z "$1" ] && usage
 
 case "$1" in
-    devnull | dev/null)
-        echo "BASH: &>/dev/null"
-        echo "POSIX: >/dev/null 2>&1"
-        ;;
-    *ssh*)
-        echo "1. ssh-keygen -t ed25519 -a 100 (OR ssh-keygen -t rsa -b 4096 -o -a 100)"
-        echo "2. eval \"\$(ssh-agent -s)\""
-        echo "3. ssh-add ~/.ssh/KEY"
-        echo "4. add host to ~/.ssh/config"
-        echo "5. ssh-add -K ~/.ssh/KEY"
-        echo "6. ssh-copy-id -i ~/.ssh/KEY USER@HOSTNAME"
-        ;;
-    *usb* | *iphone)
-        # https://apple.stackexchange.com/a/334006
-        echo "sudo killall -STOP -c usbd"
-        ;;
-    *test*)
-        echo "-d    file is a directory"
-        echo "-e    file exists (type doesn't matter"
-        echo "-f    regular file"
-        echo "-n    length string is nonzero"
-        echo "-r    file is readable"
-        echo "-w    file is writable"
-        echo "-x    file is executable"
-        echo "-z    length string is zero"
-        ;;
-    *bash*|*rc*)
-        echo "env -i bash --norc --noprofile"
-        echo "vim -u NONE"
-        ;;
-    *git*|*branch*)
-        echo "git push --delete <remote_name> <branch_name>"
-        echo "git branch -d <branch_name>"
-        ;;
-    redirect|overwrite|append)
-        echo ">>: append"
-        echo ">: overwrite"
-        ;;
-    hub)
-        echo "hub fork --remote-name=origin"
-        echo "git push origin <branch>"
-        echo "hub pull-request"
-        ;;
-    *scp*)
-        echo "scp -P 5679 -r path swagbox:path"
-        ;;
-    *)
-        usage
-        ;;
+	devnull | dev/null)
+		echo "BASH: &>/dev/null"
+		echo "POSIX: >/dev/null 2>&1"
+		;;
+	*ssh*)
+		echo "1. ssh-keygen -t ed25519 -a 100 (OR ssh-keygen -t rsa -b 4096 -o -a 100)"
+		echo "2. eval \"\$(ssh-agent -s)\""
+		echo "3. ssh-add ~/.ssh/KEY"
+		echo "4. add host to ~/.ssh/config"
+		echo "5. ssh-add -K ~/.ssh/KEY"
+		echo "6. ssh-copy-id -i ~/.ssh/KEY USER@HOSTNAME"
+		;;
+	*usb* | *iphone)
+		# https://apple.stackexchange.com/a/334006
+		echo "sudo killall -STOP -c usbd"
+		;;
+	*test*)
+		echo "-d	file is a directory"
+		echo "-e	file exists (type doesn't matter"
+		echo "-f	regular file"
+		echo "-n	length string is nonzero"
+		echo "-r	file is readable"
+		echo "-w	file is writable"
+		echo "-x	file is executable"
+		echo "-z	length string is zero"
+		;;
+	*bash*|*rc*)
+		echo "env -i bash --norc --noprofile"
+		echo "vim -u NONE"
+		;;
+	*git*|*branch*)
+		echo "git push --delete <remote_name> <branch_name>"
+		echo "git branch -d <branch_name>"
+		;;
+	redirect|overwrite|append)
+		echo ">>: append"
+		echo ">: overwrite"
+		;;
+	hub)
+		echo "hub fork --remote-name=origin"
+		echo "git push origin <branch>"
+		echo "hub pull-request"
+		;;
+	*scp*)
+		echo "scp -P 5679 -r path swagbox:path"
+		;;
+	*)
+		usage
+		;;
 esac
 
 exit 0

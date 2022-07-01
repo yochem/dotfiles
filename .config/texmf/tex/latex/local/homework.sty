@@ -10,8 +10,8 @@
 \DeclareOptionX{course}[]{\renewcommand{\course}{#1}}
 \DeclareOptionX{hw}[]{\renewcommand{\hwnum}{#1}}
 \DeclareOptionX{alph_enum}[]{
-    \titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{Question\ \thesection}
-    \renewcommand{\labelenumi}{(\alph{enumi})}
+	\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{Question\ \thesection}
+	\renewcommand{\labelenumi}{(\alph{enumi})}
 }
 \ProcessOptionsX\relax
 
@@ -24,16 +24,16 @@
 \setlength{\parindent}{0pt} % don't indent paragraphs
 
 \title{
-    \vspace{-2.5cm}
-    \rule{\linewidth}{0.5pt} \\
-    \LARGE \textbf{\course}\\
-    [0.5cm]
-    \normalsize \textsc{Homework \hwnum}\\
-    \rule{\linewidth}{0.5pt}
+	\vspace{-2.5cm}
+	\rule{\linewidth}{0.5pt} \\
+	\LARGE \textbf{\course}\\
+	[0.5cm]
+	\normalsize \textsc{Homework \hwnum}\\
+	\rule{\linewidth}{0.5pt}
 }
 \author{Yochem van Rosmalen\\
-        12223247\\
-        \texttt{yochem.vanrosmalen@student.uva.nl}}
+		12223247\\
+		\texttt{yochem.vanrosmalen@student.uva.nl}}
 \date{\today}
 \usepackage[bottom]{footmisc}
 

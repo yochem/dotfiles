@@ -7,9 +7,9 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_BIN_HOME="$HOME/.local/bin"
 
 if [ "$(uname -s)" = Darwin ]; then
-    export XDG_CACHE_HOME="$HOME/Library/Caches"
+	export XDG_CACHE_HOME="$HOME/Library/Caches"
 else
-    export XDG_CACHE_HOME="$HOME/.cache"
+	export XDG_CACHE_HOME="$HOME/.cache"
 fi
 
 export ATOM_HOME="$XDG_CONFIG_HOME/atom"

@@ -1,85 +1,85 @@
 [user]
-    name = Yochem van Rosmalen
-    email = yochem+git@icloud.com
+	name = Yochem van Rosmalen
+	email = yochem+git@icloud.com
 
 [init]
-    defaultBranch = main
+	defaultBranch = main
 
 [core]
-    excludesfile = ~/.config/git/ignore
+	excludesfile = ~/.config/git/ignore
 
 [pager]
-    diff = true
+	diff = true
 
 [help]
-    autocorrect = 1
+	autocorrect = 1
 
 [alias]
-    # View the current working tree status using the short format
-    s = status -s
+	# View the current working tree status using the short format
+	s = status -s
 
-    # show diff summary
-    diffsum = diff master --compact-summary
+	# show diff summary
+	diffsum = diff master --compact-summary
 
-    # commit all files that have been modified or removed, new files not
-    # affected
-    ca = commit -a
+	# commit all files that have been modified or removed, new files not
+	# affected
+	ca = commit -a
 
-    # View url to Github
-    url = config --get remote.origin.url
+	# View url to Github
+	url = config --get remote.origin.url
 
-    # List aliases
-    aliases = config --get-regexp alias
+	# List aliases
+	aliases = config --get-regexp alias
 
-    # List contributors with number of commits
-    contributors = shortlog --summary --numbered
+	# List contributors with number of commits
+	contributors = shortlog --summary --numbered
 
-    # find author of specific commit
-    author = show -s --format='%an <%ae>'
+	# find author of specific commit
+	author = show -s --format='%an <%ae>'
 
-    # also show remote branches
-    branches = branch -a
+	# also show remote branches
+	branches = branch -a
 
-    # I always forgot these
-    unadd = reset
-    uncommit = reset HEAD^
+	# I always forgot these
+	unadd = reset
+	uncommit = reset HEAD^
 
-    # log a pretty graph to show commits
-    graph = log --graph --pretty=format:'%Cred%h%Creset (%an) -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit
+	# log a pretty graph to show commits
+	graph = log --graph --pretty=format:'%Cred%h%Creset (%an) -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit
 
-    # check last commit
-    last = log -1 HEAD
+	# check last commit
+	last = log -1 HEAD
 
-    # git status for every local branch
-    branch-status = !branch_status
+	# git status for every local branch
+	branch-status = !branch_status
 
-    # see all files tracked
-    files = ls-tree --full-tree -r --name-only HEAD
+	# see all files tracked
+	files = ls-tree --full-tree -r --name-only HEAD
 
 [log]
-    date = auto:human
+	date = auto:human
 
 [commit]
-    template = ~/.config/git/commit-template
+	template = ~/.config/git/commit-template
 
 [color "branch"]
-    current = green
-    local = normal
-    remote = yellow
+	current = green
+	local = normal
+	remote = yellow
 
 [color "status"]
-    added = green
-    changed = yellow
-    untracked = red
+	added = green
+	changed = yellow
+	untracked = red
 
 [hub]
-    protocol = ssh
+	protocol = ssh
 
 [merge]
-    tool = vimdiff
+	tool = vimdiff
 
 [mergetool]
-    prompt = false
+	prompt = false
 
 [mergetool "vimdiff"]
-    cmd = nvim -d $BASE $LOCAL
+	cmd = nvim -d $BASE $LOCAL

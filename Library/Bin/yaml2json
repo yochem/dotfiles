@@ -5,17 +5,17 @@ import sys
 import yaml
 
 if len(sys.argv) > 1:
-    with open(sys.argv[1], 'r') as f:
-        loaded_yaml = yaml.safe_load(f)
+	with open(sys.argv[1], 'r') as f:
+		loaded_yaml = yaml.safe_load(f)
 else:
-    try:
-        loaded_yaml = yaml.safe_load(str(sys.stdin.read()))
-    except KeyboardInterrupt:
-        print()
-        sys.exit(1)
+	try:
+		loaded_yaml = yaml.safe_load(str(sys.stdin.read()))
+	except KeyboardInterrupt:
+		print()
+		sys.exit(1)
 
 if len(sys.argv) == 3:
-    with open(sys.argv[2], 'w') as f:
-        json.dump(loaded_yaml, f, indent=4)
+	with open(sys.argv[2], 'w') as f:
+		json.dump(loaded_yaml, f, indent=4)
 else:
-    print(json.dumps(loaded_yaml, indent=4))
+	print(json.dumps(loaded_yaml, indent=4))

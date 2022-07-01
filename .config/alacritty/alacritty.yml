@@ -5,37 +5,37 @@ font:
 
 colors:
   cursor:
-    cursor: '#abb2bf'
+	cursor: '#abb2bf'
 
   primary:
-    background: '#1c1c1c'
-    foreground: '#ffffff'
+	background: '#1c1c1c'
+	foreground: '#ffffff'
 
   normal:
-    black:   '#282c34'
-    red:     '#e06c75'
-    green:   '#98c379'
-    yellow:  '#d19a66'
-    blue:    '#61afef'
-    magenta: '#c678dd'
-    cyan:    '#56b6c2'
-    white:   '#abb2bf'
+	black:   '#282c34'
+	red:	 '#e06c75'
+	green:   '#98c379'
+	yellow:  '#d19a66'
+	blue:	'#61afef'
+	magenta: '#c678dd'
+	cyan:	'#56b6c2'
+	white:   '#abb2bf'
 
   # Bright colors
   bright:
-    black:   '#5c6370'
-    red:     '#e06c75'
-    green:   '#98c379'
-    yellow:  '#d19a66'
-    blue:    '#61afef'
-    magenta: '#c678dd'
-    cyan:    '#56b6c2'
-    white:   '#ffffff'
+	black:   '#5c6370'
+	red:	 '#e06c75'
+	green:   '#98c379'
+	yellow:  '#d19a66'
+	blue:	'#61afef'
+	magenta: '#c678dd'
+	cyan:	'#56b6c2'
+	white:   '#ffffff'
 
 window:
   padding:
-    x: 15
-    y: 10
+	x: 15
+	y: 10
   dynamic_title: true
 
 selection:
@@ -45,5 +45,5 @@ live_config_reload: true
 
 key_bindings:
   - { key: Return, mods: Command, action: ToggleSimpleFullscreen }
-  - { key: W,      mods: Command, action: Hide }
-  - { key: N,      mods: Command, action: SpawnNewInstance }
+  - { key: W,	  mods: Command, action: Hide }
+  - { key: N,	  mods: Command, action: SpawnNewInstance }

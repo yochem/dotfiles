@@ -11,14 +11,14 @@ dot checkout >/dev/null 2>&1
 
 # if git checkout returned an error, create a backup and replace
 if [ "$?" -ne 0 ]; then
-    files=$(dot checkout 2>&1 | grep -E "^\s+" | awk {'print $1'})
-    mkdir -p "$HOME/dotfiles-backup/"
+	files=$(dot checkout 2>&1 | grep -E "^\s+" | awk {'print $1'})
+	mkdir -p "$HOME/dotfiles-backup/"
 
-    for file in $files; do
-        mv "$file" "$HOME/dotfiles-backup/$file"
-    done
+	for file in $files; do
+		mv "$file" "$HOME/dotfiles-backup/$file"
+	done
 
-    echo "some files already exist on your computer. They have been moved to $HOME/dotfiles-backup."
+	echo "some files already exist on your computer. They have been moved to $HOME/dotfiles-backup."
 fi
 
 # checkout again to really do the checkout
@@ -30,8 +30,8 @@ dot update-index --assume-unchanged README.md
 rm "$HOME/README.md" >/dev/null 2>&1
 
 if [ "$(uname -s)" = "Linux" ]; then
-    dot update-index --assume-unchanged "$HOME/Library/Preferences/"*
-    rm -rf "$HOME/Library" >/dev/null 2>&1
+	dot update-index --assume-unchanged "$HOME/Library/Preferences/"*
+	rm -rf "$HOME/Library" >/dev/null 2>&1
 fi
 
 echo "dotfiles installed! Run '. ~/.bash_profile' to reload"

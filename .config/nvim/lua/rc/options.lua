@@ -41,10 +41,10 @@ opt.scrolloff = 3
 opt.wrap = false
 opt.sidescrolloff = 1
 
--- tabs / spaces settings
+-- tabs are better for accessability
 opt.tabstop = 4
-opt.softtabstop = 4
-opt.expandtab = true
+opt.softtabstop = 0
+opt.expandtab = false
 opt.shiftwidth = 4
 opt.shiftround = true
 opt.smartindent = true
@@ -67,7 +67,7 @@ vim.g.python_highlight_all = 1
 
 -- speed improvement
 if vim.fn.has('mac') == 1 then
-    vim.g.python3_host_prog = '/usr/local/bin/python3'
+	vim.g.python3_host_prog = '/usr/local/bin/python3'
 else
-    vim.g.python3_host_prog = '/usr/bin/python3'
+	vim.g.python3_host_prog = '/usr/bin/python3'
 end

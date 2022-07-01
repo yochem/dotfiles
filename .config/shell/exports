@@ -2,14 +2,14 @@
 
 # choose the default editor
 if command -v nvim >/dev/null 2>&1; then
-    export VISUAL="nvim"
+	export VISUAL="nvim"
 
-    # view manpage in neovim
-    export MANPAGER='nvim +Man!'
+	# view manpage in neovim
+	export MANPAGER='nvim +Man!'
 elif command -v vim >/dev/null 2>&1; then
-    export VISUAL="vim"
+	export VISUAL="vim"
 else
-    export VISUAL="nano"
+	export VISUAL="nano"
 fi
 
 export EDITOR="$VISUAL"

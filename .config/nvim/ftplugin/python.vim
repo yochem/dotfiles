@@ -6,7 +6,7 @@ endfunction
 function! FoldText()
   let l:snippet = getline(v:foldstart)
   if len(s:Strip(l:snippet)) == 3
-    let l:snippet = strpart(l:snippet, 1) . s:Strip(getline(v:foldstart + 1))
+	let l:snippet = strpart(l:snippet, 1) . s:Strip(getline(v:foldstart + 1))
   endif
   return l:snippet
 endfunction
