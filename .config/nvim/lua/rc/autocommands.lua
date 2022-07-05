@@ -13,9 +13,9 @@ autocmd('TextYankPost', {
 -- open file with cursor on last position
 autocmd('BufReadPost', {
 	callback = function ()
-		local mark = vim.fn.line([['"]])
-		if 0 < mark and mark <= vim.api.nvim_buf_line_count(0) then
-			vim.api.nvim_command([[normal! g'"]])
+		local mark = vim.api.nvim_buf_get_mark(0, [["]])
+		if 0 < mark[1] and mark[1] <= vim.api.nvim_buf_line_count(0) then
+			vim.api.nvim_win_set_cursor(0, mark)
 		end
 	end
 })
@@ -68,7 +68,6 @@ autocmd({'BufEnter', 'BufWritePost'}, {
 })
 
 -- go to the github repo of plugins
--- if vim.fn.expand('%:t') == 'plugins.lua' then
 autocmd('BufEnter', {
 	pattern = 'plugins.lua',
 	callback = function ()
@@ -79,16 +78,6 @@ autocmd('BufEnter', {
 		end)
 	end
 })
-
--- autocmd({'VimEnter'}, {
---	 callback = function ()
---		 local ft = vim.opt.filetype:get()
---		 vim.schedule(function ()
---			 vim.cmd('TSInstall ' .. ft)
---		 end)
---	 end,
---	 group = id
--- })
 
 vim.api.nvim_create_user_command('Scratch', function()
 	vim.cmd('execute "new "')

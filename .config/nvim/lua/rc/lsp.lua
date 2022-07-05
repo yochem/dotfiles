@@ -1,20 +1,28 @@
 local lsp = require('lspconfig')
+local coq = require('coq')
 
-lsp.pylsp.setup {
-	settings = {
-		pyls = {
-			plugins = {
-				mccabe = {enabled = false},
-				pycodestyle = {enabled = false},
-				pydocstyle = {enabled = false},
-				pyflakes = {enabled = false},
-				pylint = {enabled = false},
-				yapf = {enabled = false},
-				pyls_mypy = {enabled = false, live_mode = false}
-			}
-		}
-	}
-}
+local function setup(server, options)
+	lsp[server].setup(options)
+	lsp[server].setup(coq.lsp_ensure_capabilities(options))
+end
+
+-- setup('pylsp', {
+-- 	settings = {
+-- 		pyls = {
+-- 			plugins = {
+-- 				mccabe = {enabled = false},
+-- 				pycodestyle = {enabled = false},
+-- 				pydocstyle = {enabled = false},
+-- 				pyflakes = {enabled = false},
+-- 				pylint = {enabled = false},
+-- 				yapf = {enabled = false},
+-- 				pyls_mypy = {enabled = false, live_mode = false}
+-- 			}
+-- 		}
+-- 	}
+-- })
+lsp.pylsp.setup({})
+lsp.pylsp.setup(coq.lsp_ensure_capabilities({}))
 
 lsp.sumneko_lua.setup {
 	cmd = {
@@ -67,8 +75,3 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 		update_in_insert = false,
 		severity_sort = true
 	})
-	--
--- default configuration
-lsp.util.default_config = vim.tbl_extend("force", lsp.util.default_config, {
-	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-})

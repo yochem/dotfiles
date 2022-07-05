@@ -19,10 +19,10 @@ require('paq')({
 	'gpanders/editorconfig.nvim',
 	'tpope/vim-fugitive',
 	'neovim/nvim-lspconfig',
-		'hrsh7th/nvim-cmp',
-		'hrsh7th/cmp-nvim-lsp',
-		'saadparwaiz1/cmp_luasnip',
-	'L3MON4D3/LuaSnip',
+	-- 	'hrsh7th/nvim-cmp',
+	-- 	'hrsh7th/cmp-nvim-lsp',
+	-- 	'saadparwaiz1/cmp_luasnip',
+	-- 'L3MON4D3/LuaSnip',
 	'ms-jpq/coq_nvim',
 	'nvim-treesitter/nvim-treesitter',
 	'nvim-treesitter/nvim-treesitter-textobjects',
@@ -93,46 +93,28 @@ require('indent_blankline').setup({
 
 require('virt-column').setup()
 
-local cmp = require('cmp')
-local luasnip = require('luasnip')
-cmp.setup({
-	snippet = {
-		expand = function(args)
-	luasnip.lsp_expand(args.body)
-		end,
-	},
-	mapping = {
-		['<C-p>'] = cmp.mapping.select_prev_item(),
-		['<C-n>'] = cmp.mapping.select_next_item(),
-		['<C-d>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.close(),
-		['<CR>'] = cmp.mapping.confirm {
-		behavior = cmp.ConfirmBehavior.Replace,
-		select = true,
+vim.g.coq_settings = {
+	auto_start = 'shut-up',
+	xdg = true,
+	['keymap.jump_to_mark'] = '<tab>',
+	display = {
+		pum = {
+			y_max_len = 10,
+			kind_context = {'', ''},
+			source_context = {'', ''},
 		},
-		['<Tab>'] = function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end,
-		['<S-Tab>'] = function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end,
+		icons = {mode = 'none'},
+		['icons.mode'] = 'none'
 	},
-	sources = {{ name = 'nvim_lsp' }}
-})
+	clients = {
+		buffers = {enabled = true, weight_adjust = -1.9},
+		tree_sitter = {enabled = true, weight_adjust = -1.5},
+		lsp = {enabled = true, weight_adjust = 1.5},
+		snippets = {enabled = true, weight_adjust = 3, warn = {}},
+		tmux = {enabled = false},
+	}
+}
+
 
 require('nvim-gps').setup({disable_icons = true, separator = '.'})
 
