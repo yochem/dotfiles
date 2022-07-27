@@ -107,17 +107,34 @@ map('n', 'j', "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", {expr = true})
 map('n', 'gx',
 	cmd"call netrw#BrowseX(expand((exists('g:netrw_gx')? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())")
 
--- use ! to negate a boolean under cursor
+
 map('n', '!', function()
+	local nvim_buf_get_text = vim.api.nvim_buf_get_text
+	local nvim_buf_set_text = vim.api.nvim_buf_set_text
+	local nvim_win_get_cursor = vim.api.nvim_win_get_cursor
+	local nvim_win_set_cursor = vim.api.nvim_win_set_cursor
+
 	local negates = {
 		['true'] = 'false',
 		['false'] = 'true',
 		['True'] = 'False',
 		['False'] = 'True',
 	}
-	local word = vim.fn.expand('<cword>')
+
+	-- get the entire word under cursor by moving to front and end
+	local cursor = nvim_win_get_cursor(0)
+	local line = cursor[1] - 1
+	vim.cmd('exe "norm! wb"')
+	local begin_word = nvim_win_get_cursor(0)[2]
+	vim.cmd('exe "norm! e"')
+	local end_word = nvim_win_get_cursor(0)[2] + 1
+
+	local word = nvim_buf_get_text(0, line, begin_word, line, end_word, {})[1]
+
 	if negates[word] ~= nil then
-		-- results in: exe "norm! ciwFalse"
-		vim.cmd('exe "norm! ciw' .. negates[word] .. '"')
+		nvim_buf_set_text(0, line, begin_word, line, end_word, {negates[word]})
 	end
+
+	-- restore cursor position
+	nvim_win_set_cursor(0, cursor)
 end)

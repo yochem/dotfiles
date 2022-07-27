@@ -86,3 +86,7 @@ function line -e fish_prompt -d "print line after command to seperate commands"
 	set_color brblack
 	jot -b '–' -s '' $COLUMNS 2>/dev/null
 end
+
+function sortlist
+	echo $argv[1] |tr $argv[2] '\n' | sort -b |  paste -s -d $argv[2] -
+end

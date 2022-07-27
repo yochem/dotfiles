@@ -1,5 +1,6 @@
 require('paq')({
 	'savq/paq-nvim',
+	'lewis6991/impatient.nvim',
 
 	-- improving vim experience
 	'b3nj5m1n/kommentary',
@@ -10,7 +11,7 @@ require('paq')({
 	'nmac427/guess-indent.nvim',
 
 	-- improve vim looks
-	'ful1e5/onedark.nvim',
+	'Mofiqul/vscode.nvim',
 	'lukas-reineke/indent-blankline.nvim',
 	'lukas-reineke/virt-column.nvim',
 	'nvim-lualine/lualine.nvim',
@@ -19,11 +20,8 @@ require('paq')({
 	'gpanders/editorconfig.nvim',
 	'tpope/vim-fugitive',
 	'neovim/nvim-lspconfig',
-	-- 	'hrsh7th/nvim-cmp',
-	-- 	'hrsh7th/cmp-nvim-lsp',
-	-- 	'saadparwaiz1/cmp_luasnip',
-	-- 'L3MON4D3/LuaSnip',
 	'ms-jpq/coq_nvim',
+	'ms-jpq/coq.artifacts',
 	'nvim-treesitter/nvim-treesitter',
 	'nvim-treesitter/nvim-treesitter-textobjects',
 	'lewis6991/spellsitter.nvim',
@@ -40,6 +38,23 @@ require('paq')({
 	'vim-python/python-syntax',
 	'Vimjas/vim-python-pep8-indent',
 	'chrisbra/csv.vim',
+	'ollykel/v-vim',
+
+	'dstein64/vim-startuptime'
+})
+
+require('impatient')
+
+require('vscode').setup({
+	transparent = true,
+	color_overrides = {
+		vscLineNumber = '#adbac7',
+	},
+	group_overrides = {
+		TSVariable = {fg='#ffffff'},
+		TSField = {fg='#ffffff'},
+		Whitespace = {fg='#5A5A5A'},
+	},
 })
 
 -- paq does not support local packages
@@ -52,38 +67,10 @@ vim.cmd('cabbrev vs Split')
 
 require('kommentary.config').configure_language('default', {
 	prefer_single_line_comments = true,
-	use_consistent_indentation = true,
+	use_consistient_indentation = true,
 })
 
 require('hlslens').setup({calm_down = true})
-
-require('onedark').setup({
-	transparent = true,
-	transparent_sidebar = false,
-	comment_style = 'NONE',
-	keyword_style = 'NONE',
-	function_style = 'NONE',
-	variable_style = 'NONE',
-	colors = {
-		fg0 = '#ffffff',
-	},
-	overrides = function(c)
-		local Styles = require('onedark.types').od.HighlightStyle
-		return {
-			MsgArea = {fg = c.fg0},
-			LineNr = {fg = c.fg_light},
-			ColorColumn = {bg = c.none},
-			TSField = {fg = c.fg0},
-			TSOperator = {fg = c.fg0},
-			TSParameter = {fg = c.orange0},
-			pythonTSFuncBuiltin = {fg = c.blue0},
-			TSVariable = {fg = c.fg0},
-			TSPunctBracket = {c.fg0},
-			TSConstructor = {fg = c.fg0},
-			TSEmphasis = {style = Styles.Bold},
-		}
-	end
-})
 
 require('indent_blankline').setup({
 	filetype_exclude = {'help', 'man', 'packer'},
@@ -96,25 +83,27 @@ require('virt-column').setup()
 vim.g.coq_settings = {
 	auto_start = 'shut-up',
 	xdg = true,
-	['keymap.jump_to_mark'] = '<tab>',
+	keymap = {
+		jump_to_mark = '<c-h>',
+		pre_select = true,
+	},
 	display = {
+		ghost_text = {enabled = false},
 		pum = {
 			y_max_len = 10,
 			kind_context = {'', ''},
 			source_context = {'', ''},
 		},
 		icons = {mode = 'none'},
-		['icons.mode'] = 'none'
 	},
 	clients = {
 		buffers = {enabled = true, weight_adjust = -1.9},
-		tree_sitter = {enabled = true, weight_adjust = -1.5},
+		tree_sitter = {enabled = true, weight_adjust = 1.2},
 		lsp = {enabled = true, weight_adjust = 1.5},
-		snippets = {enabled = true, weight_adjust = 3, warn = {}},
+		snippets = {enabled = true, weight_adjust = 1, warn = {}},
 		tmux = {enabled = false},
 	}
 }
-
 
 require('nvim-gps').setup({disable_icons = true, separator = '.'})
 

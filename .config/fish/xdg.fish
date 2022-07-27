@@ -11,10 +11,24 @@ else
 	set -xU XDG_CACHE_HOME "$HOME/.cache"
 end
 
+# for easier typing on the command line
+function xdg
+	switch $argv[1]
+	case config
+		echo "$XDG_CONFIG_HOME"
+	case data
+		echo "$XDG_DATA_HOME"
+	case cache
+		echo "$XDG_CACHE_HOME"
+	case state
+		echo "$XDG_STATE_HOME"
+	end
+end
+complete -c xdg -x -a "config data cache state"
+
 
 # set -xU PYTHONSTARTUP "$XDG_CONFIG_HOME/python/startup.py"
 # set -xU RIPGREP_CONFIG_PATH "$XDG_CONFIG_HOME/rg/config"
-set -xU ATOM_HOME "$XDG_CONFIG_HOME/atom"
 set -xU BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME/bundle"
 set -xU CONDA_ROOT "$XDG_DATA_HOME/conda"
 set -xU DOCKER_CONFIG "$XDG_CONFIG_HOME/docker"
@@ -39,5 +53,6 @@ set -xU PYTHONPYCACHEPREFIX "$XDG_CACHE_HOME/pycache"
 set -xU SCREENRC "$XDG_CONFIG_HOME/screen/screenrc"
 set -xU TERMINFO "$XDG_DATA_HOME/terminfo"
 set -xU TEXMFHOME "$XDG_CONFIG_HOME/texmf"
+set -xU VCACHE "$XDG_CACHE_HOME/v"
 set -xU ZDOTDIR "$XDG_CONFIG_HOME/zsh"
 set -xU _Z_DATA "$XDG_DATA_HOME/z/z_data"

@@ -28,17 +28,26 @@ autocmd('BufNewFile', {
 })
 
 -- highligt non-ascii blue
-vim.api.nvim_set_hl(0, 'nonascii', {bg = 'Blue'})
 autocmd({'BufEnter', 'InsertLeave'}, {
 	callback = function ()
+		vim.api.nvim_set_hl(0, 'nonascii', {bg = 'Blue'})
 		vim.cmd([[syntax match nonascii "[^\x00-\x7F]"]])
 	end
 })
 
 -- highlight trailing whitespace intrusive red
-vim.api.nvim_set_hl(0, 'ExtraWhitespace', {bg = 'red'})
-autocmd('InsertEnter', {command = [[match ExtraWhitespace /\s\+\%#\@<!$/]]})
-autocmd('InsertLeave', {command = [[match ExtraWhitespace /\s\+$/]]})
+autocmd('InsertEnter', {
+	callback = function ()
+		vim.cmd([[match TrailingWhitespace /\s\+\%#\@<!$/]])
+		vim.api.nvim_set_hl(0, 'TrailingWhitespace', {bg = 'red'})
+	end
+})
+autocmd({'InsertLeave', 'BufEnter'}, {
+	callback = function ()
+		vim.cmd([[match TrailingWhitespace /\s\+$/]])
+		vim.api.nvim_set_hl(0, 'TrailingWhitespace', {bg = 'red'})
+	end
+})
 
 -- :help for lua files in nvim config dir
 local cfgdir = vim.fn.stdpath('config')

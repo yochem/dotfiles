@@ -57,7 +57,7 @@ lsp.cssls.setup {root_dir = lsp.util.root_pattern("index.html")}
 lsp.erlangls.setup {}
 lsp.eslint.setup {}
 lsp.html.setup {}
-
+lsp.vls.setup({})
 lsp.jsonls.setup {}
 lsp.texlab.setup {
 	settings = {
