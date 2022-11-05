@@ -26,6 +26,8 @@ opt.splitbelow = true
 opt.number = true
 opt.relativenumber = true
 opt.switchbuf = 'usetab,newtab'
+opt.splitkeep = 'screen'
+
 
 -- search settings
 opt.gdefault = true

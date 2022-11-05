@@ -11,7 +11,9 @@ require('paq')({
 	'nmac427/guess-indent.nvim',
 
 	-- improve vim looks
-	'Mofiqul/vscode.nvim',
+	'navarasu/onedark.nvim',
+	-- 'Mofiqul/vscode.nvim',
+	-- 'kdheepak/monochrome.nvim',
 	'lukas-reineke/indent-blankline.nvim',
 	'lukas-reineke/virt-column.nvim',
 	'nvim-lualine/lualine.nvim',
@@ -22,15 +24,16 @@ require('paq')({
 	'neovim/nvim-lspconfig',
 	'ms-jpq/coq_nvim',
 	'ms-jpq/coq.artifacts',
+	'ray-x/lsp_signature.nvim',
 	'nvim-treesitter/nvim-treesitter',
 	'nvim-treesitter/nvim-treesitter-textobjects',
 	'lewis6991/spellsitter.nvim',
 	'nvim-treesitter/playground',
 	'SmiteshP/nvim-gps',
-	   'nvim-lua/plenary.nvim',
+		'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
 	'kosayoda/nvim-lightbulb',
-	'lewis6991/gitsigns.nvim',
+	-- 'lewis6991/gitsigns.nvim',
 
 	-- better filetypes
 	'yochem/prolog.vim',
@@ -45,25 +48,28 @@ require('paq')({
 
 require('impatient')
 
-require('vscode').setup({
+require('onedark').setup({
+	style = 'darker',
 	transparent = true,
-	color_overrides = {
-		vscLineNumber = '#adbac7',
+	colors = {
+		fg = '#fff'
 	},
-	group_overrides = {
-		TSVariable = {fg='#ffffff'},
-		TSField = {fg='#ffffff'},
-		Whitespace = {fg='#5A5A5A'},
-	},
+	highlights = {
+		MsgArea = {fg = '$fg'},
+		LineNrAbove = {fg = '#adbac7'},
+		LineNrBelow = {fg = '#adbac7'},
+		LineNr = {fg = '$fg'},
+		-- lualine_c_normal = {fg = '$fg'}
+	}
 })
+require('onedark').load()
 
--- paq does not support local packages
 vim.opt.runtimepath:append('~/Documents/jvim.nvim')
-vim.opt.runtimepath:append('~/Documents/autosplit.nvim')
+--[[ vim.opt.runtimepath:append('~/Documents/autosplit.nvim')
 
 require('autosplit').setup({split = 'auto'})
 vim.cmd('cabbrev sp Split')
-vim.cmd('cabbrev vs Split')
+vim.cmd('cabbrev vs Split') ]]
 
 require('kommentary.config').configure_language('default', {
 	prefer_single_line_comments = true,
@@ -71,12 +77,6 @@ require('kommentary.config').configure_language('default', {
 })
 
 require('hlslens').setup({calm_down = true})
-
-require('indent_blankline').setup({
-	filetype_exclude = {'help', 'man', 'packer'},
-	show_first_indent_level = false,
-	show_trailing_blankline_indent = false
-})
 
 require('virt-column').setup()
 
@@ -98,9 +98,9 @@ vim.g.coq_settings = {
 	},
 	clients = {
 		buffers = {enabled = true, weight_adjust = -1.9},
-		tree_sitter = {enabled = true, weight_adjust = 1.2},
+		tree_sitter = {enabled = true, weight_adjust = 1},
 		lsp = {enabled = true, weight_adjust = 1.5},
-		snippets = {enabled = true, weight_adjust = 1, warn = {}},
+		snippets = {enabled = true, weight_adjust = 1.2, warn = {}},
 		tmux = {enabled = false},
 	}
 }
@@ -120,8 +120,9 @@ require('nvim-lightbulb').setup({
 local gps = require('nvim-gps')
 
 local function lsp()
-	if #vim.lsp.buf_get_clients() > 0 then
-		return 'LSP'
+	local clients = vim.lsp.get_active_clients()
+	if #clients > 0 then
+		return 'LSP:' .. clients[1].name
 	end
 	return ''
 end
@@ -138,39 +139,27 @@ local function wordcount()
 	return ''
 end
 
-local function filename()
-	local ft = vim.bo.filetype
-	if ft == 'help' or ft == 'man' then
-		return vim.fn.expand('%')
-	else
-		local fn = vim.fn.expand('%:p')
-		fn = fn:gsub('/Users/yochem', '~')
-
-		if fn == '' then
-			return '[No Name]'
-		end
-
-		if #fn > 30 then
-			fn = fn:gsub('/(%.?%w%)%w+/', '/%1/', 1)
-		end
-
-		return fn
-	end
-end
+-- local custom_onedark = require('lualine.themes.onedark')
+-- local modes = {'normal', 'command', 'insert', 'visual', 'terminal', 'replace', 'inactive'}
+-- for _, mode in pairs(modes) do
+-- 	custom_onedark[mode].a = custom_onedark['insert'].a
+-- 	custom_onedark[mode].b = custom_onedark['insert'].a
+-- 	custom_onedark[mode].c = custom_onedark['insert'].a
+-- end
 
 require('lualine').setup({
 	options = {
 		icons_enabled = false,
-		component_separators = { left = '|', right = '|'},
-		section_separators = { left = '', right = ''},
+		component_separators = '|',
+		section_separators = '',
 		globalstatus = true,
-		theme = 'auto',
+		theme = 'onedark',
 	},
 	sections = {
 		lualine_a = {'mode'},
 		lualine_b = {'branch', 'diff'},
 		lualine_c = {
-			filename,
+			{'filename', path = 3 },
 			{gps.get_location, cond = gps.is_available}
 		},
 		lualine_x = {wordcount, 'filetype'},
@@ -184,8 +173,8 @@ require('lualine').setup({
 })
 
 require('nvim-treesitter.configs').setup({
-	highlight = {enable = true},
-	indent = {enable = true},
+	highlight = {enable = false},
+	indent = {enable = false},
 	textobjects = {
 		select = {
 			enable = true,
@@ -201,4 +190,10 @@ require('nvim-treesitter.configs').setup({
 	},
 })
 
-require('gitsigns').setup()
+require('indent_blankline').setup({
+	filetype_exclude = {'help', 'man', 'packer'},
+	show_first_indent_level = false,
+	show_trailing_blankline_indent = false
+})
+
+-- require('gitsigns').setup()

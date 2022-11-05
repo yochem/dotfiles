@@ -3,4 +3,7 @@ vim.filetype.add({
 		tex = 'tex',
 		tmpl = 'gohtmltmpl',
 	},
+	filename = {
+		['v.mod'] = 'vlang'
+	}
 })
