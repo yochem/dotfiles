@@ -59,7 +59,6 @@ opt.fillchars = {eob = ' '}
 -- FZF
 opt.runtimepath:append('/usr/local/opt/fzf')
 
-opt.conceallevel = 3
 
 -- global variables
 vim.g.mapleader = ' '

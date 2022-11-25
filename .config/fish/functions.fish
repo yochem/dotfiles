@@ -100,3 +100,7 @@ function ztest
 		printf "%s\n" $output
 	end
 end
+
+function venv
+	source */bin/activate.fish
+end

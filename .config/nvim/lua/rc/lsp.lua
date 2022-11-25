@@ -15,20 +15,25 @@ local function setup(server, options)
 	lsp[server].setup(coq.lsp_ensure_capabilities(opt))
 end
 
-setup('pylsp', {
-	settings = {
-		pyls = {
-			plugins = {
-				mccabe = {enabled = false},
-				pycodestyle = {enabled = false},
-				pydocstyle = {enabled = false},
-				pyflakes = {enabled = false},
-				pylint = {enabled = false},
-				yapf = {enabled = false},
-				pyls_mypy = {enabled = false, live_mode = false}
-			}
-		}
-	}
+-- setup('pylsp', {
+-- 	settings = {
+-- 		pyls = {
+-- 			plugins = {
+-- 				mccabe = {enabled = false},
+-- 				pycodestyle = {enabled = false},
+-- 				pydocstyle = {enabled = false},
+-- 				pyflakes = {enabled = false},
+-- 				pylint = {enabled = false},
+-- 				yapf = {enabled = false},
+-- 				pyls_mypy = {enabled = false, live_mode = false}
+-- 			}
+-- 		}
+-- 	}
+-- })
+
+
+setup('pyright', {
+	root_dir = function() return '.' end,
 })
 
 setup('sumneko_lua', {

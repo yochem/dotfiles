@@ -33,13 +33,12 @@ require('paq')({
 		'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
 	'kosayoda/nvim-lightbulb',
-	-- 'lewis6991/gitsigns.nvim',
+	'lewis6991/gitsigns.nvim',
 
 	-- better filetypes
 	'yochem/prolog.vim',
 	'blankname/vim-fish',
 	'vim-python/python-syntax',
-	'Vimjas/vim-python-pep8-indent',
 	'chrisbra/csv.vim',
 	'ollykel/v-vim',
 
@@ -59,7 +58,8 @@ require('onedark').setup({
 		LineNrAbove = {fg = '#adbac7'},
 		LineNrBelow = {fg = '#adbac7'},
 		LineNr = {fg = '$fg'},
-		-- lualine_c_normal = {fg = '$fg'}
+		StatusLine = {fg = '$fg'},
+		Comment = {fg = '$light_grey'},
 	}
 })
 require('onedark').load()
@@ -85,7 +85,7 @@ vim.g.coq_settings = {
 	xdg = true,
 	keymap = {
 		jump_to_mark = '<c-h>',
-		pre_select = true,
+		pre_select = false,
 	},
 	display = {
 		ghost_text = {enabled = false},
@@ -102,6 +102,9 @@ vim.g.coq_settings = {
 		lsp = {enabled = true, weight_adjust = 1.5},
 		snippets = {enabled = true, weight_adjust = 1.2, warn = {}},
 		tmux = {enabled = false},
+	},
+	match = {
+		unifying_chars = {'-'}
 	}
 }
 
@@ -139,13 +142,9 @@ local function wordcount()
 	return ''
 end
 
--- local custom_onedark = require('lualine.themes.onedark')
--- local modes = {'normal', 'command', 'insert', 'visual', 'terminal', 'replace', 'inactive'}
--- for _, mode in pairs(modes) do
--- 	custom_onedark[mode].a = custom_onedark['insert'].a
--- 	custom_onedark[mode].b = custom_onedark['insert'].a
--- 	custom_onedark[mode].c = custom_onedark['insert'].a
--- end
+local custom_onedark = require('lualine.themes.onedark')
+custom_onedark.normal.b.fg = '#fff'
+custom_onedark.normal.c.fg = '#fff'
 
 require('lualine').setup({
 	options = {
@@ -153,7 +152,7 @@ require('lualine').setup({
 		component_separators = '|',
 		section_separators = '',
 		globalstatus = true,
-		theme = 'onedark',
+		theme = custom_onedark,
 	},
 	sections = {
 		lualine_a = {'mode'},
@@ -196,4 +195,4 @@ require('indent_blankline').setup({
 	show_trailing_blankline_indent = false
 })
 
--- require('gitsigns').setup()
+require('gitsigns').setup()

@@ -84,3 +84,5 @@
 
 [mergetool "vimdiff"]
 	cmd = nvim -d $BASE $LOCAL
+[pull]
+	rebase = false
