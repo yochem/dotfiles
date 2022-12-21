@@ -1,3 +1,4 @@
+require('impatient')
 require('rc.plugins')
 require('rc.options')
 require('rc.remaps')

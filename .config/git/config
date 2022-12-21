@@ -86,3 +86,6 @@
 	cmd = nvim -d $BASE $LOCAL
 [pull]
 	rebase = false
+
+[push]
+	autoSetupRemote = true

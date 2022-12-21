@@ -1,40 +1,35 @@
 local lsp = require('lspconfig')
-local coq = require('coq')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 
 local function setup(server, options)
 	local opt = vim.tbl_extend('keep', {
-		on_attach = function(client, bufnr)
-			require "lsp_signature".on_attach({
-				hint_enable = false,
-				doc_lines = 0,
-				max_height = 1,
-			}, bufnr)
-		end
+		capabilities = capabilities
 	}, options)
 	lsp[server].setup(opt)
-	lsp[server].setup(coq.lsp_ensure_capabilities(opt))
 end
 
--- setup('pylsp', {
--- 	settings = {
--- 		pyls = {
--- 			plugins = {
--- 				mccabe = {enabled = false},
--- 				pycodestyle = {enabled = false},
--- 				pydocstyle = {enabled = false},
--- 				pyflakes = {enabled = false},
--- 				pylint = {enabled = false},
--- 				yapf = {enabled = false},
--- 				pyls_mypy = {enabled = false, live_mode = false}
--- 			}
--- 		}
--- 	}
--- })
 
-
-setup('pyright', {
-	root_dir = function() return '.' end,
+setup('pylsp', {
+	root_dir = function ()
+		return '.'
+	end,
+	settings = {
+		pyls = {
+			plugins = {
+				mccabe = {enabled = false},
+				pycodestyle = {enabled = false},
+				pydocstyle = {enabled = false},
+				pyflakes = {enabled = false},
+				pylint = {enabled = false},
+				yapf = {enabled = false},
+				pyls_mypy = {enabled = false, live_mode = false},
+				flake8 = {ignore = {'E501'}},
+			}
+		}
+	}
 })
+
 
 setup('sumneko_lua', {
 	cmd = {

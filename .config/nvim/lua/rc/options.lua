@@ -4,7 +4,7 @@ opt.termguicolors = true
 opt.suffixes = {'.swp', '.bak', '.pyc', '.out', '.aux', '.bbl', '.blg'}
 opt.autowrite = true
 opt.shellcmdflag = '-lc'
-opt.completeopt = {'menu', 'menuone'}
+opt.completeopt = {'menu', 'menuone', 'noinsert'}
 opt.textwidth = 79
 opt.formatoptions = 'tcqnj'
 opt.exrc = true
@@ -55,6 +55,7 @@ opt.smartindent = true
 opt.signcolumn = 'yes:1'
 opt.numberwidth = 1
 opt.fillchars = {eob = ' '}
+opt.pumheight = 10
 
 -- FZF
 opt.runtimepath:append('/usr/local/opt/fzf')

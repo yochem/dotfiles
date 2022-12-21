@@ -15,8 +15,7 @@ map('n', 'oo', 'm`o<Esc>``')
 map('n', 'OO', 'm`O<Esc>``')
 
 -- toggle list wrapping
--- map('n', '<leader>a', cmd'ArgWrap')
-map('n', '<leader>a', ':ArgWrap<CR>')
+map('n', '<leader>a', vim.cmd.ArgWrap)
 
 -- substitute word with content of default register
 local substitute = require('substitute')
@@ -56,7 +55,7 @@ map('n', ',', '<c-w>')
 map('n', '<leader>e', cmd'25Lexplore')
 
 -- don't care, just quit
-map('n', 'ZZ', cmd'qall')
+map('n', 'ZZ', vim.cmd.qall)
 
 -- don't accidently create macros when trying to quit
 map('n', 'Q', 'q')
@@ -81,27 +80,37 @@ map('n', '<leader>fb', require("telescope.builtin").buffers)
 -- format whole file and keep cursor at same position
 map('n', '<leader>F', "magggqG'a")
 
--- use tab to cycle through lsp completions
-map('i', '<Tab>', function()
-	return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
-end, {expr = true})
-map('i', '<S-Tab>', function()
-	return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
-end, {expr = true})
+map(
+	'i',
+	'<Tab>',
+	"luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'",
+	{expr = true}
+)
+map('i', '<S-Tab>', cmd'lua require("luasnip").jump(-1)')
 
 -- Use tab to go to next buffer
-map('n', '<Tab>', cmd'bnext')
+map('n', '<Tab>', vim.cmd.bnext)
 
--- Easier use of the system clipboard
-map({'n', 'v'}, '<leader>y', '"+y')
+-- <leader>action means clipboard
+for _, action in pairs({'y', 'd', 'p'}) do
+	map({'n', 'v'}, '<leader>' .. action, '"+' .. action)
+	local upper = string.upper(action)
+	map({'n', 'v'}, '<leader>' .. upper, '"+' .. upper)
+end
+
+-- this does not work with Y sadly, needs y$
 map({'n', 'v'}, '<leader>Y', '"+y$')
 
-map('n', '<leader>p', '"+p')
-map('n', '<leader>P', '"+P')
+map('v', 'p', [["_dP"]])
 
 -- populate jumplist with relative jumps
 map('n', 'k', "(v:count > 5 ? \"m'\" . v:count : '') . 'k'", {expr = true})
 map('n', 'j', "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", {expr = true})
+
+-- move highlighted text and auto indent
+map('v', 'J', ":m '>+1<CR>gv=gv")
+map('v', 'K', ":m '<-2<CR>gv=gv")
+
 
 -- gx does not work on macOS, temporary fix from vim #4738
 map('n', 'gx',

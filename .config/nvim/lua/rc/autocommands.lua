@@ -4,6 +4,14 @@ local autocmd = function (event, opts)
 	vim.api.nvim_create_autocmd(event, opts)
 end
 
+autocmd('BufWritePost', {
+	pattern = 'plugins.lua',
+	callback = function(opts)
+		vim.cmd.source(opts.file)
+		vim.cmd.PackerCompile()
+	end
+})
+
 autocmd('TextYankPost', {
 	callback = function()
 		vim.highlight.on_yank({timeout = 200, higroup = 'Visual'})
@@ -37,18 +45,20 @@ autocmd({'BufEnter', 'InsertLeave'}, {
 })
 
 -- highlight trailing whitespace intrusive red
--- autocmd('InsertEnter', {
--- 	callback = function ()
--- 		vim.cmd([[match TrailingWhitespace /\s\+\%#\@<!$/]])
--- 		vim.api.nvim_set_hl(0, 'TrailingWhitespace', {bg = 'red'})
--- 	end
--- })
--- autocmd({'InsertLeave', 'BufEnter'}, {
--- 	callback = function ()
--- 		vim.cmd([[match TrailingWhitespace /\s\+$/]])
--- 		vim.api.nvim_set_hl(0, 'TrailingWhitespace', {bg = 'red'})
--- 	end
--- })
+autocmd('InsertEnter', {
+	pattern = {'!lspinfo'},
+	callback = function ()
+		vim.cmd([[match TrailingWhitespace /\s\+\%#\@<!$/]])
+		vim.api.nvim_set_hl(0, 'TrailingWhitespace', {bg = 'red'})
+	end
+})
+autocmd({'InsertLeave', 'BufEnter'}, {
+	pattern = {'!lspinfo'},
+	callback = function ()
+		vim.cmd([[match TrailingWhitespace /\s\+$/]])
+		vim.api.nvim_set_hl(0, 'TrailingWhitespace', {bg = 'red'})
+	end
+})
 
 -- :help for lua files in nvim config dir
 local cfgdir = vim.fn.stdpath('config')
@@ -90,12 +100,12 @@ autocmd('BufEnter', {
 })
 
 vim.api.nvim_create_user_command('Scratch', function()
-	vim.cmd('execute "new "')
+	-- vim.cmd('execute "new "')
+	vim.cmd.new()
 	vim.opt_local.buftype = 'nofile'
 	vim.opt_local.bufhidden = 'hide'
 	vim.opt_local.swapfile = false
-	vim.cmd('file scratch')
-	vim.cmd('startinsert')
+	vim.cmd.startinsert()
 end, {})
 
 vim.api.nvim_set_hl(0, 'htmlBold', {bold = true})
