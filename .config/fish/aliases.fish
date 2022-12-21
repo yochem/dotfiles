@@ -29,7 +29,7 @@ alias sudo "sudo "
 command -v fdfind >/dev/null && alias fd fdfind
 
 # get quick octal permissions of a file
-abbr perms "stat -f '%A'"
+abbr perms "stat --format '%a'"
 
 # typo prevention
 abbr gs "git status -s"

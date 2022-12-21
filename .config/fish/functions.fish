@@ -77,8 +77,7 @@ function airpods
 end
 
 function startpyenv
-	status is-login; and pyenv init --path | source
-	status is-login; and pyenv init - | source
+	status is-login; and pyenv init --path --no-rehash | source
 	status is-login; and pyenv virtualenv-init - | source
 end
 
@@ -99,8 +98,4 @@ function ztest
 	else
 		printf "%s\n" $output
 	end
-end
-
-function venv
-	source */bin/activate.fish
 end
