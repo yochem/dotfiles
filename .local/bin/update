@@ -4,7 +4,7 @@ orangebold=$(tput bold; tput setaf 166)
 
 if command -v nvim >/dev/null 2>&1; then
 	echo -e "${orangebold}Updating nvim packages...${reset}"
-	nvim --headless +PackerSync +PackerCompile +qall
+	nvim --headless "+Lazy! sync" +qa
 	echo
 fi
 

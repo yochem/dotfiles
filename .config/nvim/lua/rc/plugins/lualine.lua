@@ -21,6 +21,7 @@ end
 
 return {
 	"nvim-lualine/lualine.nvim",
+	event = 'BufWinEnter',
 	config = function()
 		local custom_onedark = require("lualine.themes.onedark")
 		custom_onedark.normal.b.fg = "#FFFFFF"

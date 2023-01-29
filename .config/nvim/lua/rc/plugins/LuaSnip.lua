@@ -2,6 +2,7 @@ local map = require('rc.remaps').map
 
 return {
 	"L3MON4D3/LuaSnip",
+	event = 'InsertEnter',
 	init = function ()
 		map(
 		'i',
@@ -10,5 +11,6 @@ return {
 		{expr = true}
 		)
 		map('i', '<S-Tab>', function() require("luasnip").jump(-1) end)
-	end
+	end,
+	dependencies = {"rafamadriz/friendly-snippets"}
 }
