@@ -4,14 +4,6 @@ local autocmd = function (event, opts)
 	vim.api.nvim_create_autocmd(event, opts)
 end
 
-autocmd('BufWritePost', {
-	pattern = 'plugins.lua',
-	callback = function(opts)
-		vim.cmd.source(opts.file)
-		vim.cmd.PackerCompile()
-	end
-})
-
 autocmd('TextYankPost', {
 	callback = function()
 		vim.highlight.on_yank({timeout = 200, higroup = 'Visual'})

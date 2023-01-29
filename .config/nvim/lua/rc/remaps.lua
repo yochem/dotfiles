@@ -14,9 +14,6 @@ end
 map('n', 'oo', 'm`o<Esc>``')
 map('n', 'OO', 'm`O<Esc>``')
 
--- toggle list wrapping
-map('n', '<leader>a', vim.cmd.ArgWrap)
-
 -- when jumping through search always center
 map('n', 'n', 'nzz')
 
@@ -60,22 +57,9 @@ map('n', '<leader>[', vim.diagnostic.goto_prev)
 map('n', '<leader>]', vim.diagnostic.goto_next)
 map('n', '<leader>c', vim.lsp.buf.code_action)
 
-map('n', '<leader>ff', require("telescope.builtin").find_files)
-map('n', '<leader>fg', require("telescope.builtin").live_grep)
-map('n', '<leader>fb', require("telescope.builtin").buffers)
-
-map('n', '<leader>t', vim.cmd.TroubleToggle)
 
 -- format whole file and keep cursor at same position
 map('n', '<leader>F', "magggqG'a")
-
-map(
-	'i',
-	'<Tab>',
-	"luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'",
-	{expr = true}
-)
-map('i', '<S-Tab>', function() require("luasnip").jump(-1) end)
 
 -- Use tab to go to next buffer
 map('n', '<Tab>', vim.cmd.bnext)
@@ -134,3 +118,8 @@ map('n', '!', function()
 	-- restore cursor position
 	nvim_win_set_cursor(0, cursor)
 end)
+
+return {
+	map = map,
+	cmd = cmd
+}
