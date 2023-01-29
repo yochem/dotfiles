@@ -1,6 +1,6 @@
 return {
 	"navarasu/onedark.nvim",
-	config = {
+	opts = {
 		style = "darker",
 		transparent = true,
 		colors = {
@@ -18,5 +18,5 @@ return {
 			["@field"] = { fg = "$fg" },
 		},
 	},
-	lazy = true
+	lazy = true,
 }

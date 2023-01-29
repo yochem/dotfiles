@@ -1,6 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
-	event = 'InsertEnter',
+	event = "InsertEnter",
 	config = function()
 		require("luasnip.loaders.from_vscode").lazy_load()
 		local luasnip = require("luasnip")

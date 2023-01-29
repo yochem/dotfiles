@@ -1,9 +1,9 @@
 return {
 	"SmiteshP/nvim-gps",
-	config = {
+	opts = {
 		disable_icons = true,
-		separator = "."
+		separator = ".",
 	},
 	dependencies = "nvim-lua/plenary.nvim",
-	lazy = true
+	lazy = true,
 }

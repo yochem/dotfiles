@@ -1,6 +1,6 @@
 return {
 	"folke/trouble.nvim",
-	config = {
+	opts = {
 		icons = false,
 		use_diagnostic_signs = true,
 		fold_open = "",
@@ -10,5 +10,5 @@ return {
 		padding = false,
 		auto_preview = false,
 	},
-	keys = {{'<leader>t', vim.cmd.TroubleToggle}}
+	keys = { { "<leader>t", vim.cmd.TroubleToggle } },
 }
