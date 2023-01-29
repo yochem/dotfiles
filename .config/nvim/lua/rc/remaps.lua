@@ -17,13 +17,6 @@ map('n', 'OO', 'm`O<Esc>``')
 -- toggle list wrapping
 map('n', '<leader>a', vim.cmd.ArgWrap)
 
--- substitute word with content of default register
-local substitute = require('substitute')
-map('n', '<leader>s', substitute.operator)
-map('n', '<leader>ss', substitute.line)
-map('n', '<leader>S', substitute.eol)
-map('x', '<leader>s', substitute.visual)
-
 -- when jumping through search always center
 map('n', 'n', 'nzz')
 
@@ -36,10 +29,6 @@ map('n', '<S-Up>', cmd'resize +2')
 map('n', '<S-Down>', cmd'resize -2')
 map('n', '<S-Left>', cmd'vertical resize +2')
 map('n', '<S-Right>', cmd'vertical resize -2')
-
--- delete trailing whitespace
-map('n', 'W',
-	[[m`:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>``]])
 
 -- go through visual lines with j and k but don't mess with 10k etc.
 -- source: http://stackoverflow.com/a/21000307/2580955
@@ -59,7 +48,6 @@ map('n', 'ZZ', vim.cmd.qall)
 
 -- don't accidently create macros when trying to quit
 map('n', 'Q', 'q')
-map('n', 'q', '')
 
 -- some lsp remaps
 map('n', '<leader>D', vim.lsp.buf.declaration)
@@ -67,7 +55,6 @@ map('n', '<leader>gd', vim.lsp.buf.definition)
 map('n', '<leader>r', vim.lsp.buf.references)
 map('n', '<leader>rn', vim.lsp.buf.rename)
 map('n', '<leader>f', vim.lsp.buf.format)
-map('n', '<leader>d', vim.diagnostic.open_float)
 map('n', '<leader>h', vim.lsp.buf.hover)
 map('n', '<leader>[', vim.diagnostic.goto_prev)
 map('n', '<leader>]', vim.diagnostic.goto_next)
@@ -76,6 +63,8 @@ map('n', '<leader>c', vim.lsp.buf.code_action)
 map('n', '<leader>ff', require("telescope.builtin").find_files)
 map('n', '<leader>fg', require("telescope.builtin").live_grep)
 map('n', '<leader>fb', require("telescope.builtin").buffers)
+
+map('n', '<leader>t', vim.cmd.TroubleToggle)
 
 -- format whole file and keep cursor at same position
 map('n', '<leader>F', "magggqG'a")
@@ -86,30 +75,28 @@ map(
 	"luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'",
 	{expr = true}
 )
-map('i', '<S-Tab>', cmd'lua require("luasnip").jump(-1)')
+map('i', '<S-Tab>', function() require("luasnip").jump(-1) end)
 
 -- Use tab to go to next buffer
 map('n', '<Tab>', vim.cmd.bnext)
 
 -- <leader>action means clipboard
-for _, action in pairs({'y', 'd', 'p'}) do
+for _, action in pairs({'y', 'd', 'p', 'y$', 'D', 'P'}) do
 	map({'n', 'v'}, '<leader>' .. action, '"+' .. action)
-	local upper = string.upper(action)
-	map({'n', 'v'}, '<leader>' .. upper, '"+' .. upper)
 end
-
--- this does not work with Y sadly, needs y$
-map({'n', 'v'}, '<leader>Y', '"+y$')
 
 map('v', 'p', [["_dP"]])
 
 -- populate jumplist with relative jumps
-map('n', 'k', "(v:count > 5 ? \"m'\" . v:count : '') . 'k'", {expr = true})
-map('n', 'j', "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", {expr = true})
+map('n', 'k', [[(v:count > 5 ? "m'" . v:count : '') . 'k']], {expr = true})
+map('n', 'j', [[(v:count > 5 ? "m'" . v:count : '') . 'j']], {expr = true})
 
 -- move highlighted text and auto indent
 map('v', 'J', ":m '>+1<CR>gv=gv")
 map('v', 'K', ":m '<-2<CR>gv=gv")
+
+-- close window
+map('n', 'q', vim.cmd.close)
 
 
 -- gx does not work on macOS, temporary fix from vim #4738

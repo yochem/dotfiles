@@ -37,6 +37,7 @@ autocmd('BufNewFile', {
 
 -- highligt non-ascii blue
 autocmd({'BufEnter', 'InsertLeave'}, {
+	pattern = {'!lspinfo', '!Trouble'},
 	callback = function ()
 		-- todo: if file is writeable
 		vim.api.nvim_set_hl(0, 'nonascii', {bg = 'Blue'})
@@ -100,12 +101,15 @@ autocmd('BufEnter', {
 })
 
 vim.api.nvim_create_user_command('Scratch', function()
-	-- vim.cmd('execute "new "')
 	vim.cmd.new()
 	vim.opt_local.buftype = 'nofile'
 	vim.opt_local.bufhidden = 'hide'
 	vim.opt_local.swapfile = false
 	vim.cmd.startinsert()
+end, {})
+
+vim.api.nvim_create_user_command('Config', function()
+	vim.cmd.edit(vim.fn.stdpath('config'))
 end, {})
 
 vim.api.nvim_set_hl(0, 'htmlBold', {bold = true})

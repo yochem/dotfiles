@@ -6,7 +6,7 @@ opt.autowrite = true
 opt.shellcmdflag = '-lc'
 opt.completeopt = {'menu', 'menuone', 'noinsert'}
 opt.textwidth = 79
-opt.formatoptions = 'tcqnj'
+opt.formatoptions = 'cqnj'
 opt.exrc = true
 opt.secure = true
 opt.fileformat = 'unix'
@@ -56,6 +56,8 @@ opt.signcolumn = 'yes:1'
 opt.numberwidth = 1
 opt.fillchars = {eob = ' '}
 opt.pumheight = 10
+
+opt.statuscolumn = '%@SignCb@%s%=%T%@NumCb@%{v:relnum?v:relnum:v:lnum}│%T'
 
 -- FZF
 opt.runtimepath:append('/usr/local/opt/fzf')
