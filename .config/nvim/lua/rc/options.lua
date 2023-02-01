@@ -7,13 +7,13 @@ opt.expandtab = false
 opt.exrc = true
 opt.fileformat = "unix"
 opt.fillchars = { eob = " " }
-opt.listchars = { tab = "  ", trail = "•" }
-opt.list = true
 opt.foldenable = false
 opt.formatoptions = "cqnj"
 opt.gdefault = true
 opt.ignorecase = true
 opt.inccommand = "split"
+opt.list = true
+opt.listchars = { tab = "  ", trail = "•" }
 opt.number = true
 opt.numberwidth = 1
 opt.pumheight = 10
@@ -42,7 +42,6 @@ opt.timeoutlen = 600
 opt.undofile = true
 opt.updatetime = 100
 opt.wrap = false
-
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.python_highlight_all = 1

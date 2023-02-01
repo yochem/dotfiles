@@ -1,6 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
-	event = "BufWinEnter",
+	event = "InsertEnter",
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			highlight = { enable = true },
@@ -30,5 +30,8 @@ return {
 				},
 			},
 		})
+	end,
+	cond = function()
+		return vim.api.nvim_buf_line_count(0) < 10000
 	end,
 }

@@ -1,1 +1,4 @@
-return { "wellle/targets.vim" }
+return {
+	"wellle/targets.vim",
+	event = "BufWinEnter",
+}

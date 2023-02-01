@@ -83,10 +83,12 @@ map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
 -- close window
-map("n", "q", vim.cmd.close)
-
--- gx does not work on macOS, temporary fix from vim #4738
-map("n", "gx", cmd("call netrw#BrowseX(expand((exists('g:netrw_gx')? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())"))
+map("n", "q", function()
+	local success = pcall(vim.cmd.close)
+	if not success then
+		vim.cmd.norm([[exe! q]])
+	end
+end)
 
 map("n", "!", function()
 	local nvim_buf_get_text = vim.api.nvim_buf_get_text

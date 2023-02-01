@@ -14,6 +14,7 @@ return {
 			LineNr = { fg = "$fg" },
 			StatusLine = { fg = "$fg" },
 			Comment = { fg = "$light_grey" },
+			EndOfBuffer = { fg = "$light_grey" },
 			["@comment"] = { fg = "$light_grey" },
 			["@field"] = { fg = "$fg" },
 		},

@@ -5,4 +5,5 @@ return {
 		status_text = { enabled = true },
 		autocmd = { enabled = true },
 	},
+	lazy = true,
 }
