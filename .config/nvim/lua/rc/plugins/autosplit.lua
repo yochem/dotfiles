@@ -4,5 +4,6 @@ return {
 		vim.cmd.cabbrev({ "sp", "Split" })
 		vim.cmd.cabbrev({ "vs", "Split" })
 	end,
+	cmd = "Split",
 	opts = {},
 }

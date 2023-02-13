@@ -1,4 +1,3 @@
-local gps = require("nvim-gps")
 local function lsp()
 	local clients = vim.lsp.get_active_clients()
 	if #clients > 0 then
@@ -23,6 +22,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	event = "BufWinEnter",
 	config = function()
+		local gps = require("nvim-gps")
 		local custom_onedark = require("lualine.themes.onedark")
 		custom_onedark.normal.b.fg = "#FFFFFF"
 		custom_onedark.normal.c.fg = "#FFFFFF"
