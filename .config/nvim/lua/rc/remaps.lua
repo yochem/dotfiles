@@ -86,7 +86,7 @@ map("v", "K", ":m '<-2<CR>gv=gv")
 map("n", "q", function()
 	local success = pcall(vim.cmd.close)
 	if not success then
-		vim.cmd.norm([[exe! q]])
+		pcall(vim.cmd.quit)
 	end
 end)
 

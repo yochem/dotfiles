@@ -19,5 +19,16 @@ return {
 				require("telescope.builtin").buffers()
 			end,
 		},
+		{
+			"<leader>fF",
+			function()
+				require("telescope.builtin").lsp_document_symbols({symbols={
+					'class',
+					'function',
+					'method',
+					'struct',
+				}})
+			end,
+		},
 	},
 }

@@ -17,6 +17,7 @@ return {
 			EndOfBuffer = { fg = "$light_grey" },
 			["@comment"] = { fg = "$light_grey" },
 			["@field"] = { fg = "$fg" },
+			SpellBad = { fg = "default", fmt="undercurl" },
 		},
 	},
 	lazy = true,

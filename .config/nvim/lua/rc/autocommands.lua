@@ -10,6 +10,19 @@ autocmd("TextYankPost", {
 	end,
 })
 
+-- autocmd("BufWritePre", {
+-- 	callback = function ()
+-- 		local clients = vim.lsp.get_active_clients()
+-- 		for _, client in pairs(clients) do
+-- 			for buf, _ in pairs(client.attached_buffers) do
+-- 				if buf == vim.fn.bufnr("%") then
+-- 					vim.lsp.buf.format()
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+-- })
+
 -- open file with cursor on last position
 autocmd("BufReadPost", {
 	callback = function()
@@ -47,7 +60,7 @@ autocmd("BufReadPost", {
 	end,
 })
 
-autocmd({ "BufEnter", "BufWritePost" }, {
+autocmd({ "BufEnter", "BufWritePost", "FocusGained" }, {
 	callback = function()
 		if vim.env.TMUX ~= nil then
 			local fn = vim.fn.expand("%:t")

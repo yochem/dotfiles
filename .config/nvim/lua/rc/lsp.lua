@@ -28,7 +28,7 @@ setup("pylsp", {
 	},
 })
 
-setup("sumneko_lua", {
+setup("lua_ls", {
 	cmd = {
 		"/Users/yochem/.local/bin/luals/bin/macOS/lua-language-server",
 		"-E",
