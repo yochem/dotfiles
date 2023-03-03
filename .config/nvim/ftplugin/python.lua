@@ -14,8 +14,8 @@ end, {})
 
 -- fold docstrings beautifully
 -- vim.opt_local.foldenable = true
-vim.opt_local.fillchars.fold = ' '
-vim.opt_local.foldmethod = 'syntax'
+-- vim.opt_local.fillchars.fold = ' '
+-- vim.opt_local.foldmethod = 'syntax'
 
 vim.opt.autoread = true
 vim.keymap.set('n', '<leader>b', '<cmd>!black %<CR>', {buffer = true})

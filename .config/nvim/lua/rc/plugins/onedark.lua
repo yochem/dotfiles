@@ -18,6 +18,9 @@ return {
 			["@comment"] = { fg = "$light_grey" },
 			["@field"] = { fg = "$fg" },
 			SpellBad = { fg = "default", fmt="undercurl" },
+
+			["@operator.regex"] = { fg = "$purple" },
+			["@character.special.regex"] = { fg = "$blue" }
 		},
 	},
 	lazy = true,
