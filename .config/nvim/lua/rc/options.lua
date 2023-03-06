@@ -7,11 +7,10 @@ opt.expandtab = false
 opt.exrc = true
 opt.fileformat = "unix"
 opt.fillchars = { eob = " " }
-vim.cmd([[
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-]])
-vim.o.foldlevelstart = 99
+opt.foldmethod = 'expr'
+opt.foldexpr = 'nvim_treesitter#foldexpr()'
+opt.foldenable = false
+opt.foldlevelstart = 99
 opt.formatoptions = "cqnj"
 opt.gdefault = true
 opt.ignorecase = true

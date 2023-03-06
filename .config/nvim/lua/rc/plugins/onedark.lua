@@ -20,7 +20,9 @@ return {
 			SpellBad = { fg = "default", fmt="undercurl" },
 
 			["@operator.regex"] = { fg = "$purple" },
-			["@character.special.regex"] = { fg = "$blue" }
+			["@character.special.regex"] = { fg = "$blue" },
+
+			["@string.documentation"] = { fg = "$light_grey" },
 		},
 	},
 	lazy = true,
