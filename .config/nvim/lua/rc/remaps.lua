@@ -62,9 +62,6 @@ map("n", "<leader>c", vim.lsp.buf.code_action)
 -- format whole file and keep cursor at same position
 map("n", "<leader>F", "magggqG'a")
 
--- Use tab to go to next buffer
-map("n", "<Tab>", vim.cmd.bnext)
-
 -- <leader>action means clipboard
 for _, action in pairs({ "y", "d", "p" }) do
 	map({ "n", "v" }, "<leader>" .. action, '"+' .. action)

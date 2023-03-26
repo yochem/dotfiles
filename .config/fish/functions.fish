@@ -89,15 +89,3 @@ end
 function sortlist
 	echo $argv[1] |tr $argv[2] '\n' | sort -b |  paste -s -d $argv[2] -
 end
-
-function z
-	set output (/Users/yochem/Documents/z-v/z $argv)
-
-	if test (count $output) -eq 1
-		cd $output 2>&1 >/dev/null
-	else
-		for line in $output
-			echo $line
-		end
-	end
-end

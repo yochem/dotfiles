@@ -1,5 +1,6 @@
 return {
-	dir = "/tmp/nvim-treesitter-textobjects",
+	-- "nvim-treesitter/nvim-treesitter-textobjects",
+	dir = "~/Documents/nvim-treesitter-textobjects",
 	event = "BufReadPost",
 	config = function()
 		require("nvim-treesitter.configs").setup({

@@ -23,7 +23,8 @@ set files \
 	"$HOME/.config/fish/exports.fish" \
 	"$HOME/.config/fish/aliases.fish" \
 	"$HOME/.config/fish/functions.fish" \
-	"$HOME/Documents/venvs/venvs.fish"
+	"$HOME/Documents/venvs/venvs.fish" \
+	"$HOME/Documents/z-v/z.fish"
 for file in $files
 	[ -f "$file" ] && source $file
 end
