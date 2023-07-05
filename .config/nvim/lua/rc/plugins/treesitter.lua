@@ -13,12 +13,10 @@ require("rc.autocommands").autocmd("FileType", {
 
 return {
 	"nvim-treesitter/nvim-treesitter",
-	config = function()
-		require("nvim-treesitter.configs").setup({
-			highlight = { enable = true },
-			indent = { enable = true },
-		})
-	end,
+	opts = {
+		highlight = { enable = true },
+		indent = { enable = true },
+	},
 	cond = function()
 		return vim.api.nvim_buf_line_count(0) < 10000
 	end,

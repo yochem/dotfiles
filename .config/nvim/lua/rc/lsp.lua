@@ -13,16 +13,17 @@ setup("pylsp", {
 		return "."
 	end,
 	settings = {
-		pyls = {
+		pylsp = {
 			plugins = {
-				mccabe = { enabled = false },
+				mccabe = { enabled = true },
 				pycodestyle = { enabled = false },
 				pydocstyle = { enabled = false },
 				pyflakes = { enabled = false },
-				pylint = { enabled = false },
 				yapf = { enabled = false },
-				pyls_mypy = { enabled = false, live_mode = false },
+				pylsp_mypy = { enabled = true, live_mode = true },
+				pylsp_lsp_black = { enabled = true },
 				flake8 = { ignore = { "E501" } },
+				pylint = { enabled = true },
 			},
 		},
 	},

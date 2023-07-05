@@ -14,3 +14,5 @@ set -xU EDITOR "$VISUAL"
 set -xU LC_ALL "en_US.UTF-8"
 
 set -xU FZF_DEFAULT_COMMAND 'fd --type f'
+
+set -xU LS_COLORS (vivid generate one-dark-simple)
