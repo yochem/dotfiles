@@ -6,10 +6,10 @@ opt.completeopt = { "menu", "menuone", "noinsert" }
 opt.expandtab = false
 opt.exrc = true
 opt.fileformat = "unix"
-opt.fillchars = { eob = " " }
-opt.foldmethod = 'expr'
-opt.foldexpr = 'nvim_treesitter#foldexpr()'
-opt.foldenable = false
+opt.fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" }
+opt.foldcolumn = '1'
+opt.foldenable = true
+opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.formatoptions = "cqnj"
 opt.gdefault = true
@@ -38,7 +38,6 @@ opt.spelloptions = { "camel", "noplainbuffer" }
 opt.splitbelow = true
 opt.splitkeep = "screen"
 opt.splitright = true
-opt.statuscolumn = "%@SignCb@%s%=%T%@NumCb@%{v:relnum?v:relnum:v:lnum}│%T"
 opt.suffixes = { ".swp", ".bak", ".pyc", ".out", ".aux", ".bbl", ".blg" }
 opt.tabstop = 4
 opt.termguicolors = true

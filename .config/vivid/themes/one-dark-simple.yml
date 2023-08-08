@@ -116,6 +116,3 @@ executable:
 
 unimportant:
   foreground: gray
-
-test:
-  foreground: red

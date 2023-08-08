@@ -1,8 +1,8 @@
 return {
 	dir = "~/Documents/autosplit.nvim",
 	init = function()
-		vim.cmd.cabbrev({ "sp", "Split" })
-		vim.cmd.cabbrev({ "vs", "Split" })
+		vim.api.nvim_set_keymap('ca', 'sp', 'Split', {})
+		vim.api.nvim_set_keymap('ca', 'vs', 'Split', {})
 	end,
 	cmd = "Split",
 	opts = {},
