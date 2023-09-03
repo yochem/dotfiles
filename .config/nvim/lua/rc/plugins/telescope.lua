@@ -25,7 +25,6 @@ return {
 				require("telescope.builtin").lsp_document_symbols({symbols={
 					'class',
 					'function',
-					'method',
 					'struct',
 				}})
 			end,

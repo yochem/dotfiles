@@ -40,8 +40,9 @@ return {
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "nvim_lsp" },
-				{ name = "luasnip" }, -- For luasnip users.
+				{ name = "luasnip" },
 				{ name = "path" },
+				{ name = "htmx" },
 			}, {
 				{ name = "buffer" },
 			}),
@@ -58,5 +59,10 @@ return {
 		"simrat39/symbols-outline.nvim",
 		"saadparwaiz1/cmp_luasnip",
 		"rafamadriz/friendly-snippets",
+		{
+			dir = '~/Documents/cmp-htmx',
+			dev = true,
+			as = 'cmp-htmx',
+		}
 	},
 }

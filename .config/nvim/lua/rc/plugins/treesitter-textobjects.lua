@@ -12,6 +12,8 @@ return {
 					keymaps = {
 						["af"] = "@function.outer",
 						["if"] = "@function.inner",
+						["aC"] = "@class.outer",
+						["iC"] = "@class.inner",
 						["ab"] = "@block.outer",
 						["ib"] = "@block.inner",
 						["aa"] = "@parameter.outer",

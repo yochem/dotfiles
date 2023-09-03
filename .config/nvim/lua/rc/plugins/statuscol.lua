@@ -1,15 +1,16 @@
-local function diagnostic_line_index()
+local function get_diagnostic_line(lnum)
 	local severity_signs = {
 		'%#DiagnosticError#●%*',
 		'%#DiagnosticWarn#●%*',
 		'%#DiagnosticInfo#●%*',
+		'%#DiagnosticHint#●%*',
 	}
 	local diagnostics = vim.diagnostic.get(0)
-	local line_index = {}
 	for _, diagnostic in ipairs(diagnostics) do
-		line_index[diagnostic.lnum] = severity_signs[diagnostic.severity]
+		if diagnostic.lnum == lnum then
+			return severity_signs[diagnostic.severity]
+		end
 	end
-	return line_index
 end
 
 local function folds_and_diagnostics(args)
@@ -18,9 +19,9 @@ local function folds_and_diagnostics(args)
 	local width = C.compute_foldcolumn(args.wp, 0)
 	if width == 0 then return "" end
 
-	local line_diagnostic = diagnostic_line_index()
-	if line_diagnostic[args.lnum-1] then
-		return line_diagnostic[args.lnum-1]
+	local line_diagnostic = get_diagnostic_line(args.lnum-1)
+	if line_diagnostic then
+		return line_diagnostic
 	end
 
 	local foldinfo = C.fold_info(args.wp, args.lnum)
@@ -57,6 +58,7 @@ return {
 		local builtin = require("statuscol.builtin")
 		require("statuscol").setup({
 			relculright = true,
+			ft_ignore = {'Trouble'},
 			segments = {
 				{ text = { folds_and_diagnostics, " " }, click = "v:lua.ScFa" },
 				{ text = { builtin.lnumfunc, "" }, click = "v:lua.ScLa" },
