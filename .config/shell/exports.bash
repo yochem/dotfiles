@@ -1,5 +1,3 @@
-# vim: ft=sh
-
 # choose the default editor
 if command -v nvim >/dev/null 2>&1; then
 	export VISUAL="nvim"

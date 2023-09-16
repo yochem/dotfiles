@@ -1,5 +1,3 @@
-# vim: ft=sh
-
 # open python server
 server() { s="${1:-8000}"; open "http://localhost:$s" && python3 -m http.server "$s"; }
 phpserver() { s="${1:-8000}"; open "http://localhost:$s" && php -S "localhost:$s"; }

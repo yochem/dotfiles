@@ -79,6 +79,9 @@ map("n", "j", [[(v:count > 5 ? "m'" . v:count : '') . 'j']], { expr = true })
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
+-- macro's in insert mode
+map("i", "@@", "<esc>@@i")
+
 -- close window
 map("n", "q", function()
 	local success = pcall(vim.cmd.close)

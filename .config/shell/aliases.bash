@@ -1,5 +1,3 @@
-# vim: ft=sh
-
 # fancy ls
 ls_type="ls"
 command -V gls &>/dev/null && ls_type="gls"
@@ -20,7 +18,7 @@ alias py="python3"
 alias p2="python"
 
 # reload bash profile and stuff
-alias reload="source \$HOME/.bash_profile"
+alias reload="exec bash"
 
 # use $VISUAL as editor (it's mostly vim, so i've always used 'v'
 alias vi=\$VISUAL

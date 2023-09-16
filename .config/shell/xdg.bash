@@ -1,5 +1,3 @@
-# vim: ft=sh
-
 # because some apps love to have their config files in the home directory,
 # but I don't
 export XDG_CONFIG_HOME="$HOME/.config"

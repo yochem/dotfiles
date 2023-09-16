@@ -1,5 +1,3 @@
-# vim: ft=sh
-
 # check if git rpo and which branch
 prompt_git() {
 	git rev-parse --is-inside-work-tree &>/dev/null

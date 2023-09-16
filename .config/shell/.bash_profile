@@ -1,10 +1,9 @@
 dotfiles=(
-	# This assumes MacOS
-	~/Library/Config/shell/xdg
-	~/Library/Config/shell/prompt
-	~/Library/Config/shell/exports
-	~/Library/Config/shell/aliases
-	~/Library/Config/shell/functions
+	~/.config/shell/xdg.bash
+	~/.config/shell/prompt.bash
+	~/.config/shell/exports.bash
+	~/.config/shell/aliases.bash
+	~/.config/shell/functions.bash
 	/usr/local/etc/profile.d/bash_completion.sh
 	/usr/local/etc/profile.d/z.sh
 )

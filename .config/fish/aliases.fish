@@ -1,8 +1,7 @@
 # fancy ls
 set ls_type ls
 command -v gls &>/dev/null && set ls_type gls
-alias ls "$ls_type --group-directories-first -1F --color=auto"
-alias ll "$ls_type --group-directories-first -oAF --color=auto"
+alias ls "$ls_type --group-directories-first -A1hF --time-style +%Y-%m-%d --color=auto"
 
 # use some flags by default
 alias grep "grep -iE --color=auto"
@@ -13,7 +12,7 @@ alias less "less -R"
 alias swipl "swipl -q"
 
 # reload bash profile and stuff
-abbr reload "source \$HOME/.config/fish/config.fish"
+abbr reload "exec fish"
 
 alias vi \$VISUAL
 
