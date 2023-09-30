@@ -35,16 +35,47 @@
                         ]
                     },
                     {
-                        "description": "Reload eqMac",
+                        "description": "Open Spotify",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "f6",
-                                    "modifiers": {}
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "~/.local/bin/change-playback"
+                                        "shell_command": "open -a 'Spotify'"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Disable wifi logging.",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a 'Telegram'"
                                     }
                                 ],
                                 "type": "basic"

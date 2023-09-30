@@ -16,3 +16,6 @@ set -xU LC_ALL "en_US.UTF-8"
 set -xU FZF_DEFAULT_COMMAND 'fd --type f'
 
 set -gx LS_COLORS (vivid generate one-dark-simple)
+
+set -gx PLAN9 /usr/local/plan9
+fish_add_path -aP $PLAN9/bin

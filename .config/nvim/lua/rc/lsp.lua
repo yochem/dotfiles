@@ -65,9 +65,7 @@ setup("cssls", { root_dir = lsp.util.root_pattern("index.html") })
 setup("erlangls", {})
 setup("eslint", {})
 setup("html", {})
-setup("vls", {
-	cmd = { "v", "ls", "--silent" },
-})
+setup("v_analyzer", {})
 setup("jsonls", {})
 setup("texlab", {
 	settings = {

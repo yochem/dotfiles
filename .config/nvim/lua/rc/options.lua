@@ -13,6 +13,7 @@ opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.formatoptions = "cqnj"
 opt.gdefault = true
+opt.hlsearch = false
 opt.ignorecase = true
 opt.inccommand = "split"
 opt.list = true

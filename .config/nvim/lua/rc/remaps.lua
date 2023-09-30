@@ -12,16 +12,13 @@ local function cmd(command)
 	end
 end
 
--- add empty line below or above in normal mode
-map("n", "oo", "m`o<Esc>``")
-map("n", "OO", "m`O<Esc>``")
+map("n", "oo", "m`o<Esc>``", { desc = 'add empty line without moving cursor' })
+map("n", "OO", "m`O<Esc>``", { desc = 'add empty line without moving cursor' })
 
--- when jumping through search always center
-map("n", "n", "nzz")
+map("n", "n", "nzz", { desc = 'center during search' })
 
--- stay in visual selection when indenting
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+map("v", "<", "<gv", { desc = 'keep visual selection when indenting' })
+map("v", ">", ">gv", { desc = 'keep visual selection when indenting' })
 
 -- resize windows
 map("n", "<S-Up>", cmd("resize +2"))
@@ -40,15 +37,15 @@ end
 map("n", ",", "<c-w>")
 
 -- Open new file in split
-map("n", "<leader>e", cmd("25Lexplore"))
+map("n", "<leader>e", cmd("25Lexplore"), { desc = 'open file explorer on the left' })
 
 -- don't care, just quit
 map("n", "ZZ", vim.cmd.qall)
 
--- don't accidently create macros when trying to quit
+-- don't accidentally create macros when trying to quit
 map("n", "Q", "q")
 
--- some lsp remaps
+-- some LSP remaps
 map("n", "<leader>D", vim.lsp.buf.declaration)
 map("n", "<leader>gd", vim.lsp.buf.definition)
 map("n", "<leader>r", vim.lsp.buf.references)
@@ -71,13 +68,20 @@ map({ "n", "v" }, "<leader>Y", '"+y$')
 
 map("v", "p", [["_dP"]])
 
+map({"n", "v"}, "c", '"_c', { desc = 'do not add c action to register' })
+
+-- don't put empty lines in register
+map("n", "dd", function ()
+	if vim.fn.getline(".") == "" then return [["_dd]] else return "dd" end
+end, {expr = true})
+
 -- populate jumplist with relative jumps
 map("n", "k", [[(v:count > 5 ? "m'" . v:count : '') . 'k']], { expr = true })
 map("n", "j", [[(v:count > 5 ? "m'" . v:count : '') . 'j']], { expr = true })
 
 -- move highlighted text and auto indent
-map("v", "J", ":m '>+1<CR>gv=gv")
-map("v", "K", ":m '<-2<CR>gv=gv")
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = 'move visually selected lines down' })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = 'move visually selected lines up' })
 
 -- macro's in insert mode
 map("i", "@@", "<esc>@@i")

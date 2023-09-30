@@ -14,3 +14,5 @@ map('n', '<leader>x', function ()
 		vim.api.nvim_set_current_line(line)
 	end
 end)
+
+vim.opt.foldlevel = 99
