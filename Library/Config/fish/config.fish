@@ -18,26 +18,23 @@ set -g fish_color_redirection magenta
 set -g fish_color_autosuggestion 6f7683
 
 set files \
-	"$HOME/.config/fish/xdg.fish" \
-	"$HOME/.config/fish/prompt.fish" \
-	"$HOME/.config/fish/exports.fish" \
-	"$HOME/.config/fish/aliases.fish" \
-	"$HOME/.config/fish/functions.fish" \
+	"$HOME/Library/Config/fish/xdg.fish" \
+	"$HOME/Library/Config/fish/prompt.fish" \
+	"$HOME/Library/Config/fish/exports.fish" \
+	"$HOME/Library/Config/fish/aliases.fish" \
+	"$HOME/Library/Config/fish/functions.fish" \
 	"$HOME/Documents/venvs/venvs.fish" \
 	"$HOME/Documents/z-v/z.fish"
 for file in $files
 	[ -f "$file" ] && source $file
 end
 
-# set tabs used by cat etc. to width 4
+set tabs used by cat etc. to width 4
 tabs -p
 
-bind --mode insert '>dn' "commandline -i ' >/dev/null'"
-bind --mode insert 2dn "commandline -i ' 2>/dev/null'"
-
-if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
-	tmux ls 2>/dev/null | grep attached >/dev/null
-	if [ "$status" = 1 ]
-		tmux attach-session -t general || tmux new-session -s general
-	end
-end
+# if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
+# 	tmux ls 2>/dev/null | grep attached >/dev/null
+# 	if [ "$status" = 1 ]
+# 		tmux attach-session -t general || tmux new-session -s general
+# 	end
+# end

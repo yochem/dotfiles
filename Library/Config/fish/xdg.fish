@@ -1,6 +1,6 @@
 # because some apps love to have their config files in the home directory,
 # but I don't
-set -xU XDG_CONFIG_HOME "$HOME/.config"
+set -xU XDG_CONFIG_HOME "$HOME/Library/Config"
 set -xU XDG_DATA_HOME "$HOME/.local/share"
 set -xU XDG_STATE_HOME "$HOME/.local/state"
 fish_add_path "$HOME/.local/bin"

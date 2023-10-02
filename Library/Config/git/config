@@ -6,7 +6,7 @@
 	defaultBranch = main
 
 [core]
-	excludesfile = ~/.config/git/ignore
+	excludesfile = ~/Library/Config/git/ignore
 	pager = less -x1,5,9,13,17,21,25,29,33,37,41,45,49,53,57,61,65,69,73,77,81
 
 [pager]
@@ -61,7 +61,7 @@
 	date = auto:human
 
 [commit]
-	template = ~/.config/git/commit-template
+	template = ~/Library/Config/git/commit-template
 
 [color "branch"]
 	current = green
