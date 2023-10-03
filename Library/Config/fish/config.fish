@@ -32,9 +32,9 @@ end
 set tabs used by cat etc. to width 4
 tabs -p
 
-# if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
-# 	tmux ls 2>/dev/null | grep attached >/dev/null
-# 	if [ "$status" = 1 ]
-# 		tmux attach-session -t general || tmux new-session -s general
-# 	end
-# end
+if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
+	tmux ls 2>/dev/null | grep attached >/dev/null
+	if [ "$status" = 1 ]
+		tmux attach-session -t general || tmux new-session -s general
+	end
+end
