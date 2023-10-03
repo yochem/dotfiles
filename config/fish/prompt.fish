@@ -19,6 +19,12 @@ function prompt_git
 	end
 end
 
+
+function line -e fish_prompt -d "print line after command to seperate commands"
+	set_color brblack
+	jot -b '–' -s '' $COLUMNS 2>/dev/null
+end
+
 # the prompt normally looks like this: [ ~/Documents ]
 # but can look like these:
 # [ @host: ~/Documents ]
