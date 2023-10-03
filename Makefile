@@ -77,6 +77,10 @@ clean-home:
 mac: $(wildcard Library/*/*)
 ifeq ($(shell uname),Darwin)
 	@for file in $^; do ln -sf "./$$file" "~/$$file"; done
+	@echo Installing Brew
+	xcode-select --install
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	brew bundle
 endif
 
 # NOTE: no need for a clean-mac target
