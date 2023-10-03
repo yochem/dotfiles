@@ -16,7 +16,6 @@ DATA_SRCS := $(notdir $(wildcard data/*))
 BIN_SRCS := $(notdir $(wildcard bin/*))
 BIN_DEST_DIR := ~/.local/bin
 
-
 config: $(addprefix $(XDG_CONFIG_HOME)/, $(CONFIG_SRCS))
 
 $(XDG_CONFIG_HOME)/%: config/%
@@ -65,4 +64,4 @@ track-config:
 	mv $(XDG_CONFIG_HOME)/$(prog) config/$(prog)
 	@$(MAKE) --no-print-directory $(XDG_CONFIG_HOME)/$(prog)
 
-.PHONY: all clean bin config data mac track-config
+.PHONY: all clean clean-config clean-data clean-bin bin config data mac track-config
