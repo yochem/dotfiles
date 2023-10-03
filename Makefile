@@ -16,6 +16,7 @@ DATA_SRCS := $(notdir $(wildcard data/*))
 BIN_SRCS := $(notdir $(wildcard bin/*))
 BIN_DEST_DIR := ~/.local/bin
 
+
 config: $(addprefix $(XDG_CONFIG_HOME)/, $(CONFIG_SRCS))
 
 $(XDG_CONFIG_HOME)/%: config/%
@@ -43,15 +44,25 @@ all: config data bin mac
 
 # hack to only build if file exists, || true makes sure no error is raised
 %:
-	@[ -e config/$@ ] && $(MAKE) $(XDG_CONFIG_HOME)/$@ || true
-	@[ -e data/$@ ] && $(MAKE) $(XDG_DATA_HOME)/$@ || true
-	@[ -e bin/$@ ] && $(MAKE) $(BIN_DEST_DIR)/$@ || true
+	@[ -e config/$@ ] && $(MAKE) --no-print-directory $(XDG_CONFIG_HOME)/$@ || true
+	@[ -e data/$@ ] && $(MAKE) --no-print-directory $(XDG_DATA_HOME)/$@ || true
+	@[ -e bin/$@ ] && $(MAKE) --no-print-directory $(BIN_DEST_DIR)/$@ || true
 
-MADE_FILES := $(addprefix $(XDG_CONFIG_HOME)/, $(CONFIG_SRCS)) \
-	$(addprefix $(XDG_DATA_HOME)/, $(DATA_SRCS)) \
-	$(addprefix $(BIN_DEST_DIR)/, $(BIN_SRCS))
+clean-config:
+	$(foreach file, $(addprefix $(XDG_CONFIG_HOME)/, $(CONFIG_SRCS)), unlink $(file) 2>/dev/null || true${\n})
 
-clean:
-	-$(foreach file,$(MADE_FILES), unlink $(file) 2>/dev/null || true${\n})
+clean-data:
+	$(foreach file, $(addprefix $(XDG_DATA_HOME)/, $(DATA_SRCS)), unlink $(file) 2>/dev/null || true${\n})
 
-.PHONY: all clean bin config data mac
+clean-bin:
+	$(foreach file, $(addprefix $(BIN_DEST_DIR)/, $(BIN_SRCS)), unlink $(file) 2>/dev/null || true${\n})
+
+clean: clean-config clean-data clean-bin
+
+prog ?= $(error Please set this flag)
+
+track-config:
+	mv $(XDG_CONFIG_HOME)/$(prog) config/$(prog)
+	@$(MAKE) --no-print-directory $(XDG_CONFIG_HOME)/$(prog)
+
+.PHONY: all clean bin config data mac track-config
