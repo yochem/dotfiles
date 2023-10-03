@@ -15,6 +15,7 @@ CONFIG_SRCS := $(notdir $(wildcard config/*))
 DATA_SRCS := $(notdir $(wildcard data/*))
 BIN_SRCS := $(notdir $(wildcard bin/*))
 BIN_DEST_DIR := ~/.local/bin
+HOME_SRCS := $(notdir $(wildcard home/*))
 
 config: $(addprefix $(XDG_CONFIG_HOME)/, $(CONFIG_SRCS))
 
@@ -32,6 +33,11 @@ bin: $(addprefix $(BIN_DEST_DIR)/, $(BIN_SRCS))
 
 $(BIN_DEST_DIR)/%: bin/%
 	@mkdir -p $(BIN_DEST_DIR)
+	ln -sf $(realpath $^) $@
+
+home: $(addprefix ~/., $(HOME_SRCS))
+
+~/.%: home/%
 	ln -sf $(realpath $^) $@
 
 mac: $(wildcard Library/*/*)
