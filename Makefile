@@ -1,8 +1,3 @@
-define \n
-
-
-endef
-
 ifndef XDG_CONFIG_HOME
 $(error XDG_CONFIG_HOME is undefined)
 endif
@@ -11,72 +6,45 @@ ifndef XDG_DATA_HOME
 $(error XDG_DATA_HOME is undefined)
 endif
 
-################################################################################
-# Per-directory Make targets (copy for new every new dir)
-################################################################################
-CONFIG_SRCS := $(notdir $(wildcard config/*))
+DIRS = config data bin home
+DEST_config := $(XDG_CONFIG_HOME)
+DEST_data := $(XDG_DATA_HOME)
+DEST_bin := ~/.local/bin
+DEST_home := ~
+DESTS = $(DEST_config) $(DEST_data) $(DEST_bin) $(DEST_home)
 
-config: $(addprefix $(XDG_CONFIG_HOME)/, $(CONFIG_SRCS))
+# config|data|bin
+$(DIRS) : % :
+	@$(MAKE) $(addprefix $(DEST_$@)/, $(notdir $(wildcard $@/*)))
 
-$(XDG_CONFIG_HOME)/%: config/%
-	@mkdir -p $(XDG_CONFIG_HOME)
-	ln -sf $(realpath $^) $@
+.PHONY: $(DIRS)
 
-clean-config:
-	$(foreach file, $(addprefix $(XDG_CONFIG_HOME)/, $(CONFIG_SRCS)), unlink $(file) 2>/dev/null || true${\n})
+# prog-specific
+$(addsuffix /%, $(DESTS)):
+	@test -n "$(realpath $(wildcard */$(notdir $@)))"
+	@mkdir -p $(dir $@)
+	ln -sf $(realpath $(wildcard */$(notdir $@))) $@
+	[ $(dir $@) = "$$HOME/" ] && mv $@ ~/.$(notdir $@)
 
-.PHONY: config clean-config
+# start tracking programs, e.g. track-config prog=nvim
+prog ?= $(error Please provide a program name)
+$(addprefix track-, $(DIRS)) : track-% :
+	command mv $(DEST_$*)/$(prog) $*/$(prog)
+	@$(MAKE) --no-print-directory $(DEST_$*)/$(prog)
+	git add $*/$(prog)
+	git commit -m "Add: $*/$(prog)"
 
-################################################################################
+# clean function
+$(addprefix clean-, $(DIRS)) : clean-% :
+	rm $(addprefix $(DEST_$*)/, $(notdir $(wildcard $*/*)))
 
-DATA_SRCS := $(notdir $(wildcard data/*))
+clean: $(addprefix clean-, $(DIRS))
 
-data: $(addprefix $(XDG_DATA_HOME)/, $(DATA_SRCS))
+all: $(DIRS)
 
-$(XDG_DATA_HOME)/%: data/%
-	@mkdir -p $(XDG_DATA_HOME)
-	ln -sf $(realpath $^) $@
-
-clean-data:
-	$(foreach file, $(addprefix $(XDG_DATA_HOME)/, $(DATA_SRCS)), unlink $(file) 2>/dev/null || true${\n})
-
-.PHONY: data clean-data
-
-################################################################################
-
-BIN_SRCS := $(notdir $(wildcard bin/*))
-BIN_DEST_DIR := ~/.local/bin
-
-bin: $(addprefix $(BIN_DEST_DIR)/, $(BIN_SRCS))
-
-$(BIN_DEST_DIR)/%: bin/%
-	@mkdir -p $(BIN_DEST_DIR)
-	ln -sf $(realpath $^) $@
-
-clean-bin:
-	$(foreach file, $(addprefix $(BIN_DEST_DIR)/, $(BIN_SRCS)), unlink $(file) 2>/dev/null || true${\n})
-
-.PHONY: bin clean-bin
-
-################################################################################
-
-HOME_SRCS := $(notdir $(wildcard home/*))
-
-home: $(addprefix ~/., $(HOME_SRCS))
-
-~/.%: home/%
-	ln -sf $(realpath $^) $@
-
-clean-home:
-	$(foreach file, $(addprefix ~/., $(HOME_SRCS)), unlink $(file) 2>/dev/null || true${\n})
-
-.PHONY: home clean-home
-
-################################################################################
-
-mac: $(wildcard Library/*/*)
+mac: $(wildcard Library/Preferences/*)
 ifeq ($(shell uname),Darwin)
-	@for file in $^; do ln -sf "./$$file" "~/$$file"; done
+	for file in $^; do ln -sf "$$file" "$$HOME/$$file"; done
 	@echo Installing Brew
 	xcode-select --install
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -85,11 +53,7 @@ endif
 
 # NOTE: no need for a clean-mac target
 
-.PHONY: mac
-
-################################################################################
-
-all: config data bin home mac
+.PHONY: all clean mac
 
 # hack to only build if file exists, || true makes sure no error is raised
 %:
@@ -97,7 +61,3 @@ all: config data bin home mac
 	@[ -e data/$@ ] && $(MAKE) --no-print-directory $(XDG_DATA_HOME)/$@ || true
 	@[ -e bin/$@ ] && $(MAKE) --no-print-directory $(BIN_DEST_DIR)/$@ || true
 	@[ -e home/$@ ] && $(MAKE) --no-print-directory ~/.$@ || true
-
-clean: clean-config clean-data clean-bin clean-home
-
-.PHONY: all clean
