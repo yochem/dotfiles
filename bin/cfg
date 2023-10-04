@@ -10,7 +10,7 @@
 # res="$(fd -d "$depth" --type f "$1" "$HOME/.config/" | fzf --height '40%' --layout reverse)"
 # [ -n "$res" ] && nvim "$res"
 
-cfgdir="${XDG_CONFIG_HOME:-$HOME/.config}"
+cfgdir="$HOME/Documents/dotfiles/config/"
 fzfopts='--height 40% --layout reverse --select-1 --exit-0'
 fdopts='--max-depth 5 --type file --relative-path'
 

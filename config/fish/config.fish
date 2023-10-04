@@ -8,9 +8,6 @@ set fish_cursor_default block
 set fish_cursor_insert line
 set fish_cursor_replace_one underscore
 
-function fish_greeting
-end
-
 set -g fish_color_command blue
 set -g fish_color_comment 6f7683
 set -g fish_color_quote green
@@ -21,15 +18,28 @@ set files \
 	"$HOME/Library/Config/fish/xdg.fish" \
 	"$HOME/Library/Config/fish/prompt.fish" \
 	"$HOME/Library/Config/fish/exports.fish" \
-	"$HOME/Library/Config/fish/aliases.fish" \
-	"$HOME/Library/Config/fish/functions.fish" \
 	"$HOME/Documents/venvs/venvs.fish" \
 	"$HOME/Documents/z-v/z.fish"
 for file in $files
 	[ -f "$file" ] && source $file
 end
 
-set tabs used by cat etc. to width 4
+abbr reload "exec fish"
+abbr g git
+abbr .. "cd .."
+
+[ -n (command -v nvim) ] && alias vim nvim
+
+# fd is fdfind on ubuntu
+command -v fdfind >/dev/null && alias fd fdfind
+
+# get quick octal permissions of a file
+abbr perms "stat --format '%a'"
+
+# typo prevention
+abbr gs "git status -s"
+
+# set tabs used by cat etc. to width 4
 tabs -p
 
 if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
