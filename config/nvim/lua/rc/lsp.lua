@@ -15,17 +15,12 @@ setup("pylsp", {
 	settings = {
 		pylsp = {
 			plugins = {
-				flake8 = { ignore = { "E501" } },
 				mccabe = { enabled = true },
-				pycodestyle = { enabled = false },
-				pydocstyle = { enabled = false },
-				pyflakes = { enabled = false },
-				pylint = { enabled = true },
 				pylsp_lsp_black = { enabled = true },
 				pylsp_mypy = { enabled = true, live_mode = true },
 				rope_autoimport = { enabled = true },
-				rope_completion = { enabled = true, eager = true },
-				yapf = { enabled = false },
+				rope_completion = { enabled = true, eager = false },
+				ruff = { enabled = true, extendSelect = { "I" } }
 			},
 		},
 	},

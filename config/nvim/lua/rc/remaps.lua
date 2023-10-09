@@ -15,7 +15,7 @@ end
 map("n", "oo", "m`o<Esc>``", { desc = 'add empty line without moving cursor' })
 map("n", "OO", "m`O<Esc>``", { desc = 'add empty line without moving cursor' })
 
-map("n", "n", "nzz", { desc = 'center during search' })
+-- map("n", "n", "nzz", { desc = 'center during search' })
 
 map("v", "<", "<gv", { desc = 'keep visual selection when indenting' })
 map("v", ">", ">gv", { desc = 'keep visual selection when indenting' })

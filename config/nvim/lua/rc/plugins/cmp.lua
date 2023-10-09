@@ -8,15 +8,17 @@ return {
 		cmp.setup({
 			snippet = {
 				expand = function(args)
-					require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+					require("luasnip").lsp_expand(args.body)
 				end,
 			},
-			mapping = cmp.mapping.preset.insert({
+			mapping = {
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
-					elseif luasnip.expand_or_jumpable() then
+					elseif luasnip.expand_or_locally_jumpable() then
 						luasnip.expand_or_jump()
+					elseif cmp.has_words_before() then
+						cmp.complete()
 					else
 						fallback()
 					end
@@ -31,12 +33,19 @@ return {
 						fallback()
 					end
 				end, { "i", "s" }),
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
-				["<C-Space>"] = cmp.mapping.complete(),
-				["<C-e>"] = cmp.mapping.abort(),
-				["<CR>"] = cmp.mapping.confirm({ select = false }),
-			}),
+
+				["<CR>"] = cmp.mapping({
+					i = function(fallback)
+						if cmp.visible() and cmp.get_active_entry() then
+							cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+						else
+							fallback()
+						end
+					end,
+					s = cmp.mapping.confirm({ select = true }),
+					c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+				}),
+			},
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "nvim_lsp" },
@@ -53,12 +62,8 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
-		"onsails/lspkind-nvim",
-		"nvim-lua/lsp_extensions.nvim",
-		"glepnir/lspsaga.nvim",
-		"simrat39/symbols-outline.nvim",
+		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
-		"rafamadriz/friendly-snippets",
 		{
 			dir = '~/Documents/cmp-htmx',
 			dev = true,
