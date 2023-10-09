@@ -27,6 +27,7 @@ end
 abbr reload "exec fish"
 abbr g git
 abbr .. "cd .."
+abbr pip python3 -m pip
 
 [ -n (command -v nvim) ] && alias vim nvim
 

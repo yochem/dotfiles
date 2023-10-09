@@ -24,7 +24,7 @@ $(addsuffix /%, $(DESTS)):
 	@test -n "$(realpath $(wildcard */$(notdir $@)))"
 	@mkdir -p $(dir $@)
 	ln -sf $(realpath $(wildcard */$(notdir $@))) $@
-	[ $(dir $@) = "$$HOME/" ] && mv $@ ~/.$(notdir $@)
+	@[ $(dir $@) = "$$HOME/" ] && mv $@ ~/.$(notdir $@) || true
 
 # start tracking programs, e.g. track-config prog=nvim
 prog ?= $(error Please provide a program name)
@@ -44,7 +44,8 @@ all: $(DIRS)
 
 mac: $(wildcard Library/Preferences/*)
 ifeq ($(shell uname),Darwin)
-	for file in $^; do ln -sf "$$file" "$$HOME/$$file"; done
+	# TODO: fix
+	for file in $^; do ln -sf "$(realpath $$file)" "$$HOME/$$file"; done
 	@echo Installing Brew
 	xcode-select --install
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
