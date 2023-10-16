@@ -28,14 +28,12 @@ abbr reload "exec fish"
 abbr g git
 abbr .. "cd .."
 abbr pip python3 -m pip
+abbr perms stat -f '%OLp'
 
 [ -n (command -v nvim) ] && alias vim nvim
 
 # fd is fdfind on ubuntu
 command -v fdfind >/dev/null && alias fd fdfind
-
-# get quick octal permissions of a file
-abbr perms "stat --format '%a'"
 
 # typo prevention
 abbr gs "git status -s"

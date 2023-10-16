@@ -8,7 +8,7 @@ return {
 			require('ufo').closeAllFolds()
 		end)
 	end,
-	config = {
+	opts = {
 		provider_selector = function(bufnr, filetype, buftype)
 			return {'treesitter', 'indent'}
 		end

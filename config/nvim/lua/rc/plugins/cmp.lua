@@ -67,7 +67,7 @@ return {
 		{
 			dir = '~/Documents/cmp-htmx',
 			dev = true,
-			as = 'cmp-htmx',
+			name = 'cmp-htmx',
 		}
 	},
 }
