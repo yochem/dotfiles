@@ -35,6 +35,54 @@
                         ]
                     },
                     {
+                        "description": "Open iTerm2",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "i",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a 'iTerm'"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+					{
+                        "description": "Open Browser",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "b",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a 'Brave Browser'"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+					{
                         "description": "Open Spotify",
                         "manipulators": [
                             {
@@ -59,7 +107,7 @@
                         ]
                     },
                     {
-                        "description": "Disable wifi logging.",
+                        "description": "Open Telegram",
                         "manipulators": [
                             {
                                 "from": {
@@ -83,7 +131,7 @@
                         ]
                     },
                     {
-                        "description": "Disable wifi logging.",
+                        "description": "Open WhatsApp",
                         "manipulators": [
                             {
                                 "from": {

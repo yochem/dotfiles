@@ -16,3 +16,16 @@ map('n', '<leader>x', function ()
 end)
 
 vim.opt.foldlevel = 99
+
+map('n', '~', function ()
+	local line = vim.api.nvim_get_current_line()
+	local new_line
+
+	if line:find('~') then
+		new_line = line:gsub('~', '')
+	else
+		new_line = line:gsub('- (.+)', '- ~%1~')
+	end
+
+	vim.api.nvim_set_current_line(new_line)
+end, { desc = 'Toggle strikethrough' })

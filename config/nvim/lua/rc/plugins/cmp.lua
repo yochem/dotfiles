@@ -1,3 +1,31 @@
+local kind_icons = {
+	Text = "",
+	Method = "󰆧",
+	Function = "󰊕",
+	Constructor = "",
+	Field = "󰇽",
+	Variable = "󰂡",
+	Class = "󰠱",
+	Interface = "",
+	Module = "",
+	Property = "󰜢",
+	Unit = "",
+	Value = "󰎠",
+	Enum = "",
+	Keyword = "󰌋",
+	Snippet = "",
+	Color = "󰏘",
+	File = "󰈙",
+	Reference = "",
+	Folder = "󰉋",
+	EnumMember = "",
+	Constant = "󰏿",
+	Struct = "",
+	Event = "",
+	Operator = "󰆕",
+	TypeParameter = "󰅲",
+}
+
 return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
@@ -17,8 +45,8 @@ return {
 						cmp.select_next_item()
 					elseif luasnip.expand_or_locally_jumpable() then
 						luasnip.expand_or_jump()
-					elseif cmp.has_words_before() then
-						cmp.complete()
+					-- elseif cmp.has_words_before() then
+					-- 	cmp.complete()
 					else
 						fallback()
 					end
@@ -55,6 +83,27 @@ return {
 			}, {
 				{ name = "buffer" },
 			}),
+			formatting = {
+				fields = { "kind", "abbr", "menu" },
+				format = function (entry, vim_item)
+					vim_item.kind = kind_icons[vim_item.kind]
+					vim_item.menu = ({
+						buffer = "[Buffer]",
+						nvim_lsp_signature_help = "[LSP]",
+						nvim_lsp = "[LSP]",
+						luasnip = "[LuaSnip]",
+						path = "[Path]",
+						htmx = "[HTMX]",
+					})[entry.source.name]
+					return vim_item
+				end
+			},
+			-- matching = {
+			-- 	disallow_fuzzy_matching = false,
+			-- 	disallow_fullfuzzy_matching = false,
+			-- 	disallow_partial_fuzzy_matching = false,
+			-- 	disallow_prefix_unmatching = false,
+			-- }
 		})
 	end,
 	dependencies = {
