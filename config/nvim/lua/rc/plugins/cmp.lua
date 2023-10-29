@@ -81,6 +81,17 @@ return {
 				{ name = "path" },
 				{ name = "htmx" },
 			}, {
+				{
+					name = "spell",
+					option = {
+						keep_all_entries = true,
+						enable_in_context = function()
+							local context = require('cmp.config.context')
+							return context.in_treesitter_capture('spell')
+						end,
+					}
+				},
+			}, {
 				{ name = "buffer" },
 			}),
 			formatting = {
@@ -94,16 +105,11 @@ return {
 						luasnip = "[LuaSnip]",
 						path = "[Path]",
 						htmx = "[HTMX]",
+						spell = "[Spell]",
 					})[entry.source.name]
 					return vim_item
 				end
 			},
-			-- matching = {
-			-- 	disallow_fuzzy_matching = false,
-			-- 	disallow_fullfuzzy_matching = false,
-			-- 	disallow_partial_fuzzy_matching = false,
-			-- 	disallow_prefix_unmatching = false,
-			-- }
 		})
 	end,
 	dependencies = {
@@ -111,6 +117,7 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
+		"f3fora/cmp-spell",
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 		{

@@ -12,12 +12,7 @@ fi
 if [[ $(command -v brew) ]]; then
 	HOMEBREW_NO_INSTALL_CLEANUP=1
 	echo -e "${orangebold}Updating and upgrading Brew...${reset}"
-	brew upgrade --quiet
-	echo -e "${orangebold}Upgrading Casks...${reset}"
-	defaults export com.apple.dock "/tmp/dockdefaults"
-	for d in $(brew ls --cask -1); do brew upgrade --cask "$d"; done
-	defaults import com.apple.dock "/tmp/dockdefaults"
-	killall Dock
+	brew upgrade --quiet --greedy
 	echo -e "${orangebold}Cleaning Brew...${reset}"
 	brew cleanup -s --prune=0
 	echo -e "${orangebold}Doctoring Brew...${reset}"

@@ -83,6 +83,10 @@ map("n", "j", [[(v:count > 5 ? "m'" . v:count : '') . 'j']], { expr = true })
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = 'move visually selected lines down' })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = 'move visually selected lines up' })
 
+-- don't move so aggressive
+map("n", "<PageUp>", "10k")
+map("n", "<PageDown>", "10j")
+
 -- close window
 map("n", "q", function()
 	local success = pcall(vim.cmd.close)
@@ -90,6 +94,11 @@ map("n", "q", function()
 		pcall(vim.cmd.quit)
 	end
 end)
+
+-- map("n", "zg", function ()
+-- 	vim.opt.spellfile = vim.fn.stdpath('data') .. '/spell/' .. vim.o.spelllang
+-- 	vim.cmd("exe norm! zg")
+-- end)
 
 map("n", "!", function()
 	local nvim_buf_get_text = vim.api.nvim_buf_get_text

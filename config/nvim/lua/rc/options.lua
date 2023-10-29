@@ -36,6 +36,7 @@ opt.smartindent = true
 opt.softtabstop = 0
 opt.spell = true
 opt.spelloptions = { "camel", "noplainbuffer" }
+opt.spellsuggest = "10"
 opt.splitbelow = true
 opt.splitkeep = "screen"
 opt.splitright = true

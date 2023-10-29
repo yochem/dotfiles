@@ -1,5 +1,6 @@
 vim.opt.spell = true
 vim.opt.spelllang = 'en'
+vim.opt.formatprg = 'fmt -w 80'
 
 local map = require('rc.remaps').map
 
