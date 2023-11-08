@@ -60,9 +60,6 @@
 [log]
 	date = auto:human
 
-[commit]
-	template = ~/Library/Config/git/commit-template
-
 [color "branch"]
 	current = green
 	local = normal

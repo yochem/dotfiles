@@ -64,5 +64,4 @@ function fish_prompt
 	printf (prompt_git)
 	printf "] "
 
-	z --update >/dev/null 2>&1
 end

@@ -14,29 +14,22 @@ set -g fish_color_quote green
 set -g fish_color_redirection magenta
 set -g fish_color_autosuggestion 6f7683
 
-set files \
-	"$HOME/Library/Config/fish/xdg.fish" \
-	"$HOME/Library/Config/fish/prompt.fish" \
-	"$HOME/Library/Config/fish/exports.fish" \
-	"$HOME/Documents/venvs/venvs.fish" \
-	"$HOME/Documents/z-v/z.fish"
-for file in $files
-	[ -f "$file" ] && source $file
-end
+[ -z "$XDG_CONFIG_HOME" ] && echo "XDG_CONFIG_HOME not set!!!"
+source "$HOME/.config/fish/xdg.fish"
+source "$HOME/.config/fish/prompt.fish"
+source "$HOME/.config/fish/exports.fish"
 
 abbr reload "exec fish"
 abbr g git
 abbr .. "cd .."
 abbr pip python3 -m pip
 abbr perms stat -f '%OLp'
+abbr gs "git status -s"
 
 [ -n (command -v nvim) ] && alias vim nvim
 
 # fd is fdfind on ubuntu
 command -v fdfind >/dev/null && alias fd fdfind
-
-# typo prevention
-abbr gs "git status -s"
 
 # set tabs used by cat etc. to width 4
 tabs -p

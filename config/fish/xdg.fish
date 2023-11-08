@@ -1,14 +1,13 @@
 # because some apps love to have their config files in the home directory,
 # but I don't
-set -xU XDG_CONFIG_HOME "$HOME/Library/Config"
-set -xU XDG_DATA_HOME "$HOME/.local/share"
-set -xU XDG_STATE_HOME "$HOME/.local/state"
 fish_add_path "$HOME/.local/bin"
 
-if [ (uname -s) = Darwin ]
-	set -xU XDG_CACHE_HOME "$HOME/Library/Caches"
-else
-	set -xU XDG_CACHE_HOME "$HOME/.cache"
+if [ -z "$XDG_CONFIG_HOME" -o -z "$XDG_DATA_HOME" -o -z "$XDG_CACHE_HOME" ]
+	echo "XDG paths not set, try this:"
+	echo "set -xU XDG_CONFIG_HOME $HOME/.config"
+	echo "set -xU XDG_DATA_HOME $HOME/.local/share"
+	echo "set -xU XDG_STATE_HOME $HOME/.local/state"
+	echo "set -xU XDG_CACHE_HOME $HOME/.cache"
 end
 
 # for easier typing on the command line
