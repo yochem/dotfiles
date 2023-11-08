@@ -27,11 +27,6 @@ setup("pylsp", {
 })
 
 setup("lua_ls", {
-	cmd = {
-		"/Users/yochem/.local/bin/luals/bin/macOS/lua-language-server",
-		"-E",
-		"/Users/yochem/.local/bin/luals/main.lua",
-	},
 	settings = {
 		Lua = {
 			runtime = { version = "LuaJIT", path = vim.split(package.path, ";") },
@@ -60,6 +55,7 @@ setup("cssls", { root_dir = lsp.util.root_pattern("index.html") })
 setup("erlangls", {})
 setup("eslint", {})
 setup("html", {})
+setup("marksman", {})
 setup("v_analyzer", {})
 setup("jsonls", {})
 setup("texlab", {
