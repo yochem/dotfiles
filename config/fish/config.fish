@@ -23,6 +23,7 @@ abbr reload "exec fish"
 abbr g git
 abbr .. "cd .."
 abbr pip python3 -m pip
+abbr tlmgr "sudo tlmgr install"
 abbr perms stat -f '%OLp'
 abbr gs "git status -s"
 
