@@ -43,6 +43,11 @@ setup("lua_ls", {
 
 setup("arduino_language_server", {})
 
+setup("typst_lsp", {
+	exportPdf = "never",
+	root_dir = lsp.util.root_pattern("*.typ")
+})
+
 setup("gopls", {
 	cmd = { "gopls", "serve" },
 	settings = { gopls = { analyses = { unusedparams = true }, staticcheck = true } },
