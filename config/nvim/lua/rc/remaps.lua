@@ -83,6 +83,8 @@ map("n", "j", [[(v:count > 5 ? "m'" . v:count : '') . 'j']], { expr = true })
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = 'move visually selected lines down' })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = 'move visually selected lines up' })
 
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 -- don't move so aggressive
 map("n", "<PageUp>", "10k")
 map("n", "<PageDown>", "10j")

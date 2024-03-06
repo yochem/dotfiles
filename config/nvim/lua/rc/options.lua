@@ -1,5 +1,4 @@
 local opt = vim.opt
-
 opt.autowrite = true
 opt.colorcolumn = { 80 }
 opt.completeopt = { "menu", "menuone", "noinsert" }
@@ -13,7 +12,7 @@ opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.formatoptions = "cqnj"
 opt.gdefault = true
-opt.hlsearch = false
+opt.hlsearch = true
 opt.ignorecase = true
 opt.inccommand = "split"
 opt.list = true

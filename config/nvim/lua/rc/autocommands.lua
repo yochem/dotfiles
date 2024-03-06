@@ -33,13 +33,6 @@ autocmd("BufReadPost", {
 	end,
 })
 
--- use template if available
-autocmd("BufNewFile", {
-	pattern = { "*.c", "*.tex", "*.go" },
-	command = "0r " .. vim.fn.stdpath("config") .. "/templates/<afile>:e",
-	once = true,
-})
-
 -- highligt non-ascii blue
 autocmd({ "BufEnter", "InsertLeave" }, {
 	pattern = { "!lspinfo", "!Trouble" },

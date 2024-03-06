@@ -8,7 +8,7 @@ require("rc.lazy")
 require("rc.options")
 require("rc.remaps")
 require("rc.autocommands")
-require("rc.lsp")
+-- require("rc.lsp")
 
 vim.cmd.colorscheme("onedark")
 

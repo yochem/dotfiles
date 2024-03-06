@@ -36,10 +36,11 @@ return {
 		cmp.setup({
 			snippet = {
 				expand = function(args)
-					require("luasnip").lsp_expand(args.body)
+					luasnip.lsp_expand(args.body)
 				end,
 			},
-			mapping = {
+			completion = { completeopt = 'menu,menuone,noinsert' },
+			mapping = cmp.mapping.preset.insert({
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
@@ -62,38 +63,15 @@ return {
 					end
 				end, { "i", "s" }),
 
-				["<CR>"] = cmp.mapping({
-					i = function(fallback)
-						if cmp.visible() and cmp.get_active_entry() then
-							cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-						else
-							fallback()
-						end
-					end,
-					s = cmp.mapping.confirm({ select = true }),
-					c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-				}),
-			},
-			sources = cmp.config.sources({
+				["<CR>"] = cmp.mapping.confirm({ select = true }),
+			}),
+			sources = {
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 				{ name = "path" },
 				{ name = "htmx" },
-			}, {
-				{
-					name = "spell",
-					option = {
-						keep_all_entries = true,
-						enable_in_context = function()
-							local context = require('cmp.config.context')
-							return context.in_treesitter_capture('spell')
-						end,
-					}
-				},
-			}, {
-				{ name = "buffer" },
-			}),
+			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
 				format = function (entry, vim_item)
