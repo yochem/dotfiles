@@ -5,16 +5,16 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 		signs = true,
 		update_in_insert = true,
 		severity_sort = true,
-})
+	})
 
 return {
 	"neovim/nvim-lspconfig",
 	config = function()
-		vim.api.nvim_create_autocmd('LspAttach', {
-			group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 			callback = function(event)
 				local map = function(keys, func)
-					vim.keymap.set('n', keys, func, { buffer = event.buf })
+					vim.keymap.set("n", keys, func, { buffer = event.buf })
 				end
 				map("<leader>D", vim.lsp.buf.declaration)
 				map("<leader>gd", vim.lsp.buf.definition)
@@ -29,21 +29,25 @@ return {
 		})
 
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+		capabilities = vim.tbl_deep_extend(
+			"force",
+			capabilities,
+			require("cmp_nvim_lsp").default_capabilities()
+		)
 
 		local servers = {
 			lua_ls = {
 				settings = {
 					Lua = {
-						runtime = { version = 'LuaJIT' },
+						runtime = { version = "LuaJIT" },
 						workspace = {
 							checkThirdParty = false,
 							library = {
-								'${3rd}/luv/library',
-								unpack(vim.api.nvim_get_runtime_file('', true)),
+								"${3rd}/luv/library",
+								unpack(vim.api.nvim_get_runtime_file("", true)),
 							},
 						},
-						completion = { callSnippet = 'Replace' },
+						completion = { callSnippet = "Replace" },
 					},
 				},
 			},
@@ -95,12 +99,12 @@ return {
 
 		for server_name, server in pairs(servers) do
 			server.capabilities = vim.tbl_deep_extend(
-				'force',
+				"force",
 				{},
 				capabilities,
 				server.capabilities or {}
 			)
-			require('lspconfig')[server_name].setup(server)
+			require("lspconfig")[server_name].setup(server)
 		end
 	end
 }

@@ -34,7 +34,7 @@ return {
 				},
 				lualine_x = { wordcount, "filetype" },
 				lualine_y = {
-					'require("nvim-lightbulb").get_status_text()',
+					"require('nvim-lightbulb').get_status_text()",
 					"diagnostics",
 				},
 				lualine_z = { "location" },

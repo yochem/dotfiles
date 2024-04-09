@@ -7,7 +7,7 @@ return {
 			filetypes = { "help", "man", "packer" }
 		},
 		indent = {
-			tab_char = '│'
+			tab_char = "│"
 		}
 	},
 	event = "BufReadPost",

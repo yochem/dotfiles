@@ -39,15 +39,15 @@ return {
 					luasnip.lsp_expand(args.body)
 				end,
 			},
-			completion = { completeopt = 'menu,menuone,noinsert' },
+			completion = { completeopt = "menu,menuone,noinsert" },
 			mapping = cmp.mapping.preset.insert({
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
 					elseif luasnip.expand_or_locally_jumpable() then
 						luasnip.expand_or_jump()
-					-- elseif cmp.has_words_before() then
-					-- 	cmp.complete()
+						-- elseif cmp.has_words_before() then
+						-- 	cmp.complete()
 					else
 						fallback()
 					end
@@ -74,7 +74,7 @@ return {
 			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
-				format = function (entry, vim_item)
+				format = function(entry, vim_item)
 					vim_item.kind = kind_icons[vim_item.kind]
 					vim_item.menu = ({
 						buffer = "[Buffer]",
@@ -99,9 +99,9 @@ return {
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 		{
-			dir = '~/Documents/cmp-htmx',
+			dir = "~/Documents/cmp-htmx",
 			dev = true,
-			name = 'cmp-htmx',
+			name = "cmp-htmx",
 		}
 	},
 }

@@ -22,11 +22,13 @@ return {
 		{
 			"<leader>fF",
 			function()
-				require("telescope.builtin").lsp_document_symbols({symbols={
-					'class',
-					'function',
-					'struct',
-				}})
+				require("telescope.builtin").lsp_document_symbols({
+					symbols = {
+						"class",
+						"function",
+						"struct",
+					}
+				})
 			end,
 		},
 	},

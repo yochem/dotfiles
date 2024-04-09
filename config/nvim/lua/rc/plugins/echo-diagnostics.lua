@@ -1,7 +1,7 @@
 return {
 	"seblj/nvim-echo-diagnostics",
 	config = function()
-		require('echo-diagnostics').setup({
+		require("echo-diagnostics").setup({
 			show_diagnostic_number = false,
 			show_diagnostic_source = true,
 		})
