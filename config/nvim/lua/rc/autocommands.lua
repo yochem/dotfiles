@@ -10,19 +10,6 @@ autocmd("TextYankPost", {
 	end,
 })
 
--- autocmd("BufWritePre", {
--- 	callback = function ()
--- 		local clients = vim.lsp.get_active_clients()
--- 		for _, client in pairs(clients) do
--- 			for buf, _ in pairs(client.attached_buffers) do
--- 				if buf == vim.fn.bufnr("%") then
--- 					vim.lsp.buf.format()
--- 				end
--- 			end
--- 		end
--- 	end
--- })
-
 -- open file with cursor on last position
 autocmd("BufReadPost", {
 	callback = function()
@@ -30,16 +17,6 @@ autocmd("BufReadPost", {
 		if 0 < mark[1] and mark[1] <= vim.api.nvim_buf_line_count(0) then
 			vim.api.nvim_win_set_cursor(0, mark)
 		end
-	end,
-})
-
--- highligt non-ascii blue
-autocmd({ "BufEnter", "InsertLeave" }, {
-	pattern = { "!lspinfo", "!Trouble" },
-	callback = function()
-		-- todo: if file is writeable
-		vim.api.nvim_set_hl(0, "nonascii", { bg = "Blue" })
-		vim.cmd([[syntax match nonascii "[^\x00-\x7F]"]])
 	end,
 })
 
@@ -95,8 +72,6 @@ vim.api.nvim_create_user_command("SplitNum", function()
 		vim.api.nvim_set_current_line(vim.fn.substitute(vim.fn.getline("."), curr, formatted, ""))
 	end
 end, {})
-
-vim.api.nvim_set_hl(0, "htmlBold", { bold = true })
 
 return {
 	autocmd = autocmd,

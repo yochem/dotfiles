@@ -8,29 +8,31 @@ require("rc.lazy")
 require("rc.options")
 require("rc.remaps")
 require("rc.autocommands")
--- require("rc.lsp")
 
-vim.cmd.colorscheme("onedark")
-
-vim.api.nvim_set_hl(0, "@string.documentation", { link = "@comment" })
-vim.api.nvim_set_hl(0, "@function.builtin.v", { link = "@function.v" })
-vim.api.nvim_set_hl(0, "@type.builtin.v", { link = "@type.v" })
-vim.api.nvim_set_hl(0, "@parameter.v", { link = "@variable.v" })
-
-function Spell2qf()
-	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-	local qflist = {}
-	for lnum, line in ipairs(lines) do
-		local badwords = vim.spell.check(line)
-		for _, badword in ipairs(badwords) do
-			table.insert(qflist, {
-				filename = vim.api.nvim_buf_get_name(0),
-				lnum = lnum,
-				col = badword[3],
-				type = 'E',
-				text = badword[1],
-			})
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		local function hl(group, opts)
+			vim.api.nvim_set_hl(0, group, opts)
 		end
+		hl("LineNr", { fg = "NvimLightGray3" })
+		hl("FoldColumn", { fg = "NvimLightGray4" })
+
+		hl("Normal", { fg = "White", bg = "none" })
+		hl("Function", { fg = "NvimLightBlue" })
+		hl("Identifier", { fg = "NvimLightBlue" })
+		hl("Delimiter", { fg = "White" })
+		hl("Constant", { fg = "NvimLightYellow" })
+		hl("Statement", { fg = "NvimLightMagenta" })
+		hl("Special", { link = "Constant" })
+		hl("@lsp.mod.declaration", { bold = false })
+		hl("@string.documentation", { link = "@comment" })
+		hl("@comment.todo", { fg = "NvimLightRed", bold = true })
+
+		hl("@constructor.lua", { link = "Delimiter" })
+		hl("@constructor.python", { link = "Function" })
+		hl("@variable", { fg = "White" })
+		hl("@variable.parameter", { fg = "NvimLightCyan" })
 	end
-	vim.fn.setqflist(qflist, 'r')
-end
+})
+
+vim.cmd.colorscheme("default")

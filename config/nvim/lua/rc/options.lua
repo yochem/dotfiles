@@ -6,7 +6,7 @@ opt.expandtab = false
 opt.exrc = true
 opt.fileformat = "unix"
 opt.fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" }
-opt.foldcolumn = '1'
+opt.foldcolumn = "1"
 opt.foldenable = true
 opt.foldlevel = 99
 opt.foldlevelstart = 99
