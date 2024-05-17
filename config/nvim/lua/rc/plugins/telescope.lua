@@ -1,10 +1,29 @@
 return {
 	"nvim-telescope/telescope.nvim",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"folke/trouble.nvim",
+	},
+	config = function()
+		local trouble = require("trouble.providers.telescope")
+		local opts = {
+			defaults = {
+				mappings = {
+					i = { ["<c-o>"] = trouble.open_with_trouble },
+					n = { ["<c-o>"] = trouble.open_with_trouble },
+				},
+			},
+		}
+		require("telescope").setup(opts)
+	end,
 	keys = {
 		{
 			"<leader>ff",
 			function()
-				require("telescope.builtin").find_files()
+				require("telescope.builtin").find_files({
+					hidden = true,
+					preview = false,
+				})
 			end,
 		},
 		{
@@ -16,7 +35,10 @@ return {
 		{
 			"<leader>fb",
 			function()
-				require("telescope.builtin").buffers()
+				require("telescope.builtin").buffers({
+					preview = false,
+					initial_mode = "normal"
+				})
 			end,
 		},
 		{

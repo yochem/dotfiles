@@ -2,6 +2,7 @@
 [user]
 	name = Yochem van Rosmalen
 	email = git@yochem.nl
+	signingkey = /Users/yochem/.ssh/id_ed25519.pub
 
 [init]
 	defaultBranch = main
@@ -13,7 +14,7 @@
 	diff = true
 
 [help]
-	autocorrect = 1
+	autocorrect = 20
 
 [alias]
 	# View the current working tree status using the short format
@@ -46,7 +47,7 @@
 	uncommit = reset HEAD^
 
 	# log a pretty graph to show commits
-	graph = log --graph --pretty=format:'%Cred%h%Creset (%an) -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit
+	graph =log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all -n 15
 
 	# check last commit
 	last = log -1 HEAD
@@ -86,3 +87,11 @@
 
 [push]
 	autoSetupRemote = true
+[branch]
+	sort = -committerdate
+[gpg]
+	format = ssh
+[commit]
+	verbose = true
+[diff]
+	algorithm = histogram

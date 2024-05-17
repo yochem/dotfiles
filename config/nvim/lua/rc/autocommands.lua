@@ -20,16 +20,6 @@ autocmd("BufReadPost", {
 	end,
 })
 
--- :help for lua files in nvim config dir
-local cfgdir = vim.fn.stdpath("config")
-autocmd("BufReadPost", {
-	pattern = cfgdir .. "/*",
-	callback = function()
-		vim.opt_local.keywordprg = ":help"
-		vim.opt_local.path:append(cfgdir .. "/lua/")
-	end,
-})
-
 autocmd({ "BufEnter", "BufWritePost", "FocusGained" }, {
 	callback = function()
 		if vim.env.TMUX ~= nil then

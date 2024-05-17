@@ -21,10 +21,12 @@ return {
 				map("<leader>r", vim.lsp.buf.references)
 				map("<leader>rn", vim.lsp.buf.rename)
 				map("<leader>f", vim.lsp.buf.format)
-				map("K", vim.lsp.buf.hover)
-				map("<leader>[", vim.diagnostic.goto_prev)
-				map("<leader>]", vim.diagnostic.goto_next)
 				map("<leader>ca", vim.lsp.buf.code_action)
+
+				local root = vim.lsp.buf.list_workspace_folders()
+				if root[1] ~= nil then
+					vim.cmd.lcd(root[1])
+				end
 			end,
 		})
 
@@ -76,7 +78,6 @@ return {
 			},
 
 			gopls = {
-				cmd = { "gopls", "serve" },
 				settings = {
 					gopls = {
 						analyses = { unusedparams = true },

@@ -30,7 +30,7 @@ return {
 				lualine_a = { "mode" },
 				lualine_b = { "branch", "diff" },
 				lualine_c = {
-					{ "filename", path = 3 },
+					{ "filename", path = 1 },
 				},
 				lualine_x = { wordcount, "filetype" },
 				lualine_y = {

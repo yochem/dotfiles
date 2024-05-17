@@ -1,7 +1,7 @@
 local opt = vim.opt
 opt.autowrite = true
 opt.colorcolumn = { 80 }
-opt.completeopt = { "menu", "menuone", "noinsert" }
+opt.completeopt = { "menu", "menuone", "noselect" }
 opt.expandtab = false
 opt.exrc = true
 opt.fileformat = "unix"

@@ -15,9 +15,11 @@ set -g fish_color_redirection magenta
 set -g fish_color_autosuggestion 6f7683
 
 [ -z "$XDG_CONFIG_HOME" ] && echo "XDG_CONFIG_HOME not set!!!"
-source "$HOME/.config/fish/xdg.fish"
-source "$HOME/.config/fish/prompt.fish"
-source "$HOME/.config/fish/exports.fish"
+source "$HOME/Library/Config/fish/xdg.fish"
+source "$HOME/Library/Config/fish/prompt.fish"
+source "$HOME/Library/Config/fish/exports.fish"
+
+source "$HOME/Documents/venvs/venvs.fish"
 
 abbr reload "exec fish"
 abbr g git
