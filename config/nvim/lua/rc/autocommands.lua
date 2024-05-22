@@ -20,6 +20,30 @@ autocmd("BufReadPost", {
 	end,
 })
 
+autocmd("BufReadPost", {
+	callback = function(args)
+		local git_dirs = vim.fs.find('.git', {
+			upward = true,
+			path = vim.fs.dirname(args.file),
+		})
+		if git_dirs[1] ~= nil then
+			vim.cmd.lcd(vim.fs.dirname(git_dirs[1]))
+			vim.g.project_dir_set = true
+		end
+	end,
+})
+
+-- highlight wrong indentation (tabs when expandtab, spaces when not expandtab)
+autocmd("BufEnter", {
+	callback = function()
+		if vim.opt.expandtab:get() then
+			vim.cmd.match('Error', [[/^\t\+/]])
+		else
+			vim.cmd.match('Error', [[/^ \+/]])
+		end
+	end,
+})
+
 autocmd({ "BufEnter", "BufWritePost", "FocusGained" }, {
 	callback = function()
 		if vim.env.TMUX ~= nil then

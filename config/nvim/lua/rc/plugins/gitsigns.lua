@@ -7,7 +7,7 @@ return {
 			change       = { text = "│" },
 			delete       = { text = "_" },
 			topdelete    = { text = "‾" },
-			changedelete = { text = "~" },
+			changedelete = { text = "│" },
 			untracked    = { text = "│" },
 		},
 	}

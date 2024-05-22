@@ -23,9 +23,11 @@ return {
 				map("<leader>f", vim.lsp.buf.format)
 				map("<leader>ca", vim.lsp.buf.code_action)
 
-				local root = vim.lsp.buf.list_workspace_folders()
-				if root[1] ~= nil then
-					vim.cmd.lcd(root[1])
+				if not vim.g.project_dir_set then
+					local root = vim.lsp.buf.list_workspace_folders()
+					if root[1] ~= nil then
+						vim.cmd.lcd(root[1])
+					end
 				end
 			end,
 		})
@@ -58,7 +60,6 @@ return {
 				settings = {
 					pylsp = {
 						plugins = {
-							mccabe = { enabled = true },
 							pylsp_lsp_black = { enabled = true },
 							pylsp_mypy = { enabled = true, live_mode = true },
 							rope_autoimport = { enabled = true },

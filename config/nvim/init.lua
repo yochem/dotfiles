@@ -15,6 +15,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 			vim.api.nvim_set_hl(0, group, opts)
 		end
 		hl("LineNr", { fg = "NvimLightGray3" })
+		hl("CursorLineNr", { fg = "White" })
+		hl("CursorLine", { bg = nil })
 		hl("FoldColumn", { fg = "NvimLightGray4" })
 
 		hl("Normal", { fg = "White", bg = "none" })
@@ -34,5 +36,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		hl("@variable.parameter", { fg = "NvimLightCyan" })
 	end
 })
+
+vim.fn.sign_define("DiagnosticSignError", { text = "●" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "●" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "●" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "●" })
 
 vim.cmd.colorscheme("default")

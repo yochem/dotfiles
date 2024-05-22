@@ -16,6 +16,7 @@ return {
 		}
 		require("telescope").setup(opts)
 	end,
+	cmd = "Telescope",
 	keys = {
 		{
 			"<leader>ff",
@@ -51,6 +52,12 @@ return {
 						"struct",
 					}
 				})
+			end,
+		},
+		{
+			"<leader>fh",
+			function()
+				require("telescope.builtin").help_tags()
 			end,
 		},
 	},
