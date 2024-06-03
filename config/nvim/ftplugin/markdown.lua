@@ -1,6 +1,5 @@
-vim.opt.spell = true
-vim.opt.spelllang = 'en'
-vim.opt.formatprg = 'fmt -w 80'
+vim.wo.spell = true
+vim.bo.spelllang = 'en'
 
 local map = require('rc.remaps').map
 
@@ -16,7 +15,7 @@ map('n', '<leader>x', function ()
 	end
 end)
 
-vim.opt.foldlevel = 99
+vim.o.foldlevel = 99
 
 map('n', '~', function ()
 	local line = vim.api.nvim_get_current_line()

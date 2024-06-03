@@ -34,15 +34,15 @@ autocmd("BufReadPost", {
 })
 
 -- highlight wrong indentation (tabs when expandtab, spaces when not expandtab)
-autocmd("BufEnter", {
-	callback = function()
-		if vim.opt.expandtab:get() then
-			vim.cmd.match('Error', [[/^\t\+/]])
-		else
-			vim.cmd.match('Error', [[/^ \+/]])
-		end
-	end,
-})
+-- autocmd("BufEnter", {
+-- 	callback = function()
+-- 		if vim.opt.expandtab:get() == 1 then
+-- 			vim.cmd.match('Error', [[/^\t\+/]])
+-- 		else
+-- 			vim.cmd.match('Error', [[/^ \+/]])
+-- 		end
+-- 	end,
+-- })
 
 autocmd({ "BufEnter", "BufWritePost", "FocusGained" }, {
 	callback = function()
@@ -57,9 +57,9 @@ autocmd({ "BufEnter", "BufWritePost", "FocusGained" }, {
 
 vim.api.nvim_create_user_command("Scratch", function()
 	vim.cmd.new()
-	vim.opt_local.buftype = "nofile"
-	vim.opt_local.bufhidden = "hide"
-	vim.opt_local.swapfile = false
+	vim.bo.buftype = "nofile"
+	vim.bo.bufhidden = "hide"
+	vim.bo.swapfile = false
 	vim.cmd.startinsert()
 end, {})
 

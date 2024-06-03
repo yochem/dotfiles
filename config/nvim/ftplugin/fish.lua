@@ -1,1 +1,1 @@
-vim.opt_local.formatprg = 'fishindent'
+vim.bo.formatprg = 'fishindent'

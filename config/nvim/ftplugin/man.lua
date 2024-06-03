@@ -13,4 +13,4 @@ if (vim.env.TMUX ~= nil) then
 	os.execute("tmux rename-window '" .. fn .. "'")
 end
 
-vim.opt.spell = false
+vim.wo.spell = false

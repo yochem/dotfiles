@@ -1,2 +1,2 @@
-vim.opt.colorcolumn = {}
-vim.opt.statuscolumn = ''
+vim.o.colorcolumn = ''
+vim.o.statuscolumn = ''

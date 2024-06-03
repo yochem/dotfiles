@@ -1,6 +1,6 @@
-vim.opt_local.expandtab = false
-vim.opt_local.tabstop = 4
-vim.opt_local.shiftwidth = 4
-vim.opt_local.softtabstop = 4
+vim.bo.expandtab = false
+vim.bo.tabstop = 4
+vim.bo.shiftwidth = 4
+vim.bo.softtabstop = 4
 
-vim.opt_local.formatprg = 'gofmt'
+vim.bo.formatprg = 'gofmt'

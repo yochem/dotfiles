@@ -37,7 +37,7 @@ map("n", "<S-Right>", cmd("vertical resize -2"))
 
 -- go through visual lines with j and k but don't mess with 10k etc.
 -- source: http://stackoverflow.com/a/21000307/2580955
-if vim.opt.wrap:get() then
+if vim.o.wrap then
 	map("n", "j", [[v:count ? 'j' : 'gj']], { expr = true })
 	map("n", "k", [[v:count ? 'k' : 'gk']], { expr = true })
 end
