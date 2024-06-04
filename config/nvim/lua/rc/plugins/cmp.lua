@@ -39,32 +39,11 @@ return {
 					luasnip.lsp_expand(args.body)
 				end,
 			},
-			completion = { completeopt = "menu,menuone,noinsert" },
-			mapping = cmp.mapping.preset.insert({
-				["<Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					elseif luasnip.expand_or_locally_jumpable() then
-						luasnip.expand_or_jump()
-						-- elseif cmp.has_words_before() then
-						-- 	cmp.complete()
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
-
-				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					elseif luasnip.jumpable(-1) then
-						luasnip.jump(-1)
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
-
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
-			}),
+			mapping = {
+				["<TAB>"] = cmp.mapping.select_next_item(),
+				["<S-TAB>"] = cmp.mapping.select_prev_item(),
+				["<CR>"] = cmp.mapping.confirm({ select = false }),
+			},
 			sources = {
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "nvim_lsp" },
