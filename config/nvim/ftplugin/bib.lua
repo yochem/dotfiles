@@ -1,1 +1,1 @@
-vim.opt.formatoptions:remove('t')
+vim.opt.formatoptions:remove("t")

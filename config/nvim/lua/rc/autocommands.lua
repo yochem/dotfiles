@@ -22,7 +22,7 @@ autocmd("BufReadPost", {
 
 autocmd("BufReadPost", {
 	callback = function(args)
-		local git_dirs = vim.fs.find('.git', {
+		local git_dirs = vim.fs.find(".git", {
 			upward = true,
 			path = vim.fs.dirname(args.file),
 		})

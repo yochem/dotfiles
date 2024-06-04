@@ -1,6 +1,7 @@
 vim.o.autowrite = true
-vim.o.colorcolumn = '80'
+vim.o.colorcolumn = "80"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.o.conceallevel = 3
 vim.o.cursorline = true
 vim.o.expandtab = false
 vim.o.exrc = true

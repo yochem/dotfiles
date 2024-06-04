@@ -1,2 +1,2 @@
-vim.keymap.set('n', '<leader>s', ':g/^=<CR>:')
-vim.opt.formatoptions:append('t')
+vim.keymap.set("n", "<leader>s", ":g/^=<CR>:")
+vim.opt.formatoptions:append("t")

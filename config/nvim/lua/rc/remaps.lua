@@ -67,7 +67,11 @@ map({ "n", "v" }, "c", '"_c', { desc = "do not add c action to register" })
 
 -- don't put empty lines in register
 map("n", "dd", function()
-	if vim.fn.getline(".") == "" then return [["_dd]] else return "dd" end
+	if vim.fn.getline(".") == "" then
+		return [["_dd]]
+	else
+		return "dd"
+	end
 end, { expr = true })
 
 -- populate jumplist with relative jumps

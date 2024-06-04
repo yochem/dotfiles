@@ -1,3 +1,3 @@
 return {
-	s("todo", t("% TODO: "))
+	s("todo", t("% TODO: ")),
 }
