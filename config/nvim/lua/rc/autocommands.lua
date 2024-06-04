@@ -10,7 +10,6 @@ autocmd("TextYankPost", {
 	end,
 })
 
--- open file with cursor on last position
 autocmd("BufReadPost", {
 	callback = function()
 		local mark = vim.api.nvim_buf_get_mark(0, [["]])
@@ -18,6 +17,7 @@ autocmd("BufReadPost", {
 			vim.api.nvim_win_set_cursor(0, mark)
 		end
 	end,
+	desc = "open file with cursor on last position",
 })
 
 autocmd("BufReadPost", {
@@ -31,18 +31,8 @@ autocmd("BufReadPost", {
 			vim.g.project_dir_set = true
 		end
 	end,
+	desc = "use folder with .git folder as root directory",
 })
-
--- highlight wrong indentation (tabs when expandtab, spaces when not expandtab)
--- autocmd("BufEnter", {
--- 	callback = function()
--- 		if vim.opt.expandtab:get() == 1 then
--- 			vim.cmd.match('Error', [[/^\t\+/]])
--- 		else
--- 			vim.cmd.match('Error', [[/^ \+/]])
--- 		end
--- 	end,
--- })
 
 autocmd({ "BufEnter", "BufWritePost", "FocusGained" }, {
 	callback = function()
@@ -62,31 +52,3 @@ vim.api.nvim_create_user_command("Scratch", function()
 	vim.bo.swapfile = false
 	vim.cmd.startinsert()
 end, {})
-
-vim.api.nvim_create_user_command("Config", function()
-	vim.cmd.edit(vim.fn.stdpath("config"))
-end, {})
-
--- https://github.com/asrul10/readable-number.nvim
-vim.api.nvim_create_user_command("SplitNum", function()
-	local curr = vim.fn.expand("<cword>")
-
-	if tonumber(curr) then
-		if #curr < 3 then
-			return
-		end
-		local formatted = ""
-		for i = #curr, 1, -3 do
-			if i - 3 <= 0 then
-				formatted = curr:sub(1, i) .. formatted
-				break
-			end
-			formatted = "_" .. curr:sub(i - 2, i) .. formatted
-		end
-		vim.api.nvim_set_current_line(vim.fn.substitute(vim.fn.getline("."), curr, formatted, ""))
-	end
-end, {})
-
-return {
-	autocmd = autocmd,
-}

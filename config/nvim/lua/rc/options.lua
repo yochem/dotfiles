@@ -17,7 +17,7 @@ vim.o.hlsearch = true
 vim.o.ignorecase = true
 vim.o.inccommand = "split"
 vim.o.list = true
-vim.opt.listchars = { tab = "  ", trail = "•" }
+vim.opt.listchars = { tab = "  ", trail = "•", multispace = "••", leadmultispace = " " }
 vim.o.number = true
 vim.o.numberwidth = 1
 vim.o.pumheight = 10
