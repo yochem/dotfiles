@@ -35,7 +35,11 @@ return {
 				lualine_x = { wordcount, "filetype" },
 				lualine_y = {
 					"require('nvim-lightbulb').get_status_text()",
-					"diagnostics",
+					{
+						"diagnostics",
+						sections = { "error", "warn", "info" },
+						always_visible = true,
+					},
 				},
 				lualine_z = { "location" },
 			},

@@ -1,14 +1,14 @@
 return {
 	"lewis6991/gitsigns.nvim",
-	event = { "BufReadPost" },
+	event = { "VeryLazy" },
 	opts = {
 		signs = {
-			add          = { text = "│" },
-			change       = { text = "│" },
-			delete       = { text = "_" },
-			topdelete    = { text = "‾" },
+			add = { text = "│" },
+			change = { text = "│" },
+			delete = { text = "_" },
+			topdelete = { text = "‾" },
 			changedelete = { text = "│" },
-			untracked    = { text = "│" },
+			untracked = { text = "│" },
 		},
-	}
+	},
 }

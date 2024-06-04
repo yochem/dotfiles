@@ -4,12 +4,12 @@ return {
 	opts = {
 		scope = { enabled = false },
 		exclude = {
-			filetypes = { "help", "man", "packer" }
+			filetypes = { "help", "man", "packer" },
 		},
 		indent = {
-			tab_char = "│"
-		}
+			tab_char = "│",
+		},
 	},
-	event = "BufReadPost",
+	event = "VeryLazy",
 	dependencies = "nvim-treesitter/nvim-treesitter",
 }

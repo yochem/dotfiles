@@ -65,7 +65,7 @@ return {
 						spell = "[Spell]",
 					})[entry.source.name]
 					return vim_item
-				end
+				end,
 			},
 		})
 	end,
@@ -81,6 +81,6 @@ return {
 			dir = "~/Documents/cmp-htmx",
 			dev = true,
 			name = "cmp-htmx",
-		}
+		},
 	},
 }

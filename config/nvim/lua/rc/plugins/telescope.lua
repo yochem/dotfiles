@@ -38,7 +38,7 @@ return {
 			function()
 				require("telescope.builtin").buffers({
 					preview = false,
-					initial_mode = "normal"
+					initial_mode = "normal",
 				})
 			end,
 		},
@@ -50,7 +50,7 @@ return {
 						"class",
 						"function",
 						"struct",
-					}
+					},
 				})
 			end,
 		},

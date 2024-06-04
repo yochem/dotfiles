@@ -1,7 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
-	-- dir = "~/Documents/nvim-treesitter-textobjects",
-	event = "BufReadPost",
+	event = "InsertEnter",
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			highlight = { enable = true },
@@ -45,7 +44,7 @@ return {
 					},
 					goto_previous = {
 						["[b"] = "@block.outer",
-					}
+					},
 				},
 				swap = {
 					enable = true,
@@ -55,8 +54,8 @@ return {
 					swap_previous = {
 						["<leader>S"] = "@parameter.inner",
 					},
-				}
-			}
+				},
+			},
 		})
 	end,
 	cond = function()

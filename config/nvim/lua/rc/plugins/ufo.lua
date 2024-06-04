@@ -11,10 +11,10 @@ return {
 	opts = {
 		provider_selector = function()
 			return { "treesitter", "indent" }
-		end
+		end,
 	},
 	dependencies = {
-		"kevinhwang91/promise-async"
+		"kevinhwang91/promise-async",
 	},
-	event = "BufReadPost",
+	event = "VeryLazy",
 }

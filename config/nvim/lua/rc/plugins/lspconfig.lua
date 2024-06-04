@@ -1,14 +1,6 @@
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-	vim.lsp.diagnostic.on_publish_diagnostics, {
-		underline = false,
-		virtual_text = false,
-		signs = true,
-		update_in_insert = true,
-		severity_sort = true,
-	})
-
 return {
 	"neovim/nvim-lspconfig",
+	event = { "BufReadPost", "BufNewFile" },
 	config = function()
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
@@ -33,11 +25,7 @@ return {
 		})
 
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = vim.tbl_deep_extend(
-			"force",
-			capabilities,
-			require("cmp_nvim_lsp").default_capabilities()
-		)
+		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 		local servers = {
 			lua_ls = {
@@ -64,7 +52,7 @@ return {
 							pylsp_mypy = { enabled = true, live_mode = true },
 							rope_autoimport = { enabled = true },
 							rope_completion = { enabled = true, eager = false },
-							ruff = { enabled = true, extendSelect = { "I" } }
+							ruff = { enabled = true, extendSelect = { "I" } },
 						},
 					},
 				},
@@ -75,15 +63,15 @@ return {
 			typst_lsp = {
 				settings = {
 					exportPdf = "never",
-				}
+				},
 			},
 
 			gopls = {
 				settings = {
 					gopls = {
 						analyses = { unusedparams = true },
-						staticcheck = true
-					}
+						staticcheck = true,
+					},
 				},
 			},
 
@@ -98,15 +86,9 @@ return {
 			jsonls = {},
 		}
 
-
 		for server_name, server in pairs(servers) do
-			server.capabilities = vim.tbl_deep_extend(
-				"force",
-				{},
-				capabilities,
-				server.capabilities or {}
-			)
+			server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 			require("lspconfig")[server_name].setup(server)
 		end
-	end
+	end,
 }

@@ -13,6 +13,7 @@ require("rc.autocommands").autocmd("FileType", {
 
 return {
 	"nvim-treesitter/nvim-treesitter",
+	event = { "BufReadPost", "BufNewFile" },
 	opts = {
 		highlight = { enable = true },
 		indent = { enable = true },

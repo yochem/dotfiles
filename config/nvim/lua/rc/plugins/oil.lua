@@ -1,5 +1,6 @@
 return {
-	'stevearc/oil.nvim',
+	"stevearc/oil.nvim",
+	event = "Syntax",
 	opts = {
 		skip_confirm_for_simple_edits = true,
 		view_options = {

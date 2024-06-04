@@ -9,7 +9,7 @@ local function folds_and_diagnostics(args)
 			return "%s"
 		end
 	end
-	return require("statuscol.builtin").foldfunc(args)
+	return require("statuscol.builtin").foldfunc(args) .. " "
 end
 
 return {
@@ -21,7 +21,7 @@ return {
 			relculright = true,
 			ft_ignore = { "Trouble" },
 			segments = {
-				{ text = { folds_and_diagnostics, " " }, click = "v:lua.ScFa" },
+				{ text = { folds_and_diagnostics, "" }, click = "v:lua.ScFa" },
 				{ text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
 				{
 					sign = {
@@ -31,7 +31,7 @@ return {
 						fillchar = "│",
 						fillcharhl = "@comment",
 					},
-					click = "v:lua.ScSa"
+					click = "v:lua.ScSa",
 				},
 			},
 		})
