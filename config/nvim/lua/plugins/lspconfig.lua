@@ -84,6 +84,7 @@ return {
 			marksman = {},
 			v_analyzer = {},
 			jsonls = {},
+			jqls = {},
 		}
 
 		for server_name, server in pairs(servers) do
