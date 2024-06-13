@@ -46,9 +46,9 @@ autocmd({ "BufEnter", "BufWritePost", "FocusGained" }, {
 })
 
 vim.api.nvim_create_user_command("Scratch", function()
-	vim.cmd.new()
-	vim.bo.buftype = "nofile"
-	vim.bo.bufhidden = "hide"
-	vim.bo.swapfile = false
+	vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
+		split = "below",
+		height = 20,
+	})
 	vim.cmd.startinsert()
 end, {})
