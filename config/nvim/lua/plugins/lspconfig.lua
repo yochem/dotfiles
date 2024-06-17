@@ -14,6 +14,11 @@ return {
 				map("<leader>rn", vim.lsp.buf.rename)
 				map("<leader>f", vim.lsp.buf.format)
 				map("<leader>ca", vim.lsp.buf.code_action)
+				map("<leader>h", function ()
+					vim.lsp.inlay_hint.enable(
+						not vim.lsp.inlay_hint.is_enabled()
+					)
+				end)
 
 				if not vim.g.project_dir_set then
 					local root = vim.lsp.buf.list_workspace_folders()
@@ -31,6 +36,7 @@ return {
 			lua_ls = {
 				settings = {
 					Lua = {
+						hint = { enable = true },
 						runtime = { version = "LuaJIT" },
 						workspace = {
 							checkThirdParty = false,
