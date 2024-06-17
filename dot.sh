@@ -2,7 +2,7 @@
 
 xdg_config="$XDG_CONFIG_HOME"
 xdg_data="$XDG_DATA_HOME"
-dotfiles="$(dirname $(realpath $0))"
+dotfiles="$(dirname "$(realpath "$0")")"
 
 help() {
 	cat << EOF
@@ -33,7 +33,7 @@ track-file() {
 		echo "file '$2' already tracked"
 		return 1
 	}
-	echo "starting tracking $(basename $(dirname $1)) for $(basename $1)"
+	echo "starting tracking $(basename "$(dirname "$1")") for $(basename "$1")"
 	mv -v "$2" "$1" >/dev/null
 	ln -sfv "$1" "$2"
 }
@@ -63,7 +63,7 @@ sync-file() {
 		echo "file '$2' already synced"
 		return 1
 	}
-	echo "starting syncing $(basename $(dirname $1)) for $(basename $1)"
+	echo "starting syncing $(basename "$(dirname "$1")") for $(basename "$1")"
 	ln -sfv "$1" "$2"
 }
 
@@ -81,7 +81,7 @@ sync() {
 
 guess() {
 	shopt -s nullglob
-	file=$(echo */$1)
+	file="$(echo */$1)"
 	if [ -n "$file" ]; then
 		# check which one was matching and don't run rest
 		[ -e "$dotfiles/config/$1" ] && sync "$1" "config"
@@ -94,10 +94,10 @@ guess() {
 }
 
 main() {
-	echo ${XDG_CONFIG_HOME?unset or null (export XDG_DATA_HOME=$HOME/.config)} >/dev/null
-	echo ${XDG_DATA_HOME?unset or null (export XDG_DATA_HOME=$HOME/.local/share)} >/dev/null
-
 	[ $# -eq 0 ] || [ "${@: -1}" = "--help" ] && help
+
+	echo "${XDG_CONFIG_HOME?unset or null (export XDG_DATA_HOME=$HOME/.config)}" >/dev/null
+	echo "${XDG_DATA_HOME?unset or null (export XDG_DATA_HOME=$HOME/.local/share)}" >/dev/null
 
 	command="$1"
 	case "$command" in 
@@ -110,6 +110,9 @@ main() {
 			# strip `sync-` part
 			dir=${command:6}
 			sync "$2" "$dir"
+			;;
+		mac)
+			echo TODO
 			;;
 		--help|-h)
 			help
