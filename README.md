@@ -19,20 +19,36 @@ Config files      | Installed to
 ## Installation
 
 This repository can be cloned to any location on your computer. The dotfiles
-are managed using a Makefile. This makes the configuration modular and allows
-me to install only the configuration from the programs I need at that moment.
-All commands overwrite the current configuration. Here are the Make commands:
+are managed using a shell script ([`dot.sh`](./dot.sh)). This makes the
+configuration modular and allows me to install only the configuration from the
+programs I need at that moment.
 
-- `make all`: link all files from this repo to their respective (`XDG_*`
-  locations).
-- `make [config|data|home|bin]`: Only install content from these directories.
-- `make <program>`: Install config for that program, independent of which
-  directory it is in (multiple also possible).
-- `make mac`: MacOS specific stuff.
-- `make clean-[config|data|home|bin]`: Remove only the programs that are synced
-  with this repo from their target directories
-- `make clean`: Remove only the programs that are synced with this repo from
-  all target directories.
+### Full installation
+
+```
+git clone https://github.com/yochem/dotfiles.git
+cd dotfiles
+./dot.sh */*
+```
+
+### `dot.sh` script
+```
+Usage: dot.sh [sync|track|clean] [FILE...]
+       dot.sh --help
+
+Manage dotfiles. Either sync (from this repo to your dotfile directories) or
+Start tracking (from your dotfile directories to this repository) your dotfiles.
+
+COMMANDS
+	sync		Symlinks file from this repository to your dotfile directories
+	track		Moves dotfile to this repository and starts sync
+	clean		Removes dotfile, but only if it exists in this repository
+
+FILES
+	Files that should be synced/tracked/cleaned. Use glob patterns for easy
+	syncing of many files. The * in the root directory will only match the
+	dotfile directories: config, data, home, bin
+```
 
 ## Why?
 *"There is a computer disease that anybody who works with computers knows about.

@@ -2,31 +2,53 @@
 
 help() {
 	cat << EOF
-Usage: dot.sh [sync|track|clean] [FILE]
+Usage: dot.sh [sync|track|clean] [FILE...]
        dot.sh --help
 
 Manage dotfiles. Either sync (from this repo to your dotfile directories) or
 Start tracking (from your dotfile directories to this repository) your dotfiles.
 
-sync	Symlinks file from this repository to your dotfile directories
-track	Moves dotfile to this repository and starts sync
-clean	Removes dotfile, but only if it exists in this repository
+COMMANDS
+	sync		Symlinks file from this repository to your dotfile directories
+	track		Moves dotfile to this repository and starts sync
+	clean		Removes dotfile, but only if it exists in this repository
 
-FILE can be either
-	- config/data/home/bin: Run command for all files in that directory
-	- Single filename: Try to run the command for every directory listed above
-	- Empty: Run command on all (does not work with track)
+FILES
+	Files that should be synced/tracked/cleaned. Use glob patterns for easy
+	syncing of many files. The * in the root directory will only match the
+	dotfile directories: config, data, home, bin
+
+EXAMPLES
+	Sync all dotfiles:
+
+	./dot.sh sync */*
+
+	Sync all configs:
+
+	./dot.sh sync config/*
+
+	Sync everything for nvim:
+
+	./dot.sh sync */nvim
+
+	Sync or track config of newprogram:
+
+	./dot.sh config/newprogram
+
+	Clean all bin files:
+
+	./dot.sh clean bin/*
 EOF
 	exit
 }
 
 track-file() {
 	test ! -e "$2" && {
-		echo "file '$2' does not exist"
+		echo "file '$2' does not exist" >&2
 		return 1
 	}
 	test -e "$1" && {
-		echo "file '$2' already tracked"
+		echo "file '$2' already tracked" >&2
 		return 1
 	}
 	echo mv "$2" "$1" >/dev/null
@@ -34,23 +56,19 @@ track-file() {
 }
 
 track() {
-	local prog=(${1//\// })
+	prog=(${1//\// })
 	if [ ${#prog[@]} = 1 ]; then
 		paths=(config/"$1" data/"$1" home/"$1" bin/"$1")
 	else
 		paths=("$1")
 	fi
-	for path in "${paths[@]}"; do
+	for path in ${paths[@]}; do
 		track-file "$(realpath "$path")" "$(get-target-dir "$path")"
 	done
 }
 
-find-files() {
-	echo $(echo {config,data,home,bin}/* | tr ' ' '\n' | grep "$1")
-}
-
 get-target-dir() {
-	local prog="$(basename "$1")"
+	prog="$(basename "$1")"
 	case "$1" in
 		config/*)
 			echo "$XDG_CONFIG_HOME/$prog"
@@ -68,25 +86,29 @@ get-target-dir() {
 }
 
 sync() {
-	result=$(find-files "$1")
-	for path in $result; do
+	for path in $@; do
 		target="$(get-target-dir "$path")"
-		echo command ln -sfv "$(realpath "$path")" "$target"
+		[ -e "$target" ] && {
+			echo command ln -sfv "$(realpath "$path")" "$target"
+		}
 	done
 }
 
 clean() {
-	result=$(find-files "$1")
-	for path in $result; do
+	for path in $@; do
 		target="$(get-target-dir "$path")"
-		echo command unlink -v "$target"
+		[ -e "$target" ] && {
+			echo command unlink -v "$target"
+		}
 	done
 }
 
 guess() {
-	files="$(find-files "$1")"
+	shopt -s globstar
+	shopt -s nullglob
+	files=$(echo **/"$1")
 	if [ -n "$files" ]; then
-		sync "$1"
+		sync $files
 	else
 		track "$1"
 	fi
@@ -100,18 +122,21 @@ main() {
 	echo "${BIN?unset or null (export BIN=$HOME/.local/bin)}" >/dev/null
 
 	command="$1"
-	shift
 	case "$command" in
 		track)
-			track $@
+			shift
+			track "${@}"
 			;;
 		sync)
-			sync $@
+			shift
+			sync "${@}"
 			;;
 		clean)
-			clean $@
+			shift
+			clean "${@}"
 			;;
 		mac)
+			shift
 			echo TODO
 			;;
 		--help|-h)
@@ -119,7 +144,7 @@ main() {
 			;;
 		*)
 			# try sync, otherwise track
-			guess "$1"
+			guess "${@}"
 			;;
 	esac
 }
