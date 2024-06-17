@@ -1,30 +1,26 @@
 #!/usr/bin/env bash
 
-xdg_config="$XDG_CONFIG_HOME"
-xdg_data="$XDG_DATA_HOME"
-dotfiles="$(dirname "$(realpath "$0")")"
-
 help() {
 	cat << EOF
-Usage: dot.sh track-[config|data|home] FILE
-       dot.sh sync-[config|data|home] FILE
-       dot.sh FILE
+Usage: dot.sh [sync|track|clean] [FILE]
        dot.sh --help
 
 Manage dotfiles. Either sync (from this repo to your dotfile directories) or
 Start tracking (from your dotfile directories to this repository) your dotfiles.
 
-You can specify the action you want using track-* and sync-* commands. If not
-provided, sync is tried first and otherwise track.
+sync	Symlinks file from this repository to your dotfile directories
+track	Moves dotfile to this repository and starts sync
+clean	Removes dotfile, but only if it exists in this repository
+
+FILE can be either
+	- config/data/home/bin: Run command for all files in that directory
+	- Single filename: Try to run the command for every directory listed above
+	- Empty: Run command on all (does not work with track)
 EOF
 	exit
 }
 
 track-file() {
-	test "$2" = "$xdg_config" -o "$2" = "$xdg_data" -o "$2" = "$HOME" && {
-		echo "no file provided"
-		return 1
-	}
 	test ! -e "$2" && {
 		echo "file '$2' does not exist"
 		return 1
@@ -33,62 +29,65 @@ track-file() {
 		echo "file '$2' already tracked"
 		return 1
 	}
-	echo "starting tracking $(basename "$(dirname "$1")") for $(basename "$1")"
-	mv -v "$2" "$1" >/dev/null
-	ln -sfv "$1" "$2"
+	echo mv "$2" "$1" >/dev/null
+	echo ln -sfv "$1" "$2"
 }
 
 track() {
-	if [ -z "$2" ] || [ "$2" = "config" ]; then
-		track-file "$dotfiles/config/$1" "$xdg_config/$1"
+	local prog=(${1//\// })
+	if [ ${#prog[@]} = 1 ]; then
+		paths=(config/"$1" data/"$1" home/"$1" bin/"$1")
+	else
+		paths=("$1")
 	fi
-	if [ -z "$2" ] || [ "$2" = "data" ]; then
-		track-file "$dotfiles/data/$1" "$xdg_data/$1"
-	fi
-	if [ -z "$2" ] || [ "$2" = "home" ]; then
-		track-file "$dotfiles/home/$1" "$HOME/.$1"
-	fi
+	for path in "${paths[@]}"; do
+		track-file "$(realpath "$path")" "$(get-target-dir "$path")"
+	done
 }
 
-sync-file() {
-	test "$2" = "$xdg_config" -o "$2" = "$xdg_data" -o "$2" = "$HOME" && {
-		echo "no file provided"
-		return 1
-	}
-	test ! -e "$1" && {
-		echo "file '$2' does not exist"
-		return 1
-	}
-	test -e "$2" && {
-		echo "file '$2' already synced"
-		return 1
-	}
-	echo "starting syncing $(basename "$(dirname "$1")") for $(basename "$1")"
-	ln -sfv "$1" "$2"
+find-files() {
+	echo $(echo {config,data,home,bin}/* | tr ' ' '\n' | grep "$1")
+}
+
+get-target-dir() {
+	local prog="$(basename "$1")"
+	case "$1" in
+		config/*)
+			echo "$XDG_CONFIG_HOME/$prog"
+			;;
+		data/*)
+			echo "$XDG_DATA_HOME/$prog"
+			;;
+		home/*)
+			echo "$HOME/.$prog"
+			;;
+		bin/*)
+			echo "$BIN/$prog"
+			;;
+	esac
 }
 
 sync() {
-	if [ -z "$2" ] || [ "$2" = "config" ]; then
-		sync-file "$dotfiles/config/$1" "$xdg_config/$1"
-	fi
-	if [ -z "$2" ] || [ "$2" = "data" ]; then
-		sync-file "$dotfiles/data/$1" "$xdg_data/$1"
-	fi
-	if [ -z "$2" ] || [ "$2" = "home" ]; then
-		sync-file "$dotfiles/home/$1" "$HOME/.$1"
-	fi
+	result=$(find-files "$1")
+	for path in $result; do
+		target="$(get-target-dir "$path")"
+		echo command ln -sfv "$(realpath "$path")" "$target"
+	done
+}
+
+clean() {
+	result=$(find-files "$1")
+	for path in $result; do
+		target="$(get-target-dir "$path")"
+		echo command unlink -v "$target"
+	done
 }
 
 guess() {
-	shopt -s nullglob
-	file="$(echo */$1)"
-	if [ -n "$file" ]; then
-		# check which one was matching and don't run rest
-		[ -e "$dotfiles/config/$1" ] && sync "$1" "config"
-		[ -e "$dotfiles/data/$1" ] && sync "$1" "data"
-		[ -e "$dotfiles/home/$1" ] && sync "$1" "home"
+	files="$(find-files "$1")"
+	if [ -n "$files" ]; then
+		sync "$1"
 	else
-		# try to track everything
 		track "$1"
 	fi
 }
@@ -98,18 +97,19 @@ main() {
 
 	echo "${XDG_CONFIG_HOME?unset or null (export XDG_DATA_HOME=$HOME/.config)}" >/dev/null
 	echo "${XDG_DATA_HOME?unset or null (export XDG_DATA_HOME=$HOME/.local/share)}" >/dev/null
+	echo "${BIN?unset or null (export BIN=$HOME/.local/bin)}" >/dev/null
 
 	command="$1"
-	case "$command" in 
-		track|track-config|track-data|track-home)
-			# strip `track-` part
-			dir=${command:6}
-			track "$2" "$dir"
+	shift
+	case "$command" in
+		track)
+			track $@
 			;;
-		sync|sync-config|sync-data|sync-home)
-			# strip `sync-` part
-			dir=${command:6}
-			sync "$2" "$dir"
+		sync)
+			sync $@
+			;;
+		clean)
+			clean $@
 			;;
 		mac)
 			echo TODO
@@ -118,6 +118,7 @@ main() {
 			help
 			;;
 		*)
+			# try sync, otherwise track
 			guess "$1"
 			;;
 	esac
