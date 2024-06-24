@@ -52,3 +52,14 @@ vim.api.nvim_create_user_command("Scratch", function()
 	})
 	vim.cmd.startinsert()
 end, {})
+
+autocmd("WinEnter", {
+	callback = function ()
+		local win_width = vim.api.nvim_win_get_width(0)
+		local is_float = vim.api.nvim_win_get_config(0).relative ~= ""
+		if not is_float and win_width > 160 then
+			vim.cmd.wincmd('L')
+		end
+	end,
+	desc = "open second window horizontally"
+})
