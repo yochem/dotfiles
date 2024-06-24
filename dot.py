@@ -4,15 +4,14 @@ import os
 import sys
 from functools import partial
 import typing
-from typing import Iterable, Literal, Tuple
+from typing import Iterable
 
-RepoDir = Literal[
-    "config",
-    "data",
-    "home",
-    "bin",
-]
-repo_dirs: Tuple[RepoDir, ...] = typing.get_args(RepoDir)
+repo_dirs = (
+	"config",
+	"data",
+	"home",
+	"bin",
+)
 
 
 err_print = partial(print, file=sys.stderr)
@@ -33,17 +32,16 @@ def ensure_path_from_env(env_var: str, exit_code: int = 2) -> Path:
 
 
 def user_dir(repo_dir: str) -> Path:
-    match repo_dir:
-        case "config":
-            return ensure_path_from_env("XDG_CONFIG_HOME")
-        case "data":
-            return ensure_path_from_env("XDG_DATA_HOME")
-        case "home":
-            return ensure_path_from_env("HOME")
-        case "bin":
-            return ensure_path_from_env("BIN")
-        case _:
-            raise ValueError(f"repo_dir must be one of {repo_dirs}")
+	if repo_dir == "config":
+		return ensure_path_from_env("XDG_CONFIG_HOME")
+	elif repo_dir == "data":
+		return ensure_path_from_env("XDG_DATA_HOME")
+	elif repo_dir == "home":
+		return ensure_path_from_env("HOME")
+	elif repo_dir == "bin":
+		return ensure_path_from_env("BIN")
+
+	raise ValueError(f"repo_dir must be one of {repo_dirs}")
 
 
 def prog_files(prog: Path, must_exist: bool = True) -> Iterable[Path]:
