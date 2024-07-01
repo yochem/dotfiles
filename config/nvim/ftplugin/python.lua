@@ -1,3 +1,5 @@
+vim.o.expandtab = true
+
 vim.keymap.set("n", "<leader>r", "<cmd>!python3 %:p<CR>", { buffer = true })
 
 -- list all functions in the current buffer, type :<line-num> to jump to it

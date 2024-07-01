@@ -3,7 +3,6 @@ from pathlib import Path
 import os
 import sys
 from functools import partial
-import typing
 from typing import Iterable
 
 repo_dirs = (
@@ -12,7 +11,6 @@ repo_dirs = (
 	"home",
 	"bin",
 )
-
 
 err_print = partial(print, file=sys.stderr)
 
@@ -72,9 +70,9 @@ def symlink_prog(prog: Path, dryrun: bool = False, force: bool = False) -> bool:
 
     if not force and target.exists():
         if target.is_symlink():
-            err_print(f"{dryrun_print}skip {prog}: already synced")
+            err_print(f"skip {prog}: already synced")
         else:
-            err_print(f"{dryrun_print}skip {prog}: {target} exists")
+            err_print(f"skip {prog}: {target} exists")
 
         return False
 
@@ -95,6 +93,10 @@ def sync(args: Iterable[str], dryrun: bool = False, force: bool = False) -> int:
     for arg in args:
         path = Path(arg)
         prog_paths = prog_files(path, must_exist=True)
+
+        if not prog_paths:
+            err_print(f"skip {path}: {path} does not exist")
+
         for prog_path in prog_paths:
             is_synced = symlink_prog(prog_path, dryrun=dryrun, force=force)
             dirs_synced += is_synced
@@ -113,15 +115,13 @@ def track(args: Iterable[str], dryrun: bool = False, force: bool = False) -> int
 
         for repo_path in repo_paths:
             if not force and repo_path.exists():
-                err_print(f"{dryrun_print}skip {repo_path}: {repo_path} exists")
+                err_print(f"skip {repo_path}: {repo_path} exists")
                 continue
 
             system_path = user_dir(repo_path.parent.name) / path.name
 
             if not system_path.exists():
-                err_print(
-                    f"{dryrun_print}skip {repo_path}: {system_path} does not exist"
-                )
+                err_print(f"skip {repo_path}: {system_path} does not exist")
                 continue
 
             print(f"{dryrun_print}{force_print}track {repo_path} from {system_path}")
@@ -135,8 +135,13 @@ def track(args: Iterable[str], dryrun: bool = False, force: bool = False) -> int
     return dirs_tracked
 
 
+def mac(args: Iterable[str], dryrun: bool = False, force: bool = False):
+    err_print("Not implemented yet!")
+    sys.exit(3)
+
+
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
+    main_cmd = argparse.ArgumentParser(
         prog="dot",
         description="Manage dotfiles.",
     )
@@ -148,23 +153,38 @@ def parse_args() -> argparse.Namespace:
     general_args.add_argument(
         "--dry-run",
         action="store_true",
-        help="do not perform any copying or symlinking",
-    )
-    general_args.add_argument(
-        "pathspec",
-        nargs="*",
-        help="relative path to directories in this repository",
+        help="do not perform any actual file actions (e.g. symlinking)",
     )
 
-    subparsers = parser.add_subparsers(required=True)
+    subparsers = main_cmd.add_subparsers(required=True)
 
-    sync_parser = subparsers.add_parser("sync", parents=[general_args])
-    sync_parser.set_defaults(func=sync)
+    sync_subcmd = subparsers.add_parser(
+        "sync",
+        parents=[general_args],
+        help="sync dotfiles from this repository to your system",
+    )
+    sync_subcmd.set_defaults(func=sync)
+    sync_subcmd.add_argument(
+        "pathspec", nargs="*", help="relative path to this repository"
+    )
 
-    track_parser = subparsers.add_parser("track", parents=[general_args])
-    track_parser.set_defaults(func=track)
+    track_subcmd = subparsers.add_parser(
+        "track",
+        parents=[general_args],
+        help="start tracking system dotfiles in this repository",
+    )
+    track_subcmd.set_defaults(func=track)
+    track_subcmd.add_argument(
+        "pathspec", nargs="+", help="relative path to this repository"
+    )
 
-    return parser.parse_args()
+    mac_subcmd = subparsers.add_parser(
+        "mac", parents=[general_args], help="configure a new Mac"
+    )
+    mac_subcmd.set_defaults(func=mac)
+    mac_subcmd.set_defaults(pathspec=[])
+
+    return main_cmd.parse_args()
 
 
 if __name__ == "__main__":
