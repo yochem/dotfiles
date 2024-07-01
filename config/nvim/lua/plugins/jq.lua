@@ -1,4 +1,4 @@
 return {
-	dir = '~/Documents/side/jq.nvim',
+	"yochem/jq-playground.nvim",
 	config = true,
 }

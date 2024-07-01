@@ -14,10 +14,8 @@ return {
 				map("<leader>rn", vim.lsp.buf.rename)
 				map("<leader>f", vim.lsp.buf.format)
 				map("<leader>ca", vim.lsp.buf.code_action)
-				map("<leader>h", function ()
-					vim.lsp.inlay_hint.enable(
-						not vim.lsp.inlay_hint.is_enabled()
-					)
+				map("<leader>h", function()
+					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 				end)
 
 				if not vim.g.project_dir_set then
