@@ -6,10 +6,10 @@ from functools import partial
 from typing import Iterable
 
 repo_dirs = (
-	"config",
-	"data",
-	"home",
-	"bin",
+    "config",
+    "data",
+    "home",
+    "bin",
 )
 
 err_print = partial(print, file=sys.stderr)
@@ -30,16 +30,16 @@ def ensure_path_from_env(env_var: str, exit_code: int = 2) -> Path:
 
 
 def user_dir(repo_dir: str) -> Path:
-	if repo_dir == "config":
-		return ensure_path_from_env("XDG_CONFIG_HOME")
-	elif repo_dir == "data":
-		return ensure_path_from_env("XDG_DATA_HOME")
-	elif repo_dir == "home":
-		return ensure_path_from_env("HOME")
-	elif repo_dir == "bin":
-		return ensure_path_from_env("BIN")
+    if repo_dir == "config":
+        return ensure_path_from_env("XDG_CONFIG_HOME")
+    elif repo_dir == "data":
+        return ensure_path_from_env("XDG_DATA_HOME")
+    elif repo_dir == "home":
+        return ensure_path_from_env("HOME")
+    elif repo_dir == "bin":
+        return ensure_path_from_env("BIN")
 
-	raise ValueError(f"repo_dir must be one of {repo_dirs}")
+    raise ValueError(f"repo_dir must be one of {repo_dirs}")
 
 
 def prog_files(prog: Path, must_exist: bool = True) -> Iterable[Path]:
@@ -79,7 +79,8 @@ def symlink_prog(prog: Path, dryrun: bool = False, force: bool = False) -> bool:
     print(f"{dryrun_print}{force_print}sync {prog} to {target}")
 
     if not dryrun:
-        prog.symlink_to(target)
+        # this order is confusing
+        target.resolve().symlink_to(prog.resolve())
 
     return True
 
@@ -129,7 +130,9 @@ def track(args: Iterable[str], dryrun: bool = False, force: bool = False) -> int
             if not dryrun:
                 # move program from system dir to repo dir first
                 system_path.rename(repo_path)
-                repo_path.symlink_to(system_path)
+
+                # this order is confusing
+                system_path.resolve().symlink_to(repo_path.resolve())
                 dirs_tracked += 1
 
     return dirs_tracked
@@ -190,7 +193,7 @@ def parse_args() -> argparse.Namespace:
 if __name__ == "__main__":
     args = parse_args()
 
-    num_actions = args.func(args.pathspec, dryrun=True, force=args.force)
+    num_actions = args.func(args.pathspec, dryrun=args.dry_run, force=args.force)
 
     if num_actions > 0:
         sys.exit(0)

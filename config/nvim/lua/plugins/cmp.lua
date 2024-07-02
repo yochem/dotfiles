@@ -28,6 +28,8 @@ local kind_icons = {
 
 return {
 	"hrsh7th/nvim-cmp",
+	commit = "b356f2c",
+	pin = true,
 	event = "InsertEnter",
 	config = function()
 		require("luasnip.loaders.from_vscode").lazy_load()
