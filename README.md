@@ -13,13 +13,13 @@ Config files      | Installed to
 ------------------|-----------------
 `config/*`        | `XDG_CONFIG_HOME`
 `data/*`          | `XDG_DATA_HOME`
-`bin/*`           | Normally `~/.local/bin`, but specified in the Makefile
+`bin/*`           | Normally `~/.local/bin`, but specified in the dot.py
 `home/*`          | `~` (looking at you, Bash)
 
 ## Installation
 
 This repository can be cloned to any location on your computer. The dotfiles
-are managed using a shell script ([`dot.sh`](./dot.sh)). This makes the
+are managed using a Python script ([`dot.py`](./dot.py)). This makes the
 configuration modular and allows me to install only the configuration from the
 programs I need at that moment.
 
@@ -28,26 +28,7 @@ programs I need at that moment.
 ```
 git clone https://github.com/yochem/dotfiles.git
 cd dotfiles
-./dot.sh */*
-```
-
-### `dot.sh` script
-```
-Usage: dot.sh [sync|track|clean] [FILE...]
-       dot.sh --help
-
-Manage dotfiles. Either sync (from this repo to your dotfile directories) or
-Start tracking (from your dotfile directories to this repository) your dotfiles.
-
-COMMANDS
-	sync		Symlinks file from this repository to your dotfile directories
-	track		Moves dotfile to this repository and starts sync
-	clean		Removes dotfile, but only if it exists in this repository
-
-FILES
-	Files that should be synced/tracked/cleaned. Use glob patterns for easy
-	syncing of many files. The * in the root directory will only match the
-	dotfile directories: config, data, home, bin
+./dot.py sync
 ```
 
 ## Why?

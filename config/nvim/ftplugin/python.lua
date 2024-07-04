@@ -1,4 +1,4 @@
-vim.o.expandtab = true
+vim.bo.expandtab = true
 
 vim.keymap.set("n", "<leader>r", "<cmd>!python3 %:p<CR>", { buffer = true })
 

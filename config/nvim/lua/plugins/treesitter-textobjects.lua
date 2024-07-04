@@ -1,6 +1,5 @@
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
-	event = "InsertEnter",
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			highlight = { enable = true },
