@@ -3,6 +3,6 @@ return {
 	event = "BufWinEnter",
 	opts = { char = "│" },
 	cond = function()
-		return vim.api.nvim_buf_line_count(0) < 10000
+		return vim.o.filetype ~= "json" and vim.api.nvim_buf_line_count(0) < 10000
 	end,
 }

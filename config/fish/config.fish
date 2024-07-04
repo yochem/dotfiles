@@ -43,3 +43,6 @@ if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
 		tmux attach-session -t general || tmux new-session -s general
 	end
 end
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/yochem/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/yochem/Downloads/google-cloud-sdk/path.fish.inc'; end
