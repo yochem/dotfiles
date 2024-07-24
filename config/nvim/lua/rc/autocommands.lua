@@ -20,19 +20,19 @@ autocmd("BufReadPost", {
 	desc = "open file with cursor on last position",
 })
 
-autocmd("BufReadPost", {
-	callback = function(args)
-		local git_dirs = vim.fs.find(".git", {
-			upward = true,
-			path = vim.fs.dirname(args.file),
-		})
-		if git_dirs[1] ~= nil then
-			vim.cmd.lcd(vim.fs.dirname(git_dirs[1]))
-			vim.g.project_dir_set = true
-		end
-	end,
-	desc = "use folder with .git folder as root directory",
-})
+-- autocmd("BufReadPost", {
+-- 	callback = function(args)
+-- 		local git_dirs = vim.fs.find(".git", {
+-- 			upward = true,
+-- 			path = vim.fs.dirname(args.file),
+-- 		})
+-- 		if git_dirs[1] ~= nil then
+-- 			vim.cmd.lcd(vim.fs.dirname(git_dirs[1]))
+-- 			vim.g.project_dir_set = true
+-- 		end
+-- 	end,
+-- 	desc = "use folder with .git folder as root directory",
+-- })
 
 autocmd({ "BufEnter", "BufWritePost", "FocusGained" }, {
 	callback = function()

@@ -51,6 +51,12 @@ return {
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 				{ name = "path" },
+				{
+					name = "buffer",
+					option = {
+						keyword_length = 6,
+					}
+				},
 				{ name = "htmx" },
 			},
 			formatting = {
