@@ -3,13 +3,13 @@ from pathlib import Path
 import os
 import sys
 from functools import partial
-from typing import Iterable
+from typing import Iterable, NoReturn
 
 repo_dirs = (
-    "config",
-    "data",
-    "home",
-    "bin",
+    Path("config"),
+    Path("data"),
+    Path("home"),
+    Path("bin"),
 )
 
 err_print = partial(print, file=sys.stderr)
@@ -19,11 +19,11 @@ def ensure_path_from_env(env_var: str, exit_code: int = 2) -> Path:
     try:
         path = Path(os.environ[env_var])
     except KeyError:
-        err_print(f"{env_var} not set!")
+        err_print(f"{env_var} not set! Skipping")
         sys.exit(exit_code)
 
     if not path.exists():
-        err_print(f"{env_var} set but {path} does not exist!")
+        err_print(f"{env_var} set but {path} does not exist! Skipping")
         sys.exit(exit_code)
 
     return path
@@ -47,7 +47,7 @@ def prog_files(prog: Path, must_exist: bool = True) -> Iterable[Path]:
     # 1: config, data, home, bin
     # 2: nvim, ...
     # 3: config/nvim
-    if prog.name in repo_dirs:
+    if prog in repo_dirs:
         paths = prog.iterdir()
     elif len(prog.parts) == 1:
         paths = [repo_dir / prog for repo_dir in repo_dirs]
@@ -85,37 +85,43 @@ def symlink_prog(prog: Path, dryrun: bool = False, force: bool = False) -> bool:
     return True
 
 
-def sync(args: Iterable[str], dryrun: bool = False, force: bool = False) -> int:
+def sync(pathspecs: Iterable[Path], flags: argparse.Namespace) -> int:
     dirs_synced = 0
 
-    if not args:
-        args = repo_dirs
+    if not pathspecs:
+        pathspecs = repo_dirs
 
-    for arg in args:
-        path = Path(arg)
-        prog_paths = prog_files(path, must_exist=True)
+    for pathspec in pathspecs:
+        pathspec = Path(pathspec)
+        prog_paths = prog_files(pathspec, must_exist=True)
 
         if not prog_paths:
-            err_print(f"skip {path}: {path} does not exist")
+            err_print(f"skip {pathspec}: {pathspec} does not exist")
 
         for prog_path in prog_paths:
-            is_synced = symlink_prog(prog_path, dryrun=dryrun, force=force)
+            if flags.only_list:
+                target = user_dir(prog_path.resolve().parent.name) / prog_path.name
+                if target.exists():
+                    print(target)
+                continue
+
+            is_synced = symlink_prog(prog_path, dryrun=flags.dry_run, force=flags.force)
             dirs_synced += is_synced
 
     return dirs_synced
 
 
-def track(args: Iterable[str], dryrun: bool = False, force: bool = False) -> int:
+def track(pathspecs: Iterable[Path], flags: argparse.Namespace) -> int:
     dirs_tracked = 0
-    dryrun_print = "DRYRUN: " if dryrun else ""
-    force_print = "force " if force else ""
+    dryrun_print = "DRYRUN: " if flags.dryrun else ""
+    force_print = "force " if flags.force else ""
 
-    for arg in args:
-        path = Path(arg)
+    for pathspec in pathspecs:
+        path = Path(pathspec)
         repo_paths = prog_files(path, must_exist=False)
 
         for repo_path in repo_paths:
-            if not force and repo_path.exists():
+            if not flags.force and repo_path.exists():
                 err_print(f"skip {repo_path}: {repo_path} exists")
                 continue
 
@@ -127,7 +133,7 @@ def track(args: Iterable[str], dryrun: bool = False, force: bool = False) -> int
 
             print(f"{dryrun_print}{force_print}track {repo_path} from {system_path}")
 
-            if not dryrun:
+            if not flags.dryrun:
                 # move program from system dir to repo dir first
                 system_path.rename(repo_path)
 
@@ -138,7 +144,7 @@ def track(args: Iterable[str], dryrun: bool = False, force: bool = False) -> int
     return dirs_tracked
 
 
-def mac(args: Iterable[str], dryrun: bool = False, force: bool = False):
+def mac(pathspecs: Iterable[Path], flags: argparse.Namespace) -> NoReturn:
     err_print("Not implemented yet!")
     sys.exit(3)
 
@@ -168,7 +174,10 @@ def parse_args() -> argparse.Namespace:
     )
     sync_subcmd.set_defaults(func=sync)
     sync_subcmd.add_argument(
-        "pathspec", nargs="*", help="relative path to this repository"
+        "pathspec", nargs="*", help="relative path to this repository", type=Path
+    )
+    sync_subcmd.add_argument(
+        "-l", "--list", action="store_true", help="list currently synced dotfiles", dest="only_list"
     )
 
     track_subcmd = subparsers.add_parser(
@@ -178,7 +187,7 @@ def parse_args() -> argparse.Namespace:
     )
     track_subcmd.set_defaults(func=track)
     track_subcmd.add_argument(
-        "pathspec", nargs="+", help="relative path to this repository"
+        "pathspec", nargs="+", help="relative path to this repository", type=Path
     )
 
     mac_subcmd = subparsers.add_parser(
@@ -193,7 +202,7 @@ def parse_args() -> argparse.Namespace:
 if __name__ == "__main__":
     args = parse_args()
 
-    num_actions = args.func(args.pathspec, dryrun=args.dry_run, force=args.force)
+    num_actions = args.func(args.pathspec, args)
 
     if num_actions > 0:
         sys.exit(0)
