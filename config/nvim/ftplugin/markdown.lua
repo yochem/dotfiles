@@ -1,5 +1,6 @@
 vim.wo.spell = true
 vim.bo.spelllang = "en"
+vim.wo.conceallevel = 0
 
 local map = require("rc.remaps").map
 

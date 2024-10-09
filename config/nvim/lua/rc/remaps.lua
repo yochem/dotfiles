@@ -78,6 +78,9 @@ end, { expr = true })
 map("n", "k", [[(v:count > 5 ? "m'" . v:count : "") . "k"]], { expr = true })
 map("n", "j", [[(v:count > 5 ? "m'" . v:count : "") . "j"]], { expr = true })
 
+-- toggle folds easily
+map("n", "h", [[getcurpos()[2] == 1 ? "zc" : "h"]], { expr = true })
+
 -- move highlighted text and auto indent
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "move visually selected lines down" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "move visually selected lines up" })

@@ -2,42 +2,36 @@ return {
 	"nvim-telescope/telescope.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"folke/trouble.nvim",
 	},
-	config = function()
-		local trouble = require("trouble.providers.telescope")
-		local opts = {
-			defaults = {
-				mappings = {
-					i = { ["<c-o>"] = trouble.open_with_trouble },
-					n = { ["<c-o>"] = trouble.open_with_trouble },
-				},
-			},
-		}
-		require("telescope").setup(opts)
-	end,
+	opts = {
+		defaults = {
+			preview = false
+		},
+		pickers = {
+			find_files = { theme = "ivy" },
+			live_grep = { theme = "ivy" },
+			buffers = { theme = "dropdown" },
+		},
+	},
 	cmd = "Telescope",
 	keys = {
 		{
 			"<leader>ff",
 			function()
-				require("telescope.builtin").find_files({
-					hidden = true,
-					preview = false,
-				})
+				require("telescope.builtin").find_files({ hidden = true })
 			end,
 		},
 		{
 			"<leader>fg",
 			function()
-				require("telescope.builtin").live_grep()
+				require("telescope.builtin").live_grep({ preview = true })
 			end,
 		},
 		{
 			"<leader>fb",
 			function()
 				require("telescope.builtin").buffers({
-					preview = false,
+					preview = true,
 					initial_mode = "normal",
 				})
 			end,
@@ -46,6 +40,7 @@ return {
 			"<leader>fF",
 			function()
 				require("telescope.builtin").lsp_document_symbols({
+					preview = true,
 					symbols = {
 						"class",
 						"function",
@@ -57,7 +52,7 @@ return {
 		{
 			"<leader>fh",
 			function()
-				require("telescope.builtin").help_tags()
+				require("telescope.builtin").help_tags({ preview = true })
 			end,
 		},
 	},

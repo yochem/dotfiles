@@ -29,6 +29,11 @@ abbr tlmgr "sudo tlmgr install"
 abbr perms stat -f '%OLp'
 abbr gs "git status -s"
 
+function last_history_item
+	echo $history[1]
+end
+abbr -a !! --position anywhere --function last_history_item
+
 [ -n (command -v nvim) ] && alias vim nvim
 
 # fd is fdfind on ubuntu

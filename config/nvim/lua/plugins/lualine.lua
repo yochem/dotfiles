@@ -1,6 +1,6 @@
 local function wordcount()
 	local ft = vim.bo.filetype
-	if ft == "markdown" or ft == "text" then
+	if ft == "markdown" or ft == "text" or ft == "typst" then
 		if vim.fn.wordcount().visual_words then
 			return vim.fn.wordcount().visual_words .. " words"
 		else
@@ -13,6 +13,7 @@ end
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "BufWinEnter",
+	enabled = false,
 	config = function()
 		local custom_onedark = require("lualine.themes.onedark")
 		custom_onedark.normal.b.fg = "#FFFFFF"

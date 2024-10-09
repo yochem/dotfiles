@@ -34,17 +34,6 @@ autocmd("BufReadPost", {
 -- 	desc = "use folder with .git folder as root directory",
 -- })
 
-autocmd({ "BufEnter", "BufWritePost", "FocusGained" }, {
-	callback = function()
-		if vim.env.TMUX ~= nil then
-			local fn = vim.fn.expand("%:t")
-			fn = fn ~= "" and fn or "nvim"
-			os.execute("tmux rename-window '" .. fn .. "'")
-		end
-	end,
-	desc = "rename tmux window to current filename",
-})
-
 vim.api.nvim_create_user_command("Scratch", function()
 	vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
 		split = "below",
