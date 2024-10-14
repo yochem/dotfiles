@@ -19,4 +19,7 @@ require("lazy").setup("plugins", {
 	change_detection = {
 		notify = false,
 	},
+	pkg = {
+		sources = {"lazy", "packspec"},
+	}
 })

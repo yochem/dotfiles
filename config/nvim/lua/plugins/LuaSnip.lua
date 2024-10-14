@@ -1,6 +1,7 @@
 return {
 	"L3MON4D3/LuaSnip",
 	event = "InsertEnter",
+	enabled = false,
 	lazy = true,
 	init = function()
 		local luasnip = require("luasnip")

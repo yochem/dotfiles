@@ -7,7 +7,6 @@ vim.o.conceallevel = 3
 vim.o.cursorline = true
 vim.o.expandtab = false
 vim.o.exrc = true
-vim.o.fileformat = "unix"
 vim.o.foldcolumn = "1"
 vim.o.foldenable = true
 vim.o.foldlevel = 99
