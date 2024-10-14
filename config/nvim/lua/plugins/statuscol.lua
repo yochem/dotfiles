@@ -32,6 +32,7 @@ return {
 					},
 					click = "v:lua.ScSa",
 				},
+				{ text = { " " } },
 			},
 		})
 	end,
