@@ -19,17 +19,20 @@ Config files      | Installed to
 ## Installation
 
 This repository can be cloned to any location on your computer. The dotfiles
-are managed using a Python script ([`dot.py`](./dot.py)). This makes the
-configuration modular and allows me to install only the configuration from the
-programs I need at that moment.
+are managed using a Makefile. This makes the configuration modular and allows
+me to install only the configuration from the programs I need at that moment.
+All commands overwrite the current configuration. Here are the Make commands:
 
-### Full installation
-
-```
-git clone https://github.com/yochem/dotfiles.git
-cd dotfiles
-./dot.py sync
-```
+- `make all`: link all files from this repo to their respective (`XDG_*`
+  locations).
+- `make [config|data|home|bin]`: Only install content from these directories.
+- `make <program>`: Install config for that program, independent of which
+  directory it is in (multiple also possible).
+- `make mac`: MacOS specific stuff.
+- `make clean-[config|data|home|bin]`: Remove only the programs that are synced
+  with this repo from their target directories
+- `make clean`: Remove only the programs that are synced with this repo from
+  all target directories.
 
 ## Why?
 *"There is a computer disease that anybody who works with computers knows about.
