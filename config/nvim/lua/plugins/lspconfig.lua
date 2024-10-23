@@ -18,12 +18,12 @@ return {
 					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 				end)
 
-				if not vim.g.project_dir_set then
-					local root = vim.lsp.buf.list_workspace_folders()
-					if root[1] ~= nil then
-						vim.cmd.lcd(root[1])
-					end
-				end
+				-- if not vim.g.project_dir_set then
+				-- 	local root = vim.lsp.buf.list_workspace_folders()
+				-- 	if root[1] ~= nil then
+				-- 		vim.cmd.lcd(root[1])
+				-- 	end
+				-- end
 			end,
 		})
 

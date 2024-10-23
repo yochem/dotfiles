@@ -3,6 +3,8 @@ return {
 	dependencies = {
 		{
 			"romgrk/fzy-lua-native",
+			"max397574/care-cmp",
+			"hrsh7th/cmp-path",
 		}
 	},
 	opts = {
