@@ -1,33 +1,11 @@
 return {
 	"neovim/nvim-lspconfig",
-	event = { "BufReadPost", "BufNewFile" },
 	config = function()
-		vim.api.nvim_create_autocmd("LspAttach", {
-			group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
-			callback = function(event)
-				local map = function(keys, func)
-					vim.keymap.set("n", keys, func, { buffer = event.buf })
-				end
-				map("<leader>D", vim.lsp.buf.declaration)
-				map("<leader>gd", vim.lsp.buf.definition)
-				map("<leader>r", vim.lsp.buf.references)
-				map("<leader>rn", vim.lsp.buf.rename)
-				map("<leader>f", vim.lsp.buf.format)
-				map("<leader>ca", vim.lsp.buf.code_action)
-				map("<leader>h", function()
-					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-				end)
-
-				-- if not vim.g.project_dir_set then
-				-- 	local root = vim.lsp.buf.list_workspace_folders()
-				-- 	if root[1] ~= nil then
-				-- 		vim.cmd.lcd(root[1])
-				-- 	end
-				-- end
-			end,
-		})
-
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities.textDocument.foldingRange = {
+			dynamicRegistration = false,
+			lineFoldingOnly = true
+		}
 
 		local servers = {
 			lua_ls = {

@@ -99,6 +99,25 @@ map("n", "q", function()
 	end
 end)
 
+map("n", "<leader>ff", function() require("telescope.builtin").find_files() end)
+map("n", "<leader>fg", function() require("telescope.builtin").live_grep() end)
+map("n", "<leader>fb", function() require("telescope.builtin").buffers() end)
+map("n", "<leader>fF", function() require("telescope.builtin").lsp_document_symbols() end)
+map("n", "<leader>fh", function() require("telescope.builtin").help_tags() end)
+
+map("n", "zO", function() require("ufo").openAllFolds() end)
+map("n", "zC", function() require("ufo").closeAllFolds() end)
+
+map("n", "<leader>D", vim.lsp.buf.declaration)
+map("n", "<leader>gd", vim.lsp.buf.definition)
+map("n", "<leader>r", vim.lsp.buf.references)
+map("n", "<leader>rn", vim.lsp.buf.rename)
+map("n", "<leader>f", vim.lsp.buf.format)
+map("n", "<leader>ca", vim.lsp.buf.code_action)
+map("n", "<leader>h", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end)
+
 -- map("n", "zg", function ()
 -- 	vim.opt.spellfile = vim.fn.stdpath('data') .. '/spell/' .. vim.o.spelllang
 -- 	vim.cmd("exe norm! zg")

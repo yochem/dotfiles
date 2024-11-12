@@ -25,3 +25,5 @@ hl("@constructor.lua", { link = "Delimiter" })
 hl("@constructor.python", { link = "Function" })
 hl("@variable", { fg = "White" })
 -- hl("@variable.parameter", { fg = "NvimLightCyan" })
+
+hl("Directory", { fg = "NvimLightBlue" })

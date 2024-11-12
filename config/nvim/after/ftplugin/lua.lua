@@ -16,3 +16,5 @@ if _G.MiniSplitjoin ~= nil then
 		join = { hooks_post = { del_comma_curly, pad_curly } },
 	}
 end
+
+vim.o.tabstop = 2
