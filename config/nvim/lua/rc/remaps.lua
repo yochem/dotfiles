@@ -12,19 +12,8 @@ local function cmd(command)
 	end
 end
 
-map("n", "oo", function()
-	local repeated = vim.fn["repeat"]({ "" }, vim.v.count1)
-	local line = vim.api.nvim_win_get_cursor(0)[1]
-	vim.api.nvim_buf_set_lines(0, line, line, true, repeated)
-end, {})
-
-map("n", "OO", function()
-	local repeated = vim.fn["repeat"]({ "" }, vim.v.count1)
-	local line = vim.api.nvim_win_get_cursor(0)[1]
-	vim.api.nvim_buf_set_lines(0, line - 1, line - 1, true, repeated)
-end, {})
-
--- map("n", "n", "nzz", { desc = "center during search" })
+map("n", '<Leader>O', '[<Space>', { remap = true, desc = "empty line above" })
+map("n", '<Leader>o', ']<Space>', { remap = true, desc = "empty line below" })
 
 map("v", "<", "<gv", { desc = "keep visual selection when indenting" })
 map("v", ">", ">gv", { desc = "keep visual selection when indenting" })
@@ -36,11 +25,8 @@ map("n", "<S-Left>", cmd("vertical resize +2"))
 map("n", "<S-Right>", cmd("vertical resize -2"))
 
 -- go through visual lines with j and k but don't mess with 10k etc.
--- source: http://stackoverflow.com/a/21000307/2580955
-if vim.o.wrap then
-	map("n", "j", [[v:count ? 'j' : 'gj']], { expr = true })
-	map("n", "k", [[v:count ? 'k' : 'gk']], { expr = true })
-end
+map("n", "j", [[v:count ? 'j' : 'gj']], { expr = true })
+map("n", "k", [[v:count ? 'k' : 'gk']], { expr = true })
 
 -- use comma to switch windows
 map("n", ",", "<c-w>")
@@ -66,13 +52,7 @@ map("v", "p", [["_dP"]])
 map({ "n", "v" }, "c", '"_c', { desc = "do not add c action to register" })
 
 -- don't put empty lines in register
-map("n", "dd", function()
-	if vim.fn.getline(".") == "" then
-		return [["_dd]]
-	else
-		return "dd"
-	end
-end, { expr = true })
+map("n", "dd", [[getline(".") == "" ? '"_dd' : 'dd']], { expr = true })
 
 -- populate jumplist with relative jumps
 map("n", "k", [[(v:count > 5 ? "m'" . v:count : "") . "k"]], { expr = true })
@@ -85,7 +65,7 @@ map("n", "h", [[getcurpos()[2] == 1 ? "zc" : "h"]], { expr = true })
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "move visually selected lines down" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "move visually selected lines up" })
 
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+map("n", "<Esc>", cmd("nohlsearch"))
 
 -- don't move so aggressive
 map("n", "<PageUp>", "10k")

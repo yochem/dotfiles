@@ -20,20 +20,6 @@ autocmd("BufReadPost", {
 	desc = "open file with cursor on last position",
 })
 
--- autocmd("BufReadPost", {
--- 	callback = function(args)
--- 		local git_dirs = vim.fs.find(".git", {
--- 			upward = true,
--- 			path = vim.fs.dirname(args.file),
--- 		})
--- 		if git_dirs[1] ~= nil then
--- 			vim.cmd.lcd(vim.fs.dirname(git_dirs[1]))
--- 			vim.g.project_dir_set = true
--- 		end
--- 	end,
--- 	desc = "use folder with .git folder as root directory",
--- })
-
 vim.api.nvim_create_user_command("Scratch", function()
 	vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
 		split = "below",
@@ -41,6 +27,28 @@ vim.api.nvim_create_user_command("Scratch", function()
 	})
 	vim.cmd.startinsert()
 end, {})
+
+vim.api.nvim_create_user_command("AddPlugin", function(args)
+	-- try match repo name from GitHub url
+	local user_repo = args.args:match("[^/]+/[^/]+$")
+	local name = args.args:match("[^/]+$")
+	if not user_repo or not name then
+		vim.notify("provide github url as argument, got: " .. args.args, vim.log.levels.ERROR)
+		return
+	end
+	local stripped = name:gsub(".nvim", ""):gsub("nvim-", ""):gsub("-nvim", "")
+	local filename = vim.fn.stdpath('config') .. "/lua/plugins/" .. stripped .. ".lua"
+	if vim.fn.filereadable(filename) == 1 then
+		vim.notify("plugin path already exists: " .. filename, vim.log.levels.ERROR)
+		return
+	end
+	vim.cmd.vsplit(filename)
+	vim.api.nvim_buf_set_lines(0, 0, -1, false, { ([[return { "%s" }]]):format(user_repo) })
+	vim.cmd.Lazy('install')
+end, {
+	nargs = 1,
+	desc = ":AddPlugin https://github.com/user/repo creates repo.lua lazy config"
+})
 
 autocmd("WinEnter", {
 	callback = function()
