@@ -24,4 +24,8 @@ end
 
 FOREVERGLOBAL = hs.hotkey.bind({}, 'F18', enterHyperMode, exitHyperMode)
 
+hs.hotkey.bind({"shift"}, 'F18', function ()
+	hs.eventtap.keyStroke({"shift"}, "`")
+end)
+
 return M
