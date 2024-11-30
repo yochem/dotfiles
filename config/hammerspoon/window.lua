@@ -1,5 +1,15 @@
 local M = {}
 
+local function move_window(movefn)
+	return function ()
+		local win = hs.window.focusedWindow()
+		local frame = win:frame()
+		local screen_frame = win:screen():frame()
+		local new_frame = movefn(frame, screen_frame)
+		win:setFrame(new_frame)
+	end
+end
+
 local function half2thirds(frame_size, screen_size, in_position)
 	-- 1/2 -> 1/3
 	if in_position and frame_size == math.floor(screen_size / 2) then
@@ -15,93 +25,71 @@ local function half2thirds(frame_size, screen_size, in_position)
 	return screen_size / 2
 end
 
-M.tile_left = function()
-	local win = hs.window.focusedWindow()
-	local f = win:frame()
-	local screen = win:screen():frame()
+M.tile_left = move_window(function(f, s)
+	local already_in_pos = f.x == s.x and f.y == s.y and f.h == s.h
+	f.w = half2thirds(f.w, s.w, already_in_pos)
+	f.x = s.x
+	f.y = s.y
+	f.h = s.h
+	return f
+end)
 
-	local already_in_pos = f.x == screen.x and f.y == screen.y and f.h == f.h
-	f.w = half2thirds(f.w, screen.w, already_in_pos)
-	f.x = screen.x
-	f.y = screen.y
-	f.h = screen.h
-	win:setFrame(f)
-end
+M.tile_right = move_window(function(f, s)
+	local already_in_pos = f.x == s.w - f.w and f.y == s.y and f.h == s.h
+	f.w = half2thirds(f.w, s.w, already_in_pos)
+	f.x = s.w - f.w
+	f.y = s.y
+	f.h = s.h
+	return f
+end)
 
-M.tile_right = function()
-	local win = hs.window.focusedWindow()
-	local f = win:frame()
-	local screen = win:screen():frame()
+M.tile_up = move_window(function(f, s)
+	local already_in_pos = f.x == s.x and f.y == s.y and f.w == s.w
+	f.h = half2thirds(f.h, s.h, already_in_pos)
+	f.x = s.x
+	f.y = s.y
+	f.w = s.w
+	return f
+end)
 
-	local already_in_pos = f.x == screen.w - f.w and f.y == screen.y and f.h == screen.h
-	f.w = half2thirds(f.w, screen.w, already_in_pos)
-	f.x = screen.x + (screen.w - f.w)
-	f.y = screen.y
-	f.h = screen.h
-	win:setFrame(f)
-end
-
-M.tile_up = function()
-	local win = hs.window.focusedWindow()
-	local f = win:frame()
-	local screen = win:screen():frame()
-
-	local already_in_pos = f.x == screen.x and f.y == screen.y and f.w == screen.w
-	f.h = half2thirds(f.h, screen.h, already_in_pos)
-	f.x = screen.x
-	f.y = screen.y
-	f.w = screen.w
-	win:setFrame(f)
-end
-
-M.tile_down = function()
-	local win = hs.window.focusedWindow()
-	local f = win:frame()
-	local screen = win:screen():frame()
-
-	local already_in_pos = f.y == screen.h - f.h and f.x == screen.x and f.w == screen.w
+M.tile_down = move_window(function(f, s)
 	-- TODO: not working yet
-	f.h = half2thirds(f.h, screen.h, already_in_pos)
-	f.x = screen.x
-	f.y = screen.y + (screen.h - f.h)
-	f.w = screen.w
-	win:setFrame(f)
-end
+	local already_in_pos = f.y == s.h - f.h and f.x == s.x and f.w == s.w
+	f.h = half2thirds(f.h, s.h, already_in_pos)
+	f.x = s.x
+	f.y = s.h - f.h
+	f.w = s.w
+	return f
+end)
 
 M.center = function()
-	local win = hs.window.focusedWindow()
-	win:centerOnScreen()
-	-- local f = win:frame()
-	-- local screen = win:screen():frame()
-	-- f.center = screen.center
-	-- win:setFrame(f)
+	hs.window.focusedWindow():centerOnScreen()
 end
 
 M.full = function()
 	hs.window.focusedWindow():maximize()
-	-- local screen = win:screen():frame()
-	-- win:setFrame(screen)
 end
 
-M.larger = function ()
-	local win = hs.window.focusedWindow()
-	local f = win:frame()
+M.larger = move_window(function (f, _)
 	local prev_center = f.center
 	f.h = f.h * 1.05
 	f.w = f.w * 1.05
 	f.center = prev_center
-	win:setFrame(f)
-end
+	return f
+end)
 
-M.smaller = function ()
-	local win = hs.window.focusedWindow()
-	local f = win:frame()
+M.smaller = move_window(function (f, _)
 	local prev_center = f.center
 	f.h = f.h * 0.95
 	f.w = f.w * 0.95
 	f.center = prev_center
-	win:setFrame(f)
-end
+	return f
+end)
+
+M.up = move_window(function (f, _)
+	f.y = 0
+	return f
+end)
 
 M.move_space_right = function ()
 	local win = hs.window.focusedWindow()
