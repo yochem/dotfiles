@@ -1,11 +1,13 @@
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function ()
+		vim.wo.foldexpr = 'v:lua.vim.lsp.foldexpr()'
+	end
+})
+
 return {
 	"neovim/nvim-lspconfig",
 	config = function()
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities.textDocument.foldingRange = {
-			dynamicRegistration = false,
-			lineFoldingOnly = true
-		}
 
 		local servers = {
 			lua_ls = {
@@ -16,8 +18,9 @@ return {
 						workspace = {
 							checkThirdParty = false,
 							library = {
+								vim.env.VIMRUNTIME,
 								"${3rd}/luv/library",
-								unpack(vim.api.nvim_get_runtime_file("", true)),
+								vim.env.XDG_CONFIG_HOME .. "hammerspoon/Spoons/EmmyLua.spoon/annotations"
 							},
 						},
 						completion = { callSnippet = "Replace" },
