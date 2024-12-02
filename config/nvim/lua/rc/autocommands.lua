@@ -48,14 +48,3 @@ end, {
 	nargs = 1,
 	desc = ":AddPlugin https://github.com/user/repo creates repo.lua lazy config"
 })
-
--- autocmd("WinEnter", {
--- 	callback = function()
--- 		local win_width = vim.api.nvim_win_get_width(0)
--- 		local is_float = vim.api.nvim_win_get_config(0).relative ~= ""
--- 		if not is_float and win_width > 160 then
--- 			vim.cmd.wincmd("L")
--- 		end
--- 	end,
--- 	desc = "open second window horizontally",
--- })

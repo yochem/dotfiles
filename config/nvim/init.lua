@@ -22,16 +22,15 @@ vim.diagnostic.config({
 	},
 	underline = false,
 	virtual_text = false,
-	update_in_insert = true,
+	update_in_insert = false,
 	severity_sort = true,
 })
 
-vim.diagnostic.handlers["qflist"] = {
-	show = function(_, _, _, _)
-		vim.diagnostic.setqflist({ open = false })
-	end,
-
-	hide = function(_, _)
-		vim.fn.setqflist({}, 'r')
+vim.diagnostic.handlers.loclist = {
+	show = function(_, _, _, opts)
+		opts.loclist.open = opts.loclist.open or false
+		local winid = vim.api.nvim_get_current_win()
+		vim.diagnostic.setloclist(opts.loclist)
+		vim.api.nvim_set_current_win(winid)
 	end
 }

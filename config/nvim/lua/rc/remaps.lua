@@ -87,14 +87,8 @@ map("n", "<leader>fd", function()
 	require("telescope.builtin").find_files({ cwd = vim.fn.stdpath('config') })
 end)
 
-map("n", "zO", function() require("ufo").openAllFolds() end)
-map("n", "zC", function() require("ufo").closeAllFolds() end)
-
--- toggle folds easily
--- map("n", "h", [[getcurpos()[2] == 1 ? "zc" : "h"]], { expr = true })
-
-map("n", "<leader>D", vim.diagnostic.setqflist)
--- map("n", "<leader>D", vim.lsp.buf.declaration)
+-- TODO: errors on no loclist
+map("n", "<leader>D", cmd("lopen"))
 map("n", "<leader>gd", vim.lsp.buf.definition)
 map("n", "<leader>r", vim.lsp.buf.references)
 map("n", "<leader>rn", vim.lsp.buf.rename)

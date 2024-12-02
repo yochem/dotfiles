@@ -20,7 +20,7 @@ return {
 							library = {
 								vim.env.VIMRUNTIME,
 								"${3rd}/luv/library",
-								vim.env.XDG_CONFIG_HOME .. "hammerspoon/Spoons/EmmyLua.spoon/annotations"
+								vim.env.XDG_CONFIG_HOME .. "/hammerspoon/Spoons/EmmyLua.spoon/annotations"
 							},
 						},
 						completion = { callSnippet = "Replace" },

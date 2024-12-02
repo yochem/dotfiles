@@ -2,3 +2,4 @@ config/fish/fish_variables
 config/nvim/spell/
 config/karabiner/automatic_backups/
 lazy-lock.json
+config/hammerspoon/Spoons/EmmyLua.spoon/annotations
