@@ -1,3 +1,3 @@
 return {
-	dir = "~/Documents/jq-playground.nvim",
+	dir = "~/Documents/side/jq-playground.nvim",
 }

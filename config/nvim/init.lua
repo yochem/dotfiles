@@ -25,3 +25,13 @@ vim.diagnostic.config({
 	update_in_insert = true,
 	severity_sort = true,
 })
+
+vim.diagnostic.handlers["qflist"] = {
+	show = function(_, _, _, _)
+		vim.diagnostic.setqflist({ open = false })
+	end,
+
+	hide = function(_, _)
+		vim.fn.setqflist({}, 'r')
+	end
+}

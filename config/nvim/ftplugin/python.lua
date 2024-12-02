@@ -9,7 +9,7 @@ vim.keymap.set("n", ",f", function()
 	vim.cmd.normal("`x")
 end, {})
 
-function foldDocstrings()
+local function foldDocstrings()
 	local query = [[
 		(function_definition
 			body: (block

@@ -18,3 +18,4 @@ if _G.MiniSplitjoin ~= nil then
 end
 
 vim.o.tabstop = 2
+vim.o.shiftwidth = 2
