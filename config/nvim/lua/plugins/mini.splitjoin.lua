@@ -5,4 +5,5 @@ return {
 			toggle = '<leader>a',
 		},
 	},
+	keys = "<leader>a",
 }

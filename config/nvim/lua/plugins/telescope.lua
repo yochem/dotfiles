@@ -26,4 +26,6 @@ return {
 			},
 		},
 	},
+	lazy = true,
+	cmd = "Telescope",
 }
