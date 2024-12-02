@@ -58,8 +58,6 @@ map("n", "dd", [[getline(".") == "" ? '"_dd' : 'dd']], { expr = true })
 map("n", "k", [[(v:count > 5 ? "m'" . v:count : "") . "k"]], { expr = true })
 map("n", "j", [[(v:count > 5 ? "m'" . v:count : "") . "j"]], { expr = true })
 
--- toggle folds easily
-map("n", "h", [[getcurpos()[2] == 1 ? "zc" : "h"]], { expr = true })
 
 -- move highlighted text and auto indent
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "move visually selected lines down" })
@@ -84,11 +82,19 @@ map("n", "<leader>fg", function() require("telescope.builtin").live_grep() end)
 map("n", "<leader>fb", function() require("telescope.builtin").buffers() end)
 map("n", "<leader>fF", function() require("telescope.builtin").lsp_document_symbols() end)
 map("n", "<leader>fh", function() require("telescope.builtin").help_tags() end)
+map("n", "<leader>fq", function() require("telescope.builtin").quickfix() end)
+map("n", "<leader>fd", function()
+	require("telescope.builtin").find_files({ cwd = vim.fn.stdpath('config') })
+end)
 
 map("n", "zO", function() require("ufo").openAllFolds() end)
 map("n", "zC", function() require("ufo").closeAllFolds() end)
 
-map("n", "<leader>D", vim.lsp.buf.declaration)
+-- toggle folds easily
+-- map("n", "h", [[getcurpos()[2] == 1 ? "zc" : "h"]], { expr = true })
+
+map("n", "<leader>D", vim.diagnostic.setqflist)
+-- map("n", "<leader>D", vim.lsp.buf.declaration)
 map("n", "<leader>gd", vim.lsp.buf.definition)
 map("n", "<leader>r", vim.lsp.buf.references)
 map("n", "<leader>rn", vim.lsp.buf.rename)

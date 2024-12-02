@@ -1,5 +1,6 @@
 return {
-	"nvim-treesitter/nvim-treesitter-textobjects",
+	dir = "/tmp/nvim-treesitter-textobjects",
+	-- "nvim-treesitter/nvim-treesitter-textobjects",
 	main = "nvim-treesitter.configs",
 	opts = {
 		highlight = { enable = true },

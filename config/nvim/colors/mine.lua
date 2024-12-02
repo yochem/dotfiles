@@ -27,4 +27,3 @@ hl("@variable", { fg = "White" })
 -- hl("@variable.parameter", { fg = "NvimLightCyan" })
 
 hl("Directory", { fg = "NvimLightBlue" })
-hl("VisualNonText", { fg = "NvimDarkGray3" })
