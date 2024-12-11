@@ -1,7 +1,11 @@
-vim.api.nvim_create_autocmd('LspAttach', {
-	callback = function ()
-		vim.wo.foldexpr = 'v:lua.vim.lsp.foldexpr()'
-	end
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client:supports_method("textDocument/foldingRange") then
+			vim.wo.foldmethod = "expr"
+			vim.wo.foldexpr = "v:lua.vim.lsp.foldexpr()"
+		end
+	end,
 })
 
 return {
@@ -44,12 +48,6 @@ return {
 
 			arduino_language_server = {},
 
-			typst_lsp = {
-				settings = {
-					exportPdf = "never",
-				},
-			},
-
 			gopls = {
 				settings = {
 					gopls = {
@@ -65,10 +63,11 @@ return {
 			erlangls = {},
 			eslint = {},
 			html = {},
-			marksman = {},
-			v_analyzer = {},
-			jsonls = {},
 			jqls = {},
+			jsonls = {},
+			marksman = {},
+			tinymist = {},
+			v_analyzer = {},
 		}
 
 		for server_name, server in pairs(servers) do

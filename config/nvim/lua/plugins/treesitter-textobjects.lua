@@ -1,6 +1,5 @@
 return {
-	dir = "/tmp/nvim-treesitter-textobjects",
-	-- "nvim-treesitter/nvim-treesitter-textobjects",
+	"nvim-treesitter/nvim-treesitter-textobjects",
 	main = "nvim-treesitter.configs",
 	event = "BufReadPost",
 	opts = {

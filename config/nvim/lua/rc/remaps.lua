@@ -77,6 +77,10 @@ map("n", "q", function()
 	end
 end)
 
+-- change line with commented previous version as backup
+map("n", "yc", "yygccp", { remap = true })
+map("v", "yc", "ygvgcP", { remap = true })
+
 map("n", "<leader>ff", function() require("telescope.builtin").find_files() end)
 map("n", "<leader>fg", function() require("telescope.builtin").live_grep() end)
 map("n", "<leader>fb", function() require("telescope.builtin").buffers() end)
@@ -109,6 +113,10 @@ map("n", "!", function()
 		["false"] = "true",
 		["True"] = "False",
 		["False"] = "True",
+		["0"] = "1",
+		["1"] = "0",
+		["on"] = "off",
+		["off"] = "on",
 	}
 
 	-- get the entire word under cursor by moving to front and end
