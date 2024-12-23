@@ -1,5 +1,7 @@
 vim.cmd.runtime("colors/default.lua")
 
+---@param group string
+---@param opts vim.api.keyset.highlight
 local function hl(group, opts)
 	vim.api.nvim_set_hl(0, group, opts)
 end

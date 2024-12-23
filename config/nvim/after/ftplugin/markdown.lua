@@ -3,7 +3,7 @@ vim.bo.spelllang = "en"
 vim.wo.conceallevel = 0
 vim.opt.listchars:remove("multispace")
 
-local map = require("rc.remaps").map
+local map = vim.keymap.set
 
 map("n", "<leader>x", function()
 	local line = vim.api.nvim_get_current_line()

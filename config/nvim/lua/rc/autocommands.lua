@@ -54,5 +54,5 @@ vim.api.nvim_create_user_command("AddPlugin", function(args)
 	vim.api.nvim_buf_set_lines(0, 0, -1, false, { ([[return { "%s" }]]):format(user_repo) })
 end, {
 	nargs = 1,
-	desc = ":AddPlugin https://github.com/user/repo creates repo.lua lazy config"
+	desc = ":AddPlugin https://github.com/user/repo creates lua/plugin/repo.lua"
 })
