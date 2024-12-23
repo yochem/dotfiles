@@ -1,3 +1,4 @@
+-- brew install lua-language-server
 return {
 	cmd = { 'lua-language-server' },
 	filetypes = { 'lua' },

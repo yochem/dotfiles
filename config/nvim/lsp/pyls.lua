@@ -1,3 +1,4 @@
+-- pip install python-lsp-server
 return {
 	cmd = { 'pylsp' },
 	filetypes = { 'python' },
