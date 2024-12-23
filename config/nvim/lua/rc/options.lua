@@ -37,6 +37,7 @@ vim.o.titlestring = [[%{&modified?'● ':''}%{empty(expand('%:t'))?'nvim':expand
 
 -- EDITING
 vim.o.formatoptions = "cqnj"
+vim.o.synmaxcol = 300
 
 vim.o.gdefault = true
 vim.o.hlsearch = true
@@ -48,7 +49,7 @@ vim.o.expandtab = false
 vim.o.shiftround = true
 vim.o.shiftwidth = 4
 vim.o.smartindent = true
-vim.o.softtabstop = 0
+vim.o.softtabstop = -1
 vim.o.tabstop = 4
 
 vim.o.foldenable = true
