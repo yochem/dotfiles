@@ -1,3 +1,1 @@
-return {
-	dir = "~/Documents/side/jq-playground.nvim",
-}
+return { "yochem/jq-playground.nvim" }
