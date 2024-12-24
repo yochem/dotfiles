@@ -1,5 +1,5 @@
 return {
 	"echasnovski/mini.ai",
 	opts = {},
-	event = "BufReadPost",
+	event = {"BufReadPost", "BufNewFile"},
 }

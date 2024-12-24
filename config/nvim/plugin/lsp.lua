@@ -1,11 +1,10 @@
-local map = vim.keymap.set
-map("n", "<leader>D", vim.cmd.lopen)
-map("n", "<leader>gd", vim.lsp.buf.definition)
-map("n", "<leader>r", vim.lsp.buf.references)
-map("n", "<leader>rn", vim.lsp.buf.rename)
-map("n", "<leader>f", vim.lsp.buf.format)
-map("n", "<leader>ca", vim.lsp.buf.code_action)
-map("n", "<leader>h", function()
+vim.keymap.set("n", "<leader>D", vim.cmd.lopen)
+vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "<leader>r", vim.lsp.buf.references)
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+vim.keymap.set("n", "<leader>h", function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
 

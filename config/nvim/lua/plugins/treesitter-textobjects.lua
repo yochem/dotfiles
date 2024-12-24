@@ -1,7 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
 	main = "nvim-treesitter.configs",
-	event = "BufReadPost",
+	event = { "BufReadPost", "BufNewFile" },
 	opts = {
 		highlight = { enable = true },
 		indent = { enable = false },
