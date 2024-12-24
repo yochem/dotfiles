@@ -1,0 +1,20 @@
+{
+	"todo": {
+		"prefix": "todo",
+		"body": [
+			"$LINE_COMMENT TODO: $0"
+		]
+	},
+	"fix": {
+		"prefix": "fix",
+		"body": [
+			"$LINE_COMMENT FIX: $0"
+		]
+	},
+	"bc": {
+		"prefix": "block comment",
+		"body": [
+			"$BLOCK_COMMENT_START $0 $BLOCK_COMMENT_END"
+		]
+	}
+}

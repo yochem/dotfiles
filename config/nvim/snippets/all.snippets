@@ -1,9 +1,0 @@
-extends _
-snippet todo insert TODO comment
-	`split(&commentstring, '%s', 1)[0]`TODO: $0`split(&commentstring, '%s', 1)[1]`
-
-snippet fix insert FIX comment
-	`split(&commentstring, '%s', 1)[0]`FIX: $0`split(&commentstring, '%s', 1)[1]`
-
-snippet comment insert comment
-	`split(&commentstring, '%s', 1)[0]`$0`split(&commentstring, '%s', 1)[1]`

@@ -1,0 +1,11 @@
+{
+	"holythree": {
+		"prefix": ["numpy", "matplotlib", "pandas", "importholy"],
+		"body": [
+			"import numpy as np",
+			"import pandas as pd",
+			"import matplotlib.pyplot as plt",
+			"$0"
+		]
+	}
+}
