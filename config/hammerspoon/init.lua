@@ -1,13 +1,20 @@
+--[[
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "path/to/here"
+
+sudo hidutil property --set '{"UserKeyMapping": [{"HIDKeyboardModifierMappingSrc":0x700000029, "HIDKeyboardModifierMappingDst":0x700000039},{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000029},{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x70000006D}]}'
+]]
 hs.loadSpoon("EmmyLua")
 
-local hyper = require('hyper')
+---@diagnostic disable: lowercase-global
+hyper = require('hyper')
 hyper.bind('r', function()
   hs.reload()
 end)
 print("------------ RELOAD -----------")
 hs.alert("Hammerspoon: config loaded")
 
-local window = require('window')
+---@diagnostic disable: lowercase-global
+window = require('window')
 hs.window.animationDuration = 0
 hyper.bind('h', window.tile_left)
 hyper.bind('l', window.tile_right)

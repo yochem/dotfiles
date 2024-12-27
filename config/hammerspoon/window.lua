@@ -52,8 +52,9 @@ M.tile_up = move_window(function(f, s)
 	return f
 end)
 
-M.tile_down = move_window(function(f, s)
-	-- TODO: not working yet
+M.tile_down = move_window(function(f, _)
+	-- overwrite screen to account for menu bar
+	local s = hs.window.focusedWindow():screen():fullFrame()
 	local already_in_pos = f.y == s.h - f.h and f.x == s.x and f.w == s.w
 	f.h = half2thirds(f.h, s.h, already_in_pos)
 	f.x = s.x
