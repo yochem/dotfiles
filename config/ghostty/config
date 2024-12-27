@@ -1,0 +1,12 @@
+# C-x C-o for completion
+background = #1f2124
+confirm-close-surface = false
+cursor-style-blink = false
+font-family = MesloLGS NF
+font-size = 14
+keybind = command+k=text:\x0c
+macos-non-native-fullscreen = true
+macos-titlebar-proxy-icon = hidden
+shell-integration-features = no-cursor, no-title
+window-padding-x = 10
+window-padding-y = 8, 6
