@@ -2,7 +2,7 @@
 background = #1f2124
 confirm-close-surface = false
 cursor-style-blink = false
-font-family = MesloLGS NF
+font-family = Menlo
 font-size = 14
 keybind = command+k=text:\x0c
 macos-non-native-fullscreen = true
