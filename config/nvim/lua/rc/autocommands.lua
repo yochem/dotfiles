@@ -28,14 +28,6 @@ vim.api.nvim_create_user_command("Scratch", function()
 	vim.cmd.startinsert()
 end, {})
 
-autocmd("BufReadPost", {
-	callback = function (ev)
-		if vim.bo[ev.buf].modifiable then
-			vim.wo.listchars = ""
-		end
-	end
-})
-
 vim.api.nvim_create_user_command("AddPlugin", function(args)
 	-- try match repo name from GitHub url
 	local user_repo = args.args:match("[^/]+/[^/]+$")

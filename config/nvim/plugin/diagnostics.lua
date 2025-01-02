@@ -12,12 +12,3 @@ vim.diagnostic.config({
 	update_in_insert = false,
 	severity_sort = true,
 })
-
-vim.diagnostic.handlers.loclist = {
-	show = function(_, _, _, opts)
-		opts.loclist.open = opts.loclist.open or false
-		local winid = vim.api.nvim_get_current_win()
-		vim.diagnostic.setloclist(opts.loclist)
-		vim.api.nvim_set_current_win(winid)
-	end
-}
