@@ -125,4 +125,3 @@ require("lazy").setup("plugins", {
 
 require("rc.remaps")
 require("rc.autocommands")
-require("matchitchat")
