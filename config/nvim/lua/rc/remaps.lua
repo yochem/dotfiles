@@ -61,3 +61,5 @@ nmap("Q", "q")
 
 -- negate boolean values
 nmap("!", "<Plug>(Negate)")
+
+nmap("R", cmd("source %"))

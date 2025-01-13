@@ -88,6 +88,9 @@ vim.o.timeoutlen = 600
 vim.o.updatetime = 100
 vim.opt.suffixes = { ".swp", ".bak", ".pyc", ".out", ".aux", ".bbl", ".blg" }
 
+vim.o.concealcursor = 'nc'
+vim.o.conceallevel = 2
+
 if vim.fn.has("mac") == 1 then
 	vim.g.python3_host_prog = "/usr/local/bin/python3"
 else
@@ -122,3 +125,4 @@ require("lazy").setup("plugins", {
 
 require("rc.remaps")
 require("rc.autocommands")
+require("matchitchat")
