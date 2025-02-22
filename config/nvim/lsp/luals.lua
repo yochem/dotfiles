@@ -21,6 +21,7 @@ return {
 				library = {
 					vim.env.VIMRUNTIME,
 					"${3rd}/luv/library",
+					"${3rd}/busted/library",
 					vim.env.XDG_CONFIG_HOME .. "/hammerspoon/Spoons/EmmyLua.spoon/annotations"
 				},
 			},

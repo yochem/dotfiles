@@ -22,11 +22,13 @@ vim.o.colorcolumn = "80"
 vim.o.textwidth = 79
 vim.o.wrap = false
 
+-- statuscolumn
 vim.o.foldcolumn = "1"
 vim.o.number = true
 vim.o.numberwidth = 1
 vim.o.relativenumber = true
 vim.o.signcolumn = "yes:1"
+vim.o.cursorline = true
 
 vim.o.list = true
 vim.opt.fillchars = {
@@ -112,15 +114,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
-	default = {
-		lazy = true,
-	},
-	change_detection = {
-		notify = false,
-	},
-	install = {
-		colorscheme = { "mine" },
-	}
+	default = { lazy = true },
+	change_detection = { notify = false },
+	install = { colorscheme = { "mine" } },
+	performance = { rtp = { reset = false } },
 })
 
 require("rc.remaps")

@@ -7,7 +7,7 @@ local function hl(group, opts)
 end
 
 hl("LineNr", { fg = "NvimLightGray3" })
-hl("CursorLineNr", { fg = "White" })
+hl("CursorLineNr", { fg = "Orange" })
 hl("CursorLine", { bg = nil })
 hl("FoldColumn", { fg = "NvimLightGray4" })
 
