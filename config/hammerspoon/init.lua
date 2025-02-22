@@ -36,6 +36,6 @@ hyper.bind("w", function() hs.application.open("WhatsApp") end)
 hyper.bind("s", function() hs.application.open("Spotify") end)
 hyper.bind("i", function() hs.application.open("Iterm") end)
 
-require("appswitcher")
+-- require("appswitcher")
 
 -- hs.hotkey.bind({}, "", hs.caffeinate.lockScreen)

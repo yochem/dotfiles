@@ -27,7 +27,6 @@ complete -c xdg -x -a "config data cache state"
 
 
 # set -xU PYTHONSTARTUP "$XDG_CONFIG_HOME/python/startup.py"
-# set -xU RIPGREP_CONFIG_PATH "$XDG_CONFIG_HOME/rg/config"
 
 set -xU BUNDLE_USER_CACHE "$XDG_CACHE_HOME/bundle"
 set -xU BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME/bundle"
@@ -58,6 +57,7 @@ set -xU PYLINTRC "$XDG_CONFIG_HOME/pylint/config"
 set -xU PYTHONPYCACHEPREFIX "$XDG_CACHE_HOME/pycache"
 set -xU PYTHONUSERBASE "$XDG_DATA_HOME/python"
 set -xU PYTHON_HISTORY "$XDG_STATE_HOME/python"
+set -xU RIPGREP_CONFIG_PATH "$XDG_CONFIG_HOME/rg/config"
 set -xU RUFF_CACHE_DIR "$XDG_CACHE_HOME/ruff"
 set -xU SCREENRC "$XDG_CONFIG_HOME/screen/screenrc"
 set -xU TERMINFO "$XDG_DATA_HOME/terminfo"

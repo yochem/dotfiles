@@ -43,12 +43,11 @@ command -v fdfind >/dev/null && alias fd fdfind
 # set tabs used by cat etc. to width 4
 tabs -p
 
+sudo hidutil property --set '{"UserKeyMapping": [{"HIDKeyboardModifierMappingSrc":0x700000029, "HIDKeyboardModifierMappingDst":0x700000039},{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000029},{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x70000006D}]}' >/dev/null
+
 if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
 	tmux ls 2>/dev/null | grep attached >/dev/null
 	if [ "$status" = 1 ]
 		tmux attach-session -t general || tmux new-session -s general
 	end
 end
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/yochem/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/yochem/Downloads/google-cloud-sdk/path.fish.inc'; end

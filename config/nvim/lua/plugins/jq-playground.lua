@@ -1,1 +1,4 @@
-return { "yochem/jq-playground.nvim" }
+return {
+	"yochem/jq-playground.nvim",
+	cmd = "JqPlayground",
+}

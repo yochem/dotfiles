@@ -31,10 +31,10 @@ local function center_screen()
 	vim.cmd.normal({ ("%d%s"):format(math.abs(offset), scrollcmd), bang = true })
 end
 
-vim.api.nvim_create_autocmd({ 'WinResized', 'BufEnter', 'TextChanged' }, {
-	callback = redraw,
-	group = vim.api.nvim_create_augroup('rc.scrolltop', {}),
-	desc = 'virtual toplines',
-})
+-- vim.api.nvim_create_autocmd({ 'WinResized', 'BufEnter', 'TextChanged' }, {
+-- 	callback = redraw,
+-- 	group = vim.api.nvim_create_augroup('rc.scrolltop', {}),
+-- 	desc = 'virtual toplines',
+-- })
 
-vim.keymap.set('n', 'zz', center_screen, { desc = 'virtual toplines' })
+-- vim.keymap.set('n', 'zz', center_screen, { desc = 'virtual toplines' })
