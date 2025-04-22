@@ -1,5 +1,5 @@
 -- inspired by https://github.com/nullromo/go-up.nvim
-local ns = vim.api.nvim_create_namespace('rc.scrolltop')
+local ns = vim.api.nvim_create_namespace('yochem.scrolltop')
 
 local function redraw()
 	vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
@@ -33,7 +33,7 @@ end
 
 -- vim.api.nvim_create_autocmd({ 'WinResized', 'BufEnter', 'TextChanged' }, {
 -- 	callback = redraw,
--- 	group = vim.api.nvim_create_augroup('rc.scrolltop', {}),
+-- 	group = vim.api.nvim_create_augroup('yochem.scrolltop', {}),
 -- 	desc = 'virtual toplines',
 -- })
 

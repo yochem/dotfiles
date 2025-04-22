@@ -1,4 +1,5 @@
-local ns = vim.api.nvim_create_namespace('rc.treesitter-diagnostics')
+local ns = vim.api.nvim_create_namespace('yochem.treesitter-diagnostics')
+local autocmd_group = vim.api.nvim_create_augroup('yochem.treesitter-diagnostics', {})
 
 --- @param buf integer Buffer number
 --- @param pos integer[] Line number and stuff
@@ -81,8 +82,6 @@ local function diagnose(args)
 
   vim.diagnostic.set(ns, args.buf, diagnostics)
 end
-
-local autocmd_group = vim.api.nvim_create_augroup('rc.treesitter-diagnostics', {})
 
 vim.api.nvim_create_autocmd({ 'FileType', 'TextChanged', 'InsertLeave' }, {
   desc = 'publish treesitter diagnostics',

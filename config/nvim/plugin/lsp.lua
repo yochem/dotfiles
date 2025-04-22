@@ -1,3 +1,5 @@
+local augroup = vim.api.nvim_create_augroup('yochem.lsp', {})
+
 vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition)
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
@@ -14,9 +16,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
 			vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
 		end
 	end,
+	group = augroup,
 })
 
-vim.api.nvim_create_autocmd('LspDetach', { command = 'setl foldexpr<' })
+vim.api.nvim_create_autocmd('LspDetach', {
+	command = 'setl foldexpr<',
+	group = augroup,
+})
 
 vim.lsp.config('*', { root_markers = { '.git' } })
 

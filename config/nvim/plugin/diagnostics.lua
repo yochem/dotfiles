@@ -24,8 +24,8 @@ vim.diagnostic.config({
 			return {
 				{ severity_name, "Diagnostic" .. severity_name},
 				{ ": " },
-				{ vim.split(d.message, "\n")[1] },
-				{ " (" .. d.source .. ")", "LineNr" },
+				{ d.message:match("^(.-)\n") or d.message },
+				{ " (" .. (d.source or "unknown") .. ")", "LineNr" },
 			}
 		end
 	}
