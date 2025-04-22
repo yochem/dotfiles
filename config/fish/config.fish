@@ -18,7 +18,6 @@ set -g fish_color_autosuggestion 6f7683
 [ -z "$XDG_CONFIG_HOME" ] && echo "XDG_CONFIG_HOME not set!!!"
 source "$XDG_CONFIG_HOME/fish/xdg.fish"
 source "$XDG_CONFIG_HOME/fish/prompt.fish"
-source "$XDG_CONFIG_HOME/fish/exports.fish"
 
 source "$HOME/Documents/venvs/venvs.fish"
 
@@ -35,15 +34,33 @@ function last_history_item
 end
 abbr -a !! --position anywhere --function last_history_item
 
-[ -n (command -v nvim) ] && alias vim nvim
+# choose the default editor
+if command -v nvim >/dev/null 2>&1
+	set -xU VISUAL nvim
+	set -xU MANPAGER 'nvim +Man!'
+else if command -v vim >/dev/null 2>&1
+	set -xU VISUAL vim
+else
+	set -xU VISUAL nano
+end
+
+set -xU EDITOR "$VISUAL"
+
+# fix the bug of Apple creating a non-exisiting LC
+set -xU LC_ALL "en_US.UTF-8"
+
+set -xU FZF_DEFAULT_COMMAND 'fd --type f'
+
+set -gx LS_COLORS (vivid generate one-dark-simple)
+
+set -gx PLAN9 /usr/local/plan9
+fish_add_path -aP $PLAN9/bin
 
 # fd is fdfind on ubuntu
 command -v fdfind >/dev/null && alias fd fdfind
 
 # set tabs used by cat etc. to width 4
 tabs -p
-
-sudo hidutil property --set '{"UserKeyMapping": [{"HIDKeyboardModifierMappingSrc":0x700000029, "HIDKeyboardModifierMappingDst":0x700000039},{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000029},{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x70000006D}]}' >/dev/null
 
 if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
 	tmux ls 2>/dev/null | grep attached >/dev/null

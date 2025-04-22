@@ -10,22 +10,6 @@ if [ -z "$XDG_CONFIG_HOME" -o -z "$XDG_DATA_HOME" -o -z "$XDG_CACHE_HOME" ]
 	echo "set -xU XDG_CACHE_HOME $HOME/.cache"
 end
 
-# for easier typing on the command line
-function xdg
-	switch $argv[1]
-	case config
-		echo "$XDG_CONFIG_HOME"
-	case data
-		echo "$XDG_DATA_HOME"
-	case cache
-		echo "$XDG_CACHE_HOME"
-	case state
-		echo "$XDG_STATE_HOME"
-	end
-end
-complete -c xdg -x -a "config data cache state"
-
-
 # set -xU PYTHONSTARTUP "$XDG_CONFIG_HOME/python/startup.py"
 
 set -xU BUNDLE_USER_CACHE "$XDG_CACHE_HOME/bundle"

@@ -22,7 +22,7 @@ end
 
 function line -e fish_prompt -d "print line after command to seperate commands"
 	set_color brblack
-	jot -b '–' -s '' $COLUMNS 2>/dev/null
+	jot -b '─' -s '' $COLUMNS 2>/dev/null
 end
 
 # the prompt normally looks like this: [ ~/Documents ]
