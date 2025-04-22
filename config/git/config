@@ -58,6 +58,9 @@
 	# see all files tracked
 	files = ls-tree --full-tree -r --name-only HEAD
 
+	# amend some files
+	oops = !git commit --amend --no-edit && git push --force-with-lease
+
 [log]
 	date = auto:human
 
@@ -71,9 +74,6 @@
 	changed = yellow
 	untracked = red
 
-[hub]
-	protocol = ssh
-
 [merge]
 	tool = vimdiff
 
@@ -83,10 +83,11 @@
 [mergetool "vimdiff"]
 	cmd = nvim -d $BASE $LOCAL
 [pull]
-	rebase = false
-
+	rebase = true
 [push]
+	default = simple
 	autoSetupRemote = true
+	followTags = true
 [branch]
 	sort = -committerdate
 [gpg]
@@ -96,3 +97,14 @@
 	gpgsign = true
 [diff]
 	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[column]
+	ui = auto
+[tag]
+	sort = version:refname
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
