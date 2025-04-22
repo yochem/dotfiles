@@ -4,6 +4,7 @@ return {
     'rafamadriz/friendly-snippets',
   },
   event = "InsertEnter",
+  version = '*',
   opts = {
     keymap = {
       ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation', 'hide' },

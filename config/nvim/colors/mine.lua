@@ -10,6 +10,7 @@ hl("LineNr", { fg = "NvimLightGray3" })
 hl("CursorLineNr", { fg = "Orange" })
 hl("CursorLine", { bg = nil })
 hl("FoldColumn", { fg = "NvimLightGray4" })
+hl("Folded", { bg = nil })
 
 hl("Normal", { fg = "White", bg = "none" })
 hl("NormalFloat", { fg = "White", bg = "NvimDarkGray3" })

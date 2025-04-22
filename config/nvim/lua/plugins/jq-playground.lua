@@ -1,4 +1,4 @@
 return {
-	"yochem/jq-playground.nvim",
+	dir = "~/Documents/jq-playground.nvim",
 	cmd = "JqPlayground",
 }

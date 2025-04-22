@@ -8,7 +8,7 @@ return {
 			segments = {
 				{
 					sign = {
-						namespace = { "jumpsigns", "diagnostic/signs" },
+						namespace = { "jumpsigns", "diagnostic.signs" },
 						maxwidth = 1,
 						colwidth = 1,
 						auto = true,
