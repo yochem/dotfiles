@@ -1,3 +1,4 @@
+-- stripped down version of lukas-reineke/virt-column.nvim
 local ns = vim.api.nvim_create_namespace('yochem.virtcolumn')
 
 local column = 80
@@ -9,10 +10,10 @@ vim.api.nvim_set_decoration_provider(ns, {
 		local i = topline
 		while i <= botline + 1 do
 			local width = vim.api.nvim_win_call(win, function()
-				return vim.fn.virtcol { i, "$" } - 1
+				return vim.fn.virtcol({ i, "$" }) - 1
 			end)
 			if width < column then
-				vim.api.nvim_buf_set_extmark(buf, ns, math.max(i-1, 0), 0, {
+				vim.api.nvim_buf_set_extmark(buf, ns, math.max(i - 1, 0), 0, {
 					virt_text = { { "│", "NonText" } },
 					virt_text_pos = "overlay",
 					hl_mode = "combine",

@@ -28,7 +28,7 @@ local function center_screen()
 	end
 
 	local scrollcmd = offset > 0 and '' or ''
-	vim.cmd.normal({ ("%d%s"):format(math.abs(offset), scrollcmd), bang = true })
+	vim.cmd.normal({ ('%d%s'):format(math.abs(offset), scrollcmd), bang = true })
 end
 
 -- vim.api.nvim_create_autocmd({ 'WinResized', 'BufEnter', 'TextChanged' }, {
@@ -36,5 +36,5 @@ end
 -- 	group = vim.api.nvim_create_augroup('yochem.scrolltop', {}),
 -- 	desc = 'virtual toplines',
 -- })
-
+--
 -- vim.keymap.set('n', 'zz', center_screen, { desc = 'virtual toplines' })

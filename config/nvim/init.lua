@@ -137,76 +137,96 @@ end, {})
 -- REMAPS --
 ------------
 local function cmd(command) return function() vim.cmd(command) end end
-local nmap = function (lhs, rhs, opts) vim.keymap.set("n", lhs, rhs, opts) end
-local vmap = function (lhs, rhs, opts) vim.keymap.set("v", lhs, rhs, opts) end
-local xmap = function (lhs, rhs, opts) vim.keymap.set("x", lhs, rhs, opts) end
+local map = vim.keymap.set
 
-nmap('OO', '[<Space>', { remap = true })
-nmap('oo', ']<Space>', { remap = true })
+map('n', 'OO', '[<Space>', { remap = true })
+map('n', 'oo', ']<Space>', { remap = true })
 
 -- move highlighted text and auto indent
-vmap("J", ":m '>+1<CR>gv=gv")
-vmap("K", ":m '<-2<CR>gv=gv")
+map('v', 'J', ":m '>+1<CR>gv=gv")
+map('v', 'K', ":m '<-2<CR>gv=gv")
 
 -- keep selection while visually indenting
-vmap("<", "<gv")
-vmap(">", ">gv")
+map('v', '<', '<gv')
+map('v', '>', '>gv')
 
 -- resize windows
-nmap("<S-Up>", cmd("resize +2"))
-nmap("<S-Down>", cmd("resize -2"))
-nmap("<S-Left>", cmd("vertical resize +2"))
-nmap("<S-Right>", cmd("vertical resize -2"))
+map('n', '<S-Up>', cmd('resize +2'))
+map('n', '<S-Down>', cmd('resize -2'))
+map('n', '<S-Left>', cmd('vertical resize +2'))
+map('n', '<S-Right>', cmd('vertical resize -2'))
 
 -- use comma to switch windows
-nmap(",", "<c-w>")
+map('n', ',', '<c-w>')
 
 -- Open file explorer left
-nmap("<leader>e", cmd("15Lexplore"))
+map('n', '<leader>e', cmd('15Lexplore'))
 
 -- don't move so aggressive
-nmap("<PageUp>", "10k")
-nmap("<PageDown>", "10j")
+map('n', '<PageUp>', '10k')
+map('n', '<PageDown>', '10j')
 
 -- populate jumplist with relative jumps, otherwise move by wrapped line
-nmap("k", [[(v:count ? "m'" . v:count : "g") . "k"]], { expr = true })
-nmap("j", [[(v:count ? "m'" . v:count : "g") . "j"]], { expr = true })
+map('n', 'k', [[(v:count ? "m'" . v:count : "g") . "k"]], { expr = true })
+map('n', 'j', [[(v:count ? "m'" . v:count : "g") . "j"]], { expr = true })
 
 -- reselect pasted text like |gv| does for visually selected text
-nmap("gp", "`[v`]")
+map('n', 'gp', '`[v`]')
 
-nmap("<Esc>", vim.cmd.nohlsearch)
+map('n', '<Esc>', vim.cmd.nohlsearch)
 
 -- always jump exactly to mark
-nmap([[']], [[`]])
+map('n', [[']], [[`]])
 
 -- preserve cursor on joining lines
-nmap("J", "m`J``")
+map('n', 'J', 'm`J``')
 
 -- set mark before searching
-nmap("/", "ms/")
+map('n', '/', 'ms/')
 
 -- only search in visual selection
-xmap("/", "<Esc>/\\%V")
+map('x', '/', '<Esc>/\\%V')
 
 -- don't care, just quit
-nmap("ZZ", vim.cmd.qall)
+map('n', 'ZZ', vim.cmd.qall)
 
 -- close window
-nmap("q", function()
+map('n', 'q', function()
 	local success = pcall(vim.cmd.close)
 	if not success then
 		pcall(vim.cmd.quit)
 	end
 end)
 
+map('n', 'gX', function()
+	vim.ui.open(
+		vim.fn.expand('<cfile>'),
+		{ cmd = { 'gh', 'repo', 'view', '--web' } }
+	)
+end)
+
 -- keep Q for macros
-nmap("Q", "q")
+map('n', 'Q', 'q')
 
 -- negate boolean values
-nmap("!", "<Plug>(Negate)")
+map('n', '!', '<Plug>(Negate)')
 
-nmap("R", cmd("source %"))
+map('n', 'R', cmd('source %'))
+
+-- ignore 'scrolloff' with H and L
+map('n', 'H', function ()
+	vim._with({ o = { scrolloff = 0 } }, function () vim.cmd('norm! H') end)
+end)
+
+map('n', 'L', function ()
+	vim._with({ o = { scrolloff = 0 } }, function () vim.cmd('norm! L') end)
+end)
+
+-- sensible normal mode in terminal
+map('t', '<Esc><Esc>', '<C-\\><C-n>')
+
+-- sensible redo
+map('n', 'U', '<C-r')
 
 vim.g.python3_host_prog = vim.fn.has('mac') == 1 and '/usr/local/bin/python3' or '/usr/bin/python3'
 

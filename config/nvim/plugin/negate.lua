@@ -1,13 +1,13 @@
 local function negate()
 	local negates = {
-		["true"] = "false",
-		["false"] = "true",
-		["True"] = "False",
-		["False"] = "True",
-		["0"] = "1",
-		["1"] = "0",
-		["on"] = "off",
-		["off"] = "on",
+		['true'] = 'false',
+		['false'] = 'true',
+		['True'] = 'False',
+		['False'] = 'True',
+		['0'] = '1',
+		['1'] = '0',
+		['on'] = 'off',
+		['off'] = 'on',
 	}
 
 	-- get the entire word under cursor by moving to front and end
@@ -28,6 +28,6 @@ local function negate()
 	vim.api.nvim_win_set_cursor(0, cursor)
 end
 
-vim.keymap.set("n", "<Plug>(Negate)", negate, {
-	desc = "negate boolean values under cursor"
+vim.keymap.set('n', '<Plug>(Negate)', negate, {
+	desc = 'negate boolean values under cursor'
 })
