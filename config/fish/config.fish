@@ -1,6 +1,3 @@
-if set -q TMUX
-  set -e ITERM_PROFILE
-end
 fish_vi_key_bindings
 set -g fish_vi_force_cursor 1
 
