@@ -5,6 +5,7 @@ local column = 80
 
 vim.api.nvim_set_decoration_provider(ns, {
 	on_win = function(_, win, buf, topline, botline)
+		if vim.bo[buf].buftype ~= "" then return end
 		vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
 		local leftcol = vim.api.nvim_win_call(win, vim.fn.winsaveview).leftcol or 0
 		local i = topline
