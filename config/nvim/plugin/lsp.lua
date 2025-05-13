@@ -3,7 +3,7 @@ local augroup = vim.api.nvim_create_augroup('yochem.lsp', {})
 vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition)
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
-vim.keymap.set('n', 'grh', function()
+vim.keymap.set('n', '<leader>h', function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
 
@@ -14,6 +14,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 			local win = vim.api.nvim_get_current_win()
 			vim.wo[win][0].foldmethod = 'expr'
 			vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+		end
+		if client and client:supports_method('textDocument/documentColor') then
+			vim.lsp.document_color.enable(true, args.buf)
 		end
 	end,
 	group = augroup,
