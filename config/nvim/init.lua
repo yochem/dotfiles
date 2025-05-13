@@ -2,8 +2,12 @@ if vim.g.vscode or vim.fn.has('nvim-0.10') == 0 then
 	return
 end
 
+require('vim._extui').enable({})
+
 vim.g.did_install_default_menus = 1
-vim.g.loaded_netrwPlugin = 0
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_python3_provider = 0
 
 vim.loader.enable()
 vim.cmd.colorscheme('mine')
@@ -24,7 +28,6 @@ vim.o.splitbelow = true
 vim.o.splitkeep = 'screen'
 vim.o.splitright = true
 
--- vim.o.colorcolumn = '80'
 vim.o.textwidth = 79
 vim.o.wrap = false
 
@@ -99,14 +102,17 @@ vim.opt.suffixes = { '.swp', '.bak', '.pyc', '.out', '.aux', '.bbl', '.blg' }
 vim.o.concealcursor = 'nc'
 vim.o.conceallevel = 2
 
+vim.o.confirm = true
+
 --------------
 -- AUTOCMDS --
 --------------
+local augroup = vim.api.nvim_create_augroup('yochem', {})
 local function on(event, callback)
 	vim.api.nvim_create_autocmd(event, {
 		callback = type(callback) == 'function' and callback or nil,
 		command = type(callback) == 'string' and callback or nil,
-		group = vim.api.nvim_create_augroup('yochem', { clear = false }),
+		group = augroup,
 	})
 end
 
@@ -121,6 +127,15 @@ on('BufReadPost', function()
 	local mark = vim.api.nvim_buf_get_mark(0, [["]])
 	if 0 < mark[1] and mark[1] <= vim.api.nvim_buf_line_count(0) then
 		vim.api.nvim_win_set_cursor(0, mark)
+	end
+end)
+
+on('FileType', function(opts)
+	local parsers = require('nvim-treesitter.parsers')
+	if parsers.get_parser_configs()[opts.match] and not parsers.has_parser(opts.match) then
+		vim.schedule(function()
+			vim.cmd.TSInstall(opts.match)
+		end)
 	end
 end)
 
@@ -179,7 +194,7 @@ map('n', '<Esc>', vim.cmd.nohlsearch)
 map('n', [[']], [[`]])
 
 -- preserve cursor on joining lines
-map('n', 'J', 'm`J``')
+map('n', 'gJ', 'm`J``')
 
 -- set mark before searching
 map('n', '/', 'ms/')
@@ -214,21 +229,20 @@ map('n', '!', '<Plug>(Negate)')
 map('n', 'R', cmd('source %'))
 
 -- ignore 'scrolloff' with H and L
-map('n', 'H', function ()
-	vim._with({ o = { scrolloff = 0 } }, function () vim.cmd('norm! H') end)
+map('n', 'H', function()
+	vim._with({ o = { scrolloff = 0 } }, function() vim.cmd('norm! H') end)
 end)
 
-map('n', 'L', function ()
-	vim._with({ o = { scrolloff = 0 } }, function () vim.cmd('norm! L') end)
+map('n', 'L', function()
+	vim._with({ o = { scrolloff = 0 } }, function() vim.cmd('norm! L') end)
 end)
 
 -- sensible normal mode in terminal
 map('t', '<Esc><Esc>', '<C-\\><C-n>')
 
 -- sensible redo
-map('n', 'U', '<C-r')
-
-vim.g.python3_host_prog = vim.fn.has('mac') == 1 and '/usr/local/bin/python3' or '/usr/bin/python3'
+map('n', '<C-r>', '<cmd>echo "Use U"<cr>')
+map('n', 'U', '<C-r>')
 
 ----------
 -- LAZY --

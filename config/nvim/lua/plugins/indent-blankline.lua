@@ -3,13 +3,8 @@ return {
 	main = "ibl",
 	opts = {
 		scope = { enabled = false },
-		exclude = {
-			filetypes = { "help", "man", "packer" },
-		},
-		indent = {
-			tab_char = "│",
-		},
+		exclude = { filetypes = { "help", "man", "packer" } },
+		indent = { tab_char = "│" },
 	},
 	event = "VeryLazy",
-	dependencies = "nvim-treesitter/nvim-treesitter",
 }

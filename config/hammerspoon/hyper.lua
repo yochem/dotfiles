@@ -16,7 +16,7 @@ local function exitHyperMode()
 end
 
 function M.bind(key, func)
-	hyper_mode:bind({}, key, function ()
+	hyper_mode:bind({}, key, function()
 		func()
 		hyper_mode.triggered = true
 	end)
@@ -24,8 +24,8 @@ end
 
 FOREVERGLOBAL = hs.hotkey.bind({}, 'F18', enterHyperMode, exitHyperMode)
 
-hs.hotkey.bind({"shift"}, 'F18', function ()
-	hs.eventtap.keyStroke({"shift"}, "`")
+hs.hotkey.bind({ 'shift' }, 'F18', function()
+	hs.eventtap.keyStroke({ 'shift' }, '`')
 end)
 
 return M

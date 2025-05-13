@@ -11,7 +11,6 @@ return {
 						namespace = { "jumpsigns", "diagnostic.signs" },
 						maxwidth = 1,
 						colwidth = 1,
-						auto = true,
 					},
 					click = "v:lua.ScSa",
 				},

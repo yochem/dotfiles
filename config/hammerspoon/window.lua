@@ -1,5 +1,7 @@
 local M = {}
 
+hs.window.animationDuration = 0
+
 local function move_window(movefn)
 	return function ()
 		local win = hs.window.focusedWindow()
@@ -35,7 +37,7 @@ M.tile_left = move_window(function(f, s)
 end)
 
 M.tile_right = move_window(function(f, s)
-	local already_in_pos = f.x == s.w - f.w and f.y == s.y and f.h == s.h
+	local already_in_pos = f.y == s.y and f.h == s.h
 	f.w = half2thirds(f.w, s.w, already_in_pos)
 	f.x = s.w - f.w
 	f.y = s.y
