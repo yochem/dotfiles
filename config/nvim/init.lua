@@ -2,7 +2,7 @@ if vim.g.vscode or vim.fn.has('nvim-0.10') == 0 then
 	return
 end
 
-require('vim._extui').enable({})
+-- require('vim._extui').enable({})
 
 vim.g.did_install_default_menus = 1
 vim.g.loaded_netrw = 1
@@ -22,7 +22,7 @@ vim.g.netrw_liststyle = 3
 vim.o.laststatus = 0
 vim.o.showmode = false
 vim.o.ruler = false
-vim.o.shortmess = 'WIFsc'
+vim.o.shortmess = 'WIFsclo'
 
 vim.o.splitbelow = true
 vim.o.splitkeep = 'screen'
@@ -56,6 +56,7 @@ vim.opt.listchars = {
 
 vim.o.pumheight = 10
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+vim.opt.jumpoptions:append({ 'view', 'stack' })
 
 vim.o.scrolloff = 3
 vim.o.sidescrolloff = 1
@@ -130,12 +131,21 @@ on('BufReadPost', function()
 	end
 end)
 
-on('FileType', function(opts)
+on({ 'BufRead', 'BufNewFile' }, function(opts)
 	local parsers = require('nvim-treesitter.parsers')
 	if parsers.get_parser_configs()[opts.match] and not parsers.has_parser(opts.match) then
 		vim.schedule(function()
 			vim.cmd.TSInstall(opts.match)
 		end)
+	end
+end)
+
+on('WinNew', function()
+	if vim.fn.win_gettype(0) ~= '' then
+		return
+	end
+	if vim.api.nvim_win_get_width(0) > 2 * 74 then
+		vim.cmd.wincmd(vim.o.splitright and 'L' or 'H')
 	end
 end)
 
