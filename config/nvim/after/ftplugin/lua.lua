@@ -19,3 +19,17 @@ end
 
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
+
+vim.keymap.set('i', '++', function ()
+	local line = vim.fn.getline('.')
+	local varname = line:match("(%w+)%s*$")
+	vim.fn.setline('.', ('%s= %s + 1'):format(line, varname))
+	vim.cmd.norm({ 'A', bang = true })
+end)
+
+vim.keymap.set('i', '+=', function ()
+	local line = vim.fn.getline('.')
+	local varname = line:match("(%w+)%s*$")
+	vim.fn.setline('.', ('%s= %s + '):format(line, varname))
+	vim.cmd.norm({ 'A', bang = true })
+end)
