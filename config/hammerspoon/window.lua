@@ -15,16 +15,16 @@ end
 local function half2thirds(frame_size, screen_size, in_position)
 	-- 1/2 -> 1/3
 	if in_position and frame_size == math.floor(screen_size / 2) then
-		return screen_size / 3
+		return math.floor(screen_size / 3)
 	end
 
 	-- 1/3 -> 2/3
 	if in_position and frame_size == math.floor(screen_size / 3) then
-		return screen_size / 3 * 2
+		return math.floor(screen_size / 3 * 2)
 	end
 
 	-- 2/3 -> 1/2 or coming from other position
-	return screen_size / 2
+	return math.floor(screen_size / 2)
 end
 
 M.tile_left = move_window(function(f, s)
@@ -37,7 +37,7 @@ M.tile_left = move_window(function(f, s)
 end)
 
 M.tile_right = move_window(function(f, s)
-	local already_in_pos = f.y == s.y and f.h == s.h
+	local already_in_pos = f.x == s.w - f.w and f.y == s.y and f.h == s.h
 	f.w = half2thirds(f.w, s.w, already_in_pos)
 	f.x = s.w - f.w
 	f.y = s.y
