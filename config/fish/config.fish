@@ -26,9 +26,6 @@ abbr tlmgr "sudo tlmgr install"
 abbr perms stat -f '%OLp'
 abbr gs "git status -s"
 
-function last_history_item
-	echo $history[1]
-end
 abbr -a !! --position anywhere --function last_history_item
 
 # choose the default editor
@@ -49,6 +46,10 @@ set -xU LC_ALL "en_US.UTF-8"
 set -xU FZF_DEFAULT_COMMAND 'fd --type f'
 
 set -gx LS_COLORS (vivid generate one-dark-simple)
+
+if not status is-interactive
+	return
+end
 
 set -gx PLAN9 /usr/local/plan9
 fish_add_path -aP $PLAN9/bin

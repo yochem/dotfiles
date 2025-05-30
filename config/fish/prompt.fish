@@ -31,6 +31,9 @@ end
 # [ root ~/Documents ]
 # [ root@host: ~/Documents ]
 function fish_prompt
+	if not status is-interactive
+		return
+	end
 	set_color normal
 	printf "[ "
 
