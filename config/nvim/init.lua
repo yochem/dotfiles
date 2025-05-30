@@ -5,9 +5,10 @@ end
 -- require('vim._extui').enable({})
 
 vim.g.did_install_default_menus = 1
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_ruby_provider = 0
 
 vim.loader.enable()
 vim.cmd.colorscheme('mine')
@@ -109,7 +110,7 @@ vim.o.confirm = true
 -- AUTOCMDS --
 --------------
 local augroup = vim.api.nvim_create_augroup('yochem', {})
-local function on(event, callback)
+function _G.on(event, callback)
 	vim.api.nvim_create_autocmd(event, {
 		callback = type(callback) == 'function' and callback or nil,
 		command = type(callback) == 'string' and callback or nil,
@@ -275,6 +276,17 @@ require('lazy').setup('plugins', {
 	default = { lazy = true },
 	lockfile = vim.fn.stdpath('state') .. '/lazy-lock.json',
 	change_detection = { notify = false },
+	dev = { path = '~/Documents', patterns = { 'yochem' }, fallback = true },
 	install = { colorscheme = { 'mine' } },
-	performance = { rtp = { reset = true } },
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				'gzip',
+				'netrwPlugin',
+				'tarPlugin',
+				'tohtml',
+				'tutor',
+			}
+		}
+	},
 })

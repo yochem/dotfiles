@@ -35,3 +35,6 @@ hl('TroubleNormal', { link = 'Normal' })
 hl('TroubleNormalNC', { link = 'Normal' })
 
 hl('VisualNonText', { fg = 'Grey', bg = 'NvimDarkGrey4' })
+
+hl('BlinkCmpLabelMatch', { bold = true })
+hl('BlinkCmpMenuSelection', { bg = 'NvimDarkGray4' })

@@ -1,3 +1,1 @@
-return {
-	dir = '~/Documents/chime.nvim'
-}
+return { 'yochem/chime.nvim' }

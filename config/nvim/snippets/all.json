@@ -11,6 +11,12 @@
 			"$LINE_COMMENT FIX: $0"
 		]
 	},
+	"list": {
+		"prefix": "-",
+		"body": [
+			"• "
+		]
+	},
 	"bc": {
 		"prefix": "block comment",
 		"body": [

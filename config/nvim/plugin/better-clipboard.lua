@@ -1,14 +1,17 @@
 local map = vim.keymap.set
 
--- <leader>action uses system clipboard
-map({ 'n', 'v' }, '<leader>y', [["+y]])
-map({ 'n', 'v' }, '<leader>Y', [["+Y]], { remap = true })
+-- <leader>action copies last yank to clipboard
+map('n', '<leader>y', function()
+	vim.fn.setreg('+', vim.fn.getreg('0'))
+end)
 
-map({ 'n', 'v' }, '<leader>d', [["+d]])
-map({ 'n', 'v' }, '<leader>D', [["+D]])
-
-map({ 'n', 'v' }, '<leader>p', [["+p]])
-map({ 'n', 'v' }, '<leader>P', [["+P]])
+on('TextYankPost', function()
+	if vim.v.event.operator == 'y' then
+		for i = 9, 1, -1 do -- Shift all numbered registers.
+			vim.fn.setreg(tostring(i), vim.fn.getreg(tostring(i - 1)))
+		end
+	end
+end)
 
 -- change line with commented previous version as backup
 map('n', 'yc', 'yygccp', { remap = true })

@@ -16,7 +16,20 @@ return {
       ['<C-k>'] = {}
     },
     completion = {
-      list = { selection = { preselect = false, auto_insert = false } },
+      keyword = { range = 'full' },
+      menu = {
+        draw = {
+          treesitter = { 'lsp' },
+          padding = { 0, 1 },
+          components = {
+            kind_icon = {
+              text = function(ctx) return ' ' .. ctx.kind_icon .. ctx.icon_gap .. ' ' end
+            }
+          },
+          columns = { { 'kind_icon', 'label', 'label_description' } },
+        }
+      },
+      list = { selection = { preselect = false, auto_insert = true } },
       ghost_text = { enabled = true },
     },
     sources = {
