@@ -6,6 +6,14 @@ local function hl(group, opts)
 	vim.api.nvim_set_hl(0, group, opts)
 end
 
+---@param group string
+---@param opts vim.api.keyset.highlight
+local function hl_add(group, opts)
+	local old = vim.api.nvim_get_hl(0, { name = group, link = false })
+	vim.api.nvim_set_hl(0, group, vim.tbl_extend('keep', opts, old))
+end
+
+
 hl('LineNr', { fg = 'NvimLightGray3' })
 hl('CursorLineNr', { fg = 'Orange' })
 hl('CursorLine', { bg = nil })
@@ -38,3 +46,7 @@ hl('VisualNonText', { fg = 'Grey', bg = 'NvimDarkGrey4' })
 
 hl('BlinkCmpLabelMatch', { bold = true })
 hl('BlinkCmpMenuSelection', { bg = 'NvimDarkGray4' })
+
+hl('@variable.parameter.vimdoc', { link = '@string.special.vimdoc' })
+hl_add('@label.vimdoc', { fg = 'NvimLightBlue' })
+hl('@string.special.vimdoc', { underline = true })

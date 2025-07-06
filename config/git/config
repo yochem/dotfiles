@@ -7,9 +7,6 @@
 [init]
 	defaultBranch = main
 
-[core]
-	pager = less -x1,5,9,13,17,21,25,29,33,37,41,45,49,53,57,61,65,69,73,77,81
-
 [pager]
 	diff = true
 

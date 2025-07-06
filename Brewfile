@@ -16,7 +16,6 @@ brew "ipython"
 brew "jq"
 brew "make"
 brew "neofetch"
-brew "neovim", args: ["HEAD"]
 brew "python@3.9"
 brew "ripgrep"
 brew "tmux"

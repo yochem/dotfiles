@@ -2,6 +2,8 @@
 
 My modular configuration manager for MacOS and Linux.
 
+You're probably looking for [config/nvim](./config/nvim).
+
 ## Screenshots
 ![img](https://user-images.githubusercontent.com/23235841/63441128-38638a80-c431-11e9-8e42-32f6965589aa.png)
 

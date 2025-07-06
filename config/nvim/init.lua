@@ -2,8 +2,6 @@ if vim.g.vscode or vim.fn.has('nvim-0.10') == 0 then
 	return
 end
 
--- require('vim._extui').enable({})
-
 vim.g.did_install_default_menus = 1
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
@@ -99,12 +97,13 @@ vim.o.secure = true
 vim.o.shellcmdflag = '-Nc'
 vim.o.timeoutlen = 400
 vim.o.updatetime = 100
-vim.opt.suffixes = { '.swp', '.bak', '.pyc', '.out', '.aux', '.bbl', '.blg' }
+
+vim.opt.path:append('**')
+vim.o.wildmenu = true
+vim.opt.suffixes = { '.swp', '.bak', '.pyc', '.out', '.aux', '.bbl', '.blg', '.pdf' }
 
 vim.o.concealcursor = 'nc'
 vim.o.conceallevel = 2
-
-vim.o.confirm = true
 
 --------------
 -- AUTOCMDS --
@@ -141,8 +140,8 @@ on({ 'BufRead', 'BufNewFile' }, function(opts)
 	end
 end)
 
-on('WinNew', function()
-	if vim.fn.win_gettype(0) ~= '' then
+on('WinNew', function(ev)
+	if vim.fn.win_gettype(ev.id) ~= '' then
 		return
 	end
 	if vim.api.nvim_win_get_width(0) > 2 * 74 then
@@ -157,6 +156,10 @@ vim.api.nvim_create_user_command('Scratch', function()
 	})
 	vim.cmd.startinsert()
 end, {})
+
+vim.api.nvim_create_user_command('Pager', function()
+	vim.api.nvim_open_term(0, {})
+end, { desc = 'Highlights ANSI termcodes in curbuf' })
 
 
 ------------
