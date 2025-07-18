@@ -1,1 +1,0 @@
-return { 'yochem/chime.nvim' }
