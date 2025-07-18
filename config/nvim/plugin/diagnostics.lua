@@ -12,6 +12,7 @@ vim.diagnostic.config({
 	update_in_insert = false,
 	severity_sort = true,
 	chime = {
+		trim = false,
 		--- @param d vim.Diagnostic
 		--- @return { [1]: string, [2]: string? }[]
 		format = function(d)

@@ -525,10 +525,9 @@ require('lazy-vimpack').add({
 				["ic"] = "@comment.inner",
 				["ac"] = "@comment.outer",
 			}
-
+			local ts = require("nvim-treesitter-textobjects.select")
 			for rhs, object in pairs(keymaps) do
 				vim.keymap.set({ 'x', 'o' }, rhs, function()
-					local ts = require("nvim-treesitter-textobjects.select")
 					ts.select_textobject(object, "textobjects")
 				end)
 			end

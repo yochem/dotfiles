@@ -32,7 +32,6 @@ abbr -a !! --position anywhere --function last_history_item
 if command -v nvim >/dev/null 2>&1
 	set -xU VISUAL nvim
 	set -xU MANPAGER 'nvim +Man!'
-	set -xU PAGER 'nvim +Pager'
 else if command -v vim >/dev/null 2>&1
 	set -xU VISUAL vim
 else
