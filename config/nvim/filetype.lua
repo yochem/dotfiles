@@ -18,9 +18,7 @@ vim.filetype.add({
 					return
 				end
 				local size = vim.fn.getfsize(path)
-				if size <= 0 then
-					return
-				end
+				if size <= 0 then return end
 				if size > 1.5e6 then
 					return "bigfile"
 				end

@@ -7,8 +7,7 @@ vim.keymap.set('n', '<leader>h', function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
 
-vim.api.nvim_create_autocmd('LspAttach', {
-	callback = function(args)
+on('LspAttach', function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		if client and client:supports_method('textDocument/foldingRange') then
 			local win = vim.api.nvim_get_current_win()
@@ -18,14 +17,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		if client and client:supports_method('textDocument/documentColor') then
 			vim.lsp.document_color.enable(true, args.buf, { style = 'virtual' })
 		end
-	end,
+	end, {
 	group = augroup,
 })
 
-vim.api.nvim_create_autocmd('LspDetach', {
-	command = 'setl foldexpr<',
-	group = augroup,
-})
+on('LspDetach', 'setl foldexpr<', { group = augroup })
 
 vim.lsp.config('*', { root_markers = { '.git' } })
 
@@ -37,7 +33,7 @@ vim.lsp.enable({
 	'jqls',
 	'luals',
 	'marksman',
-	'pyls',
+	'ty',
 	'tapo',
 	'tinymist',
 	'v-analyzer',
