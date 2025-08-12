@@ -21,31 +21,86 @@ vim.cmd.colorscheme('mine')
 -------------
 -- OPTIONS --
 -------------
-vim.g.mapleader = ' '
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3
+vim.cmd([[
+let g:mapleader=' '
+let g:netrw_banner=0
+let g:netrw_liststyle=3
 
-vim.o.laststatus = 3
-vim.o.showmode = false
-vim.o.ruler = false
-vim.o.shortmess = 'WIFsclo'
+set laststatus=3
+set noshowmode
+set noruler
+set shortmess=WIFsclo
 
-vim.o.splitbelow = true
-vim.o.splitkeep = 'screen'
-vim.o.splitright = true
+set splitbelow
+set splitright
+set splitkeep=screen
 
-vim.o.textwidth = 79
-vim.o.wrap = false
+set textwidth=79
+set nowrap
 
--- statuscolumn
-vim.o.foldcolumn = '1'
-vim.o.number = true
-vim.o.numberwidth = 1
-vim.o.relativenumber = true
-vim.o.signcolumn = 'yes:1'
-vim.o.cursorline = true
+set foldcolumn=1
+set number
+set numberwidth=1
+set relativenumber
+set signcolumn=yes:1
+set cursorline
 
-vim.o.list = true
+set list
+set pumheight=10
+set scrolloff=3
+set sidescrolloff=1
+
+set pumheight=10
+set completeopt=menu,menuone,noselect
+
+set title
+set titlestring=%{&modified?'●\ ':''}%{empty(expand('%:t'))?'nvim':expand('%:t')}
+
+set formatoptions=cqnj
+set jumpoptions+=view,stack
+
+set gdefault
+set hlsearch
+set ignorecase
+set inccommand=split
+set smartcase
+
+set noexpandtab
+set shiftround
+set shiftwidth=4
+set smartindent
+set softtabstop=-1
+set tabstop=4
+
+set foldenable
+set foldlevel=99
+set foldlevelstart=99
+set foldmethod=expr
+set foldtext=
+
+set spell
+set spellsuggest=10
+set spelloptions=camel,noplainbuffer
+
+set autowrite
+set nohidden
+set undofile
+set exrc
+set secure
+
+set shellcmdflag=-Nc
+set timeoutlen=400
+set updatetime=100
+
+set path+=**
+set wildmenu
+set suffixes+=.pyc,.out,.pdf
+
+set concealcursor=nc
+set conceallevel=2
+]])
+
+
 vim.opt.fillchars = {
 	eob = ' ',
 	fold = ' ',
@@ -59,58 +114,6 @@ vim.opt.listchars = {
 	multispace = '••',
 	leadmultispace = ' '
 }
-
-vim.o.pumheight = 10
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-vim.opt.jumpoptions:append({ 'view', 'stack' })
-
-vim.o.scrolloff = 3
-vim.o.sidescrolloff = 1
-
-vim.o.title = true
-vim.o.titlestring = [[%{&modified?'● ':''}%{empty(expand('%:t'))?'nvim':expand('%:t')}]]
-
-vim.o.formatoptions = 'cqnj'
-
-vim.o.gdefault = true
-vim.o.hlsearch = true
-vim.o.ignorecase = true
-vim.o.inccommand = 'split'
-vim.o.smartcase = true
-
-vim.o.expandtab = false
-vim.o.shiftround = true
-vim.o.shiftwidth = 4
-vim.o.smartindent = true
-vim.o.softtabstop = -1
-vim.o.tabstop = 4
-
-vim.o.foldenable = true
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldmethod = 'expr'
-vim.o.foldtext = ''
-
-vim.o.spell = true
-vim.o.spellsuggest = '10'
-vim.opt.spelloptions = { 'camel', 'noplainbuffer' }
-
-vim.o.autowrite = true
-vim.o.hidden = false
-vim.o.undofile = true
-vim.o.exrc = true
-vim.o.secure = true
-
-vim.o.shellcmdflag = '-Nc'
-vim.o.timeoutlen = 400
-vim.o.updatetime = 100
-
-vim.opt.path:append('**')
-vim.o.wildmenu = true
-vim.opt.suffixes = { '.swp', '.bak', '.pyc', '.out', '.aux', '.bbl', '.blg', '.pdf' }
-
-vim.o.concealcursor = 'nc'
-vim.o.conceallevel = 2
 
 --------------
 -- AUTOCMDS --
@@ -181,91 +184,93 @@ end, {})
 ------------
 local function cmd(command) return function() vim.cmd(command) end end
 local map = vim.keymap.set
+local nmap = function(lhs, rhs, opts) return map('n', lhs, rhs, opts) end
+local vmap = function(lhs, rhs, opts) return map('v', lhs, rhs, opts) end
 
-map('n', 'OO', '[<Space>', { remap = true })
-map('n', 'oo', ']<Space>', { remap = true })
+nmap('OO', '[<Space>', { remap = true })
+nmap('oo', ']<Space>', { remap = true })
 
 -- move highlighted text and auto indent
-map('v', 'J', ":m '>+1<CR>gv=gv")
-map('v', 'K', ":m '<-2<CR>gv=gv")
+vmap('J', ":m '>+1<CR>gv=gv")
+vmap('K', ":m '<-2<CR>gv=gv")
 
 -- keep selection while visually indenting
-map('v', '<', '<gv')
-map('v', '>', '>gv')
+vmap('<', '<gv')
+vmap('>', '>gv')
 
 -- resize windows
-map('n', '<S-Up>', cmd('resize +2'))
-map('n', '<S-Down>', cmd('resize -2'))
-map('n', '<S-Left>', cmd('vertical resize +2'))
-map('n', '<S-Right>', cmd('vertical resize -2'))
+nmap('<S-Up>', cmd('resize +2'))
+nmap('<S-Down>', cmd('resize -2'))
+nmap('<S-Left>', cmd('vertical resize +2'))
+nmap('<S-Right>', cmd('vertical resize -2'))
 
 -- use comma to switch windows
-map('n', ',', '<c-w>')
+nmap(',', '<c-w>')
 
 -- Open file explorer left
-map('n', '<leader>e', cmd('15Lexplore'))
+nmap('<leader>e', cmd('15Lexplore'))
 
 -- don't move so aggressive
-map('n', '<PageUp>', '10k')
-map('n', '<PageDown>', '10j')
+nmap('<PageUp>', '10k')
+nmap('<PageDown>', '10j')
 
 -- populate jumplist with relative jumps, otherwise move by wrapped line
-map('n', 'k', [[(v:count ? "m'" . v:count : "g") . "k"]], { expr = true })
-map('n', 'j', [[(v:count ? "m'" . v:count : "g") . "j"]], { expr = true })
+nmap('k', [[(v:count ? "m'" . v:count : "g") . "k"]], { expr = true })
+nmap('j', [[(v:count ? "m'" . v:count : "g") . "j"]], { expr = true })
 
 -- reselect pasted text like |gv| does for visually selected text
-map('n', 'gp', '`[v`]')
+nmap('gp', '`[v`]')
 
-map('n', '<Esc>', vim.cmd.nohlsearch)
+nmap('<Esc>', vim.cmd.nohlsearch)
 
 -- always jump exactly to mark
-map('n', [[']], [[`]])
+nmap([[']], [[`]])
 
 -- preserve cursor on joining lines
-map('n', 'gJ', 'm`J``')
+nmap('gJ', 'm`J``')
 
 -- set mark before searching
-map('n', '/', 'ms/')
-map('n', '?', 'ms?')
+nmap('/', 'ms/')
+nmap('?', 'ms?')
 
 -- only search in visual selection
 map('x', '/', '<Esc>/\\%V')
 
 -- don't care, just quit
-map('n', 'ZZ', vim.cmd.qall)
+nmap('ZZ', vim.cmd.qall)
 
 -- close window
-map('n', 'q', function()
+nmap('q', function()
 	local success = pcall(vim.cmd.close)
 	if not success then
 		pcall(vim.cmd.quit)
 	end
 end)
 
-map('n', 'gh', function()
+nmap('gh', function()
 	vim.ui.open(
 		vim.fn.expand('<cfile>'),
 		{ cmd = { 'gh', 'repo', 'view', '--web' } }
 	)
 end)
 
-map('n', '<leader>q', ":execute empty(filter(getwininfo(), 'v:val.quickfix')) ? 'copen' : 'cclose'<CR>",
+nmap('<leader>q', ":execute empty(filter(getwininfo(), 'v:val.quickfix')) ? 'copen' : 'cclose'<CR>",
 	{ silent = true })
 
 -- keep Q for macros
-map('n', 'Q', 'q')
+nmap('Q', 'q')
 
 -- negate boolean values
-map('n', '!', '<Plug>(Negate)')
+nmap('!', '<Plug>(Negate)')
 
-map('n', 'R', cmd('source %'))
+nmap('R', cmd('source %'))
 
 -- ignore 'scrolloff' with H and L
-map('n', 'H', function()
+nmap('H', function()
 	vim._with({ o = { scrolloff = 0 } }, function() vim.cmd('norm! H') end)
 end)
 
-map('n', 'L', function()
+nmap('L', function()
 	vim._with({ o = { scrolloff = 0 } }, function() vim.cmd('norm! L') end)
 end)
 
@@ -273,8 +278,8 @@ end)
 map('t', '<Esc><Esc>', '<C-\\><C-n>')
 
 -- sensible redo
-map('n', '<C-r>', '<cmd>echo "Use U"<cr>')
-map('n', 'U', '<C-r>')
+nmap('<C-r>', '<cmd>echo "Use U"<cr>')
+nmap('U', '<C-r>')
 
 local function add_plugin(plugins, opts)
 	opts = opts or {}
@@ -324,7 +329,7 @@ add_plugin({
 	gh 'mcauley-penney/visual-whitespace.nvim',
 	gh 'nvim-lua/plenary.nvim',
 	gh 'nvim-telescope/telescope.nvim',
-	{ src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' },
+	{ src = gh 'nvim-treesitter/nvim-treesitter',             version = 'main' },
 	{ src = gh 'nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
 	gh 'yochem/prolog.vim',
 	gh 'rafamadriz/friendly-snippets',
