@@ -25,7 +25,7 @@ vim.g.mapleader = ' '
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 
-vim.o.laststatus = 0
+vim.o.laststatus = 3
 vim.o.showmode = false
 vim.o.ruler = false
 vim.o.shortmess = 'WIFsclo'
@@ -96,6 +96,7 @@ vim.o.spellsuggest = '10'
 vim.opt.spelloptions = { 'camel', 'noplainbuffer' }
 
 vim.o.autowrite = true
+vim.o.hidden = false
 vim.o.undofile = true
 vim.o.exrc = true
 vim.o.secure = true
@@ -115,12 +116,15 @@ vim.o.conceallevel = 2
 -- AUTOCMDS --
 --------------
 local augroup = vim.api.nvim_create_augroup('yochem', {})
-function _G.on(event, callback)
-	vim.api.nvim_create_autocmd(event, {
-		callback = type(callback) == 'function' and callback or nil,
-		command = type(callback) == 'string' and callback or nil,
-		group = augroup,
-	})
+function _G.on(event, callback, opts)
+	opts = opts or {}
+	if type(callback) == 'function' then
+		opts.callback = callback
+	else
+		opts.command = callback
+	end
+	opts.group = opts.group or augroup
+	vim.api.nvim_create_autocmd(event, opts)
 end
 
 -- on('InsertEnter', 'set conceallevel=0')
@@ -148,22 +152,20 @@ on('FileType', function(ev)
 	end
 end)
 
-on('WinNew', function(ev)
-	if vim.fn.win_gettype(ev.id) ~= '' then
-		return
-	end
-	if vim.api.nvim_win_get_width(0) > 2 * 74 then
-		vim.cmd.wincmd(vim.o.splitright and 'L' or 'H')
-	end
+on('BufNewFile', function(ev)
+	on('BufWritePre', function(ev2)
+		vim.fn.mkdir(vim.fs.dirname(ev2.match), 'p')
+	end, { buffer = ev.buf, once = true })
 end)
 
-vim.api.nvim_create_user_command('Scratch', function()
-	vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
-		split = 'below',
-		height = 20,
-	})
-	vim.cmd.startinsert()
-end, {})
+on('WinNew', function()
+	on({ 'BufReadPost', 'BufNewFile' }, function()
+		if vim.fn.win_gettype() ~= '' then return end
+		if vim.api.nvim_win_get_width(0) > 2 * 74 then
+			vim.cmd.wincmd(vim.o.splitright and 'L' or 'H')
+		end
+	end, { once = true })
+end)
 
 vim.api.nvim_create_user_command('Pager', function()
 	vim.api.nvim_open_term(0, {})
@@ -171,7 +173,7 @@ end, { desc = 'Highlights ANSI termcodes in curbuf' })
 
 vim.api.nvim_create_user_command('Update', function()
 	vim.pack.update()
-end, { desc = 'Highlights ANSI termcodes in curbuf' })
+end, {})
 
 
 ------------
@@ -224,6 +226,7 @@ map('n', 'gJ', 'm`J``')
 
 -- set mark before searching
 map('n', '/', 'ms/')
+map('n', '?', 'ms?')
 
 -- only search in visual selection
 map('x', '/', '<Esc>/\\%V')
@@ -239,12 +242,15 @@ map('n', 'q', function()
 	end
 end)
 
-map('n', 'gX', function()
+map('n', 'gh', function()
 	vim.ui.open(
 		vim.fn.expand('<cfile>'),
 		{ cmd = { 'gh', 'repo', 'view', '--web' } }
 	)
 end)
+
+map('n', '<leader>q', ":execute empty(filter(getwininfo(), 'v:val.quickfix')) ? 'copen' : 'cclose'<CR>",
+	{ silent = true })
 
 -- keep Q for macros
 map('n', 'Q', 'q')
@@ -270,13 +276,11 @@ map('t', '<Esc><Esc>', '<C-\\><C-n>')
 map('n', '<C-r>', '<cmd>echo "Use U"<cr>')
 map('n', 'U', '<C-r>')
 
-local gh = function(repo) return 'https://github.com/' .. repo end
-
 local function add_plugin(plugins, opts)
 	opts = opts or {}
-	local function do_add()
-		vim.pack.add(plugins)
-		for _, plug in ipairs(plugins) do
+	local function do_add(plugs)
+		vim.pack.add(plugs)
+		for _, plug in ipairs(plugs) do
 			if type(plug) == 'string' then
 				plug = { src = plug }
 			end
@@ -293,172 +297,36 @@ local function add_plugin(plugins, opts)
 			once = true,
 			group = augroup,
 			desc = 'lazy-load plugins',
-			callback = do_add
+			callback = function()
+				do_add(plugins)
+			end
 		})
 	else
-		do_add()
+		do_add(plugins)
 	end
 end
 
--- vim.pack.add({ 'https://github.com/yochem/lazy-vimpack' })
-vim.opt.rtp:append(vim.fs.normalize('~/Documents/lazy-vimpack'))
-require('lazy-vimpack').add('plugins')
+local function gh(url) return 'https://github.com/' .. url end
 
--- require('lazy-vimpack').add({
--- 	gh 'yochem/chime.nvim',
--- 	gh 'blankname/vim-fish',
--- 	gh 'tpope/vim-fugitive',
--- 	{
--- 		gh 'lewis6991/gitsigns.nvim',
--- 		main = 'gitsigns',
--- 		opts = {
--- 			signs = {
--- 				add = { text = "│" },
--- 				change = { text = "│" },
--- 				delete = { text = "_" },
--- 				topdelete = { text = "‾" },
--- 				changedelete = { text = "│" },
--- 				untracked = { text = "│" },
--- 			},
--- 		}
--- 	},
--- 	{
--- 		gh 'lukas-reineke/indent-blankline.nvim',
--- 		config = function()
--- 			local hooks = require('ibl.hooks')
--- 			hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
--- 			hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
--- 			require('ibl').setup({
--- 				scope = { enabled = false },
--- 				exclude = { filetypes = { 'help', 'man', 'packer' } },
--- 				indent = { tab_char = '│' },
--- 			})
--- 		end,
--- 	},
--- 	gh 'yochem/jq-playground.nvim',
--- 	{
--- 		gh 'echasnovski/mini.splitjoin',
--- 		main = 'mini.splitjoin',
--- 		opts = { mappings = { toggle = '<leader>a' } }
--- 	},
--- 	gh 'yochem/prolog.vim',
--- 	{
--- 		gh 'luukvbaal/statuscol.nvim',
--- 		config = function()
--- 			local builtin = require("statuscol.builtin")
--- 			require("statuscol").setup({
--- 				relculright = true,
--- 				ft_ignore = { "qf" },
--- 				segments = {
--- 					{
--- 						sign = {
--- 							namespace = { "jumpsigns", "diagnostic.signs" },
--- 							maxwidth = 1,
--- 							colwidth = 1,
--- 						},
--- 						click = "v:lua.ScSa",
--- 					},
--- 					{ text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
--- 					{ text = { builtin.lnumfunc },      click = "v:lua.ScLa" },
--- 					{
--- 						sign = {
--- 							namespace = { "gitsign" },
--- 							maxwidth = 1,
--- 							colwidth = 1,
--- 							fillchar = "│",
--- 							fillcharhl = "@comment",
--- 						},
--- 						click = "v:lua.ScSa",
--- 					},
--- 				},
--- 			})
--- 		end,
--- 	},
--- 	gh 'nvim-lua/plenary.nvim',
--- 	{
--- 		gh 'nvim-telescope/telescope.nvim',
--- 		config = function()
--- 			local function ts_func(func, args)
--- 				return function() require("telescope.builtin")[func](args) end
--- 			end
--- 			map("n", "<leader>ff", ts_func("find_files"))
--- 			map("n", "<leader>fg", ts_func("live_grep"))
--- 			map("n", "<leader>fb", ts_func("buffers"))
--- 			map("n", "<leader>fF", ts_func("lsp_document_symbols"))
--- 			map("n", "<leader>fh", ts_func("help_tags"))
--- 			map("n", "<leader>fq", ts_func("quickfix"))
--- 			map("n", "<leader>fd", ts_func("find_files", { cwd = vim.fn.stdpath("config") }))
---
--- 			require('telescope').setup({
--- 				pickers = {
--- 					find_files = {
--- 						theme = "ivy",
--- 						preview = false,
--- 						hidden = true,
--- 					},
--- 					live_grep = {
--- 						theme = "ivy",
--- 					},
--- 					buffers = {
--- 						theme = "dropdown",
--- 						initial_mode = "normal",
--- 					},
--- 					lsp_document_symbols = {
--- 						symbols = {
--- 							"class",
--- 							"function",
--- 							"struct",
--- 						},
--- 					},
--- 				},
--- 			})
--- 		end
--- 	},
--- 	{
--- 		gh 'folke/trouble.nvim',
--- 		config = function()
--- 			require('trouble').setup({
--- 				focus = false,
--- 				warn_no_results = false,
--- 				modes = {
--- 					symbols = {
--- 						format = "{kind_icon} {symbol.name}",
--- 						multiline = false,
--- 					}
--- 				},
--- 			})
--- 			map('n', 'gO', '<Cmd>Trouble symbols<CR>')
--- 		end
--- 	},
--- 	{ src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' },
--- 	gh 'kaarmu/typst.vim',
--- 	{ gh 'mcauley-penney/visual-whitespace.nvim', opts = {}, main = 'visual-whitespace' },
--- 	{ gh 'nmac427/guess-indent.nvim', main = 'guess-indent', opts = {} },
--- 	{ gh 'echasnovski/mini.ai', main = 'mini.ai', opts = {}, event = { 'BufReadPost', 'BufNewFile' } },
--- 	{
--- 		gh 'nvim-treesitter/nvim-treesitter-textobjects',
--- 		version = 'main',
--- 		event = { 'BufReadPost', 'BufNewFile' },
--- 		config = function()
--- 			local keymaps = {
--- 				["af"] = "@function.outer",
--- 				["if"] = "@function.inner",
--- 				["aC"] = "@class.outer",
--- 				["iC"] = "@class.inner",
--- 				["ab"] = "@block.outer",
--- 				["ib"] = "@block.inner",
--- 				["aa"] = "@parameter.outer",
--- 				["ia"] = "@parameter.inner",
--- 				["as"] = "@statement.outer",
--- 				["ic"] = "@comment.inner",
--- 				["ac"] = "@comment.outer",
--- 			}
--- 			local ts = require("nvim-treesitter-textobjects.select")
--- 			for rhs, object in pairs(keymaps) do
--- 				vim.keymap.set({ 'x', 'o' }, rhs, function()
--- 					ts.select_textobject(object, "textobjects")
--- 				end)
--- 			end
--- 		end
--- 	},
--- })
+add_plugin({
+	gh 'blankname/vim-fish',
+	gh 'nmac427/guess-indent.nvim',
+	gh 'lukas-reineke/indent-blankline.nvim',
+	gh 'luukvbaal/statuscol.nvim',
+	gh 'yochem/chime.nvim',
+	gh 'echasnovski/mini.ai',
+	gh 'lewis6991/gitsigns.nvim',
+	gh 'echasnovski/mini.splitjoin',
+	gh 'yochem/jq-playground.nvim',
+	gh 'tpope/vim-fugitive',
+	gh 'folke/trouble.nvim',
+	gh 'kaarmu/typst.vim',
+	gh 'mcauley-penney/visual-whitespace.nvim',
+	gh 'nvim-lua/plenary.nvim',
+	gh 'nvim-telescope/telescope.nvim',
+	{ src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' },
+	{ src = gh 'nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
+	gh 'yochem/prolog.vim',
+	gh 'rafamadriz/friendly-snippets',
+	{ src = gh 'saghen/blink.cmp', version = vim.version.range('1.*') },
+})

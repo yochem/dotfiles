@@ -1,18 +1,12 @@
-return {
-	"https://github.com/folke/trouble.nvim",
-	main = 'trouble',
-	opts = {
+require('trouble').setup({
 		focus = false,
 		warn_no_results = false,
 		modes = {
 			symbols = {
-				format = "{kind_icon} {symbol.name}",
+				format = '{kind_icon} {symbol.name}',
 				multiline = false,
 			}
 		},
-	},
-	keys = {
-		{ "gO", "<Cmd>Trouble symbols<CR>" },
-	},
-	cmd = "Trouble",
-}
+	})
+
+vim.keymap.set('n', 'gO', '<Cmd>Trouble symbols<CR>')
