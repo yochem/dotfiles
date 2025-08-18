@@ -314,7 +314,6 @@ end
 local function gh(url) return 'https://github.com/' .. url end
 
 add_plugin({
-	gh 'blankname/vim-fish',
 	gh 'nmac427/guess-indent.nvim',
 	gh 'lukas-reineke/indent-blankline.nvim',
 	gh 'luukvbaal/statuscol.nvim',
@@ -325,13 +324,11 @@ add_plugin({
 	gh 'yochem/jq-playground.nvim',
 	gh 'tpope/vim-fugitive',
 	gh 'folke/trouble.nvim',
-	gh 'kaarmu/typst.vim',
 	gh 'mcauley-penney/visual-whitespace.nvim',
 	gh 'nvim-lua/plenary.nvim',
 	gh 'nvim-telescope/telescope.nvim',
-	{ src = gh 'nvim-treesitter/nvim-treesitter',             version = 'main' },
+	{ src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' },
 	{ src = gh 'nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
-	gh 'yochem/prolog.vim',
 	gh 'rafamadriz/friendly-snippets',
 	{ src = gh 'saghen/blink.cmp', version = vim.version.range('1.*') },
 })
