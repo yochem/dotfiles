@@ -23,4 +23,4 @@ vim.api.nvim_buf_create_user_command(0, 'FoldDocstrings', function(args)
   end
 end, { range = true })
 
-vim.keymap.set('n', 'zp', vim.cmd.FoldDocstrings)
+vim.keymap.set('n', 'zp', vim.cmd.FoldDocstrings, { buffer = true })

@@ -2,7 +2,7 @@ local map = vim.keymap.set
 
 -- <leader>action copies last yank to clipboard
 map('n', '<leader>y', function()
-	vim.fn.setreg('+', vim.fn.getreg('0'))
+	vim.fn.setreg('+', vim.fn.getreg([["]]))
 end)
 
 on('TextYankPost', function()

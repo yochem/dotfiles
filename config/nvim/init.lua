@@ -2,7 +2,7 @@ if vim.g.vscode or vim.fn.has('nvim-0.10') == 0 then
 	return
 end
 
-require('vim._extui').enable({})
+-- require('vim._extui').enable({})
 
 vim.g.did_install_default_menus = 1
 vim.g.loaded_2html_plugin = 1
@@ -26,7 +26,7 @@ let g:mapleader=' '
 let g:netrw_banner=0
 let g:netrw_liststyle=3
 
-set laststatus=3
+set laststatus=0
 set noshowmode
 set noruler
 set shortmess=WIFsclo
@@ -135,24 +135,6 @@ end
 
 on('TextYankPost', function()
 	vim.hl.on_yank({ timeout = 200, higroup = 'Visual' })
-end)
-
-on('FileType', function(ev)
-	if vim.bo[ev.buf].buftype ~= '' then return end
-	local ok, ts = pcall(require, 'nvim-treesitter')
-	if ok then
-		local ft = vim.bo[ev.buf].filetype
-		local is_available = vim.list_contains(ts.get_available(2), ft)
-		local is_installed = vim.list_contains(ts.get_installed(), ft)
-		if is_available and not is_installed then
-			ts.install(ft)
-		end
-		if is_installed then
-			vim.treesitter.start()
-			vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-		end
-	end
 end)
 
 on('BufNewFile', function(ev)
@@ -267,11 +249,15 @@ nmap('R', cmd('source %'))
 
 -- ignore 'scrolloff' with H and L
 nmap('H', function()
-	vim._with({ o = { scrolloff = 0 } }, function() vim.cmd('norm! H') end)
+	vim._with({ o = { scrolloff = 0 } }, function()
+		vim.cmd('norm! H')
+	end)
 end)
 
 nmap('L', function()
-	vim._with({ o = { scrolloff = 0 } }, function() vim.cmd('norm! L') end)
+	vim._with({ o = { scrolloff = 0 } }, function()
+		vim.cmd('norm! L')
+	end)
 end)
 
 -- sensible normal mode in terminal
@@ -291,8 +277,8 @@ local function add_plugin(plugins, opts)
 			end
 			local name = plug.name or plug.src
 			name = vim.fs.basename(name)
-			name = name:gsub('%.n?vim', '')
 			name = name:gsub('%.', '-')
+			name = name:gsub('%-?n?vim%-?', '')
 			pcall(require, 'plugins.' .. name)
 		end
 	end
