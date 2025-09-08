@@ -8,16 +8,25 @@ vim.keymap.set('n', '<leader>h', function()
 end)
 
 on('LspAttach', function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client and client:supports_method('textDocument/foldingRange') then
-			local win = vim.api.nvim_get_current_win()
-			vim.wo[win][0].foldmethod = 'expr'
-			vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
-		end
-		if client and client:supports_method('textDocument/documentColor') then
-			vim.lsp.document_color.enable(true, args.buf, { style = 'virtual' })
-		end
-	end, {
+	local client = vim.lsp.get_client_by_id(args.data.client_id)
+	if client and client:supports_method('textDocument/foldingRange') then
+		local win = vim.api.nvim_get_current_win()
+		vim.wo[win][0].foldmethod = 'expr'
+		vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+	end
+	if client and client:supports_method('textDocument/documentColor') then
+		vim.lsp.document_color.enable(true, args.buf, { style = 'virtual' })
+	end
+	if client and client:supports_method 'textDocument/codeLens' then
+		vim.lsp.codelens.refresh({ bufnr = args.buf })
+		vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+			buffer = args.buf,
+			callback = function ()
+				 vim.lsp.codelens.refresh({ bufnr = args.buf })
+			end,
+		})
+	end
+end, {
 	group = augroup,
 })
 
@@ -40,5 +49,5 @@ vim.lsp.enable({
 	'vscode-cssls',
 	'vscode-eslintls',
 	'vscode-htmlls',
-	'vscode-jsonls',
+	-- 'vscode-jsonls',
 })

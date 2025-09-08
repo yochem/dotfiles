@@ -14,6 +14,7 @@ return {
 	},
 	settings = {
 		Lua = {
+			codelens = { enable = true },
 			hint = { enable = true },
 			runtime = { version = "LuaJIT" },
 			workspace = {

@@ -2,7 +2,7 @@ if vim.g.vscode or vim.fn.has('nvim-0.10') == 0 then
 	return
 end
 
--- require('vim._extui').enable({})
+require('vim._extui').enable({})
 
 vim.g.did_install_default_menus = 1
 vim.g.loaded_2html_plugin = 1
@@ -156,11 +156,6 @@ vim.api.nvim_create_user_command('Pager', function()
 	vim.api.nvim_open_term(0, {})
 end, { desc = 'Highlights ANSI termcodes in curbuf' })
 
-vim.api.nvim_create_user_command('Update', function()
-	vim.pack.update()
-end, {})
-
-
 ------------
 -- REMAPS --
 ------------
@@ -203,7 +198,10 @@ nmap('j', [[(v:count ? "m'" . v:count : "g") . "j"]], { expr = true })
 -- reselect pasted text like |gv| does for visually selected text
 nmap('gp', '`[v`]')
 
-nmap('<Esc>', vim.cmd.nohlsearch)
+nmap('<Esc>', function ()
+	 vim.cmd.nohlsearch()
+	 vim.snippet.stop()
+end)
 
 -- always jump exactly to mark
 nmap([[']], [[`]])
@@ -263,58 +261,4 @@ end)
 -- sensible normal mode in terminal
 map('t', '<Esc><Esc>', '<C-\\><C-n>')
 
--- sensible redo
-nmap('<C-r>', '<cmd>echo "Use U"<cr>')
-nmap('U', '<C-r>')
-
-local function add_plugin(plugins, opts)
-	opts = opts or {}
-	local function do_add(plugs)
-		vim.pack.add(plugs)
-		for _, plug in ipairs(plugs) do
-			if type(plug) == 'string' then
-				plug = { src = plug }
-			end
-			local name = plug.name or plug.src
-			name = vim.fs.basename(name)
-			name = name:gsub('%.', '-')
-			name = name:gsub('%-?n?vim%-?', '')
-			pcall(require, 'plugins.' .. name)
-		end
-	end
-
-	if opts.event ~= nil then
-		vim.api.nvim_create_autocmd(opts.event, {
-			once = true,
-			group = augroup,
-			desc = 'lazy-load plugins',
-			callback = function()
-				do_add(plugins)
-			end
-		})
-	else
-		do_add(plugins)
-	end
-end
-
-local function gh(url) return 'https://github.com/' .. url end
-
-add_plugin({
-	gh 'nmac427/guess-indent.nvim',
-	gh 'lukas-reineke/indent-blankline.nvim',
-	gh 'luukvbaal/statuscol.nvim',
-	gh 'yochem/chime.nvim',
-	gh 'echasnovski/mini.ai',
-	gh 'lewis6991/gitsigns.nvim',
-	gh 'echasnovski/mini.splitjoin',
-	gh 'yochem/jq-playground.nvim',
-	gh 'tpope/vim-fugitive',
-	gh 'folke/trouble.nvim',
-	gh 'mcauley-penney/visual-whitespace.nvim',
-	gh 'nvim-lua/plenary.nvim',
-	gh 'nvim-telescope/telescope.nvim',
-	{ src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' },
-	{ src = gh 'nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
-	gh 'rafamadriz/friendly-snippets',
-	{ src = gh 'saghen/blink.cmp', version = vim.version.range('1.*') },
-})
+require('plugins')
