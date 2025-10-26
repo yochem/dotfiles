@@ -20,7 +20,7 @@ end, {
 
 on('TermRequest', function(ev)
 	local ns = vim.api.nvim_create_namespace('yochem.terminal.prompt')
-	-- :h terminal-osc133
+	-- |terminal-osc133|
 	if string.match(ev.data.sequence, '^\027]133;A') then
 		local lnum = ev.data.cursor[1]
 		vim.api.nvim_buf_set_extmark(ev.buf, ns, lnum - 1, 0, {
