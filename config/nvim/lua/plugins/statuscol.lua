@@ -12,7 +12,7 @@ require("statuscol").setup({
 			},
 			click = "v:lua.ScSa",
 		},
-		{ text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
+		{ text = { "%C", " " }, click = "v:lua.ScFa" },
 		{ text = { builtin.lnumfunc },      click = "v:lua.ScLa" },
 		{
 			sign = {

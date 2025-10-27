@@ -1,22 +1,21 @@
 if vim.g.vscode or vim.fn.has('nvim-0.10') == 0 then
 	return
 end
+vim.loader.enable()
 
-require('vim._extui').enable({})
+require('plugins')
+vim.cmd.colorscheme('mine')
+-- require('vim._extui').enable({})
 
 vim.g.did_install_default_menus = 1
 vim.g.loaded_2html_plugin = 1
 vim.g.loaded_gzip = 1
-vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_tarPlugin = 1
 vim.g.loaded_tutor_mode_plugin = 1
-
-vim.loader.enable()
-vim.cmd.colorscheme('mine')
 
 -------------
 -- OPTIONS --
@@ -98,6 +97,8 @@ set suffixes+=.pyc,.out,.pdf
 
 set concealcursor=nc
 set conceallevel=2
+
+set statuscolumn=%C%@SignCb@%s%@NumCb@%=%l%#Comment#│
 ]])
 
 
@@ -106,7 +107,8 @@ vim.opt.fillchars = {
 	fold = ' ',
 	foldopen = '',
 	foldsep = ' ',
-	foldclose = ''
+	foldclose = '',
+	foldinner = ' ',
 }
 vim.opt.listchars = {
 	tab = '  ',
@@ -198,9 +200,9 @@ nmap('j', [[(v:count ? "m'" . v:count : "g") . "j"]], { expr = true })
 -- reselect pasted text like |gv| does for visually selected text
 nmap('gp', '`[v`]')
 
-nmap('<Esc>', function ()
-	 vim.cmd.nohlsearch()
-	 vim.snippet.stop()
+nmap('<Esc>', function()
+	vim.cmd.nohlsearch()
+	vim.snippet.stop()
 end)
 
 -- always jump exactly to mark
@@ -260,5 +262,3 @@ end)
 
 -- sensible normal mode in terminal
 map('t', '<Esc><Esc>', '<C-\\><C-n>')
-
-require('plugins')
