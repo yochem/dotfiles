@@ -1,6 +1,9 @@
 vim.opt.listchars:remove("multispace")
 
 local map = vim.keymap.set
+vim.bo.shiftwidth = 2
+vim.bo.softtabstop = 2
+vim.wo.conceallevel = 2
 
 map("n", "<leader>x", function()
 	local line = vim.api.nvim_get_current_line()

@@ -18,6 +18,24 @@ end, {
 	desc = 'set terminal buffer name to terminal title',
 })
 
+-- |terminal-osc7|
+on('TermRequest', function(ev)
+	local val, n = string.gsub(ev.data.sequence, '\027]7;file://[^/]*', '')
+	if n > 0 then
+		-- OSC 7: dir-change
+		local dir = val
+		if vim.fn.isdirectory(dir) == 0 then
+			vim.notify('invalid dir: ' .. dir)
+			return
+		end
+		vim.b[ev.buf].osc7_dir = dir
+		if vim.api.nvim_get_current_buf() == ev.buf then
+			vim.cmd.lcd(dir)
+		end
+	end
+end)
+
+
 on('TermRequest', function(ev)
 	local ns = vim.api.nvim_create_namespace('yochem.terminal.prompt')
 	-- |terminal-osc133|

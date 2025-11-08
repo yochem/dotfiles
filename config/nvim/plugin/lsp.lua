@@ -7,6 +7,17 @@ vim.keymap.set('n', '<leader>h', function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
 
+on('LspProgress', function(ev)
+	local value = ev.data.params.value
+	if value.kind == 'begin' then
+		vim.api.nvim_ui_send('\027]9;4;1;0\027\\')
+	elseif value.kind == 'end' then
+		vim.api.nvim_ui_send('\027]9;4;0\027\\')
+	elseif value.kind == 'report' then
+		vim.api.nvim_ui_send(string.format('\027]9;4;1;%d\027\\', value.percentage or 0))
+	end
+end)
+
 on('LspAttach', function(args)
 	local client = vim.lsp.get_client_by_id(args.data.client_id)
 	if client and client:supports_method('textDocument/foldingRange') then
@@ -21,8 +32,8 @@ on('LspAttach', function(args)
 		vim.lsp.codelens.refresh({ bufnr = args.buf })
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
 			buffer = args.buf,
-			callback = function ()
-				 vim.lsp.codelens.refresh({ bufnr = args.buf })
+			callback = function()
+				vim.lsp.codelens.refresh({ bufnr = args.buf })
 			end,
 		})
 	end

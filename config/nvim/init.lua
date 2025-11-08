@@ -3,7 +3,6 @@ if vim.g.vscode or vim.fn.has('nvim-0.10') == 0 then
 end
 vim.loader.enable()
 
-require('plugins')
 vim.cmd.colorscheme('mine')
 -- require('vim._extui').enable({})
 
@@ -111,10 +110,9 @@ vim.opt.fillchars = {
 	foldinner = ' ',
 }
 vim.opt.listchars = {
-	tab = '  ',
+	tab = '│ ',
 	trail = '•',
 	multispace = '••',
-	leadmultispace = ' '
 }
 
 --------------
@@ -154,6 +152,15 @@ on('WinNew', function()
 	end, { once = true })
 end)
 
+local ns = vim.api.nvim_create_namespace('yochem.hl')
+vim.paste = (function(overridden)
+	return function(lines, phase)
+		local res = overridden(lines, phase)
+		vim.hl.range(0, ns, 'Visual', "'[", "']", { timeout = 300 })
+		return res
+	end
+end)(vim.paste)
+
 vim.api.nvim_create_user_command('Pager', function()
 	vim.api.nvim_open_term(0, {})
 end, { desc = 'Highlights ANSI termcodes in curbuf' })
@@ -164,7 +171,7 @@ end, { desc = 'Highlights ANSI termcodes in curbuf' })
 local function cmd(command) return function() vim.cmd(command) end end
 local map = vim.keymap.set
 local nmap = function(lhs, rhs, opts) return map('n', lhs, rhs, opts) end
-local vmap = function(lhs, rhs, opts) return map('v', lhs, rhs, opts) end
+local vmap = function(lhs, rhs, opts) return map('x', lhs, rhs, opts) end
 
 nmap('OO', '[<Space>', { remap = true })
 nmap('oo', ']<Space>', { remap = true })
@@ -172,6 +179,9 @@ nmap('oo', ']<Space>', { remap = true })
 -- move highlighted text and auto indent
 vmap('J', ":m '>+1<CR>gv=gv")
 vmap('K', ":m '<-2<CR>gv=gv")
+
+vmap('p', 'P')
+vmap('P', 'p')
 
 -- keep selection while visually indenting
 vmap('<', '<gv')
@@ -262,3 +272,5 @@ end)
 
 -- sensible normal mode in terminal
 map('t', '<Esc><Esc>', '<C-\\><C-n>')
+
+require('plugins')
