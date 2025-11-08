@@ -1,5 +1,5 @@
 function t
-	set cmd 'command ls ~/Documents | fzf --tmux --tac -0 -1'
+	set cmd 'fd . -t d -d 1 --base-directory ~/Documents | fzf --tmux --tac -0 -1'
 	if set -q argv[1]
 		set cmd "$cmd --query $argv[1]"
 	end

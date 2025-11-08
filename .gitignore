@@ -1,3 +1,4 @@
 config/fish/fish_variables
 config/karabiner/automatic_backups/
 config/hs/Spoons/EmmyLua.spoon/annotations
+config/nvim/nvim-pack-lock.json

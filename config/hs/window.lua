@@ -13,14 +13,14 @@ local function move_window(movefn)
 end
 
 local function half2thirds(frame_size, screen_size, in_position)
-	-- 1/2 -> 1/3
+	-- 1/2 -> 2/3
 	if in_position and frame_size == math.floor(screen_size / 2) then
-		return math.floor(screen_size / 3)
+		return math.floor(screen_size / 3 * 2)
 	end
 
-	-- 1/3 -> 2/3
-	if in_position and frame_size == math.floor(screen_size / 3) then
-		return math.floor(screen_size / 3 * 2)
+	-- 2/3 -> 2/3
+	if in_position and frame_size == math.floor(screen_size / 3 * 2) then
+		return math.floor(screen_size / 3)
 	end
 
 	-- 2/3 -> 1/2 or coming from other position

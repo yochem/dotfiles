@@ -4,6 +4,8 @@
 	email = git@yochem.nl
 	signingkey = ~/.ssh/id_ed25519.pub
 
+[blame]
+	date = short
 [init]
 	defaultBranch = main
 
@@ -29,6 +31,8 @@
 
 	# List aliases
 	aliases = config --get-regexp alias
+
+	introduced = log --diff-filter=A
 
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered

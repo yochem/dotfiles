@@ -3,6 +3,6 @@ function fish_title
 	if [ fish != $_ ]
 		echo "$_"
 	else
-		echo (string replace -r '/*$' '/' (basename (prompt_pwd)))
+		echo (string replace -r '/*$' '/' (basename (prompt_pwd --dir-length 0)))
 	end
 end
