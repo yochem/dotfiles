@@ -21,8 +21,6 @@ source "$HOME/Documents/venvs/venvs.fish"
 abbr reload "exec fish"
 abbr g git
 abbr .. "cd .."
-abbr pip python3 -m pip
-abbr tlmgr "sudo tlmgr install"
 abbr perms stat -f '%OLp'
 abbr gs "git status -s"
 
@@ -60,9 +58,12 @@ command -v fdfind >/dev/null && alias fd fdfind
 # set tabs used by cat etc. to width 4
 tabs -p
 
-if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
-	tmux ls 2>/dev/null | grep attached >/dev/null
-	if [ "$status" = 1 ]
-		tmux attach-session -t general || tmux new-session -s general
-	end
-end
+# if [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]
+# 	tmux ls 2>/dev/null | grep attached >/dev/null
+# 	if [ "$status" = 1 ]
+# 		tmux attach-session -t general || tmux new-session -s general
+# 	end
+# end
+
+# suppress "Last login" message
+printf '\33c\e[3J'

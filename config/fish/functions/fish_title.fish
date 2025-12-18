@@ -1,5 +1,5 @@
 function fish_title
-	[ -z $TMUX ] && return
+	# [ -z $TMUX ] && return
 	if [ fish != $_ ]
 		echo "$_"
 	else

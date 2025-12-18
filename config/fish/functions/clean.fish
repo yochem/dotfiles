@@ -1,9 +1,14 @@
 function clean
-    git clean -ndfx
+    set temp (mktemp)
+    git clean -ndfx | tee $temp
+    if test ! -s $temp
+        echo "nothing to clean"
+        return
+    end
     read -l -P "Proceed with cleaning? [y/N] " confirm
     if test "$confirm" = "y"
         git clean -dfx
     else
-        echo "Aborted."
+        echo "aborted"
     end
 end
