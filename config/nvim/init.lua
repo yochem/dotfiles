@@ -4,7 +4,7 @@ end
 vim.loader.enable()
 
 vim.cmd.colorscheme('mine')
--- require('vim._extui').enable({})
+require('vim._extui').enable({})
 
 vim.g.did_install_default_menus = 1
 vim.g.loaded_2html_plugin = 1
@@ -96,8 +96,6 @@ set suffixes+=.pyc,.out,.pdf
 
 set concealcursor=nc
 set conceallevel=2
-
-set statuscolumn=%C%@SignCb@%s%@NumCb@%=%l%#Comment#│
 ]])
 
 
@@ -130,9 +128,6 @@ function _G.on(event, callback, opts)
 	vim.api.nvim_create_autocmd(event, opts)
 end
 
--- on('InsertEnter', 'set conceallevel=0')
--- on('InsertLeave', 'set conceallevel=2')
-
 on('TextYankPost', function()
 	vim.hl.on_yank({ timeout = 200, higroup = 'Visual' })
 end)
@@ -150,19 +145,16 @@ on('WinNew', function()
 			vim.cmd.wincmd(vim.o.splitright and 'L' or 'H')
 		end
 	end, { once = true })
-end)
-
-local ns = vim.api.nvim_create_namespace('yochem.hl')
-vim.paste = (function(overridden)
-	return function(lines, phase)
-		local res = overridden(lines, phase)
-		vim.hl.range(0, ns, 'Visual', "'[", "']", { timeout = 300 })
-		return res
-	end
-end)(vim.paste)
+end, { desc = 'split vertical if theres room' })
 
 vim.api.nvim_create_user_command('Pager', function()
 	vim.api.nvim_open_term(0, {})
+end, { desc = 'Highlights ANSI termcodes in curbuf' })
+
+vim.api.nvim_create_user_command('Make', function()
+	-- TODO: smaller size
+	vim.cmd([[hor terminal ]] .. vim.o.makeprg)
+	vim.api.nvim_win_set_height(0, math.floor(vim.api.nvim_win_get_height(0) / 3))
 end, { desc = 'Highlights ANSI termcodes in curbuf' })
 
 ------------
@@ -170,101 +162,85 @@ end, { desc = 'Highlights ANSI termcodes in curbuf' })
 ------------
 local function cmd(command) return function() vim.cmd(command) end end
 local map = vim.keymap.set
-local nmap = function(lhs, rhs, opts) return map('n', lhs, rhs, opts) end
-local vmap = function(lhs, rhs, opts) return map('x', lhs, rhs, opts) end
 
-nmap('OO', '[<Space>', { remap = true })
-nmap('oo', ']<Space>', { remap = true })
+map('n', 'OO', '[<Space>', { remap = true })
+map('n', 'oo', ']<Space>', { remap = true })
 
 -- move highlighted text and auto indent
-vmap('J', ":m '>+1<CR>gv=gv")
-vmap('K', ":m '<-2<CR>gv=gv")
+map('x', 'J', ":m '>+1<CR>gv=gv")
+map('x', 'K', ":m '<-2<CR>gv=gv")
 
-vmap('p', 'P')
-vmap('P', 'p')
+map('x', 'P', 'p')
+map('x', 'p', 'P')
 
 -- keep selection while visually indenting
-vmap('<', '<gv')
-vmap('>', '>gv')
-
--- resize windows
-nmap('<S-Up>', cmd('resize +2'))
-nmap('<S-Down>', cmd('resize -2'))
-nmap('<S-Left>', cmd('vertical resize +2'))
-nmap('<S-Right>', cmd('vertical resize -2'))
+map('x', '<', '<gv')
+map('x', '>', '>gv')
 
 -- use comma to switch windows
-nmap(',', '<c-w>')
-
--- Open file explorer left
-nmap('<leader>e', cmd('15Lexplore'))
+map('n', ',', '<c-w>')
 
 -- don't move so aggressive
-nmap('<PageUp>', '10k')
-nmap('<PageDown>', '10j')
+map('n', '<PageUp>', '10k')
+map('n', '<PageDown>', '10j')
 
 -- populate jumplist with relative jumps, otherwise move by wrapped line
-nmap('k', [[(v:count ? "m'" . v:count : "g") . "k"]], { expr = true })
-nmap('j', [[(v:count ? "m'" . v:count : "g") . "j"]], { expr = true })
+map('n', 'k', [[(v:count ? "m'" . v:count : "g") . "k"]], { expr = true })
+map('n', 'j', [[(v:count ? "m'" . v:count : "g") . "j"]], { expr = true })
 
 -- reselect pasted text like |gv| does for visually selected text
-nmap('gp', '`[v`]')
+map('n', 'gp', '`[v`]')
 
-nmap('<Esc>', function()
+map('n', '<Esc>', function()
 	vim.cmd.nohlsearch()
 	vim.snippet.stop()
 end)
 
 -- always jump exactly to mark
-nmap([[']], [[`]])
+map('n', [[']], [[`]])
 
 -- preserve cursor on joining lines
-nmap('gJ', 'm`J``')
+map('n', 'gJ', 'J"_x')
 
 -- set mark before searching
-nmap('/', 'ms/')
-nmap('?', 'ms?')
+map('n', '/', 'ms/')
+map('n', '?', 'ms?')
 
 -- only search in visual selection
 map('x', '/', '<Esc>/\\%V')
 
 -- don't care, just quit
-nmap('ZZ', vim.cmd.qall)
+map('n', 'ZZ', vim.cmd.qall)
 
 -- close window
-nmap('q', function()
+map('n', 'q', function()
 	local success = pcall(vim.cmd.close)
 	if not success then
 		pcall(vim.cmd.quit)
 	end
 end)
 
-nmap('gh', function()
-	vim.ui.open(
-		vim.fn.expand('<cfile>'),
-		{ cmd = { 'gh', 'repo', 'view', '--web' } }
-	)
-end)
-
-nmap('<leader>q', ":execute empty(filter(getwininfo(), 'v:val.quickfix')) ? 'copen' : 'cclose'<CR>",
-	{ silent = true })
+map(
+	'n',
+	'<leader>q',
+	":execute empty(filter(getwininfo(), 'v:val.quickfix')) ? 'copen' : 'cclose'<CR>",
+	{ silent = true }
+)
 
 -- keep Q for macros
-nmap('Q', 'q')
+map('n', 'Q', 'q')
 
 -- negate boolean values
-nmap('!', '<Plug>(Negate)')
-
-nmap('R', cmd('source %'))
+map('n', '!', '<Plug>(Negate)')
 
 -- ignore 'scrolloff' with H and L
-nmap('H', function()
+map('n', 'H', function()
 	vim._with({ o = { scrolloff = 0 } }, function()
 		vim.cmd('norm! H')
 	end)
 end)
 
-nmap('L', function()
+map('n', 'L', function()
 	vim._with({ o = { scrolloff = 0 } }, function()
 		vim.cmd('norm! L')
 	end)
@@ -272,5 +248,12 @@ end)
 
 -- sensible normal mode in terminal
 map('t', '<Esc><Esc>', '<C-\\><C-n>')
+
+-- map('n', '<leader>r', function()
+-- 	vim.cmd.update()
+-- 	vim.cmd.Make()
+-- end)
+
+map('n', '<leader>r', '<CMD>update | Make<CR>')
 
 require('plugins')

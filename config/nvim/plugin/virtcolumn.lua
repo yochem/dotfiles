@@ -1,6 +1,5 @@
 -- stripped down version of lukas-reineke/virt-column.nvim
 local ns = vim.api.nvim_create_namespace('yochem.virtcolumn')
-
 local column = 80
 
 vim.api.nvim_set_decoration_provider(ns, {
@@ -22,10 +21,6 @@ vim.api.nvim_set_decoration_provider(ns, {
 					priority = 1,
 				})
 			end
-			-- local fold_end = vim.api.nvim_win_call(win, function()
-			-- 	return vim.fn.foldclosedend(i)
-			-- end)
-			-- i = math.max(fold_end, i + 1)
 			i = i + 1
 		end
 	end
