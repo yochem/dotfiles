@@ -19,6 +19,9 @@
 	# View the current working tree status using the short format
 	s = status -s
 
+	# The base commit of the current branch
+	base = merge-base HEAD master
+
 	# show diff summary
 	diffsum = diff master --compact-summary
 
@@ -83,8 +86,8 @@
 
 [mergetool "vimdiff"]
 	cmd = nvim -d $BASE $LOCAL
-[pull]
-	rebase = true
+; [pull]
+; 	rebase = true
 [push]
 	default = simple
 	autoSetupRemote = true
