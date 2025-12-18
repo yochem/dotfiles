@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd('FileType', {
 		if vim.bo[ev.buf].buftype ~= '' then return end
 		local ts = require('nvim-treesitter')
 		local ft = vim.bo[ev.buf].filetype
-		local is_available = vim.list_contains(ts.get_available(2), ft)
+		local is_available = vim.list_contains(ts.get_available(), ft)
 		local is_installed = vim.list_contains(ts.get_installed(), ft)
 		if is_available then
 			if not is_installed then

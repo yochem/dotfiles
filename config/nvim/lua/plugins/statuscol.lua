@@ -2,7 +2,7 @@ local builtin = require("statuscol.builtin")
 
 require("statuscol").setup({
 	relculright = true,
-	ft_ignore = { "qf" },
+	ft_ignore = { "qf", "terminal" },
 	segments = {
 		{
 			sign = {

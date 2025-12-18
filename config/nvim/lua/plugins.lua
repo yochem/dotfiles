@@ -43,12 +43,24 @@ add({
 	gh 'yochem/jq-playground.nvim',
 	gh 'tpope/vim-fugitive',
 	gh 'folke/trouble.nvim',
-	gh 'nvim-lua/plenary.nvim',
-	gh 'nvim-telescope/telescope.nvim',
-	{ src = gh 'nvim-treesitter/nvim-treesitter',             version = 'main', data = { build = 'TSUpdate' } },
-	{ src = gh 'nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
+	{
+		src = gh 'nvim-treesitter/nvim-treesitter',
+		version = 'main',
+		data = { build = 'TSUpdate' },
+	},
+	{
+		src = gh 'nvim-treesitter/nvim-treesitter-textobjects',
+		version = 'main',
+	},
 	gh 'rafamadriz/friendly-snippets',
-	{ src = gh 'saghen/blink.cmp',             version = vim.version.range('*') },
+	{
+		src = gh 'saghen/blink.cmp',
+		version = vim.version.range('*'),
+	},
 	gh 'mcauley-penney/visual-whitespace.nvim',
-	{ src = gh 'chomosuke/typst-preview.nvim', version = vim.version.range('1.*') },
+	{
+		src = gh 'chomosuke/typst-preview.nvim',
+		version = vim.version.range('1.*'),
+	},
+	gh "comfysage/artio.nvim"
 })
