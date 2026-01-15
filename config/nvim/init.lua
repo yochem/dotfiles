@@ -1,7 +1,6 @@
 if vim.g.vscode or vim.fn.has('nvim-0.10') == 0 then
 	return
 end
-vim.loader.enable()
 
 vim.cmd.colorscheme('mine')
 require('vim._extui').enable({})

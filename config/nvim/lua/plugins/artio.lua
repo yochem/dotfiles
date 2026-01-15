@@ -2,6 +2,15 @@ require('artio').setup({
 	opts = {
 		use_icons = false,
 	},
+	mappings = {
+		["<C-n>"] = "down",
+    ["<C-p>"] = "up",
+    ["<CR>"] = "accept",
+    ["<ESC>"] = "cancel",
+    ["<TAB>"] = "mark",
+    ["<C-l>"] = "togglepreview",
+    ["<C-q>"] = "setqflistmark",
+	},
 })
 
 vim.ui.select = require('artio').select

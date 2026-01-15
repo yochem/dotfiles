@@ -62,5 +62,6 @@ add({
 		src = gh 'chomosuke/typst-preview.nvim',
 		version = vim.version.range('1.*'),
 	},
-	gh "comfysage/artio.nvim"
+	gh "comfysage/artio.nvim",
+	gh 'suderio/autolang.nvim',
 })

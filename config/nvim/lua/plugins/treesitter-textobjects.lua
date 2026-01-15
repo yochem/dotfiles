@@ -19,11 +19,11 @@ for rhs, object in pairs(keymaps) do
 	end)
 end
 
-vim.keymap.set('n', '[[', function()
+vim.keymap.set('n', '[f', function()
 	local ts_move = require('nvim-treesitter-textobjects.move')
 	ts_move.goto_previous_start('@function.outer', 'textobjects')
 end)
-vim.keymap.set('n', ']]', function()
+vim.keymap.set('n', ']f', function()
 	local ts_move = require('nvim-treesitter-textobjects.move')
 	ts_move.goto_next_start('@function.outer', 'textobjects')
 end)
