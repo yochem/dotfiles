@@ -1,3 +1,3 @@
 function dot
-	git --git-dir=$HOME/Documents/dotfiles --work-tree=$HOME/Library/Config2
+	git --git-dir="$HOME/Documents/dot" --work-tree="$XDG_CONFIG_HOME" $argv
 end
