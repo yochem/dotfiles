@@ -49,8 +49,8 @@ if not status is-interactive
 	return
 end
 
-set -gx PLAN9 /usr/local/plan9
-fish_add_path -aP $PLAN9/bin
+# set -gx PLAN9 /usr/local/plan9
+# fish_add_path -aP $PLAN9/bin
 
 # fd is fdfind on ubuntu
 command -v fdfind >/dev/null && alias fd fdfind

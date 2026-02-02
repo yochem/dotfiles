@@ -12,12 +12,13 @@ vim.api.nvim_set_decoration_provider(ns, {
 			local width = vim.api.nvim_win_call(win, function()
 				return vim.fn.virtcol({ i, "$" }) - 1
 			end)
-			if width < column then
+			local tw = vim.api.nvim_get_option_value('textwidth', { scope = 'local', buf = buf }) + 1
+			if width < tw then
 				vim.api.nvim_buf_set_extmark(buf, ns, math.max(i - 1, 0), 0, {
 					virt_text = { { "│", "NonText" } },
 					virt_text_pos = "overlay",
 					hl_mode = "combine",
-					virt_text_win_col = column - 1 - leftcol,
+					virt_text_win_col = tw -1 - leftcol,
 					priority = 1,
 				})
 			end

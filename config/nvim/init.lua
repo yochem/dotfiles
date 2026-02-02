@@ -153,8 +153,9 @@ end, { desc = 'Highlights ANSI termcodes in curbuf' })
 vim.api.nvim_create_user_command('Make', function()
 	-- TODO: smaller size
 	vim.cmd([[hor terminal ]] .. vim.o.makeprg)
-	vim.api.nvim_win_set_height(0, math.floor(vim.api.nvim_win_get_height(0) / 3))
-end, { desc = 'Highlights ANSI termcodes in curbuf' })
+	vim.cmd.startinsert()
+	vim.api.nvim_win_set_height(0, math.floor(vim.api.nvim_win_get_height(0) / 2))
+end, {})
 
 ------------
 -- REMAPS --
@@ -254,5 +255,14 @@ map('t', '<Esc><Esc>', '<C-\\><C-n>')
 -- end)
 
 map('n', '<leader>r', '<CMD>update | Make<CR>')
+
+local old_open = vim.ui.open
+vim.ui.open = function(path, opts)
+	opts = opts or {}
+	if path:match('#%d+') then
+		opts.cmd = { 'gh', 'browse' }
+	end
+	return old_open(path, opts)
+end
 
 require('plugins')
