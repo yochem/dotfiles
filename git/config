@@ -65,6 +65,8 @@
 	# amend some files
 	oops = !git commit --amend --no-edit && git push --force-with-lease
 
+	exclude = "!echo "${1?no argument}" >> $(git rev-parse --git-path info/exclude) && :"
+
 [log]
 	date = auto:human
 
