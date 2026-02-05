@@ -13,7 +13,7 @@ require('artio').setup({
 	},
 })
 
-vim.ui.select = require('artio').select
+-- vim.ui.select = require('artio').select
 vim.keymap.set("n", "<leader><leader>", "<Plug>(artio-files)")
 vim.keymap.set("n", "<leader>fg", "<Plug>(artio-grep)")
 vim.keymap.set("n", "<leader>ff", "<Plug>(artio-smart)")
