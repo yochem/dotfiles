@@ -3,7 +3,7 @@ if vim.g.vscode or vim.fn.has('nvim-0.10') == 0 then
 end
 
 vim.cmd.colorscheme('mine')
-require('vim._extui').enable({})
+require('vim._core.ui2').enable({})
 
 vim.g.did_install_default_menus = 1
 vim.g.loaded_2html_plugin = 1
@@ -51,7 +51,7 @@ set pumheight=10
 set completeopt=menu,menuone,noselect
 
 set title
-set titlestring=%{&modified?'●\ ':''}%{empty(expand('%:t'))?'nvim':expand('%:t')}
+set titlestring=%{&modified?'●\ ':''}%{empty(expand('%'))?'nvim':expand('%:~:.')}
 
 set formatoptions=cqnj
 set jumpoptions+=view,stack
@@ -220,12 +220,15 @@ map('n', 'q', function()
 	end
 end)
 
-map(
-	'n',
-	'<leader>q',
-	":execute empty(filter(getwininfo(), 'v:val.quickfix')) ? 'copen' : 'cclose'<CR>",
-	{ silent = true }
-)
+map('n', '<leader>q', function ()
+	for _, w in ipairs(vim.fn.getwininfo()) do
+		if w.quickfix == 1 then
+			vim.cmd.cclose()
+			return
+		end
+	end
+	vim.cmd.copen()
+end)
 
 -- keep Q for macros
 map('n', 'Q', 'q')
