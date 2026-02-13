@@ -9,7 +9,7 @@ local function add(plugins, load)
 			if kind ~= 'install' and kind ~= 'update' then
 				return
 			end
-			if ev.data.spec.data.build then
+			if (ev.data.spec.data or {}).build then
 				vim.cmd.packadd(name)
 				vim.cmd(ev.data.spec.data.build)
 			end
@@ -42,7 +42,7 @@ add({
 	gh 'nvim-mini/mini.splitjoin',
 	gh 'yochem/jq-playground.nvim',
 	gh 'tpope/vim-fugitive',
-	gh 'folke/trouble.nvim',
+	-- gh 'folke/trouble.nvim',
 	{
 		src = gh 'nvim-treesitter/nvim-treesitter',
 		version = 'main',

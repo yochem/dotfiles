@@ -154,7 +154,7 @@ vim.api.nvim_create_user_command('Make', function()
 	-- TODO: smaller size
 	vim.cmd([[hor terminal ]] .. vim.o.makeprg)
 	vim.cmd.startinsert()
-	vim.api.nvim_win_set_height(0, math.floor(vim.api.nvim_win_get_height(0) / 2))
+	-- vim.api.nvim_win_set_height(0, math.floor(vim.api.nvim_win_get_height(0) / 2))
 end, {})
 
 ------------

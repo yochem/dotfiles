@@ -1,4 +1,4 @@
-fish_vi_key_bindings
+set -g fish_key_bindings fish_vi_key_bindings
 set -g fish_vi_force_cursor 1
 
 set fish_cursor_unknown block
