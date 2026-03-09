@@ -1,18 +1,17 @@
 local augroup = vim.api.nvim_create_augroup('yochem.lsp', {})
 
-vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist)
-vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition)
-vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
-vim.keymap.set('n', '<leader>h', function()
-	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end)
-
 on('LspAttach', function(args)
 	local client = vim.lsp.get_client_by_id(args.data.client_id)
 	local buf = args.buf
 	if not client then
 		return
 	end
+	vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist)
+	vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition)
+	vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
+	vim.keymap.set('n', '<leader>h', function()
+		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+	end)
 	if client:supports_method('textDocument/foldingRange') then
 		local win = vim.api.nvim_get_current_win()
 		vim.wo[win][0].foldmethod = 'expr'
@@ -32,7 +31,47 @@ on('LspAttach', function(args)
 			end,
 		})
 	end
-
+	if client:supports_method('textDocument/documentSymbol') then
+		vim.keymap.set('n', 'gO', function()
+			local discard = {
+				all = {
+					['Variable'] = true,
+					['String'] = true,
+					['Object'] = true,
+					['Boolean'] = true,
+				},
+				lua = {
+					['Package'] = true,
+					['Constant'] = true,
+					['Array'] = true,
+				},
+			}
+			-- local kinds = {
+			-- 	['Class'] = true,
+			-- 	['Constructor'] = true,
+			-- 	['Enum'] = true,
+			-- 	['Field'] = true,
+			-- 	['Function'] = true,
+			-- 	['Interface'] = true,
+			-- 	['Method'] = true,
+			-- 	['Module'] = true,
+			-- 	['Namespace'] = true,
+			-- 	['Package'] = true,
+			-- 	['Property'] = true,
+			-- 	['Struct'] = true,
+			-- 	['Trait'] = true,
+			-- }
+			local function on_list(list)
+				list.items = vim.iter(list.items):filter(function(x)
+					-- return kinds[x.kind]
+					return not discard.all[x.kind] and not discard[vim.o.filetype][x.kind]
+				end):totable()
+				vim.fn.setloclist(0, {}, ' ', list)
+				vim.cmd.lopen()
+			end
+			vim.lsp.buf.document_symbol({ on_list = on_list })
+		end, { buffer = buf })
+	end
 	-- if client:supports_method 'textDocument/documentHighlight' then
 	-- 	vim.api.nvim_create_autocmd({ 'CursorHold', 'InsertLeave' }, {
 	-- 		group = augroup,

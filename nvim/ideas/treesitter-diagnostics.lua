@@ -1,3 +1,4 @@
+if true then return end
 local ns = vim.api.nvim_create_namespace('yochem.treesitter-diagnostics')
 local augroup = vim.api.nvim_create_augroup('yochem.treesitter-diagnostics', {})
 
