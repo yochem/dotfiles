@@ -10,6 +10,8 @@ keybind = command+k=text:\x0c
 macos-icon = xray
 macos-titlebar-proxy-icon = hidden
 mouse-hide-while-typing = true
+notify-on-command-finish = unfocused
+notify-on-command-finish-action = bell,no-notify
 window-inherit-working-directory = true
 window-new-tab-position = end
 window-padding-x = 10
