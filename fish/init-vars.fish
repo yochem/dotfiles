@@ -2,15 +2,9 @@
 # but I don't
 fish_add_path "$HOME/.local/bin"
 
-if [ -z "$XDG_CONFIG_HOME" -o -z "$XDG_DATA_HOME" -o -z "$XDG_CACHE_HOME" ]
-	echo "XDG paths not set, try this:"
-	echo "set -xU XDG_CONFIG_HOME $HOME/.config"
-	echo "set -xU XDG_DATA_HOME $HOME/.local/share"
-	echo "set -xU XDG_STATE_HOME $HOME/.local/state"
-	echo "set -xU XDG_CACHE_HOME $HOME/.cache"
-end
-
-# set -xU PYTHONSTARTUP "$XDG_CONFIG_HOME/python/startup.py"
+set -xU XDG_DATA_HOME "$HOME/.local/share"
+set -xU XDG_STATE_HOME "$HOME/.local/state"
+set -xU XDG_CACHE_HOME "$HOME/.cache"
 
 set -xU BUNDLE_USER_CACHE "$XDG_CACHE_HOME/bundle"
 set -xU BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME/bundle"
@@ -52,3 +46,21 @@ set -xU VMODULES "$XDG_DATA_HOME/vmodules"
 set -xU VSCODE_PORTABLE "$XDG_DATA_HOME/vscode"
 set -xU ZDOTDIR "$XDG_CONFIG_HOME/zsh"
 set -xU _Z_DATA "$XDG_DATA_HOME/z/z_data"
+
+if type -q nvim
+	set -xU VISUAL nvim
+	set -xU MANPAGER 'nvim +Man!'
+else if type -q vim
+	set -xU VISUAL vim
+else
+	set -xU VISUAL nano
+end
+set -xU EDITOR "$VISUAL"
+
+
+# fix the bug of Apple creating a non-exisiting LC
+set -xU LC_ALL "en_US.UTF-8"
+
+set -xU FZF_DEFAULT_COMMAND 'fd --type f'
+
+set -xU LS_COLORS (vivid generate one-dark-simple)
