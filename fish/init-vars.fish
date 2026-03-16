@@ -29,6 +29,8 @@ set -xU MPLCONFIGDIR "$XDG_CACHE_HOME/matplotlib"
 set -xU MYPY_CACHE_DIR "$XDG_CACHE_HOME/mypy"
 set -xU NLTK_DATA "$XDG_DATA_HOME/nltk"
 set -xU NPM_CONFIG_CACHE "$XDG_CACHE_HOME/npm"
+set -xU PLATFORMIO_CACHE_DIR "$XDG_CACHE_HOME/pio"
+set -xU PLATFORMIO_CORE_DIR "$XDG_CONFIG_HOME/pio"
 set -xU PYENV_ROOT "$XDG_DATA_HOME/pyenv"
 set -xU PYLINTHOME "$XDG_CACHE_HOME/pylint"
 set -xU PYLINTRC "$XDG_CONFIG_HOME/pylint/config"
@@ -46,6 +48,7 @@ set -xU VMODULES "$XDG_DATA_HOME/vmodules"
 set -xU VSCODE_PORTABLE "$XDG_DATA_HOME/vscode"
 set -xU ZDOTDIR "$XDG_CONFIG_HOME/zsh"
 set -xU _Z_DATA "$XDG_DATA_HOME/z/z_data"
+
 
 if type -q nvim
 	set -xU VISUAL nvim
