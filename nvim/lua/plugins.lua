@@ -1,36 +1,5 @@
 local configs = {
-	autolang = {
-		limit_languages = { "nl", "en" },
-	},
-	statuscol = function()
-		local builtin = require("statuscol.builtin")
-		require("statuscol").setup({
-			relculright = true,
-			ft_ignore = { "qf", "terminal" },
-			segments = {
-				{
-					sign = {
-						namespace = { "jumpsigns", "diagnostic.signs", ".*" },
-						maxwidth = 1,
-						colwidth = 1,
-					},
-					click = "v:lua.ScSa",
-				},
-				{ text = { "%C", " " },        click = "v:lua.ScFa" },
-				{ text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
-				{
-					sign = {
-						namespace = { "gitsign" },
-						maxwidth = 1,
-						colwidth = 1,
-						fillchar = "│",
-						fillcharhl = "@comment",
-					},
-					click = "v:lua.ScSa",
-				},
-			},
-		})
-	end,
+	autolang = { limit_languages = { "nl", "en" } },
 	['blink.cmp'] = {
 		keymap = {
 			['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation', 'hide' },
@@ -49,7 +18,9 @@ local configs = {
 					padding = { 0, 1 },
 					components = {
 						kind_icon = {
-							text = function(ctx) return ' ' .. ctx.kind_icon .. ctx.icon_gap .. ' ' end
+							text = function(ctx)
+								return (' %s%s '):format(ctx.kind_icon, ctx.icon_gap)
+							end
 						}
 					},
 					columns = { { 'kind_icon', 'label', 'label_description' } },
@@ -62,9 +33,7 @@ local configs = {
 		signature = { enabled = true },
 	},
 	artio = {
-		opts = {
-			use_icons = false,
-		},
+		opts = { use_icons = false },
 		mappings = {
 			["<C-n>"] = "down",
 			["<C-p>"] = "up",
@@ -88,6 +57,7 @@ local configs = {
 			untracked = { text = "│" },
 		},
 	},
+	quicker = {},
 }
 
 vim.api.nvim_create_user_command('Update', function(args)
@@ -116,6 +86,7 @@ local function add(plugins)
 		end
 
 		local name = plug.name or vim.fs.basename(plug.src)
+		-- strip '(n)vim-', '-(n)vim', and '.(n)vim'
 		name = name:gsub('[%-.]?n?vim[%-.]?', '')
 
 		local config = configs[name]
@@ -123,8 +94,6 @@ local function add(plugins)
 			require(name).setup(config)
 		elseif vim.is_callable(config) then
 			config()
-		else
-			vim.print(('config field of %s not recognized: skipping'):format(name))
 		end
 	end
 end
@@ -134,11 +103,10 @@ local function gh(url) return 'https://github.com/' .. url end
 local semver = vim.version.range
 
 add({
-	gh 'luukvbaal/statuscol.nvim',
 	{ src = gh 'nvim-treesitter/nvim-treesitter',             version = 'main',     data = { build = 'TSUpdate' } },
 	{ src = gh 'nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
 	{ src = gh 'saghen/blink.cmp',                            version = semver('*') },
-	-- { src = gh 'suderio/autolang.nvim' }
+	-- { src = gh 'yochem/autolang.nvim', version = 'tmp' }
 })
 
 vim.schedule(function()
@@ -153,5 +121,6 @@ vim.schedule(function()
 		gh 'mcauley-penney/visual-whitespace.nvim',
 		{ src = gh 'chomosuke/typst-preview.nvim', version = semver('1.*') },
 		gh 'lewis6991/gitsigns.nvim',
+		gh 'stevearc/quicker.nvim',
 	})
 end)
