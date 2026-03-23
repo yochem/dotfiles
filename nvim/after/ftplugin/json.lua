@@ -9,4 +9,5 @@ function _G.fmt_json()
   lines = vim.split(stringified, '\n')
   vim.api.nvim_buf_set_lines(0, vim.v.lnum - 1, vim.v.count, true, lines)
 end
+
 vim.o.formatexpr = 'v:lua.fmt_json()'

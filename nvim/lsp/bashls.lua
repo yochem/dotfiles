@@ -1,10 +1,10 @@
 -- npm i -g bash-language-server
 return {
-	cmd = { 'bash-language-server', 'start' },
-	filetypes = { 'bash', 'sh' },
-	settings = {
-		bashIde = {
-			globPattern = vim.env.GLOB_PATTERN or '*@(.sh|.inc|.bash|.command)',
-		},
-	},
+  cmd = { 'bash-language-server', 'start' },
+  filetypes = { 'bash', 'sh' },
+  settings = {
+    bashIde = {
+      globPattern = vim.env.GLOB_PATTERN or '*@(.sh|.inc|.bash|.command)',
+    },
+  },
 }
