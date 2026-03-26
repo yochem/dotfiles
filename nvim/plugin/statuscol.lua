@@ -1,21 +1,14 @@
-local fmt = string.format
-
----@type string[]
-local diagnostic_signs = vim.diagnostic.config().signs.text
-local diagnostic_hl = {
-  [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
-  [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
-  [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
-  [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
-}
-
-local function get_signs(buf, lnum, ns_name)
-  local ns = vim.api.nvim_create_namespace(ns_name)
+local function get_signs(buf, lnum, ns_ids)
+  local all = {}
   local start, end_ = { lnum - 1, 0 }, { lnum - 1, -1 }
-  return vim.api.nvim_buf_get_extmarks(buf, ns, start, end_, {
-    details = true,
-    type = 'sign'
-  })
+  for _, ns in ipairs(ns_ids) do
+    local marks = vim.api.nvim_buf_get_extmarks(buf, ns, start, end_, {
+      details = true,
+      type = 'sign'
+    })
+    all = vim.list_extend(all, marks)
+  end
+  return all
 end
 
 local function highlight(text, group)
@@ -25,11 +18,11 @@ local function highlight(text, group)
   return '%#' .. group .. '#' .. text .. '%*'
 end
 
-local fold_open_sign = vim.opt.fillchars:get().foldopen
-local fold_close_sign = vim.opt.fillchars:get().foldclose
+local fold_open_sign = vim.opt.fillchars:get().foldopen .. ' '
+local fold_close_sign = vim.opt.fillchars:get().foldclose .. ' '
 
-local function get_diagnostic_sign(bufnr, lnum)
-  local sign, hl = ' ', ''
+local function get_diagnostic_sign(buf, lnum)
+  local sign, hl = '  ', 'SignColumn'
 
   -- short-circuit for the common case that f1 is 0
   local f1 = vim.fn.foldlevel(lnum)
@@ -38,26 +31,42 @@ local function get_diagnostic_sign(bufnr, lnum)
     hl = 'FoldColumn'
   end
 
-  local diags = vim.diagnostic.get(bufnr, { lnum = lnum - 1 })
+  local diagnostic_ns = {}
+  for name, id in pairs(vim.api.nvim_get_namespaces()) do
+    if name:find('diagnostic.signs', 1, true) then
+      diagnostic_ns[#diagnostic_ns + 1] = id
+    end
+  end
+  local diags = get_signs(buf, lnum, diagnostic_ns)
+
   if #diags > 0 then
-    local worst = diags[1]
+    local worst_prio = -1
     for _, d in ipairs(diags) do
-      if d.severity < worst.severity then
-        worst = d
+      local prio = d[4].priority
+      if prio > worst_prio then
+        sign = d[4].sign_text or '•'
+        hl = d[4].sign_hl_group or 'Error'
+        worst_prio = prio
       end
     end
-
-    sign = diagnostic_signs[assert(worst.severity)] or ''
-    hl = diagnostic_hl[worst.severity]
   end
 
-  return highlight(sign .. ' ', hl)
+  local ca_marks = get_signs(buf, lnum, {
+    vim.api.nvim_create_namespace('yochem.lsp.code_actions')
+  })
+  if #ca_marks > 0 then
+    sign = assert(ca_marks[1][4]).sign_text
+    hl = assert(ca_marks[1][4]).sign_hl_group
+  end
+
+  return highlight(sign, hl)
 end
 
 local function get_git_sign(buf, lnum)
   local sign, hl = '│', '@comment'
 
-  local marks = get_signs(buf, lnum, 'gitsigns_signs_')
+  local ns = vim.api.nvim_create_namespace('gitsigns_signs_')
+  local marks = get_signs(buf, lnum, { ns })
   if #marks > 0 then
     local detail = assert(marks[1][4])
     sign = (detail.sign_text):gsub('%s+$', '')
@@ -67,12 +76,12 @@ local function get_git_sign(buf, lnum)
   return highlight(sign, hl)
 end
 
-local function get_linenr(lnum)
-  if vim.v.relnum == 0 then
+local function get_linenr(lnum, is_relative)
+  if is_relative then
     local w = math.max(vim.wo.numberwidth - 1, 2)
-    return highlight(fmt('%%=%' .. w .. 'd ', lnum), 'CursorLineNr')
+    return highlight(string.format('%%=%' .. w .. 'd', lnum), 'CursorLineNr')
   end
-  return highlight('%=%l ', 'LineNr')
+  return highlight('%=%l', 'LineNr')
 end
 
 function _G.mystatuscol()
@@ -85,7 +94,7 @@ function _G.mystatuscol()
 
   return table.concat({
     get_diagnostic_sign(buf, lnum),
-    get_linenr(lnum),
+    get_linenr(lnum, vim.v.relnum == 0),
     get_git_sign(buf, lnum),
   }, '')
 end

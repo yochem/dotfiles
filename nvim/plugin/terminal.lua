@@ -46,3 +46,5 @@ on('TermRequest', function(ev)
     end
   end
 end)
+
+vim.api.nvim_clear_autocmds({ group = 'nvim.terminal', event = 'TermClose' })

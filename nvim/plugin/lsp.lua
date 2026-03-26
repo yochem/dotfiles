@@ -1,8 +1,31 @@
 local augroup = vim.api.nvim_create_augroup('yochem.lsp', {})
 
+local function enable_code_action(buf)
+  local ns = vim.api.nvim_create_namespace('yochem.lsp.code_actions')
+
+  vim.api.nvim_create_autocmd('CursorHold', {
+    buffer = buf,
+    callback = function()
+      local lnum = vim.fn.line('.')
+      local params = vim.lsp.util.make_range_params(0, 'utf-8')
+      params.context = { diagnostics = vim.diagnostic.get(buf, { lnum = lnum - 1 }) }
+
+      vim.lsp.buf_request(buf, 'textDocument/codeAction', params, function(_, result)
+        vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+        if result and #result > 0 then
+          vim.api.nvim_buf_set_extmark(buf, ns, lnum - 1, 0, {
+            sign_text = '💡',
+            sign_hl_group = 'SignColumn',
+          })
+        end
+      end)
+    end,
+  })
+end
+
 on('LspAttach', function(args)
   local id = args.data.client_id
-  local client = vim.lsp.get_client_by_id(args.data.client_id)
+  local client = vim.lsp.get_client_by_id(id)
   local buf = args.buf
   if not client then
     return
@@ -21,6 +44,9 @@ on('LspAttach', function(args)
   if client:supports_method('textDocument/documentColor') then
     vim.lsp.document_color.enable(true, { bufnr = buf }, { style = 'virtual' })
     vim.api.nvim_buf_create_user_command(buf, 'ColorRepresentation', vim.lsp.document_color.color_presentation, {})
+  end
+  if client:supports_method('textDocument/codeAction') then
+    enable_code_action(buf)
   end
   if client:supports_method('textDocument/codeLens') then
     vim.lsp.codelens.enable(true, { bufnr = buf })
@@ -47,25 +73,9 @@ on('LspAttach', function(args)
           ['Array'] = true,
         },
       }
-      -- local kinds = {
-      -- 	['Class'] = true,
-      -- 	['Constructor'] = true,
-      -- 	['Enum'] = true,
-      -- 	['Field'] = true,
-      -- 	['Function'] = true,
-      -- 	['Interface'] = true,
-      -- 	['Method'] = true,
-      -- 	['Module'] = true,
-      -- 	['Namespace'] = true,
-      -- 	['Package'] = true,
-      -- 	['Property'] = true,
-      -- 	['Struct'] = true,
-      -- 	['Trait'] = true,
-      -- }
       local function on_list(list)
         list.items = vim.iter(list.items):filter(function(x)
-          -- return kinds[x.kind]
-          return not discard.all[x.kind] and not discard[vim.o.filetype][x.kind]
+          return not discard.all[x.kind] and not (discard[vim.o.filetype] or {})[x.kind]
         end):totable()
         vim.fn.setloclist(0, {}, ' ', list)
         vim.cmd.lopen()

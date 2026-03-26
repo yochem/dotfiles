@@ -18,9 +18,8 @@ vim.diagnostic.config({
   update_in_insert = false,
   severity_sort = true,
   chime = {
-    trim = true,
     --- @param d vim.Diagnostic
-    --- @return { [1]: string, [2]: string? }[]
+    --- @return [string, string?][]
     format = function(d)
       local sev = vim.diagnostic.severity[d.severity]
       -- Capitalize name
