@@ -1,4 +1,5 @@
 -- pip install python-lsp-server
+---@type vim.lsp.Config
 return {
   cmd = { 'pylsp' },
   filetypes = { 'python' },

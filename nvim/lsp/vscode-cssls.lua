@@ -1,4 +1,5 @@
 -- npm i -g vscode-langservers-extracted
+---@type vim.lsp.Config
 return {
   cmd = { 'vscode-css-language-server', '--stdio' },
   filetypes = { 'css', 'scss', 'less' },

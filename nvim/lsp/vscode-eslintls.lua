@@ -1,4 +1,5 @@
 -- npm i -g vscode-langservers-extracted
+---@type vim.lsp.Config
 return {
   cmd = { 'vscode-eslint-language-server', '--stdio' },
   filetypes = { 'javascript', 'vue', 'svelte', 'astro' },

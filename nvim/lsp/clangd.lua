@@ -1,4 +1,5 @@
 -- brew install llvm
+---@type vim.lsp.Config
 return {
   cmd = { 'clangd' },
   filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
