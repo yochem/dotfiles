@@ -1,0 +1,116 @@
+# vim: ft=gitconfig
+[user]
+	name = Yochem van Rosmalen
+	email = git@yochem.nl
+	signingkey = ~/.ssh/id_ed25519.pub
+
+[blame]
+	date = short
+[init]
+	defaultBranch = main
+
+[pager]
+	diff = true
+
+[help]
+	autocorrect = 20
+
+[alias]
+	# View the current working tree status using the short format
+	s = status -s
+
+	# The base commit of the current branch
+	base = merge-base HEAD master
+
+	# show diff summary
+	diffsum = diff master --compact-summary
+
+	# commit all files that have been modified or removed, new files not
+	# affected
+	ca = commit -a
+
+	# View url to Github
+	url = config --get remote.origin.url
+
+	# List aliases
+	aliases = config --get-regexp alias
+
+	introduced = log --diff-filter=A
+
+	# List contributors with number of commits
+	contributors = shortlog --summary --numbered
+
+	# find author of specific commit
+	author = show -s --format='%an <%ae>'
+
+	# also show remote branches
+	branches = branch -a
+
+	# I always forgot these
+	unadd = reset
+	uncommit = reset HEAD^
+
+	# log a pretty graph to show commits
+	graph =log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all -n 15
+
+	# check last commit
+	last = log -1 HEAD
+
+	# git status for every local branch
+	branch-status = !branch_status
+
+	# see all files tracked
+	files = ls-tree --full-tree -r --name-only HEAD
+
+	# amend some files
+	oops = !git commit --amend --no-edit && git push --force-with-lease
+
+	exclude = "!echo "${1?no argument}" >> $(git rev-parse --git-path info/exclude) && :"
+
+[log]
+	date = auto:human
+
+[color "branch"]
+	current = green
+	local = normal
+	remote = yellow
+
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = red
+
+[merge]
+	tool = vimdiff
+
+[mergetool]
+	prompt = false
+
+[mergetool "vimdiff"]
+	cmd = nvim -d $BASE $LOCAL
+; [pull]
+; 	rebase = true
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+[branch]
+	sort = -committerdate
+[gpg]
+	format = ssh
+[commit]
+	verbose = true
+	gpgsign = true
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[column]
+	ui = auto
+[tag]
+	sort = version:refname
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
