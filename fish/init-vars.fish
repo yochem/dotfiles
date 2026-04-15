@@ -66,4 +66,9 @@ set -xU LC_ALL "en_US.UTF-8"
 
 set -xU FZF_DEFAULT_COMMAND 'fd --type f'
 
-set -xU LS_COLORS (vivid generate one-dark-simple)
+if type -q vivid
+	set -xU LS_COLORS (vivid generate one-dark-simple)
+end
+
+### WORK
+fish_add_path -a "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
