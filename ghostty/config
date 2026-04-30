@@ -1,12 +1,14 @@
 # macos-non-native-fullscreen = true
-auto-update-channel = tip
 background = #1f2124
 confirm-close-surface = false
 copy-on-select = clipboard
 cursor-style-blink = false
 font-family = Menlo
 font-size = 14
+auto-update-channel = stable
 keybind = command+k=text:\x0c
+env = XDG_CONFIG_HOME = /Users/yochem.vanrosmalen/.config
+command = /Users/yochem.vanrosmalen/.local/bin/fish
 macos-icon = xray
 macos-titlebar-proxy-icon = hidden
 mouse-hide-while-typing = true

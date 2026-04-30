@@ -122,5 +122,6 @@ vim.schedule(function()
     { src = gh 'chomosuke/typst-preview.nvim', version = semver('1.*') },
     gh 'lewis6991/gitsigns.nvim',
     gh 'stevearc/quicker.nvim',
+    gh 'sindrets/diffview.nvim',
   })
 end)

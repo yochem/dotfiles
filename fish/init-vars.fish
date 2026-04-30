@@ -72,3 +72,16 @@ end
 
 ### WORK
 fish_add_path -a "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+set -xU PLANET_NAME venus
+set -xU LOCAL_AIRFLOW_TEAM_FOLDER marketing
+set -xU LOCAL_AIRFLOW_GCP_PROJECT coolblue-marketing-dev
+
+set -xU GOOGLE_CLOUD_PROJECT coolblue-marketing-dev
+set -xU DBT_TEAM marketing
+set -xU DBT_ENV development
+
+set -xU CLOUDSDK_CONFIG "$HOME/.config/gcloud"
+
+fish_add_path "$HOME/.local/bin"
+fish_add_path "$HOME/.docker/bin"

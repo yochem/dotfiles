@@ -12,6 +12,10 @@ if test "$vars_hash" != "$_vars_hash"
     set -Ux _vars_hash $vars_hash
 end
 
+if test -e "$XDG_CONFIG_HOME/fish/secrets.fish"
+	source "$XDG_CONFIG_HOME/fish/secrets.fish"
+end
+
 if not status is-interactive
 	return
 end
