@@ -3,6 +3,6 @@ function fish_title
 	if [ fish != $_ ]
 		echo "$_"
 	else
-		echo (string replace -r '/*$' '/' (prompt_pwd -D 20))
+		echo (nice_path (string replace -r '/*$' '/' (prompt_pwd -D 20)))
 	end
 end

@@ -39,6 +39,7 @@ function fish_prompt
 
 	set_color blue
 	set full (string replace $HOME '~' $PWD)
+	set full (nice_path $full)
 	if [ (string length $full) -gt (math $COLUMNS / 3) ]
 		echo -n (prompt_pwd)
 	else

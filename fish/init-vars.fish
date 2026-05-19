@@ -84,4 +84,5 @@ set -xU DBT_ENV development
 set -xU CLOUDSDK_CONFIG "$HOME/.config/gcloud"
 
 fish_add_path "$HOME/.local/bin"
+fish_add_path "/usr/local/google-cloud-sdk/bin/"
 fish_add_path "$HOME/.docker/bin"
