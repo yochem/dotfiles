@@ -2,3 +2,4 @@
 .ropeproject
 .git/*
 *.swp
+**/.claude/settings.local.json
