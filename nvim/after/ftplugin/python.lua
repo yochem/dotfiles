@@ -1,6 +1,6 @@
 vim.bo.expandtab = true
 
-vim.bo.makeprg = 'python3 %'
+vim.bo.makeprg = 'uv run %'
 
 vim.api.nvim_buf_create_user_command(0, 'FoldDocstrings', function(args)
   local query = vim.treesitter.query.parse('python', [[
