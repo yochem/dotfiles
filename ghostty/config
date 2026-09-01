@@ -6,7 +6,7 @@ cursor-style-blink = false
 font-family = Menlo
 font-size = 14
 auto-update-channel = stable
-keybind = command+k=text:\x0c
+keybind = command+k=clear_screen
 env = XDG_CONFIG_HOME = /Users/yochem.vanrosmalen/.config
 command = /Users/yochem.vanrosmalen/.local/bin/fish
 macos-icon = xray
