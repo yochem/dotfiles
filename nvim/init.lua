@@ -110,7 +110,8 @@ vim.opt.fillchars = {
   foldinner = ' ',
 }
 vim.opt.listchars = {
-  tab = '│ ',
+  tab = '  ',
+  leadtab = '│ ',
   trail = '•',
   -- multispace = '••',
 }
