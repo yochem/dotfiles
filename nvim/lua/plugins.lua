@@ -1,4 +1,5 @@
 local configs = {
+  mason = {},
   autolang = { limit_languages = { "nl", "en" } },
   ['blink.cmp'] = {
     keymap = {
@@ -58,6 +59,24 @@ local configs = {
     },
   },
   quicker = {},
+  telescope = function()
+    require("telescope").setup({})
+    vim.keymap.set('n', '<leader>ff', function()
+      require("telescope.builtin").find_files({
+        hidden = true,
+        preview = false,
+      })
+    end)
+    vim.keymap.set('n', '<leader>fg', function()
+      require('telescope.builtin').live_grep()
+    end)
+    vim.keymap.set('n', '<leader>fh', function()
+      require('telescope.builtin').help_tags()
+    end)
+    vim.keymap.set('n', '<leader>fO', function()
+      require('telescope.builtin').lsp_workspace_symbols()
+    end)
+  end,
 }
 
 vim.api.nvim_create_user_command('Update', function(args)
@@ -106,6 +125,7 @@ add({
   { src = gh 'nvim-treesitter/nvim-treesitter',             version = 'main',     data = { build = 'TSUpdate' } },
   { src = gh 'nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
   { src = gh 'saghen/blink.cmp',                            version = semver('*') },
+  gh 'mason-org/mason.nvim',
   -- { src = gh 'yochem/autolang.nvim', version = 'tmp' }
 })
 
@@ -123,5 +143,8 @@ vim.schedule(function()
     gh 'lewis6991/gitsigns.nvim',
     gh 'stevearc/quicker.nvim',
     gh 'sindrets/diffview.nvim',
+    gh 'justinmk/guh.nvim',
+    gh 'nvim-lua/plenary.nvim',
+    gh 'nvim-telescope/telescope.nvim',
   })
 end)
